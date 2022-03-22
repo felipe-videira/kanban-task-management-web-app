@@ -1,11 +1,17 @@
+import PropTypes, { InferProps } from "prop-types"
 
-function Option() {
+function Option({ name }: InferProps<typeof Option.propTypes>) {
 
-    return (
-      <div>
-      </div>
-    )
-  }
-  
-  export default Option
+  return (
+    <div>
+      {name}
+    </div>
+  )
+}
+
+Option.propTypes = {
+  name: PropTypes.string.isRequired,
+}
+
+export default Option
   
