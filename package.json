@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "update-snapshots": "jest --updateSnapshot"
   },
   "dependencies": {
     "prop-types": "^15.8.1",

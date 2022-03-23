@@ -19,6 +19,7 @@ function Game() {
               key={option.name}
               name={option.name}
               icon={option.icon}
+              color={option.color}
               onClick={onOptionClick}
             />
           ))}

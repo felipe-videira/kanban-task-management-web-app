@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Option should render correctly with all props 1`] = `ShallowWrapper {}`;
+exports[`Option should render correctly with all props, with color as array 1`] = `ShallowWrapper {}`;
 
-exports[`Option should thown error if name is not present 1`] = `ShallowWrapper {}`;
-
-exports[`Option should throw error if name is not present 1`] = `ShallowWrapper {}`;
+exports[`Option should render correctly with all props, with color as string 1`] = `ShallowWrapper {}`;
