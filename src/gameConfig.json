@@ -1,11 +1,11 @@
 [
     {
         "name": "original",
-        "rules": "images/images-rules.svg",
+        "rules": "src/images/images-rules.svg",
         "options": [
             {
                 "name": "rock",
-                "icon": "images/icon-rock.svg",
+                "icon": "src/images/icon-rock.svg",
                 "color": [
                     "hsl(349, 71%, 52%)",
                     "hsl(349, 70%, 56%)"
@@ -17,7 +17,7 @@
             },
             {
                 "name": "scissors",
-                "icon": "images/icon-scissors.svg",
+                "icon": "src/images/icon-scissors.svg",
                 "color": [
                     "hsl(39, 89%, 49%)",
                     "hsl(40, 84%, 53%)"
@@ -29,7 +29,7 @@
             },
             {
                 "name": "paper",
-                "icon": "images/icon-paper.svg",
+                "icon": "src/images/icon-paper.svg",
                 "color": [
                     "hsl(230, 89%, 62%)", 
                     "hsl(230, 89%, 65%)"
@@ -43,11 +43,11 @@
     },
     {
         "name": "lizard-spock",
-        "rules": "images/images-rules-bonus.svg",
+        "rules": "src/images/images-rules-bonus.svg",
         "options": [
             {
                 "name": "rock",
-                "icon": "images/icon-rock.svg",
+                "icon": "src/images/icon-rock.svg",
                 "color": [
                     "hsl(349, 71%, 52%)",
                     "hsl(349, 70%, 56%)"
@@ -61,7 +61,7 @@
             },
             {
                 "name": "scissors",
-                "icon": "images/icon-scissors.svg",
+                "icon": "src/images/icon-scissors.svg",
                 "color": [
                     "hsl(39, 89%, 49%)",
                     "hsl(40, 84%, 53%)"
@@ -75,7 +75,7 @@
             },
             {
                 "name": "paper",
-                "icon": "images/icon-paper.svg",
+                "icon": "src/images/icon-paper.svg",
                 "color": [
                     "hsl(230, 89%, 62%)", 
                     "hsl(230, 89%, 65%)"
@@ -89,7 +89,7 @@
             },
             {
                 "name": "lizard",
-                "icon": "images/icon-lizard.svg",
+                "icon": "src/images/icon-lizard.svg",
                 "color": [
                     "hsl(261, 73%, 60%)", 
                     "hsl(230, 89%, 62%)"
@@ -103,7 +103,7 @@
             },
             {
                 "name": "spock",
-                "icon": "images/icon-spock.svg",
+                "icon": "src/images/icon-spock.svg",
                 "color": [
                     "hsl(189, 59%, 53%)",
                     "hsl(189, 58%, 57%)"
