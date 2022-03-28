@@ -1,12 +1,9 @@
-import Routes from './Routes'
+import Routes from "./Routes";
 
-import './App.scss'
+import "./App.scss";
 
 function App() {
-
-  return (
-    <Routes />
-  )
+  return <Routes />;
 }
 
-export default App
+export default App;

@@ -1,5 +1,7 @@
-import { Validator } from "prop-types"
+import { Validator } from "prop-types";
 
-export default function customValidator <T>(validator: Validator<T>): Validator<T> {
-    return validator;
+export default function customValidator<T>(
+  validator: Validator<T>
+): Validator<T> {
+  return validator;
 }
