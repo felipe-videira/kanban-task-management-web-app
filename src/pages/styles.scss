@@ -1,0 +1,62 @@
+$degrees: calc(360deg / var(--length));
+$size: calc(var(--size) * var(--length));
+//TODO: position fixed? no scroll?
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  padding: 5%;
+  gap: 100px;
+}
+
+.score {
+  height: 200px;
+  width: 90%;
+  border: 1px solid #fff;
+}
+
+.options-list-container {
+  width: calc(var(--size) * var(--length));
+  height: calc(var(--size) * var(--length));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+
+  .options-list {
+      transform: rotate(45deg);
+      width: calc($size / 10);
+      height: calc($size / 10);
+  
+    &__item {
+        position: absolute;
+        top: 0; 
+        left: 0;
+        width: 100%; 
+        height: 100%;
+        transform: rotate($degrees);
+  
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: calc((var(--size) * -1));
+        right: 0;
+        height: calc(var(--size) * 1.25); //TODO: dinamico
+        width: 20px; //TODO: dinamico
+        transform: rotate(45deg);
+        background: rgba(0, 0, 0, 0.2);
+      }
+  
+      &__content {
+          position: absolute;
+          top: calc(var(--size) * -1);
+          left: calc(var(--size) * -1);
+          width: var( --size);
+          height: var( --size);
+      }
+    }
+  }
+} 
