@@ -1,4 +1,4 @@
-import { Children, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Option from "../components/Option";
 import gameConfig from "../gameConfig.json";
@@ -40,7 +40,7 @@ function Game() {
 
     if (selectedGame) {
       setGame(selectedGame);
-      setOptionSize(screen.width / (selectedGame.options.length + 1));
+      setOptionSize((screen.width / (selectedGame.options.length + 1)) * 0.5);
       setOptionsLength(selectedGame.options.length);
     } else {
       navigate("/");

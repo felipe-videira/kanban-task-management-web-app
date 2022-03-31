@@ -30,13 +30,7 @@ function Option({
       style={style}
     >
       <div className="option__icon-container">
-        <img
-          className="option__icon"
-          src={icon}
-          width="60px"
-          height="60px"
-          alt={name}
-        />
+        <img className="option__icon" src={icon} alt={name} />
       </div>
     </button>
   );
@@ -47,7 +41,7 @@ Option.propTypes = {
   icon: iconValidator,
   color: colorValidator,
   onClick: onClickValidator,
-  size: number.isRequired,
+  size: number.isRequired, //TODO: test
 };
 
 export default Option;
