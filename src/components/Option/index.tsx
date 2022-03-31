@@ -1,47 +1,32 @@
-import { InferProps, number } from "prop-types";
-import { useMemo } from "react";
-import stringValidator from "../../utils/stringValidator";
-import { iconValidator, colorValidator, onClickValidator } from "./validators";
+import { arrayOf, InferProps, number, oneOfType } from "prop-types";
+import { string, image, color, func } from "../../utils/validators";
+import { Button, IconContainer, Icon } from "./styles";
 
-import "./style.scss";
+interface OnClick {
+  (name: string): void;
+}
 
-function Option({
-  name,
-  icon,
-  color,
-  size,
-  onClick,
-}: InferProps<typeof Option.propTypes>) {
-  const style = useMemo(
-    () => ({
-      background: Array.isArray(color)
-        ? `linear-gradient(${color.join(",")})`
-        : color,
-      "--size": `${size}px`,
-    }),
-    [color, size]
-  );
-
+function Option(props: InferProps<typeof Option.propTypes>) {
   return (
-    <button
+    <Button
       type="button"
-      onClick={() => onClick(name)}
-      className="option"
-      style={style}
+      onClick={() => props.onClick(props.name)}
+      size={props.size}
+      background={props.color}
     >
-      <div className="option__icon-container">
-        <img className="option__icon" src={icon} alt={name} />
-      </div>
-    </button>
+      <IconContainer size={props.size}>
+        <Icon src={props.icon} alt={props.name} size={props.size} />
+      </IconContainer>
+    </Button>
   );
 }
 
 Option.propTypes = {
-  name: stringValidator(true, 2),
-  icon: iconValidator,
-  color: colorValidator,
-  onClick: onClickValidator,
-  size: number.isRequired, //TODO: test
+  name: string.lenght(2).isRequired,
+  icon: image.isRequired,
+  color: oneOfType([color, arrayOf(color.isRequired)]).isRequired,
+  onClick: func<OnClick>().isRequired,
+  size: number.isRequired,
 };
 
 export default Option;

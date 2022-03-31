@@ -40,7 +40,7 @@ function Game() {
 
     if (selectedGame) {
       setGame(selectedGame);
-      setOptionSize((screen.width / (selectedGame.options.length + 1)) * 0.5);
+      setOptionSize((screen.width / selectedGame.options.length) * 0.4);
       setOptionsLength(selectedGame.options.length);
     } else {
       navigate("/");
