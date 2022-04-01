@@ -7,20 +7,19 @@ import checkFile from "../src/services/checkFile";
 import isColor from "../src/utils/isColor";
 import "jest-styled-components";
 
-
-//TODO: array lenght
-//TODO: size
 const mockColorString = "#000";
 const mockColorArray = ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"];
+const mockInvalidColorArray = ["hsl(230, 89%, 62%)"];
+const mockInvalidPath = "invalid/path";
+const mockInvalidColor = "invalid";
 const mockGameConfig = {
   name: "paper",
   icon: "images/icon-paper.svg",
   color: mockColorArray,
   size: 200,
 };
+
 const mockClickFn = jest.fn((name) => {});
-const mockInvalidPath = "invalid/path";
-const mockInvalidColor = "invalid";
 
 jest.mock("../src/services/checkFile");
 jest.mock("../src/utils/isColor");
@@ -114,6 +113,13 @@ describe("Option", () => {
     ).toThrow();
   });
 
+  it('should throw error if prop "color" is a string[] below min length', () => {
+    expect(() =>
+      shallow(<Option {...mockGameConfig} color={mockInvalidColorArray} onClick={mockClickFn} />)
+    ).toThrow();
+  });
+
+
   it('should throw error if prop "color" is not valid', () => {
     expect(() =>
       shallow(
@@ -123,6 +129,20 @@ describe("Option", () => {
           onClick={mockClickFn}
         />
       )
+    ).toThrow();
+  });
+
+  it('should throw error if prop "size" is not present', () => {
+    expect(() =>
+      shallow(
+        <Option {...mockGameConfig} size={undefined} onClick={mockClickFn} />
+      )
+    ).toThrow();
+  });
+
+  it('should throw error if prop "size" is not a number', () => {
+    expect(() =>
+      shallow(<Option {...mockGameConfig} size={"1"} onClick={mockClickFn} />)
     ).toThrow();
   });
 
