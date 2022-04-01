@@ -1,5 +1,12 @@
-import { arrayOf, InferProps, number, oneOfType } from "prop-types";
-import { string, image, color, func } from "../../utils/validators";
+import { InferProps, number } from "prop-types";
+import {
+  string,
+  image,
+  color,
+  func,
+  arrayOf,
+  oneOfType,
+} from "../../utils/validators";
 import { Button, IconContainer, Icon } from "./styles";
 
 interface OnClick {
@@ -9,6 +16,7 @@ interface OnClick {
 function Option(props: InferProps<typeof Option.propTypes>) {
   return (
     <Button
+      id={`option-${props.name}`}
       type="button"
       onClick={() => props.onClick(props.name)}
       size={props.size}
@@ -24,7 +32,7 @@ function Option(props: InferProps<typeof Option.propTypes>) {
 Option.propTypes = {
   name: string.lenght(2).isRequired,
   icon: image.isRequired,
-  color: oneOfType([color, arrayOf(color.isRequired)]).isRequired,
+  color: oneOfType([color, arrayOf(color).lenght(2)]).isRequired,
   onClick: func<OnClick>().isRequired,
   size: number.isRequired,
 };

@@ -1,14 +1,22 @@
+import 'jsdom-global/register';
+
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import Option from "../src/components/Option";
 import checkFile from "../src/services/checkFile";
 import isColor from "../src/utils/isColor";
+import "jest-styled-components";
 
+
+//TODO: array lenght
+//TODO: size
+const mockColorString = "#000";
+const mockColorArray = ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"];
 const mockGameConfig = {
   name: "paper",
   icon: "images/icon-paper.svg",
-  colorString: "#000",
-  colorArray: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
+  color: mockColorArray,
+  size: 200,
 };
 const mockClickFn = jest.fn((name) => {});
 const mockInvalidPath = "invalid/path";
@@ -21,28 +29,29 @@ checkFile.mockImplementation((value) => value !== mockInvalidPath);
 isColor.mockImplementation((value) => value !== mockInvalidColor);
 
 describe("Option", () => {
+
   it("should render correctly with all props, with color as string", () => {
-    const component = shallow(
+    const wrapper = mount(
       <Option
         {...mockGameConfig}
-        color={mockGameConfig.colorString}
+        color={mockColorString}
         onClick={mockClickFn}
       />
     );
 
-    expect(component).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it("should render correctly with all props, with color as array", () => {
-    const component = shallow(
+    const wrapper = mount(
       <Option
         {...mockGameConfig}
-        color={mockGameConfig.colorArray}
+        color={mockColorArray}
         onClick={mockClickFn}
       />
     );
 
-    expect(component).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should throw error if prop "name" is not present', () => {
@@ -122,11 +131,11 @@ describe("Option", () => {
   });
 
   it("should call click function", () => {
-    const component = shallow(
+    const wrapper = shallow(
       <Option {...mockGameConfig} onClick={mockClickFn} />
     );
 
-    component.find("button").simulate("click");
+    wrapper.find(`#option-${mockGameConfig.name}`).simulate("click");
 
     expect(mockClickFn).toHaveBeenCalled();
   });
