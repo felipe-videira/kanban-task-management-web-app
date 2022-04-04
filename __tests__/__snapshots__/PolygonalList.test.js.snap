@@ -1,0 +1,357 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PolygonalList should render correctly with all props 1`] = `
+.c0 {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 282.84542497525103px;
+  height: 282.84542497525103px;
+}
+
+.c1 {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(calc(360deg / 3));
+  -ms-transform: rotate(calc(360deg / 3));
+  transform: rotate(calc(360deg / 3));
+}
+
+.c1::after {
+  content: "";
+  position: absolute;
+  -webkit-transform-origin: -10px -10px;
+  -ms-transform-origin: -10px -10px;
+  transform-origin: -10px -10px;
+  height: calc(100% / (3/ 4));
+  width: 20px;
+  background: rgba(0,0,0,0.2);
+  top: 0;
+  left: 0;
+  -webkit-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  transform: rotate(-15deg);
+}
+
+.c3 {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(calc(360deg / 3));
+  -ms-transform: rotate(calc(360deg / 3));
+  transform: rotate(calc(360deg / 3));
+}
+
+.c3::after {
+  content: "";
+  position: absolute;
+  -webkit-transform-origin: -10px -10px;
+  -ms-transform-origin: -10px -10px;
+  transform-origin: -10px -10px;
+  height: calc(100% / (3/ 4));
+  width: 20px;
+  background: rgba(0,0,0,0.2);
+  top: 0;
+  left: 0;
+  -webkit-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  transform: rotate(-15deg);
+}
+
+.c5 {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(calc(360deg / 3));
+  -ms-transform: rotate(calc(360deg / 3));
+  transform: rotate(calc(360deg / 3));
+}
+
+.c5::after {
+  content: "";
+  position: absolute;
+  -webkit-transform-origin: -10px -10px;
+  -ms-transform-origin: -10px -10px;
+  transform-origin: -10px -10px;
+  height: calc(100% / (3/ 4));
+  width: 20px;
+  background: rgba(0,0,0,0.2);
+  top: 0;
+  left: 0;
+  -webkit-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  transform: rotate(-15deg);
+}
+
+.c2 {
+  z-index: 3;
+  -webkit-transform: rotate(-165deg);
+  -ms-transform: rotate(-165deg);
+  transform: rotate(-165deg);
+  position: absolute;
+  top: calc(200px / 2 * -1);
+  left: calc(200px / 2 * -1);
+  width: 200px;
+  height: 200px;
+}
+
+.c4 {
+  z-index: 2;
+  -webkit-transform: rotate(-285deg);
+  -ms-transform: rotate(-285deg);
+  transform: rotate(-285deg);
+  position: absolute;
+  top: calc(200px / 2 * -1);
+  left: calc(200px / 2 * -1);
+  width: 200px;
+  height: 200px;
+}
+
+.c6 {
+  z-index: 1;
+  -webkit-transform: rotate(-405deg);
+  -ms-transform: rotate(-405deg);
+  transform: rotate(-405deg);
+  position: absolute;
+  top: calc(200px / 2 * -1);
+  left: calc(200px / 2 * -1);
+  width: 200px;
+  height: 200px;
+}
+
+<PolygonalList
+  ItemComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "value": "value",
+      },
+      Object {
+        "value": "value",
+      },
+      Object {
+        "value": "value",
+      },
+    ]
+  }
+  itemProps={
+    Object {
+      "onClick": [Function],
+    }
+  }
+  itemSize={200}
+  size={400}
+>
+  <styled.div
+    size={282.84542497525103}
+  >
+    <div
+      className="c0"
+      size={282.84542497525103}
+    >
+      <Item
+        ItemComponent={[Function]}
+        data={
+          Array [
+            Object {
+              "value": "value",
+            },
+            Object {
+              "value": "value",
+            },
+            Object {
+              "value": "value",
+            },
+          ]
+        }
+        index={0}
+        itemProps={
+          Object {
+            "onClick": [Function],
+          }
+        }
+        itemSize={200}
+        length={3}
+      >
+        <styled.div
+          contentSize={200}
+          listLength={3}
+          zIndex={3}
+        >
+          <div
+            className="c1"
+          >
+            <styled.div
+              contentSize={200}
+              currentIndex={0}
+              listLength={3}
+              zIndex={3}
+            >
+              <div
+                className="c2"
+              >
+                <ItemComponent
+                  onClick={[Function]}
+                  value="value"
+                >
+                  <button
+                    onClick={[Function]}
+                  >
+                    value
+                  </button>
+                </ItemComponent>
+              </div>
+            </styled.div>
+            <Item
+              ItemComponent={[Function]}
+              data={
+                Array [
+                  Object {
+                    "value": "value",
+                  },
+                  Object {
+                    "value": "value",
+                  },
+                  Object {
+                    "value": "value",
+                  },
+                ]
+              }
+              index={1}
+              itemProps={
+                Object {
+                  "onClick": [Function],
+                }
+              }
+              itemSize={200}
+              length={3}
+            >
+              <styled.div
+                contentSize={200}
+                listLength={3}
+                zIndex={2}
+              >
+                <div
+                  className="c3"
+                >
+                  <styled.div
+                    contentSize={200}
+                    currentIndex={1}
+                    listLength={3}
+                    zIndex={2}
+                  >
+                    <div
+                      className="c4"
+                    >
+                      <ItemComponent
+                        onClick={[Function]}
+                        value="value"
+                      >
+                        <button
+                          onClick={[Function]}
+                        >
+                          value
+                        </button>
+                      </ItemComponent>
+                    </div>
+                  </styled.div>
+                  <Item
+                    ItemComponent={[Function]}
+                    data={
+                      Array [
+                        Object {
+                          "value": "value",
+                        },
+                        Object {
+                          "value": "value",
+                        },
+                        Object {
+                          "value": "value",
+                        },
+                      ]
+                    }
+                    index={2}
+                    itemProps={
+                      Object {
+                        "onClick": [Function],
+                      }
+                    }
+                    itemSize={200}
+                    length={3}
+                  >
+                    <styled.div
+                      contentSize={200}
+                      listLength={3}
+                      zIndex={1}
+                    >
+                      <div
+                        className="c5"
+                      >
+                        <styled.div
+                          contentSize={200}
+                          currentIndex={2}
+                          listLength={3}
+                          zIndex={1}
+                        >
+                          <div
+                            className="c6"
+                          >
+                            <ItemComponent
+                              onClick={[Function]}
+                              value="value"
+                            >
+                              <button
+                                onClick={[Function]}
+                              >
+                                value
+                              </button>
+                            </ItemComponent>
+                          </div>
+                        </styled.div>
+                        <Item
+                          ItemComponent={[Function]}
+                          data={
+                            Array [
+                              Object {
+                                "value": "value",
+                              },
+                              Object {
+                                "value": "value",
+                              },
+                              Object {
+                                "value": "value",
+                              },
+                            ]
+                          }
+                          index={3}
+                          itemProps={
+                            Object {
+                              "onClick": [Function],
+                            }
+                          }
+                          itemSize={200}
+                          length={3}
+                        />
+                      </div>
+                    </styled.div>
+                  </Item>
+                </div>
+              </styled.div>
+            </Item>
+          </div>
+        </styled.div>
+      </Item>
+    </div>
+  </styled.div>
+</PolygonalList>
+`;

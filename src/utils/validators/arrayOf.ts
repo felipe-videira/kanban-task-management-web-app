@@ -1,4 +1,3 @@
-import { nominalTypeHack } from "prop-types";
 import { Measurable } from "./types";
 import { Requireable, Validator } from "prop-types";
 
