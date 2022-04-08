@@ -7,7 +7,7 @@ import {
   arrayOf,
   oneOfType,
 } from "../../utils/validators";
-import { Button, IconContainer, Icon } from "./styles";
+import { OptionButton, OptionIconContainer, OptionIcon } from "./styles";
 
 interface OnClick {
   (name: string): void;
@@ -15,17 +15,17 @@ interface OnClick {
 
 function Option(props: InferProps<typeof Option.propTypes>) {
   return (
-    <Button
+    <OptionButton
       id={`option-${props.name}`}
       type="button"
       onClick={() => props.onClick(props.name)}
       size={props.size}
       background={props.color}
     >
-      <IconContainer size={props.size}>
-        <Icon src={props.icon} alt={props.name} size={props.size} />
-      </IconContainer>
-    </Button>
+      <OptionIconContainer size={props.size}>
+        <OptionIcon src={props.icon} alt={props.name} size={props.size} />
+      </OptionIconContainer>
+    </OptionButton>
   );
 }
 

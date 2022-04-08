@@ -5,12 +5,15 @@ import PolygonalList from "../../components/PolygonalList";
 import gameConfig from "../../gameConfig.json";
 import { clamp } from "../../utils/clamp";
 import { isMobile } from "../../utils/isMobile";
-import { Container, Score, Options } from "./styles";
+import { Container, Score, Options, Display, Title } from "./styles";
 
 type GameConfig =
   | {
       name: string;
       rules: string;
+      listSetup: {
+        pointingUp: boolean;
+      };
       options: {
         name: string;
         icon: string;
@@ -28,11 +31,13 @@ function Game() {
   const { gameName } = useParams();
 
   const [game, setGame] = useState<GameConfig>();
+  const [listSize, setListSize] = useState<number>(0);
   const [optionSize, setOptionSize] = useState<number>(0);
 
   function onOptionClick(name: string): void {
     console.log(name);
   }
+
   useEffect(() => {
     const selectedGame = gameConfig.find(
       (config) => config.name === gameName
@@ -40,13 +45,14 @@ function Game() {
 
     if (selectedGame) {
       setGame(selectedGame);
-      setOptionSize(
-        clamp(
-          (screen.width / selectedGame.options.length) * (isMobile() ? 1 : 0.4),
-          50,
-          200
-        )
+      const { length } = selectedGame.options;
+      const size = clamp(
+        (screen.width / length) * (isMobile() ? 1 : 0.4),
+        50,
+        isMobile() ? screen.width / length : screen.width / 3 / length
       );
+      setOptionSize(size);
+      setListSize(size * (length / 2));
     } else {
       navigate("/");
     }
@@ -54,8 +60,11 @@ function Game() {
 
   return (
     <Container>
-      <Score></Score>
-      <Options size={400}>
+      <Display>
+        <Title>{game?.name}</Title>
+        <Score></Score>
+      </Display>
+      <Options size={listSize}>
         <PolygonalList
           data={game?.options || []}
           ItemComponent={Option}
@@ -64,7 +73,8 @@ function Game() {
             onClick: onOptionClick,
           }}
           itemSize={optionSize}
-          size={400}
+          size={listSize}
+          pointingUp={game?.listSetup.pointingUp}
         />
       </Options>
     </Container>

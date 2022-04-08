@@ -10,15 +10,11 @@ exports[`PolygonalList should render correctly with all props 1`] = `
 }
 
 .c1 {
-  z-index: 3;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(calc(360deg / 3));
-  -ms-transform: rotate(calc(360deg / 3));
-  transform: rotate(calc(360deg / 3));
 }
 
 .c1::after {
@@ -37,96 +33,8 @@ exports[`PolygonalList should render correctly with all props 1`] = `
   transform: rotate(-15deg);
 }
 
-.c3 {
-  z-index: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-transform: rotate(calc(360deg / 3));
-  -ms-transform: rotate(calc(360deg / 3));
-  transform: rotate(calc(360deg / 3));
-}
-
-.c3::after {
-  content: "";
-  position: absolute;
-  -webkit-transform-origin: -10px -10px;
-  -ms-transform-origin: -10px -10px;
-  transform-origin: -10px -10px;
-  height: calc(100% / (3/ 4));
-  width: 20px;
-  background: rgba(0,0,0,0.2);
-  top: 0;
-  left: 0;
-  -webkit-transform: rotate(-15deg);
-  -ms-transform: rotate(-15deg);
-  transform: rotate(-15deg);
-}
-
-.c5 {
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-transform: rotate(calc(360deg / 3));
-  -ms-transform: rotate(calc(360deg / 3));
-  transform: rotate(calc(360deg / 3));
-}
-
-.c5::after {
-  content: "";
-  position: absolute;
-  -webkit-transform-origin: -10px -10px;
-  -ms-transform-origin: -10px -10px;
-  transform-origin: -10px -10px;
-  height: calc(100% / (3/ 4));
-  width: 20px;
-  background: rgba(0,0,0,0.2);
-  top: 0;
-  left: 0;
-  -webkit-transform: rotate(-15deg);
-  -ms-transform: rotate(-15deg);
-  transform: rotate(-15deg);
-}
-
 .c2 {
-  z-index: 3;
-  -webkit-transform: rotate(-165deg);
-  -ms-transform: rotate(-165deg);
-  transform: rotate(-165deg);
   position: absolute;
-  top: calc(200px / 2 * -1);
-  left: calc(200px / 2 * -1);
-  width: 200px;
-  height: 200px;
-}
-
-.c4 {
-  z-index: 2;
-  -webkit-transform: rotate(-285deg);
-  -ms-transform: rotate(-285deg);
-  transform: rotate(-285deg);
-  position: absolute;
-  top: calc(200px / 2 * -1);
-  left: calc(200px / 2 * -1);
-  width: 200px;
-  height: 200px;
-}
-
-.c6 {
-  z-index: 1;
-  -webkit-transform: rotate(-405deg);
-  -ms-transform: rotate(-405deg);
-  transform: rotate(-405deg);
-  position: absolute;
-  top: calc(200px / 2 * -1);
-  left: calc(200px / 2 * -1);
-  width: 200px;
-  height: 200px;
 }
 
 <PolygonalList
@@ -150,16 +58,18 @@ exports[`PolygonalList should render correctly with all props 1`] = `
     }
   }
   itemSize={200}
+  pointingUp={true}
   size={400}
 >
   <styled.div
-    size={282.84542497525103}
+    pointingUp={true}
+    size={400}
   >
     <div
       className="c0"
-      size={282.84542497525103}
+      size="282.84542497525103px"
     >
-      <Item
+      <PolygonalListItem
         ItemComponent={[Function]}
         data={
           Array [
@@ -182,23 +92,42 @@ exports[`PolygonalList should render correctly with all props 1`] = `
         }
         itemSize={200}
         length={3}
+        pointingUp={true}
       >
         <styled.div
-          contentSize={200}
-          listLength={3}
+          itemSize={200}
+          length={3}
           zIndex={3}
         >
           <div
             className="c1"
+            origin="-10px"
+            style={
+              Object {
+                "transform": "rotate(120deg)",
+                "zIndex": 3,
+              }
+            }
           >
             <styled.div
-              contentSize={200}
-              currentIndex={0}
-              listLength={3}
+              index={0}
+              itemSize={200}
+              length={3}
+              pointingUp={true}
               zIndex={3}
             >
               <div
                 className="c2"
+                style={
+                  Object {
+                    "height": "200px",
+                    "left": "-100px",
+                    "top": "-100px",
+                    "transform": "rotate(-165deg)",
+                    "width": "200px",
+                    "zIndex": 3,
+                  }
+                }
               >
                 <ItemComponent
                   onClick={[Function]}
@@ -212,7 +141,7 @@ exports[`PolygonalList should render correctly with all props 1`] = `
                 </ItemComponent>
               </div>
             </styled.div>
-            <Item
+            <PolygonalListItem
               ItemComponent={[Function]}
               data={
                 Array [
@@ -235,23 +164,42 @@ exports[`PolygonalList should render correctly with all props 1`] = `
               }
               itemSize={200}
               length={3}
+              pointingUp={true}
             >
               <styled.div
-                contentSize={200}
-                listLength={3}
+                itemSize={200}
+                length={3}
                 zIndex={2}
               >
                 <div
-                  className="c3"
+                  className="c1"
+                  origin="-10px"
+                  style={
+                    Object {
+                      "transform": "rotate(120deg)",
+                      "zIndex": 2,
+                    }
+                  }
                 >
                   <styled.div
-                    contentSize={200}
-                    currentIndex={1}
-                    listLength={3}
+                    index={1}
+                    itemSize={200}
+                    length={3}
+                    pointingUp={true}
                     zIndex={2}
                   >
                     <div
-                      className="c4"
+                      className="c2"
+                      style={
+                        Object {
+                          "height": "200px",
+                          "left": "-100px",
+                          "top": "-100px",
+                          "transform": "rotate(-285deg)",
+                          "width": "200px",
+                          "zIndex": 2,
+                        }
+                      }
                     >
                       <ItemComponent
                         onClick={[Function]}
@@ -265,7 +213,7 @@ exports[`PolygonalList should render correctly with all props 1`] = `
                       </ItemComponent>
                     </div>
                   </styled.div>
-                  <Item
+                  <PolygonalListItem
                     ItemComponent={[Function]}
                     data={
                       Array [
@@ -288,23 +236,42 @@ exports[`PolygonalList should render correctly with all props 1`] = `
                     }
                     itemSize={200}
                     length={3}
+                    pointingUp={true}
                   >
                     <styled.div
-                      contentSize={200}
-                      listLength={3}
+                      itemSize={200}
+                      length={3}
                       zIndex={1}
                     >
                       <div
-                        className="c5"
+                        className="c1"
+                        origin="-10px"
+                        style={
+                          Object {
+                            "transform": "rotate(120deg)",
+                            "zIndex": 1,
+                          }
+                        }
                       >
                         <styled.div
-                          contentSize={200}
-                          currentIndex={2}
-                          listLength={3}
+                          index={2}
+                          itemSize={200}
+                          length={3}
+                          pointingUp={true}
                           zIndex={1}
                         >
                           <div
-                            className="c6"
+                            className="c2"
+                            style={
+                              Object {
+                                "height": "200px",
+                                "left": "-100px",
+                                "top": "-100px",
+                                "transform": "rotate(-405deg)",
+                                "width": "200px",
+                                "zIndex": 1,
+                              }
+                            }
                           >
                             <ItemComponent
                               onClick={[Function]}
@@ -318,39 +285,15 @@ exports[`PolygonalList should render correctly with all props 1`] = `
                             </ItemComponent>
                           </div>
                         </styled.div>
-                        <Item
-                          ItemComponent={[Function]}
-                          data={
-                            Array [
-                              Object {
-                                "value": "value",
-                              },
-                              Object {
-                                "value": "value",
-                              },
-                              Object {
-                                "value": "value",
-                              },
-                            ]
-                          }
-                          index={3}
-                          itemProps={
-                            Object {
-                              "onClick": [Function],
-                            }
-                          }
-                          itemSize={200}
-                          length={3}
-                        />
                       </div>
                     </styled.div>
-                  </Item>
+                  </PolygonalListItem>
                 </div>
               </styled.div>
-            </Item>
+            </PolygonalListItem>
           </div>
         </styled.div>
-      </Item>
+      </PolygonalListItem>
     </div>
   </styled.div>
 </PolygonalList>

@@ -3,11 +3,11 @@
 exports[`Option should render correctly with all props, with color as array 1`] = `
 .c0 {
   border-radius: 50%;
-  padding: 12% 12% calc(12% + (200px * 0.04));
+  padding: 12% 12% calc(12% + 8px);
   width: 100%;
   height: 100%;
   border: none;
-  box-shadow: inset 0px calc((200px * 0.04) * -1) 0px 0px rgb(0 0 0 / 30%);
+  box-shadow: inset 0px -8px 0px 0px rgb(0 0 0 / 30%);
   cursor: pointer;
   background: linear-gradient(hsl(230,89%,62%),hsl(230,89%,65%));
 }
@@ -15,13 +15,13 @@ exports[`Option should render correctly with all props, with color as array 1`] 
 .c0:active {
   box-shadow: none;
   padding: 12%;
-  -webkit-transform: translateY(calc(200px * 0.04));
-  -ms-transform: translateY(calc(200px * 0.04));
-  transform: translateY(calc(200px * 0.04));
+  -webkit-transform: translateY(8px);
+  -ms-transform: translateY(8px);
+  transform: translateY(8px);
 }
 
 .c1 {
-  box-shadow: inset 0px calc(200px * 0.025) 0px 0px rgb(0 0 0 / 20%);
+  box-shadow: inset 0px 5px 0px 0px rgb(0 0 0 / 20%);
   background: #fff;
   border-radius: 50%;
   width: 100%;
@@ -46,8 +46,8 @@ exports[`Option should render correctly with all props, with color as array 1`] 
 
 .c2 {
   object-fit: contain;
-  width: calc(200px * 0.35);
-  height: calc(200px * 0.35);
+  width: 70px;
+  height: 70px;
 }
 
 <Option
@@ -78,7 +78,7 @@ exports[`Option should render correctly with all props, with color as array 1`] 
       className="c0"
       id="option-paper"
       onClick={[Function]}
-      size={200}
+      size="8px"
       type="button"
     >
       <styled.div
@@ -96,7 +96,7 @@ exports[`Option should render correctly with all props, with color as array 1`] 
             <img
               alt="paper"
               className="c2"
-              size={200}
+              size="70px"
               src="images/icon-paper.svg"
             />
           </styled.img>
@@ -110,11 +110,11 @@ exports[`Option should render correctly with all props, with color as array 1`] 
 exports[`Option should render correctly with all props, with color as string 1`] = `
 .c0 {
   border-radius: 50%;
-  padding: 12% 12% calc(12% + (200px * 0.04));
+  padding: 12% 12% calc(12% + 8px);
   width: 100%;
   height: 100%;
   border: none;
-  box-shadow: inset 0px calc((200px * 0.04) * -1) 0px 0px rgb(0 0 0 / 30%);
+  box-shadow: inset 0px -8px 0px 0px rgb(0 0 0 / 30%);
   cursor: pointer;
   background: #000;
 }
@@ -122,13 +122,13 @@ exports[`Option should render correctly with all props, with color as string 1`]
 .c0:active {
   box-shadow: none;
   padding: 12%;
-  -webkit-transform: translateY(calc(200px * 0.04));
-  -ms-transform: translateY(calc(200px * 0.04));
-  transform: translateY(calc(200px * 0.04));
+  -webkit-transform: translateY(8px);
+  -ms-transform: translateY(8px);
+  transform: translateY(8px);
 }
 
 .c1 {
-  box-shadow: inset 0px calc(200px * 0.025) 0px 0px rgb(0 0 0 / 20%);
+  box-shadow: inset 0px 5px 0px 0px rgb(0 0 0 / 20%);
   background: #fff;
   border-radius: 50%;
   width: 100%;
@@ -153,8 +153,8 @@ exports[`Option should render correctly with all props, with color as string 1`]
 
 .c2 {
   object-fit: contain;
-  width: calc(200px * 0.35);
-  height: calc(200px * 0.35);
+  width: 70px;
+  height: 70px;
 }
 
 <Option
@@ -175,7 +175,7 @@ exports[`Option should render correctly with all props, with color as string 1`]
       className="c0"
       id="option-paper"
       onClick={[Function]}
-      size={200}
+      size="8px"
       type="button"
     >
       <styled.div
@@ -193,7 +193,7 @@ exports[`Option should render correctly with all props, with color as string 1`]
             <img
               alt="paper"
               className="c2"
-              size={200}
+              size="70px"
               src="images/icon-paper.svg"
             />
           </styled.img>

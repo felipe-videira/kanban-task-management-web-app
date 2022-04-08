@@ -1,64 +1,85 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
+
+const SCALE_ROTATION_45DEG = 1.4142;
 
 interface ContainerProps {
   readonly size: number;
+  readonly pointingUp?: boolean | null;
 }
 
-export const Container = styled.div<ContainerProps>`
+export const PolygonalListContainer = styled.div.attrs<ContainerProps>(
+  (props) => ({
+    size: `${props.size / SCALE_ROTATION_45DEG}px`,
+  })
+)<ContainerProps>`
   ${(props) => `
-    transform: rotate(45deg);
-    width: ${props.size}px;
-    height: ${props.size}px;
+    transform: rotate(${props.pointingUp ? "45" : "225"}deg);
+    width: ${props.size};
+    height: ${props.size};
 `}
 `;
 
 interface ItemContainerProps {
-  readonly listLength: number;
-  readonly contentSize: number;
+  readonly length: number;
+  readonly itemSize: number;
   readonly zIndex: number;
+  readonly origin?: string;
 }
 
-export const ItemContainer = styled.div<ItemContainerProps>`
-  z-index: ${(props) => props.zIndex};
+export const PolygonalListItemContainer = styled.div.attrs<ItemContainerProps>(
+  (props) => ({
+    style: {
+      zIndex: props.zIndex,
+      transform: `rotate(${360 / props.length}deg)`,
+    },
+    origin: `-${props.itemSize / (props.itemSize * 0.1)}px`,
+  })
+)<ItemContainerProps>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  transform: ${(props) => `rotate(calc(360deg / ${props.listLength}))`};
 
-  &::after {
-    ${(props) => `
-      ${props.listLength < 3 ? "display: none;" : ""}
-      content: "";
-      position: absolute;
-      transform-origin: ${
-        (props.contentSize / (props.contentSize * 0.1)) * -1
-      }px ${(props.contentSize / (props.contentSize * 0.1)) * -1}px;
-      height: calc(100% / (${props.listLength}/ 4));
-      width: ${props.contentSize * 0.1}px;
-      background: rgba(0,0,0,0.2);
-      top: 0;
-      left: 0;
-      transform: rotate(${(90 - 360 / props.listLength) / 2}deg);
+  ${(props) =>
+    props.length >= 3 &&
+    `
+      &::after {
+          content: "";
+          position: absolute;
+          transform-origin: ${props.origin} ${props.origin};
+          height: calc(100% / (${props.length}/ 4));
+          width: ${props.itemSize * 0.1}px;
+          background: rgba(0,0,0,0.2);
+          top: 0;
+          left: 0;
+          transform: rotate(${(90 - 360 / props.length) / 2}deg);
+      }
     `}
-  }
 `;
 
 interface ItemContentProps extends ItemContainerProps {
-  readonly currentIndex: number;
+  readonly index: number;
+  readonly pointingUp?: boolean | null;
 }
 
-export const ItemContent = styled.div<ItemContentProps>`
-  ${(props) => `
-    z-index: ${props.zIndex};
-    transform: rotate(${
-      ((360 / props.listLength) * (props.currentIndex + 1) + 45) * -1
-    }deg);
-    position: absolute;
-    top: calc(${props.contentSize}px / 2 * -1);
-    left: calc(${props.contentSize}px / 2 * -1);
-    width: ${props.contentSize}px;
-    height: ${props.contentSize}px;
-`}
+export const PolygonalListItemContent = styled.div.attrs<ItemContentProps>(
+  (props) => {
+    const width = `${props.itemSize}px`;
+    const top = `${(props.itemSize / 2) * -1}px`;
+    const rotationDegrees =
+      (360 / props.length) * (props.index + 1) + (props.pointingUp ? 45 : 225);
+    return {
+      style: {
+        zIndex: props.zIndex,
+        top,
+        left: top,
+        width,
+        height: width,
+        transform: `rotate(-${rotationDegrees}deg)`,
+      },
+    };
+  }
+)<ItemContentProps>`
+  position: absolute;
 `;
