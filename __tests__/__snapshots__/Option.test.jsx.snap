@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option should render correctly with all props 1`] = `
+.c0 {
+  border-radius: 50%;
+  padding: 12% 12% calc(12% + 8px);
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: inset 0px -8px 0px 0px rgb(0 0 0 / 30%);
+  cursor: pointer;
+  background: linear-gradient(hsl(230,89%,62%),hsl(230,89%,65%));
+}
+
+.c0:active {
+  box-shadow: none;
+  padding: 12%;
+  -webkit-transform: translateY(8px);
+  -ms-transform: translateY(8px);
+  transform: translateY(8px);
+}
+
+.c1 {
+  box-shadow: inset 0px 5px 0px 0px rgb(0 0 0 / 20%);
+  background: #fff;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c1:hover {
+  background: #f0f0f0;
+}
+
+.c2 {
+  object-fit: contain;
+  width: 70px;
+  height: 70px;
+}
+
+<button
+  class="c0"
+  id="option-paper"
+  type="button"
+>
+  <div
+    class="c1"
+    size="200"
+  >
+    <img
+      alt="paper"
+      class="c2"
+      src="images/icon-paper.svg"
+    />
+  </div>
+</button>
+`;

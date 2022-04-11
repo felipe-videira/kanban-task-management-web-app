@@ -6,6 +6,7 @@ import propTypes from "./propTypes";
 
 function PolygonalList(props: InferProps<typeof PolygonalList.propTypes>) {
   const length = useMemo(() => props.data.length, [props.data]);
+  const polygonExteriorAngle = useMemo(() => 360 / length, [length]);
 
   return length > 0 ? (
     <Container size={props.size} pointingUp={props.pointingUp}>
@@ -17,6 +18,7 @@ function PolygonalList(props: InferProps<typeof PolygonalList.propTypes>) {
         itemSize={props.itemSize}
         length={length}
         pointingUp={props.pointingUp}
+        polygonExteriorAngle={polygonExteriorAngle}
       />
     </Container>
   ) : null;

@@ -1,79 +1,108 @@
 import "jsdom-global/register";
 
 import React from "react";
-import { mount } from "enzyme";
+import { mount, render } from "enzyme";
 import PolygonalList from "../src/components/PolygonalList";
 import "jest-styled-components";
 
-const mockProps = {
+const props = {
   data: [{ value: "value" }, { value: "value" }, { value: "value" }],
-  ItemComponent: (props) => (
-    // eslint-disable-next-line react/prop-types
-    <button onClick={props.onClick}>{props.value}</button>
-  ),
+  ItemComponent: jest.fn().mockImplementation(() => null),
   itemProps: {
-    onClick: () => {},
+    prop: "prop",
   },
   itemSize: 200,
   size: 400,
+  pointingUp: true,
 };
 
 describe("PolygonalList", () => {
   it("should render correctly with all props", () => {
-    const wrapper = mount(<PolygonalList {...mockProps} />);
+    const wrapper = render(<PolygonalList {...props} />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should throw error if prop "data" is not present', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} data={undefined} />)
-    ).toThrow();
+  it('should nest the items according to the prop "data"', () => {
+    const wrapper = mount(<PolygonalList {...props} />);
+
+    const lastElement = wrapper
+      .first("div")
+      .getDOMNode()
+      .children.item(0)
+      .children.item(1)
+      .children.item(1);
+
+    expect(lastElement).toBeTruthy();
   });
 
-  it('should throw error if prop "data" is not an array of objects', () => {
-    expect(() => shallow(<PolygonalList {...mockProps} data={1} />)).toThrow();
+  it('should rotate the container according to the prop "pointingUp"', () => {
+    const wrapper = mount(<PolygonalList {...props} />);
+
+    const containerElement = wrapper.first("div").getDOMNode();
+
+    expect(
+      getComputedStyle(containerElement).getPropertyValue("transform")
+    ).toBe("rotate(45deg)");
+
+    wrapper.setProps({ pointingUp: false });
+
+    expect(
+      getComputedStyle(containerElement).getPropertyValue("transform")
+    ).toBe("rotate(225deg)");
   });
 
-  it('should throw error if prop "ItemComponent" is not present', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} ItemComponent={undefined} />)
-    ).toThrow();
+  it("should rotate the items according to the data's length", () => {
+    const wrapper = mount(<PolygonalList {...props} />);
+
+    const firstItemElement = wrapper.first("div").getDOMNode().children.item(0);
+
+    expect(
+      getComputedStyle(firstItemElement).getPropertyValue("transform")
+    ).toBe(`rotate(120deg)`);
   });
 
-  it('should throw error if prop "ItemComponent" is not a React element type', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} ItemComponent={() => {}} />)
-    ).toThrow();
+  it("should rotate the item content to be the item's absolute negative rotation", () => {
+    const wrapper = mount(<PolygonalList {...props} />);
+
+    const secondItemContentElement = wrapper
+      .first("div")
+      .getDOMNode()
+      .children.item(0)
+      .children.item(1)
+      .children.item(0);
+
+    expect(
+      getComputedStyle(secondItemContentElement).getPropertyValue("transform")
+    ).toBe(`rotate(-285deg)`);
   });
 
-  it('should throw error if prop "itemProps" is not an object', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} itemProps={"value"} />)
-    ).toThrow();
+  it("should position the item content to be centered at the end of the container", () => {
+    const wrapper = mount(<PolygonalList {...props} />);
+
+    const firstItemContentElement = wrapper
+      .first("div")
+      .getDOMNode()
+      .children.item(0)
+      .children.item(0);
+
+    const style = getComputedStyle(firstItemContentElement);
+
+    expect(style.getPropertyValue("top")).toBe(`-100px`);
+    expect(style.getPropertyValue("left")).toBe(`-100px`);
   });
 
-  it('should throw error if prop "itemSize" is not present', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} itemSize={undefined} />)
-    ).toThrow();
-  });
+  it('should pass on the "itemProps" and "data" as props to the "ItemComponent"', () => {
+    props.ItemComponent.mockClear();
 
-  it('should throw error if prop "itemSize" is not a number', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} itemSize={"1"} />)
-    ).toThrow();
-  });
+    mount(<PolygonalList {...props} />);
 
-  it('should throw error if prop "size" is not present', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} size={undefined} />)
-    ).toThrow();
-  });
-
-  it('should throw error if prop "size" is not a number', () => {
-    expect(() =>
-      shallow(<PolygonalList {...mockProps} size={"1"} />)
-    ).toThrow();
+    expect(props.ItemComponent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        value: "value",
+        prop: "prop",
+      }),
+      {}
+    );
   });
 });

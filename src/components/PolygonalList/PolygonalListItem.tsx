@@ -15,6 +15,7 @@ function PolygonalListItem(
       zIndex={zIndex}
       length={props.length}
       itemSize={props.itemSize}
+      polygonExteriorAngle={props.polygonExteriorAngle}
     >
       <ItemContent
         zIndex={zIndex}
@@ -22,6 +23,7 @@ function PolygonalListItem(
         length={props.length}
         itemSize={props.itemSize}
         pointingUp={props.pointingUp}
+        polygonExteriorAngle={props.polygonExteriorAngle}
       >
         <props.ItemComponent
           {...props.data[props.index]}
@@ -40,6 +42,7 @@ PolygonalListItem.propTypes = {
   ...propTypes,
   index: number.isRequired,
   length: number.isRequired,
+  polygonExteriorAngle: number.isRequired,
 };
 
 export default PolygonalListItem;

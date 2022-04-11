@@ -8,9 +8,22 @@ interface ButtonProps extends StyleProps {
   readonly background: string | string[];
 }
 
-export const OptionButton = styled.button.attrs<ButtonProps>((props) => ({
-  size: `${props.size * 0.04}px`,
-}))<ButtonProps>`
+export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
+  let background;
+
+  if (Array.isArray(props.background) && props.background.length > 1) {
+    background = `linear-gradient(${props.background.join(",")})`;
+  } else if (Array.isArray(props.background)) {
+    background = props.background[0];
+  } else {
+    background = props.background;
+  }
+
+  return {
+    size: `${props.size * 0.04}px`,
+    background,
+  };
+})<ButtonProps>`
   border-radius: 50%;
   padding: ${(props) => `12% 12% calc(12% + ${props.size})`};
   width: 100%;
@@ -18,10 +31,7 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => ({
   border: none;
   box-shadow: ${(props) => `inset 0px -${props.size} 0px 0px rgb(0 0 0 / 30%)`};
   cursor: pointer;
-  background: ${(props) =>
-    Array.isArray(props.background)
-      ? `linear-gradient(${props.background.join(",")})`
-      : props.background};
+  background: ${(props) => props.background};
 
   &:active {
     box-shadow: none;

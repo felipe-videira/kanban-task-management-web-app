@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     styledComponents: {
         ssr: false,
         fileName: false,
