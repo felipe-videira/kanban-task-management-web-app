@@ -7,7 +7,30 @@ import * as userScoreService from "../../services/userScore";
 import { clamp } from "../../utils/clamp";
 import { isMobile } from "../../utils/isMobile";
 import { random } from "../../utils/random";
-import { Container, Score, Options, Display, Title } from "./styles";
+import {
+  Container,
+  Score,
+  Options,
+  Display,
+  Title,
+  Stepper,
+  Step,
+  GameResultContainer,
+  GameResultUserChoice,
+  GameResult,
+  GameResultHouseChoice,
+} from "./styles";
+
+const RESULT_DELAY = 6;
+
+type GameOption = {
+  name: string;
+  icon: string;
+  color: string[] | string;
+  winRules: {
+    [key: string]: boolean;
+  };
+};
 
 type GameConfig = {
   name: string;
@@ -15,14 +38,7 @@ type GameConfig = {
   listSetup: {
     pointingUp: boolean;
   };
-  options: {
-    name: string;
-    icon: string;
-    color: string[] | string;
-    winRules: {
-      [key: string]: boolean;
-    };
-  }[];
+  options: GameOption[];
 };
 
 function Game() {
@@ -32,58 +48,84 @@ function Game() {
   const [game, setGame] = useState<GameConfig>();
   const [listSize, setListSize] = useState<number>(0);
   const [optionSize, setOptionSize] = useState<number>(0);
-  const [userScore, setUserScore] = useState<number>(userScoreService.get());
+  const [userScore, setUserScore] = useState<number>(0);
   const [userChoice, setUserChoice] = useState<string>();
   const [houseChoice, setHouseChoice] = useState<string>();
-  const [userWins, setUserWins] = useState<boolean>();
+  const [userWins, setUserWins] = useState<boolean>(false);
+  const [step, setStep] = useState<number>(1);
 
-  function setupGame(selectedGame: GameConfig) {
-    setGame(selectedGame);
-
+  function getSize(
+    selectedGame: GameConfig,
+    screenWidth: number = screen.width
+  ): [optionsSize: number, listSize: number] {
     const { length } = selectedGame.options;
     const size = clamp(
-      (screen.width / length) * (isMobile() ? 1 : 0.4),
+      (screenWidth / length) * (isMobile() ? 1 : 0.4),
       50,
-      isMobile() ? screen.width / length : screen.width / 3 / length
+      isMobile() ? screenWidth / length : screenWidth / 3 / length
     );
 
-    setOptionSize(size);
-    setListSize(size * (length / 2));
+    return [size, size * (length / 2)];
+  }
+
+  function playMatch(
+    optionName: string,
+    options: GameOption[]
+  ): [isWinner: boolean, houseOption: GameOption] {
+    const houseOption = options[random(0, options.length - 1)];
+    const userOption = options.find((option) => option.name === optionName);
+    return [!!userOption?.winRules[houseOption.name], houseOption];
+  }
+
+  //todo
+  function incrementScore() {
+    //todo
+    if (userWins && game) {
+      const newScore = userScore + 1;
+      setUserScore(newScore);
+      userScoreService.save(game.name, newScore);
+    }
+  }
+
+  function onOptionClick(name: string) {
+    const [isWinner, houseOption] = playMatch(name, game?.options || []);
+
+    setUserChoice(name);
+    setHouseChoice(houseOption.name);
+    setUserWins(isWinner);
+    setStep(2);
   }
 
   function resetGame() {
+    setStep(1);
     setUserChoice(undefined);
     setHouseChoice(undefined);
     setUserWins(false);
   }
 
-  function onOptionClick(name: string) {
-    if (game) {
-      setUserChoice(name);
-
-      const houseOption = game.options[random(0, game.options.length - 1)];
-
-      setHouseChoice(houseOption.name);
-
-      const userOption = game.options.find((option) => option.name === name);
-
-      if (userOption?.winRules[houseOption.name]) {
-        setUserWins(true);
-        setUserScore(userScore + 1);
-        userScoreService.save(userScore);
-      }
-    }
-  }
-
-  useEffect(() => {
+  function setupGame(): GameConfig | undefined {
     const selectedGame = gameConfig.find(
       (config) => config.name === gameName
     ) as GameConfig | undefined;
 
     if (selectedGame) {
-      setupGame(selectedGame);
+      setGame(selectedGame);
+
+      const [options, list] = getSize(selectedGame);
+      setOptionSize(options);
+      setListSize(list);
+      setUserScore(userScoreService.get(selectedGame.name));
+    }
+
+    return selectedGame;
+  }
+
+  useEffect(() => {
+    const selectedGame = setupGame();
+
+    if (selectedGame) {
       userScoreService.setOnExitSaveListener(() => {
-        userScoreService.save(userScore);
+        userScoreService.save(selectedGame.name, userScore);
       });
     } else {
       navigate("/");
@@ -94,20 +136,36 @@ function Game() {
     <Container>
       <Display>
         <Title>{game?.name}</Title>
-        <Score>{userScore}</Score>
+        <Score value={userScore} />
       </Display>
       <Options size={listSize}>
-        <PolygonalList
-          data={game?.options || []}
-          ItemComponent={Option}
-          itemProps={{
-            size: optionSize,
-            onClick: onOptionClick,
-          }}
-          itemSize={optionSize}
-          size={listSize}
-          pointingUp={game?.listSetup.pointingUp}
-        />
+        <Stepper value={step}>
+          <Step value={1}>
+            <PolygonalList
+              data={game?.options || []}
+              ItemComponent={Option}
+              itemProps={{
+                size: optionSize,
+                onClick: onOptionClick,
+              }}
+              itemSize={optionSize}
+              size={listSize}
+              pointingUp={game?.listSetup.pointingUp}
+            />
+          </Step>
+          <Step value={2}>
+            <GameResultContainer userWins={userWins} delayInSecs={RESULT_DELAY}>
+              <GameResultUserChoice>{userChoice}</GameResultUserChoice>
+              <GameResult onAnimationEnd={incrementScore}>
+                <p>{userWins ? "You win" : "You loose"}</p>
+                <button type="button" onClick={resetGame}>
+                  Play again
+                </button>
+              </GameResult>
+              <GameResultHouseChoice>{houseChoice}</GameResultHouseChoice>
+            </GameResultContainer>
+          </Step>
+        </Stepper>
       </Options>
     </Container>
   );

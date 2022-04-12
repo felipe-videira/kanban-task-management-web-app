@@ -1,4 +1,4 @@
-import checkFile from "../../services/checkFile";
+import checkFile from "../checkFile";
 import { Requireable } from "prop-types";
 
 export const image: Requireable<string> = (props, propName, componentName) => {

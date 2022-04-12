@@ -57,8 +57,7 @@
       "enzyme-to-json/serializer"
     ],
     "setupFiles": [
-      "<rootDir>/setupTests.js",
-      "<rootDir>/scripts/throwOnPropTypeError.js"
+      "<rootDir>/setupTests.js"
     ]
   }
 }

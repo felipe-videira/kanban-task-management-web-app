@@ -1,9 +1,10 @@
 import "jsdom-global/register";
+import "jest-styled-components";
+import "../scripts/throwOnPropTypeError";
 
 import React from "react";
 import { mount, render } from "enzyme";
 import PolygonalList from "../src/components/PolygonalList";
-import "jest-styled-components";
 
 const props = {
   data: [{ value: "value" }, { value: "value" }, { value: "value" }],

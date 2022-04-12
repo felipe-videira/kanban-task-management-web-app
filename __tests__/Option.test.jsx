@@ -1,11 +1,12 @@
 import "jsdom-global/register";
+import "jest-styled-components";
+import "../scripts/throwOnPropTypeError";
 
 import React from "react";
 import { shallow, render } from "enzyme";
 import Option from "../src/components/Option";
-import checkFile from "../src/services/checkFile";
+import checkFile from "../src/utils/checkFile";
 import isColor from "../src/utils/isColor";
-import "jest-styled-components";
 
 const props = {
   name: "paper",
@@ -17,7 +18,7 @@ const props = {
 const invalidPath = "invalid/path";
 const invalidColor = "invalid";
 
-jest.mock("../src/services/checkFile");
+jest.mock("../src/utils/checkFile");
 jest.mock("../src/utils/isColor");
 
 checkFile.mockImplementation((value) => value !== invalidPath);
