@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components/macro";
+import { mobile } from "../../../utils/breakpoints";
 
 type StepperProps = {
   readonly value: number;
@@ -22,6 +23,10 @@ export const Step = styled.div<StepperProps>`
   animation-fill-mode: both;
   display: none;
   width: 100%;
+
+  ${mobile} {
+    height: 100%;
+  }
 `;
 
 export const Stepper = styled.div<StepperProps>`

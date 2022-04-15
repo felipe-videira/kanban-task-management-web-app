@@ -1,5 +1,6 @@
 import styled from "styled-components/macro";
 import { mobile } from "../../../utils/breakpoints";
+import getFontSize from "../../../utils/getFontSize";
 import { fadeIn } from "./keyframes";
 
 type ScoreProps = {
@@ -35,17 +36,20 @@ export const Display = styled.div`
   align-items: center;
   width: 40%;
   border: 3px solid #ffffff59;
-  border-radius: 20px;
-  padding: 2.5% 5%;
+  border-radius: 10px;
+  padding: 2% 5%;
 
   ${mobile} {
-    width: 25%;
+    width: 70%;
   }
 `;
 
 export const Title = styled.h1`
   text-transform: uppercase;
   width: 10%;
+  margin: 0;
+
+  font-size: ${(props) => getFontSize(props.children, 2)};
 `;
 
 export const Score = styled.div.attrs<ScoreProps>((props) => ({

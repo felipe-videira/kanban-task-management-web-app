@@ -1,4 +1,6 @@
 import styled, { css, keyframes } from "styled-components/macro";
+import { mobile } from "../../../utils/breakpoints";
+import getFontSize from "../../../utils/getFontSize";
 import { fadeIn } from "./keyframes";
 
 const SHOW_HOUSE_CHOICE_DURATION_RATIO = 0.2;
@@ -20,18 +22,21 @@ const growAndfadeIn = keyframes`
   0%  {
    	width: 0;
   	opacity: 0;
+    margin: 0;
   }
   25% {
     width: 100%;
+    margin 0 5%;
   }
   100% {
     width: 100%;
+    margin 0 5%;
   	opacity: 1;
   }
 `;
 
 const radialBackgroundEffect = keyframes`
-   0% {
+  0% {
       background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0) 38%);
       opacity: 0;
   }
@@ -39,11 +44,11 @@ const radialBackgroundEffect = keyframes`
     background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0.05) 55%, rgba(255,255,255,0.025) 56%,  rgba(255,255,255,0) 56%);
     opacity: 0.25;
   }
- 50% {
+  50% {
     background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0.1) 55%, rgba(255,255,255,0.05) 56%,  rgba(255,255,255,0) 56%);
     opacity: 0.5;
   }
-   75% {
+  75% {
      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0.1) 55%, rgba(255,255,255,0.025) 56%, rgba(255,255,255,0.012.5) 75%, rgba(255,255,255,0.0) 76%);
      opacity: 0.75;
   }
@@ -86,25 +91,36 @@ const GameResulChoicetWinner = css<GameResultProps>`
 `;
 
 export const GameResultChoice = styled.div<GameResultChoiceProps>`
-  ${(props) => `
-    width: ${props.size}px;
-    height: ${props.size}px;
-    position: relative;
-    background-color: rgb(0 0 0 / 25%);
-    margin: 0 5%;
-    flex-shrink: 0;
+  ${(props) => {
+    const fontSize = getFontSize(props.children);
+    return `
+      width: ${props.size}px;
+      height: ${props.size}px;
+      position: relative;
+      background-color: rgb(0 0 0 / 25%);
+      margin: 0 5%;
+      flex-shrink: 0;
 
-    &::before {
-      content: '${props.label}';
-      position: absolute;
-      top: -88px;
-      text-transform: uppercase;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      font-size: 22px;
-    }
-  `}
+      &::before {
+        content: '${props.label}';
+        position: absolute;
+        top: calc(${fontSize} * -3);
+        text-transform: uppercase;
+        left: 0;
+        text-align: center;
+        width: 100%;
+        font-size: ${fontSize};
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+
+        ${mobile} {
+          bottom: calc(${fontSize} * -2);
+          top: unset;
+        }
+      }
+  `;
+  }}
   border-radius: 50%;
 `;
 
@@ -126,13 +142,20 @@ export const GameResult = styled.div`
   animation-name: ${growAndfadeIn};
   animation-fill-mode: both;
   z-index: 1;
-  margin 0 5%;
+
+  ${mobile} {
+    animation-name: ${fadeIn};
+    width: 60%;
+    margin 0 5%;
+  	opacity: 0;
+    order: 3;
+  }
 `;
 
 export const GameResultMessage = styled.p`
   text-transform: uppercase;
   white-space: nowrap;
-  font-size: 52px;
+  font-size: ${(props) => getFontSize(props.children, 2)};
   font-weight: bold;
   margin: 10px 0;
 `;
@@ -140,6 +163,11 @@ export const GameResultMessage = styled.p`
 export const GameResultContainer = styled.div<GameResultProps>`
   display: flex;
   justify-content: space-evenly;
+
+  ${mobile} {
+    height: 100%;
+    flex-wrap: wrap;
+  }
 
   ${GameResultHouseChoice} {
     animation-duration: ${(props) =>

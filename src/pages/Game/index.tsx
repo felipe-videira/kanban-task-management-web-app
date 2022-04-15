@@ -61,7 +61,7 @@ function Game() {
   function getSize(
     selectedGame: NonNullable<GameConfig>,
     screenWidth: number = screen.width
-  ): [optionsSize: number, listSize: number] {
+  ): [optionsSize: number, listSize: number, resultSize: number] {
     const { length } = selectedGame.options;
     const size = clamp(
       (screenWidth / length) * (isMobile() ? 1 : 0.4),
@@ -69,7 +69,7 @@ function Game() {
       isMobile() ? screenWidth / length : screenWidth / 3 / length
     );
 
-    return [size, size * (length / 2)];
+    return [size, size * (length / 2), size * (length / 4)];
   }
 
   function playMatch(
@@ -130,9 +130,9 @@ function Game() {
     if (selectedGame) {
       setGame(selectedGame);
 
-      const [options, list] = getSize(selectedGame);
+      const [options, list, result] = getSize(selectedGame);
       setOptionSize(options);
-      setResultSize(options * 1.5);
+      setResultSize(result);
       setListSize(list);
       setUserScore(scoreService.get(selectedGame.name));
     }
