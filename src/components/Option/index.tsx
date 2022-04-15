@@ -18,7 +18,7 @@ function Option(props: InferProps<typeof Option.propTypes>) {
     <OptionButton
       id={`option-${props.name}`}
       type="button"
-      onClick={() => props.onClick(props.name)}
+      onClick={() => props.onClick && props.onClick(props.name)}
       size={props.size}
       background={props.color}
     >
@@ -33,7 +33,7 @@ Option.propTypes = {
   name: string.lenght(2).isRequired,
   icon: image.isRequired,
   color: oneOfType([color, arrayOf(color).lenght(2)]).isRequired,
-  onClick: func<OnClick>().isRequired,
+  onClick: func<OnClick>(),
   size: number.isRequired,
 };
 

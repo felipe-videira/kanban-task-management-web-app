@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
 import Option from "../../components/Option";
 import PolygonalList from "../../components/PolygonalList";
 import gameConfig from "../../gameConfig.json";
-import * as userScoreService from "../../services/userScore";
+import * as scoreService from "../../services/score";
 import { clamp } from "../../utils/clamp";
 import { isMobile } from "../../utils/isMobile";
 import { random } from "../../utils/random";
@@ -19,6 +20,7 @@ import {
   GameResultUserChoice,
   GameResult,
   GameResultHouseChoice,
+  GameResultMessage,
 } from "./styles";
 
 const RESULT_DELAY = 6;
@@ -30,7 +32,7 @@ type GameOption = {
   winRules: {
     [key: string]: boolean;
   };
-};
+} | null;
 
 type GameConfig = {
   name: string;
@@ -38,24 +40,26 @@ type GameConfig = {
   listSetup: {
     pointingUp: boolean;
   };
-  options: GameOption[];
-};
+  options: NonNullable<GameOption>[];
+} | null;
 
 function Game() {
   const navigate = useNavigate();
   const { gameName } = useParams();
 
-  const [game, setGame] = useState<GameConfig>();
+  const [game, setGame] = useState<GameConfig>(null);
   const [listSize, setListSize] = useState<number>(0);
   const [optionSize, setOptionSize] = useState<number>(0);
+  const [resultSize, setResultSize] = useState<number>(0);
   const [userScore, setUserScore] = useState<number>(0);
-  const [userChoice, setUserChoice] = useState<string>();
-  const [houseChoice, setHouseChoice] = useState<string>();
+  const [houseScore, setHouseScore] = useState<number>(0);
+  const [userChoice, setUserChoice] = useState<GameOption>(null);
+  const [houseChoice, setHouseChoice] = useState<GameOption>(null);
   const [userWins, setUserWins] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
 
   function getSize(
-    selectedGame: GameConfig,
+    selectedGame: NonNullable<GameConfig>,
     screenWidth: number = screen.width
   ): [optionsSize: number, listSize: number] {
     const { length } = selectedGame.options;
@@ -70,36 +74,51 @@ function Game() {
 
   function playMatch(
     optionName: string,
-    options: GameOption[]
-  ): [isWinner: boolean, houseOption: GameOption] {
-    const houseOption = options[random(0, options.length - 1)];
+    options: NonNullable<GameOption>[]
+  ): [isWinner: boolean, userOption: GameOption, houseOption: GameOption] {
     const userOption = options.find((option) => option.name === optionName);
-    return [!!userOption?.winRules[houseOption.name], houseOption];
+
+    if (userOption) {
+      const houseOption = options[random(0, options.length - 1)];
+
+      return [!!userOption.winRules[houseOption.name], userOption, houseOption];
+    }
+
+    return [false, null, null];
   }
 
-  //todo
-  function incrementScore() {
-    //todo
-    if (userWins && game) {
-      const newScore = userScore + 1;
-      setUserScore(newScore);
-      userScoreService.save(game.name, newScore);
-    }
+  function incrementScore(userIsWinner: boolean) {
+    const setStateAction = userIsWinner ? setUserScore : setHouseScore;
+
+    setStateAction((prevValue) => {
+      const newScore = prevValue + 1;
+
+      scoreService.save(game?.name || "", newScore, !userIsWinner);
+
+      return newScore;
+    });
   }
 
   function onOptionClick(name: string) {
-    const [isWinner, houseOption] = playMatch(name, game?.options || []);
+    const [isWinner, userOption, houseOption] = playMatch(
+      name,
+      game?.options || []
+    );
 
-    setUserChoice(name);
-    setHouseChoice(houseOption.name);
+    setUserChoice(userOption);
+    setHouseChoice(houseOption);
     setUserWins(isWinner);
     setStep(2);
+
+    setTimeout(() => {
+      incrementScore(isWinner);
+    }, RESULT_DELAY * 0.6 * 1000);
   }
 
   function resetGame() {
     setStep(1);
-    setUserChoice(undefined);
-    setHouseChoice(undefined);
+    setUserChoice(null);
+    setHouseChoice(null);
     setUserWins(false);
   }
 
@@ -113,8 +132,9 @@ function Game() {
 
       const [options, list] = getSize(selectedGame);
       setOptionSize(options);
+      setResultSize(options * 1.5);
       setListSize(list);
-      setUserScore(userScoreService.get(selectedGame.name));
+      setUserScore(scoreService.get(selectedGame.name));
     }
 
     return selectedGame;
@@ -124,25 +144,27 @@ function Game() {
     const selectedGame = setupGame();
 
     if (selectedGame) {
-      userScoreService.setOnExitSaveListener(() => {
-        userScoreService.save(selectedGame.name, userScore);
-      });
+      scoreService.setSaveOnExitListener(() => ({
+        game: selectedGame.name,
+        userScore,
+        houseScore,
+      }));
     } else {
       navigate("/");
     }
   }, []);
 
-  return (
+  return game ? (
     <Container>
       <Display>
-        <Title>{game?.name}</Title>
+        <Title>{game.name}</Title>
         <Score value={userScore} />
       </Display>
-      <Options size={listSize}>
-        <Stepper value={step}>
-          <Step value={1}>
+      <Stepper value={step}>
+        <Step value={1}>
+          <Options size={listSize}>
             <PolygonalList
-              data={game?.options || []}
+              data={game.options || []}
               ItemComponent={Option}
               itemProps={{
                 size: optionSize,
@@ -150,25 +172,29 @@ function Game() {
               }}
               itemSize={optionSize}
               size={listSize}
-              pointingUp={game?.listSetup.pointingUp}
+              pointingUp={game.listSetup.pointingUp}
             />
-          </Step>
-          <Step value={2}>
-            <GameResultContainer userWins={userWins} delayInSecs={RESULT_DELAY}>
-              <GameResultUserChoice>{userChoice}</GameResultUserChoice>
-              <GameResult onAnimationEnd={incrementScore}>
-                <p>{userWins ? "You win" : "You loose"}</p>
-                <button type="button" onClick={resetGame}>
-                  Play again
-                </button>
-              </GameResult>
-              <GameResultHouseChoice>{houseChoice}</GameResultHouseChoice>
-            </GameResultContainer>
-          </Step>
-        </Stepper>
-      </Options>
+          </Options>
+        </Step>
+        <Step value={2}>
+          <GameResultContainer userWins={userWins} delayInSecs={RESULT_DELAY}>
+            <GameResultUserChoice size={resultSize} label="You picked">
+              {userChoice && <Option {...userChoice} size={resultSize} />}
+            </GameResultUserChoice>
+            <GameResult>
+              <GameResultMessage>
+                {userWins ? "You win" : "You lose"}
+              </GameResultMessage>
+              <Button onClick={resetGame}>Play again</Button>
+            </GameResult>
+            <GameResultHouseChoice size={resultSize} label="The house picked">
+              {houseChoice && <Option {...houseChoice} size={resultSize} />}
+            </GameResultHouseChoice>
+          </GameResultContainer>
+        </Step>
+      </Stepper>
     </Container>
-  );
+  ) : null;
 }
 
 export default Game;

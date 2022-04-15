@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render correctly with "outlined" false 1`] = `
+.c0 {
+  background: #fff;
+  border: none;
+  color: #1f3756;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 14px;
+  border-radius: 7px;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+<button
+  class="c0"
+  type="button"
+/>
+`;
+
+exports[`Button should render correctly with "outlined" true 1`] = `
+.c0 {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 14px;
+  border-radius: 7px;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+<button
+  class="c0"
+  type="button"
+/>
+`;

@@ -4,10 +4,22 @@ const SCALE_ROTATION_45DEG = 1.4142;
 const POINTING_UP_ROTATION = 45;
 const POINTING_DOWN_ROTATION = 225;
 
-interface ContainerProps {
+type ContainerProps = {
   readonly size: number;
   readonly pointingUp?: boolean | null;
-}
+};
+
+type ItemContainerProps = {
+  readonly length: number;
+  readonly itemSize: number;
+  readonly zIndex: number;
+  readonly polygonExteriorAngle: number;
+};
+
+type ItemContentProps = {
+  readonly index: number;
+  readonly pointingUp?: boolean | null;
+} & ItemContainerProps;
 
 export const PolygonalListContainer = styled.div.attrs<ContainerProps>(
   (props) => ({
@@ -22,13 +34,6 @@ export const PolygonalListContainer = styled.div.attrs<ContainerProps>(
     height: ${props.size};
 `}
 `;
-
-interface ItemContainerProps {
-  readonly length: number;
-  readonly itemSize: number;
-  readonly zIndex: number;
-  readonly polygonExteriorAngle: number;
-}
 
 export const PolygonalListItemContainer = styled.div.attrs<ItemContainerProps>(
   (props) => ({
@@ -66,11 +71,6 @@ export const PolygonalListItemContainer = styled.div.attrs<ItemContainerProps>(
     return "";
   }}
 `;
-
-interface ItemContentProps extends ItemContainerProps {
-  readonly index: number;
-  readonly pointingUp?: boolean | null;
-}
 
 export const PolygonalListItemContent = styled.div.attrs<ItemContentProps>(
   (props) => {

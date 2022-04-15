@@ -44,12 +44,12 @@ const gameConfig = [
     ],
   },
 ];
-jest.mock("../src/services/userScore", () => ({
+jest.mock("../src/services/score", () => ({
   __esModule: true,
   get: jest.fn(),
   save: jest.fn(),
   clear: jest.fn(),
-  setOnExitSaveListener: jest.fn(),
+  setSaveOnExitListener: jest.fn(),
 }));
 jest.mock("../src/utils/checkFile", () => ({
   __esModule: true,

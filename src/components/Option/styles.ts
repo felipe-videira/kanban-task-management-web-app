@@ -1,12 +1,12 @@
 import styled from "styled-components/macro";
 
-interface StyleProps {
+type StyleProps = {
   readonly size: number;
-}
+};
 
-interface ButtonProps extends StyleProps {
+type ButtonProps = {
   readonly background: string | string[];
-}
+} & StyleProps;
 
 export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
   let background;
