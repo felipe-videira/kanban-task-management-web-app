@@ -8,19 +8,20 @@ import * as scoreService from "../../services/score";
 import { clamp } from "../../utils/clamp";
 import { isMobile } from "../../utils/isMobile";
 import { random } from "../../utils/random";
+import { Stepper, Step } from "../../components/Stepper";
+import Modal from "../../components/Modal";
 import {
   Container,
   Score,
-  Options,
-  Display,
+  OptionsContainer,
+  TitleContainer,
   Title,
-  Stepper,
-  Step,
   GameResultContainer,
   GameResultUserChoice,
   GameResult,
   GameResultHouseChoice,
   GameResultMessage,
+  RulesButtonContainer,
 } from "./styles";
 
 const RESULT_DELAY = 6;
@@ -57,19 +58,22 @@ function Game() {
   const [houseChoice, setHouseChoice] = useState<GameOption>(null);
   const [userWins, setUserWins] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
+  const [showRulesModal, setShowRulesModal] = useState<boolean>(false);
 
   function getSize(
-    selectedGame: NonNullable<GameConfig>,
+    optionsLength: number,
+    mobileRatio = 1.15,
+    desktopRatio = 0.4,
+    minSize = 50,
     screenWidth: number = screen.width
-  ): [optionsSize: number, listSize: number, resultSize: number] {
-    const { length } = selectedGame.options;
-    const size = clamp(
-      (screenWidth / length) * (isMobile() ? 1 : 0.4),
-      50,
-      isMobile() ? screenWidth / length : screenWidth / 3 / length
+  ) {
+    return clamp(
+      (screenWidth / optionsLength) * (isMobile() ? mobileRatio : desktopRatio),
+      minSize,
+      isMobile()
+        ? (screenWidth / optionsLength) * mobileRatio
+        : screenWidth / 3 / optionsLength
     );
-
-    return [size, size * (length / 2), size * (length / 4)];
   }
 
   function playMatch(
@@ -115,6 +119,10 @@ function Game() {
     }, RESULT_DELAY * 0.6 * 1000);
   }
 
+  function showRules() {
+    setShowRulesModal(!showRulesModal);
+  }
+
   function resetGame() {
     setStep(1);
     setUserChoice(null);
@@ -130,10 +138,14 @@ function Game() {
     if (selectedGame) {
       setGame(selectedGame);
 
-      const [options, list, result] = getSize(selectedGame);
-      setOptionSize(options);
-      setResultSize(result);
-      setListSize(list);
+      const { length } = selectedGame.options;
+
+      const size = getSize(length);
+      setOptionSize(size);
+      setListSize(size * (length / 2));
+
+      setResultSize(getSize(2, 0.75));
+
       setUserScore(scoreService.get(selectedGame.name));
     }
 
@@ -156,13 +168,14 @@ function Game() {
 
   return game ? (
     <Container>
-      <Display>
-        <Title>{game.name}</Title>
-        <Score value={userScore} />
-      </Display>
+      <TitleContainer>
+        <Title>Rock Paper Scissors</Title>
+        <Score label="Score" value={userScore} />
+      </TitleContainer>
+
       <Stepper value={step}>
         <Step value={1}>
-          <Options size={listSize}>
+          <OptionsContainer size={listSize}>
             <PolygonalList
               data={game.options || []}
               ItemComponent={Option}
@@ -174,8 +187,9 @@ function Game() {
               size={listSize}
               pointingUp={game.listSetup.pointingUp}
             />
-          </Options>
+          </OptionsContainer>
         </Step>
+
         <Step value={2}>
           <GameResultContainer userWins={userWins} delayInSecs={RESULT_DELAY}>
             <GameResultUserChoice size={resultSize} label="You picked">
@@ -193,6 +207,16 @@ function Game() {
           </GameResultContainer>
         </Step>
       </Stepper>
+
+      <RulesButtonContainer>
+        <Button outlined small onClick={showRules}>
+          Rules
+        </Button>
+      </RulesButtonContainer>
+
+      <Modal show={showRulesModal} onClick={showRules}>
+        Rules
+      </Modal>
     </Container>
   ) : null;
 }

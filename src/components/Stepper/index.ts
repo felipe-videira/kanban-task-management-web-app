@@ -1,11 +1,12 @@
+import { InferProps, number } from "prop-types";
 import styled, { keyframes } from "styled-components/macro";
-import { mobile } from "../../../utils/breakpoints";
+import { mobile } from "../../utils/breakpoints";
 
-type StepperProps = {
-  readonly value: number;
+const proptypes = {
+  value: number,
 };
 
-export const stepFadeIn = keyframes`
+const stepFadeIn = keyframes`
   0% {
     display: none;
     opacity: 0;
@@ -18,7 +19,7 @@ export const stepFadeIn = keyframes`
   }
 `;
 
-export const Step = styled.div<StepperProps>`
+const Step = styled.div<InferProps<typeof proptypes>>`
   animation: ${stepFadeIn} 1s linear 0s 1;
   animation-fill-mode: both;
   display: none;
@@ -29,7 +30,7 @@ export const Step = styled.div<StepperProps>`
   }
 `;
 
-export const Stepper = styled.div<StepperProps>`
+const Stepper = styled.div<InferProps<typeof proptypes>>`
   ${(props) => `
     height: 65%;
     display: flex;
@@ -41,3 +42,9 @@ export const Stepper = styled.div<StepperProps>`
     }
 `}
 `;
+
+Step.propTypes = proptypes;
+Stepper.propTypes = proptypes;
+
+export { Step, Stepper };
+export default Stepper;

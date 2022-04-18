@@ -1,9 +1,9 @@
 import { bool, func, InferProps } from "prop-types";
 import styled from "styled-components";
-import getFontSize from "../../utils/getFontSize";
 
 const propTypes = {
   outlined: bool,
+  small: bool,
   onClick: func.isRequired,
 };
 
@@ -21,11 +21,19 @@ const Button = styled.button.attrs(() => ({
     border: none;
     color: #1f3756;`}
 
-  border: none;
+  ${(props) =>
+    props.small
+      ? `
+    font-size: 1rem;
+    padding: 10px;
+    max-width: 150px;`
+      : `
+    font-size: 1.5rem;
+    padding: 14px;
+    max-width: 350px;`}
+   
   width: 100%;
-  font-size: ${(props) => getFontSize(props.children, 0.5)};
   font-family: inherit;
-  padding: 14px;
   border-radius: 7px;
   text-transform: uppercase;
   letter-spacing: 2px;
