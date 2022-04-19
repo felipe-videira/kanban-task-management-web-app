@@ -1,9 +1,10 @@
-import { InferProps, number } from "prop-types";
+import { InferProps, number, string } from "prop-types";
 import styled, { keyframes } from "styled-components/macro";
 import { mobile } from "../../utils/breakpoints";
 
 const proptypes = {
-  value: number,
+  value: number.isRequired,
+  height: string,
 };
 
 const stepFadeIn = keyframes`
@@ -32,7 +33,7 @@ const Step = styled.div<InferProps<typeof proptypes>>`
 
 const Stepper = styled.div<InferProps<typeof proptypes>>`
   ${(props) => `
-    height: 65%;
+    height: ${props.height};
     display: flex;
     align-items: center;
     justify-content: center;

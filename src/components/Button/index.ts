@@ -1,5 +1,5 @@
 import { bool, func, InferProps } from "prop-types";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const propTypes = {
   outlined: bool,

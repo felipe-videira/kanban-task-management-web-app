@@ -1,7 +1,7 @@
 [
     {
         "name": "original",
-        "rules": "src/images/images-rules.svg",
+        "rules": "src/images/image-rules.svg",
         "listSetup": {
             "pointingUp": false
         },
@@ -46,7 +46,7 @@
     },
     {
         "name": "lizard-spock",
-        "rules": "src/images/images-rules-bonus.svg",
+        "rules": "src/images/image-rules-bonus.svg",
         "listSetup": {
             "pointingUp": true
         },

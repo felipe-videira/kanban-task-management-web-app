@@ -268,6 +268,7 @@ export const GameResultChoice = styled.div<GameResultChoiceProps>`
 `;
 
 export const GameResultUserChoice = styled(GameResultChoice)``;
+
 export const GameResultHouseChoice = styled(GameResultChoice)`
   & > * {
     animation-name: ${fadeIn};
@@ -330,4 +331,15 @@ export const GameResultContainer = styled.div<GameResultProps>`
     props.userWins ? GameResultUserChoice : GameResultHouseChoice} {
     ${GameResulChoicetWinner}
   }
+`;
+
+export const RulesImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
+export const RulesImage = styled.img`
+  width: 80%;
 `;

@@ -22,6 +22,8 @@ import {
   GameResultHouseChoice,
   GameResultMessage,
   RulesButtonContainer,
+  RulesImageContainer,
+  RulesImage,
 } from "./styles";
 
 const RESULT_DELAY = 6;
@@ -119,7 +121,7 @@ function Game() {
     }, RESULT_DELAY * 0.6 * 1000);
   }
 
-  function showRules() {
+  function toggleRules() {
     setShowRulesModal(!showRulesModal);
   }
 
@@ -173,7 +175,7 @@ function Game() {
         <Score label="Score" value={userScore} />
       </TitleContainer>
 
-      <Stepper value={step}>
+      <Stepper value={step} height="60%">
         <Step value={1}>
           <OptionsContainer size={listSize}>
             <PolygonalList
@@ -195,12 +197,15 @@ function Game() {
             <GameResultUserChoice size={resultSize} label="You picked">
               {userChoice && <Option {...userChoice} size={resultSize} />}
             </GameResultUserChoice>
+
             <GameResult>
               <GameResultMessage>
                 {userWins ? "You win" : "You lose"}
               </GameResultMessage>
+
               <Button onClick={resetGame}>Play again</Button>
             </GameResult>
+
             <GameResultHouseChoice size={resultSize} label="The house picked">
               {houseChoice && <Option {...houseChoice} size={resultSize} />}
             </GameResultHouseChoice>
@@ -209,13 +214,15 @@ function Game() {
       </Stepper>
 
       <RulesButtonContainer>
-        <Button outlined small onClick={showRules}>
+        <Button outlined small onClick={toggleRules}>
           Rules
         </Button>
       </RulesButtonContainer>
 
-      <Modal show={showRulesModal} onClick={showRules}>
-        Rules
+      <Modal show={showRulesModal} title="Rules" onClick={toggleRules}>
+        <RulesImageContainer>
+          <RulesImage src={game.rules} alt="Rules" />
+        </RulesImageContainer>
       </Modal>
     </Container>
   ) : null;
