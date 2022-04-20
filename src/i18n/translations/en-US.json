@@ -1,0 +1,18 @@
+{
+    "gameName": {
+        "original": "Rock Paper Scissors",
+        "lizard-spock": "Rock Paper Scissors Lizard Spock"
+    },
+    "label": {
+        "score": "Score",
+        "rulesButton": "Rules",
+        "rulesModal": "Rules",
+        "retryButton": "Play Again",
+        "userChoice": "You Picked",
+        "houseChoice": "The House Picked"
+    },
+    "message": {
+        "victory": "You Win",
+        "defeat": "You Lose"
+    }
+}

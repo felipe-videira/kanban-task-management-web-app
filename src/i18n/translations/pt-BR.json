@@ -1,0 +1,18 @@
+{
+    "gameName": {
+        "original": "Pedra Papel Tesoura",
+        "lizard-spock": "Pedra Papel Tesoura Lagarto Spock"
+    },
+    "label": {
+        "score": "Placar",
+        "rulesButton": "Regras",
+        "rulesModal": "Regras",
+        "retryButton": "Jogar Novamente",
+        "userChoice": "Você Escolheu",
+        "houseChoice": "A Casa Escolheu"
+    },
+    "message": {
+        "victory": "Você Ganhou",
+        "defeat": "Você Perdeu"
+    }
+}

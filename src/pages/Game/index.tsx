@@ -25,6 +25,7 @@ import {
   RulesImageContainer,
   RulesImage,
 } from "./styles";
+import { useTranslation } from "react-i18next";
 
 const RESULT_DELAY = 6;
 
@@ -49,6 +50,7 @@ type GameConfig = {
 function Game() {
   const navigate = useNavigate();
   const { gameName } = useParams();
+  const { t } = useTranslation();
 
   const [game, setGame] = useState<GameConfig>(null);
   const [listSize, setListSize] = useState<number>(0);
@@ -149,6 +151,7 @@ function Game() {
       setResultSize(getSize(2, 0.75));
 
       setUserScore(scoreService.get(selectedGame.name));
+      setHouseScore(scoreService.get(selectedGame.name, true));
     }
 
     return selectedGame;
@@ -171,8 +174,8 @@ function Game() {
   return game ? (
     <Container>
       <TitleContainer>
-        <Title>Rock Paper Scissors</Title>
-        <Score label="Score" value={userScore} />
+        <Title>{t(`gameName.${game.name}`)}</Title>
+        <Score label={t("label.score")} user={userScore} house={houseScore} />
       </TitleContainer>
 
       <Stepper value={step} height="60%">
@@ -194,19 +197,25 @@ function Game() {
 
         <Step value={2}>
           <GameResultContainer userWins={userWins} delayInSecs={RESULT_DELAY}>
-            <GameResultUserChoice size={resultSize} label="You picked">
+            <GameResultUserChoice
+              size={resultSize}
+              label={t("label.userChoice")}
+            >
               {userChoice && <Option {...userChoice} size={resultSize} />}
             </GameResultUserChoice>
 
             <GameResult>
               <GameResultMessage>
-                {userWins ? "You win" : "You lose"}
+                {t(userWins ? "message.victory" : "message.defeat")}
               </GameResultMessage>
 
-              <Button onClick={resetGame}>Play again</Button>
+              <Button onClick={resetGame}>{t("label.retryButton")}</Button>
             </GameResult>
 
-            <GameResultHouseChoice size={resultSize} label="The house picked">
+            <GameResultHouseChoice
+              size={resultSize}
+              label={t("label.houseChoice")}
+            >
               {houseChoice && <Option {...houseChoice} size={resultSize} />}
             </GameResultHouseChoice>
           </GameResultContainer>
@@ -215,13 +224,17 @@ function Game() {
 
       <RulesButtonContainer>
         <Button outlined small onClick={toggleRules}>
-          Rules
+          {t("label.rulesButton")}
         </Button>
       </RulesButtonContainer>
 
-      <Modal show={showRulesModal} title="Rules" onClick={toggleRules}>
+      <Modal
+        show={showRulesModal}
+        title={t("label.rulesModal")}
+        onClick={toggleRules}
+      >
         <RulesImageContainer>
-          <RulesImage src={game.rules} alt="Rules" />
+          <RulesImage src={game.rules} alt={t("label.rulesModal")} />
         </RulesImageContainer>
       </Modal>
     </Container>

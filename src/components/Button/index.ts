@@ -38,6 +38,11 @@ const Button = styled.button.attrs(() => ({
   text-transform: uppercase;
   letter-spacing: 2px;
   cursor: pointer;
+  transition: transform 300ms ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 Button.propTypes = propTypes;

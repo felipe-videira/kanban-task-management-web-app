@@ -9,11 +9,11 @@ const proptypes = {
 
 const stepFadeIn = keyframes`
   0% {
-    display: none;
+    transform: scale(0);
     opacity: 0;
   }
-  50% {
-    display: block;
+  1% {
+    transform: scale(1);
   }
   100% {
     opacity: 1;

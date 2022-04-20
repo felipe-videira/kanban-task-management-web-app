@@ -8,8 +8,9 @@ const SHOW_RESULT_DURATION_RATIO = 0.55;
 const SHOW_RESULT_DELAY_RATIO = 0.55;
 
 type ScoreProps = {
-  readonly value: number;
   readonly label: string;
+  readonly user: number;
+  readonly house: number;
 };
 
 type OptionsProps = {
@@ -36,41 +37,55 @@ export const fadeIn = keyframes`
 
 const growAndfadeIn = keyframes`
   0%  {
-   	width: 0;
   	opacity: 0;
-    margin: 0;
+    transform: scale(0);
   }
-  25% {
-    width: 100%;
-    margin 0 5%;
+  1% {
+    transform: scale(1);
   }
   100% {
-    width: 100%;
-    margin 0 5%;
+    transform: scale(1);
   	opacity: 1;
+  }
+`;
+
+const moveLeft = keyframes`
+  from  {
+    transform: translateX(70%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const moveRight = keyframes`
+  from  {
+    transform: translateX(-70%);
+  }
+  to {
+    transform: translateX(0);
   }
 `;
 
 const radialBackgroundEffect = keyframes`
   0% {
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0) 38%);
-      opacity: 0;
-  }
-  25% {
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0.05) 55%, rgba(255,255,255,0.025) 56%,  rgba(255,255,255,0) 56%);
-    opacity: 0.25;
-  }
-  50% {
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0.1) 55%, rgba(255,255,255,0.05) 56%,  rgba(255,255,255,0) 56%);
-    opacity: 0.5;
-  }
-  75% {
-     background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0.1) 55%, rgba(255,255,255,0.025) 56%, rgba(255,255,255,0.012.5) 75%, rgba(255,255,255,0.0) 76%);
-     opacity: 0.75;
+    background: radial-gradient(circle, 
+      rgba(255,255,255,0.2) 0%, 
+      rgba(255,255,255,0.2) 37.5%, 
+      rgba(255,255,255,0.15) 38%, 
+      rgba(255,255,255,0) 38%);
+    opacity: 0;
   }
   100% {
-     background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 37.5%, rgba(255,255,255,0.15) 38%, rgba(255,255,255,0.1) 55%, rgba(255,255,255,0.05) 56%, rgba(255,255,255,0.025) 75%, rgba(255,255,255,0.0) 76%);
-     opacity: 1;
+    background: radial-gradient(circle, 
+      rgba(255,255,255,0.2) 0%, 
+      rgba(255,255,255,0.2) 37.5%, 
+      rgba(255,255,255,0.15) 38%, 
+      rgba(255,255,255,0.1) 55%, 
+      rgba(255,255,255,0.05) 56%, 
+      rgba(255,255,255,0.025) 75%, 
+      rgba(255,255,255,0.0) 76%);
+    opacity: 0.3;
   }
 `;
 
@@ -109,7 +124,8 @@ export const TitleContainer = styled.div`
 
 export const Title = styled.h1`
   text-transform: uppercase;
-  line-height: 0.8;
+  line-height: 0.9;
+  text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
   padding-left: 10px;
   width: 10%;
   margin: 0;
@@ -117,7 +133,7 @@ export const Title = styled.h1`
 `;
 
 export const Score = styled.div.attrs<ScoreProps>((props) => ({
-  key: props.value,
+  key: `${props.user}-${props.house}`,
 }))<ScoreProps>`
   background: #fff;
   width: 25%;
@@ -131,6 +147,7 @@ export const Score = styled.div.attrs<ScoreProps>((props) => ({
   animation: ${fadeIn} 1s linear 0s 1;
   animation-fill-mode: both;
   padding: 1% 2%;
+  gap: 5px;
 
   &::before {
     content: "${(props) => props.label}";
@@ -140,27 +157,27 @@ export const Score = styled.div.attrs<ScoreProps>((props) => ({
     letter-spacing: 1.5px;
 
     ${phone} {
-      font-size: 0.9rem;
+      font-size: 0.7rem;
     }
 
     ${phoneSm} {
-      font-size: 0.7rem;
+      font-size: 0.5rem;
     }
   }
 
   &::after {
-    content: "${(props) => props.value}";
-    font-size: 3rem;
+    content: "${(props) => `${props.user} - ${props.house}`}";
+    font-size: 2.5rem;
     color: hsl(229, 25%, 31%);
     margin: -5px;
-    font-weight: bold;
+    font-weight: normal;
 
     ${phone} {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     ${phoneSm} {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
     }
   }
 `;
@@ -182,6 +199,7 @@ export const RulesButtonContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  z-index: 1;
 
   ${mobile} {
     justify-content: center;
@@ -196,28 +214,18 @@ const GameResulChoicetWinner = css<GameResultProps>`
     content: "";
     width: 300%;
     height: 300%;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0.2) 37.5%,
-      rgba(255, 255, 255, 0.15) 38%,
-      rgba(255, 255, 255, 0.1) 55%,
-      rgba(255, 255, 255, 0.05) 56%,
-      rgba(255, 255, 255, 0.025) 75%,
-      rgba(255, 255, 255, 0) 76%
-    );
     position: absolute;
     border-radius: 50%;
     top: -100%;
     left: -100%;
     z-index: -1;
     animation-name: ${radialBackgroundEffect};
-    animation-duration: 1.25s;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-fill-mode: both;
+    animation-timing-function: ease;
     animation-delay: ${(props) => props.delayInSecs * 0.6}s;
-    filter: opacity(0.5);
   }
 `;
 
@@ -264,17 +272,21 @@ export const GameResultChoice = styled.div<GameResultChoiceProps>`
         }
       }
   `}
+
+  animation-fill-mode: both;
   border-radius: 50%;
 `;
 
-export const GameResultUserChoice = styled(GameResultChoice)``;
+export const GameResultUserChoice = styled(GameResultChoice)`
+  animation-name: ${moveLeft};
+`;
 
 export const GameResultHouseChoice = styled(GameResultChoice)`
+  animation-name: ${moveRight};
+
   & > * {
     animation-name: ${fadeIn};
     animation-fill-mode: both;
-    animation-duration: inherit;
-    animation-delay: inherit;
   }
 `;
 
@@ -287,9 +299,11 @@ export const GameResult = styled.div`
   animation-fill-mode: both;
   z-index: 1;
 
+  width: 100%;
+  margin 0 5%;
+
   ${mobile} {
     animation-name: ${fadeIn};
-    width: 60%;
     margin 0 5%;
   	opacity: 0;
     order: 3;
@@ -314,11 +328,18 @@ export const GameResultContainer = styled.div<GameResultProps>`
     align-items: center;
   }
 
-  ${GameResultHouseChoice} {
+  ${GameResultChoice} {
     animation-duration: ${(props) =>
-      props.delayInSecs * SHOW_HOUSE_CHOICE_DURATION_RATIO}s;
+      props.delayInSecs * SHOW_RESULT_DURATION_RATIO * 0.15}s;
     animation-delay: ${(props) =>
-      props.delayInSecs * SHOW_HOUSE_CHOICE_DELAY_RATIO}s;
+      props.delayInSecs * SHOW_RESULT_DELAY_RATIO * 0.95}s;
+
+    & > * {
+      animation-duration: ${(props) =>
+        props.delayInSecs * SHOW_HOUSE_CHOICE_DURATION_RATIO}s;
+      animation-delay: ${(props) =>
+        props.delayInSecs * SHOW_HOUSE_CHOICE_DELAY_RATIO}s;
+    }
   }
 
   ${GameResult} {

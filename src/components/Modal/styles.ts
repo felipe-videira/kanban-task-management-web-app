@@ -7,18 +7,14 @@ type ModalOverlayProps = {
 
 const modalFadeIn = keyframes`
     0% {
-        display: none;
-        width: 0;
-        height: 0;
+        transform: scale(0);
         opacity: 0;
     }
-    25% { height: 100%; width: 100%; }
+    25% { transform: scale(1); }
     50% { opacity: 0; }
     100% { 
         opacity: 1; 
-        display: block; 
-        height: 100%; 
-        width: 100%; 
+        transform: scale(1);
     }
 `;
 
@@ -29,7 +25,7 @@ export const ModalOverlay = styled.div.attrs<ModalOverlayProps>((props) => ({
   },
 }))<ModalOverlayProps>`
   animation-name: ${modalFadeIn};
-  animation-duration: 0.5s;
+  animation-duration: 0.4s;
   animation-fill-mode: forwards;
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
@@ -51,13 +47,15 @@ export const ModalContainer = styled.div`
   max-height: 700px;
   position: absolute;
   border-radius: 8px;
-  padding: 2% 2% 0;
+  padding: 2%;
   display: flex;
   flex-direction: column;
 
   ${mobile} {
     width: 100%;
     height: 100%;
+    max-height: none;
+    max-width: none;
   }
 `;
 

@@ -21,6 +21,7 @@ function Option(props: InferProps<typeof Option.propTypes>) {
       onClick={() => props.onClick && props.onClick(props.name)}
       size={props.size}
       background={props.color}
+      clickable={!!props.onClick}
     >
       <OptionIconContainer size={props.size}>
         <OptionIcon src={props.icon} alt={props.name} size={props.size} />

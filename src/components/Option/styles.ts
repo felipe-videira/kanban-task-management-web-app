@@ -6,6 +6,7 @@ type StyleProps = {
 
 type ButtonProps = {
   readonly background: string | string[];
+  readonly clickable: boolean;
 } & StyleProps;
 
 export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
@@ -30,8 +31,17 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
   height: 100%;
   border: none;
   box-shadow: ${(props) => `inset 0px -${props.size} 0px 0px rgb(0 0 0 / 30%)`};
-  cursor: pointer;
+
   background: ${(props) => props.background};
+
+  ${(props) =>
+    props.clickable
+      ? `
+    cursor: pointer;
+    pointer-events: auto;`
+      : `  
+    cursor: none;
+    pointer-events: none;`};
 
   &:active {
     box-shadow: none;
