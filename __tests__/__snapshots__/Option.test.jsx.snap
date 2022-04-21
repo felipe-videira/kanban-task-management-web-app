@@ -8,8 +8,9 @@ exports[`Option should render correctly with all props 1`] = `
   height: 100%;
   border: none;
   box-shadow: inset 0px -8px 0px 0px rgb(0 0 0 / 30%);
-  cursor: pointer;
   background: linear-gradient(hsl(230,89%,62%),hsl(230,89%,65%));
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .c0:active {

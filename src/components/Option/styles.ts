@@ -53,7 +53,7 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
 export const OptionIconContainer = styled.div<StyleProps>`
   box-shadow: ${(props) =>
     `inset 0px ${props.size * 0.025}px 0px 0px rgb(0 0 0 / 20%)`};
-  background: #fff;
+  background: #f1f1f2;
   border-radius: 50%;
   width: 100%;
   height: 100%;
@@ -62,7 +62,7 @@ export const OptionIconContainer = styled.div<StyleProps>`
   justify-content: center;
 
   &:hover {
-    background: #f0f0f0;
+    background: #fff;
   }
 `;
 

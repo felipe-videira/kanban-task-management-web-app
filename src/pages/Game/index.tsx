@@ -27,8 +27,6 @@ import {
 import gameConfig from "../../gameConfig.json";
 import ArrowBackIcon from "../../icons/arrow_back.svg?component";
 
-const RESULT_DELAY = 6;
-
 type GameOption = {
   name: string;
   icon: string;
@@ -41,6 +39,14 @@ type GameOption = {
 type GameConfig = {
   name: string;
   rules: string;
+  settings: {
+    showHouseChoiceDelay: number;
+    showHouseChoiceDuration: number;
+    showResultDelay: number;
+    showResultDuration: number;
+    updateScoreDelay: number;
+    winnerBackgroundEffectDelay: number;
+  };
   listSetup: {
     pointingUp: boolean;
   };
@@ -120,7 +126,7 @@ function Game() {
 
     setTimeout(() => {
       incrementScore(isWinner);
-    }, RESULT_DELAY * 0.6 * 1000);
+    }, (game?.settings.updateScoreDelay || 1) * 1000);
   }
 
   function toggleRules() {
@@ -209,7 +215,7 @@ function Game() {
         </Step>
 
         <Step value={2}>
-          <GameResultContainer userWins={userWins} delayInSecs={RESULT_DELAY}>
+          <GameResultContainer userWins={userWins} {...game.settings}>
             <GameResultUserChoice
               size={resultSize}
               label={t("label.userChoice")}

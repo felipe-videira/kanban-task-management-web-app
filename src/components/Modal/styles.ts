@@ -34,7 +34,7 @@ export const ModalOverlay = styled.div.attrs<ModalOverlayProps>((props) => ({
   width: 100%;
   top: 0;
   left: 0;
-  color: hsl(229, 25%, 31%);
+  color: ${(props) => props.theme.dark};
   display: flex;
   align-items: center;
   justify-content: center;

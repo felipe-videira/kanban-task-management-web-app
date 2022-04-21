@@ -2,11 +2,6 @@ import styled, { keyframes, css } from "styled-components/macro";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
 
-const SHOW_HOUSE_CHOICE_DURATION_RATIO = 0.2;
-const SHOW_HOUSE_CHOICE_DELAY_RATIO = 0.45;
-const SHOW_RESULT_DURATION_RATIO = 0.55;
-const SHOW_RESULT_DELAY_RATIO = 0.55;
-
 type ScoreProps = {
   readonly label: string;
   readonly user: number;
@@ -19,7 +14,11 @@ type OptionsProps = {
 
 type GameResultProps = {
   readonly userWins: boolean;
-  readonly delayInSecs: number;
+  readonly showHouseChoiceDelay: number;
+  readonly showHouseChoiceDuration: number;
+  readonly showResultDelay: number;
+  readonly showResultDuration: number;
+  readonly winnerBackgroundEffectDelay: number;
 };
 
 type GameResultChoiceProps = {
@@ -113,7 +112,7 @@ export const TitleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 40%;
-  border: 3px solid hsl(217, 16%, 45%);
+  border: 3px solid ${(props) => props.theme.lowContrast};
   border-radius: 10px;
   padding: 15px;
 
@@ -135,7 +134,7 @@ export const Title = styled.h1`
 export const Score = styled.div.attrs<ScoreProps>((props) => ({
   key: `${props.user}-${props.house}`,
 }))<ScoreProps>`
-  background: #fff;
+  background: ${(props) => props.theme.primary};
   width: 25%;
   max-width: 100px;
   height: 100%;
@@ -152,7 +151,7 @@ export const Score = styled.div.attrs<ScoreProps>((props) => ({
   &::before {
     content: "${(props) => props.label}";
     font-size: 1rem;
-    color: hsl(229, 64%, 46%);
+    color: ${(props) => props.theme.highContrast};
     text-transform: uppercase;
     letter-spacing: 1.5px;
 
@@ -168,7 +167,7 @@ export const Score = styled.div.attrs<ScoreProps>((props) => ({
   &::after {
     content: "${(props) => `${props.user} - ${props.house}`}";
     font-size: 2.5rem;
-    color: hsl(229, 25%, 31%);
+    color: ${(props) => props.theme.dark};
     margin: -5px;
     font-weight: normal;
 
@@ -212,7 +211,7 @@ const GameResulChoicetWinner = css<GameResultProps>`
     animation-direction: alternate;
     animation-fill-mode: both;
     animation-timing-function: ease;
-    animation-delay: ${(props) => props.delayInSecs * 0.6}s;
+    animation-delay: ${(props) => props.winnerBackgroundEffectDelay}s;
   }
 `;
 
@@ -324,23 +323,18 @@ export const GameResultContainer = styled.div<GameResultProps>`
   }
 
   ${GameResultChoice} {
-    animation-duration: ${(props) =>
-      props.delayInSecs * SHOW_RESULT_DURATION_RATIO * 0.15}s;
-    animation-delay: ${(props) =>
-      props.delayInSecs * SHOW_RESULT_DELAY_RATIO * 0.95}s;
+    animation-duration: ${(props) => props.showResultDuration}s;
+    animation-delay: ${(props) => props.showResultDelay}s;
 
     & > * {
-      animation-duration: ${(props) =>
-        props.delayInSecs * SHOW_HOUSE_CHOICE_DURATION_RATIO}s;
-      animation-delay: ${(props) =>
-        props.delayInSecs * SHOW_HOUSE_CHOICE_DELAY_RATIO}s;
+      animation-duration: ${(props) => props.showHouseChoiceDuration}s;
+      animation-delay: ${(props) => props.showHouseChoiceDelay}s;
     }
   }
 
   ${GameResult} {
-    animation-duration: ${(props) =>
-      props.delayInSecs * SHOW_RESULT_DURATION_RATIO}s;
-    animation-delay: ${(props) => props.delayInSecs * SHOW_RESULT_DELAY_RATIO}s;
+    animation-duration: ${(props) => props.showResultDuration}s;
+    animation-delay: ${(props) => props.showResultDelay}s;
   }
 
   ${(props) =>

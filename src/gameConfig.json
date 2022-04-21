@@ -2,6 +2,14 @@
     {
         "name": "original",
         "rules": "/image-rules-no-labels.svg",
+        "settings": {
+            "showHouseChoiceDelay": 2,
+            "showHouseChoiceDuration": 1,
+            "showResultDelay": 2.6,
+            "showResultDuration": 0.5,
+            "updateScoreDelay": 3,
+            "winnerBackgroundEffectDelay": 3
+        },
         "listSetup": {
             "pointingUp": false
         },
@@ -47,6 +55,14 @@
     {
         "name": "lizard-spock",
         "rules": "/image-rules-bonus-no-labels.svg",
+        "settings": {
+            "showHouseChoiceDelay": 2,
+            "showHouseChoiceDuration": 1,
+            "showResultDelay": 2.6,
+            "showResultDuration": 0.5,
+            "updateScoreDelay": 3,
+            "winnerBackgroundEffectDelay": 3
+        },
         "listSetup": {
             "pointingUp": true
         },
