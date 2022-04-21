@@ -7,6 +7,7 @@ import {
   ModalHeader,
   ModalCloseButton,
 } from "./styles";
+import CloseIcon from "../../icons/close.svg?component";
 
 export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
         <ModalHeader>
           {props.title}
           <ModalCloseButton type="button" onClick={props.onClick}>
-            &times;
+            <CloseIcon />
           </ModalCloseButton>
         </ModalHeader>
         {props.children}

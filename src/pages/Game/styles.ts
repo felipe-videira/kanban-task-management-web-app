@@ -194,19 +194,6 @@ export const OptionsContainer = styled.div<OptionsProps>`
 `}
 `;
 
-export const RulesButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-  z-index: 1;
-
-  ${mobile} {
-    justify-content: center;
-    height: 100px;
-  }
-`;
-
 const GameResulChoicetWinner = css<GameResultProps>`
   position: relative;
 
@@ -279,10 +266,18 @@ export const GameResultChoice = styled.div<GameResultChoiceProps>`
 
 export const GameResultUserChoice = styled(GameResultChoice)`
   animation-name: ${moveLeft};
+
+  ${mobile} {
+    animation-name: none;
+  }
 `;
 
 export const GameResultHouseChoice = styled(GameResultChoice)`
   animation-name: ${moveRight};
+
+  ${mobile} {
+    animation-name: none;
+  }
 
   & > * {
     animation-name: ${fadeIn};

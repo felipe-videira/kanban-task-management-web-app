@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components/macro";
 import { mobile } from "../../utils/breakpoints";
+import Button from "../Button";
 
 type ModalOverlayProps = {
   readonly show: boolean;
@@ -74,21 +75,10 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalCloseButton = styled.button`
-  border: none;
-  background: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 3rem;
-  color: #c2c2c2;
-
+export const ModalCloseButton = styled(Button).attrs(() => ({
+  icon: true,
+}))`
   ${mobile} {
     display: none;
-  }
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.05);
   }
 `;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Button from "../../components/Button";
-import Option from "../../components/Option";
-import PolygonalList from "../../components/PolygonalList";
-import gameConfig from "../../gameConfig.json";
-import * as scoreService from "../../services/score";
+import { useTranslation } from "react-i18next";
 import { clamp } from "../../utils/clamp";
 import { isMobile } from "../../utils/isMobile";
 import { random } from "../../utils/random";
+import * as scoreService from "../../services/score";
+import Button from "../../components/Button";
+import Option from "../../components/Option";
+import PolygonalList from "../../components/PolygonalList";
 import { Stepper, Step } from "../../components/Stepper";
 import Modal from "../../components/Modal";
 import {
@@ -21,11 +21,11 @@ import {
   GameResult,
   GameResultHouseChoice,
   GameResultMessage,
-  RulesButtonContainer,
   RulesImageContainer,
   RulesImage,
 } from "./styles";
-import { useTranslation } from "react-i18next";
+import gameConfig from "../../gameConfig.json";
+import ArrowBackIcon from "../../icons/arrow_back.svg?component";
 
 const RESULT_DELAY = 6;
 
@@ -157,6 +157,10 @@ function Game() {
     return selectedGame;
   }
 
+  function navigateToHome() {
+    navigate("/");
+  }
+
   useEffect(() => {
     const selectedGame = setupGame();
 
@@ -167,12 +171,21 @@ function Game() {
         houseScore,
       }));
     } else {
-      navigate("/");
+      navigateToHome();
     }
   }, []);
 
   return game ? (
     <Container>
+      <Button
+        icon
+        small
+        onClick={navigateToHome}
+        style={{ alignSelf: "start" }}
+      >
+        <ArrowBackIcon />
+      </Button>
+
       <TitleContainer>
         <Title>{t(`gameName.${game.name}`)}</Title>
         <Score label={t("label.score")} user={userScore} house={houseScore} />
@@ -222,11 +235,9 @@ function Game() {
         </Step>
       </Stepper>
 
-      <RulesButtonContainer>
-        <Button outlined small onClick={toggleRules}>
-          {t("label.rulesButton")}
-        </Button>
-      </RulesButtonContainer>
+      <Button outlined small onClick={toggleRules} style={{ alignSelf: "end" }}>
+        {t("label.rulesButton")}
+      </Button>
 
       <Modal
         show={showRulesModal}

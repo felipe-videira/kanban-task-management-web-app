@@ -16,9 +16,9 @@ const Container = styled.div`
   position: absolute;
 
   ${mobile} {
-    flex-direction: column;
     width: 90%;
     padding: 5%;
+    justify-content: space-evenly;
   }
 `;
 
@@ -27,10 +27,17 @@ const SelectGameButton = styled(Button)`
   word-spacing: 100vh;
   font-weight: bold;
   padding: 15px;
-  height: 200px;
   font-size: ${(props) => getFontSize(props.children, 4)};
   line-height: 0.9;
   text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
+  height: 200px;
+
+  ${mobile} {
+    font-size: ${(props) => getFontSize(props.children, 3)};
+    height: 125px;
+    width: 125px;
+}
+  }
 `;
 
 function Home() {

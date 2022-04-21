@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 const propTypes = {
   outlined: bool,
   small: bool,
+  icon: bool,
   onClick: func.isRequired,
 };
 
@@ -41,8 +42,35 @@ const Button = styled.button.attrs(() => ({
   transition: transform 300ms ease;
 
   &:hover {
-    transform: scale(1.05);
+    ${(props) => (props.icon ? "" : "transform: scale(1.05);")}
   }
+
+  ${(props) =>
+    props.icon
+      ? `
+    border: none;
+    background: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 2rem;
+    color: hsl(217, 16%, 45%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0;
+    line-height: 0;
+    padding: 0;
+
+    svg {
+      fill: hsl(217,16%,45%);
+      height: inherit;
+      width: inherit;
+    }
+    
+    `
+      : ""}
 `;
 
 Button.propTypes = propTypes;

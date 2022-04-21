@@ -4,6 +4,7 @@
       url('fonts/BarlowSemiCondensed/BarlowSemiCondensed-SemiBold.ttf') 
       format('truetype');
   font-weight: 600;
+  font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
       url('fonts/BarlowSemiCondensed/BarlowSemiCondensed-Bold.ttf') 
       format('truetype');
   font-weight: 700;
+  font-display: swap;
 }
 
 body {
@@ -44,4 +46,3 @@ code {
     background: linear-gradient(#1f3756, #141539);
   }
 } 
-
