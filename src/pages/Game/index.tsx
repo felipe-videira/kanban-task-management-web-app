@@ -28,6 +28,7 @@ import {
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
 import ArrowBackIcon from "../../icons/arrow_back.svg?component";
+import useStateWithGetter from "../../hooks/useStateWithGetter";
 
 type GameOption = {
   name: string;
@@ -64,8 +65,9 @@ function Game() {
   const [listSize, setListSize] = useState<number>(0);
   const [optionSize, setOptionSize] = useState<number>(0);
   const [resultSize, setResultSize] = useState<number>(0);
-  const [userScore, setUserScore] = useState<number>(0);
-  const [houseScore, setHouseScore] = useState<number>(0);
+  const [userScore, setUserScore, getUserScore] = useStateWithGetter<number>(0);
+  const [houseScore, setHouseScore, getHouseScore] =
+    useStateWithGetter<number>(0);
   const [userChoice, setUserChoice] = useState<GameOption>(null);
   const [houseChoice, setHouseChoice] = useState<GameOption>(null);
   const [userWins, setUserWins] = useState<boolean>(false);
@@ -175,8 +177,8 @@ function Game() {
     if (selectedGame) {
       scoreService.setSaveOnExitListener(() => ({
         game: selectedGame.name,
-        userScore,
-        houseScore,
+        userScore: getUserScore(),
+        houseScore: getHouseScore(),
       }));
     } else {
       navigateToHome();
