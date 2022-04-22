@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from "styled-components/macro";
+import Button from "../../components/Button";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
 
@@ -102,9 +103,28 @@ export const Container = styled.div`
   padding: 0 2%;
 
   ${mobile} {
-    padding: 0;
+    padding: 5px;
   }
 }
+`;
+
+export const GoBackButton = styled(Button).attrs(() => ({
+  icon: true,
+  small: true,
+}))`
+  align-self: start;
+`;
+
+export const RulesButton = styled(Button).attrs(() => ({
+  outlined: true,
+  small: true,
+}))`
+  align-self: end;
+
+  ${mobile} {
+    align-self: center;
+    margin-bottom: 10%;
+  }
 `;
 
 export const TitleContainer = styled.div`

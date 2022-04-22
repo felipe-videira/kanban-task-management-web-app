@@ -23,6 +23,8 @@ import {
   GameResultMessage,
   RulesImageContainer,
   RulesImage,
+  RulesButton,
+  GoBackButton,
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
 import ArrowBackIcon from "../../icons/arrow_back.svg?component";
@@ -183,14 +185,9 @@ function Game() {
 
   return game ? (
     <Container>
-      <Button
-        icon
-        small
-        onClick={navigateToHome}
-        style={{ alignSelf: "start" }}
-      >
+      <GoBackButton onClick={navigateToHome}>
         <ArrowBackIcon />
-      </Button>
+      </GoBackButton>
 
       <TitleContainer>
         <Title>{t(`gameName.${game.name}`)}</Title>
@@ -241,9 +238,7 @@ function Game() {
         </Step>
       </Stepper>
 
-      <Button outlined small onClick={toggleRules} style={{ alignSelf: "end" }}>
-        {t("label.rulesButton")}
-      </Button>
+      <RulesButton onClick={toggleRules}>{t("label.rulesButton")}</RulesButton>
 
       <Modal
         show={showRulesModal}
