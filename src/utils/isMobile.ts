@@ -1,3 +1,1 @@
-export function isMobile() {
-  return screen.width <= 820;
-}
+export default () => screen.width <= 820;

@@ -16,7 +16,7 @@ interface OnClick {
 function Option(props: InferProps<typeof Option.propTypes>) {
   return (
     <OptionButton
-      id={`option-${props.name}`}
+      id={props.name}
       type="button"
       onClick={() => props.onClick && props.onClick(props.name)}
       size={props.size}

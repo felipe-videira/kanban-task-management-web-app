@@ -53,7 +53,7 @@ exports[`Option should render correctly with all props 1`] = `
 
 <button
   class="c0"
-  id="option-paper"
+  id="paper"
   type="button"
 >
   <div

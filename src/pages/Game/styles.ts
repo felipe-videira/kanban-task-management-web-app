@@ -3,10 +3,12 @@ import Button from "../../components/Button";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
 
-type ScoreProps = {
+type ScoreContainerProps = {
   readonly label: string;
-  readonly user: number;
-  readonly house: number;
+};
+
+type ScoreValueProps = {
+  readonly name: string;
 };
 
 type OptionsProps = {
@@ -151,22 +153,45 @@ export const Title = styled.h1`
   font-size: ${(props) => getFontSize(props.children, 3)};
 `;
 
-export const Score = styled.div.attrs<ScoreProps>((props) => ({
-  key: `${props.user}-${props.house}`,
-}))<ScoreProps>`
+export const ScoreValue = styled.div.attrs<ScoreValueProps>((props) => ({
+  key: props.children,
+}))<ScoreValueProps>`
+  font-size: 2.5rem;
+  color: ${(props) => props.theme.dark};
+  margin: -5px;
+  font-weight: normal;
+  animation: ${fadeIn} 1s linear 0s 1;
+  animation-fill-mode: both;
+
+  &:first-child {
+    order: 1;
+  }
+
+  &:last-child {
+    order: 3;
+  }
+
+  ${phone} {
+    font-size: 1.5rem;
+  }
+
+  ${phoneSm} {
+    font-size: 1.25rem;
+  }
+`;
+
+export const ScoreContainer = styled.div<ScoreContainerProps>`
   background: ${(props) => props.theme.primary};
   width: 25%;
   max-width: 100px;
-  height: 100%;
+  height: 75%;
   border-radius: 5px;
+  flex-wrap: wrap;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: ${fadeIn} 1s linear 0s 1;
-  animation-fill-mode: both;
-  padding: 1% 2%;
-  gap: 5px;
+  padding: 3% 2%;
+  gap: 0 10px;
 
   &::before {
     content: "${(props) => props.label}";
@@ -174,6 +199,8 @@ export const Score = styled.div.attrs<ScoreProps>((props) => ({
     color: ${(props) => props.theme.highContrast};
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    width: 100%;
+    text-align: center;
 
     ${phone} {
       font-size: 0.7rem;
@@ -185,10 +212,10 @@ export const Score = styled.div.attrs<ScoreProps>((props) => ({
   }
 
   &::after {
-    content: "${(props) => `${props.user} - ${props.house}`}";
+    content: "-";
+    order: 2;
     font-size: 2.5rem;
     color: ${(props) => props.theme.dark};
-    margin: -5px;
     font-weight: normal;
 
     ${phone} {

@@ -1,3 +1,2 @@
-export function clamp(value: number, min: number, max: number) {
-  return Math.max(Math.min(value, max), min);
-}
+export default (value: number, min: number, max: number) =>
+  Math.max(Math.min(value, max), min);

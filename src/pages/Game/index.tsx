@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { clamp } from "../../utils/clamp";
-import { isMobile } from "../../utils/isMobile";
-import { random } from "../../utils/random";
+import clamp from "../../utils/clamp";
+import isMobile from "../../utils/isMobile";
+import random from "../../utils/random";
 import * as scoreService from "../../services/score";
 import Button from "../../components/Button";
 import Option from "../../components/Option";
@@ -12,7 +12,6 @@ import { Stepper, Step } from "../../components/Stepper";
 import Modal from "../../components/Modal";
 import {
   Container,
-  Score,
   OptionsContainer,
   TitleContainer,
   Title,
@@ -25,9 +24,11 @@ import {
   RulesImage,
   RulesButton,
   GoBackButton,
+  ScoreContainer,
+  ScoreValue,
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
-import ArrowBackIcon from "../../icons/arrow_back.svg?component";
+import { ArrowBackIcon } from "../../icons";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
 
 type GameOption = {
@@ -128,9 +129,13 @@ function Game() {
     setUserWins(isWinner);
     setStep(2);
 
-    setTimeout(() => {
+    if (game && game.settings.updateScoreDelay > 0) {
+      setTimeout(() => {
+        incrementScore(isWinner);
+      }, game.settings.updateScoreDelay * 1000);
+    } else {
       incrementScore(isWinner);
-    }, (game?.settings.updateScoreDelay || 1) * 1000);
+    }
   }
 
   function toggleRules() {
@@ -193,7 +198,10 @@ function Game() {
 
       <TitleContainer>
         <Title>{t(`gameName.${game.name}`)}</Title>
-        <Score label={t("label.score")} user={userScore} house={houseScore} />
+        <ScoreContainer label={t("label.score")}>
+          <ScoreValue name="user">{userScore}</ScoreValue>
+          <ScoreValue name="house">{houseScore}</ScoreValue>
+        </ScoreContainer>
       </TitleContainer>
 
       <Stepper value={step} height="60%">

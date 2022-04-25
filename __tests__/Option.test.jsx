@@ -5,24 +5,26 @@ import "../scripts/throwOnPropTypeError";
 import React from "react";
 import { shallow, render } from "enzyme";
 import Option from "../src/components/Option";
-import checkFile from "../src/utils/checkFile";
-import isColor from "../src/utils/isColor";
 
 const props = {
   name: "paper",
   icon: "images/icon-paper.svg",
   color: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
   size: 200,
-  onClick: jest.fn((name) => {}),
+  onClick: jest.fn(),
 };
 const invalidPath = "invalid/path";
 const invalidColor = "invalid";
 
-jest.mock("../src/utils/checkFile");
-jest.mock("../src/utils/isColor");
+jest.mock("../src/utils/checkFile", () => ({
+  __esModule: true,
+  default: (value) => value !== invalidPath,
+}));
 
-checkFile.mockImplementation((value) => value !== invalidPath);
-isColor.mockImplementation((value) => value !== invalidColor);
+jest.mock("../src/utils/isColor", () => ({
+  __esModule: true,
+  default: (value) => value !== invalidColor,
+}));
 
 describe("Option", () => {
   it("should render correctly with all props", () => {
@@ -46,7 +48,7 @@ describe("Option", () => {
   it("should call click function with the name as argument", () => {
     const wrapper = shallow(<Option {...props} />);
 
-    wrapper.find(`#option-${props.name}`).simulate("click");
+    wrapper.find("#paper").simulate("click");
 
     expect(props.onClick).toHaveBeenCalledWith(props.name);
   });

@@ -1,13 +1,13 @@
 import { bool, func, InferProps, node, string } from "prop-types";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { isMobile } from "../../utils/isMobile";
+import isMobile from "../../utils/isMobile";
 import {
   ModalOverlay,
   ModalContainer,
   ModalHeader,
   ModalCloseButton,
 } from "./styles";
-import CloseIcon from "../../icons/close.svg?component";
+import { CloseIcon } from "../../icons";
 
 export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   const [show, setShow] = useState(false);
