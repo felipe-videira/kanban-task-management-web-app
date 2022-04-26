@@ -1,3 +1,1471 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Game should render correctly 1`] = `null`;
+exports[`Game should render correctly 1`] = `
+.c1 {
+  background: undefined;
+  border: none;
+  color: undefined;
+  font-size: 1rem;
+  padding: 10px;
+  max-width: 150px;
+  width: 100%;
+  font-family: inherit;
+  border-radius: 7px;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 300ms ease;
+  -webkit-transition: transform 300ms ease;
+  transition: transform 300ms ease;
+  border: none;
+  background: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 2rem;
+  color: undefined;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  line-height: 0;
+  padding: 0;
+}
+
+.c1 svg {
+  fill: undefined;
+  height: inherit;
+  width: inherit;
+}
+
+.c26 {
+  background: undefined;
+  border: none;
+  color: undefined;
+  font-size: 1.5rem;
+  padding: 14px;
+  max-width: 350px;
+  width: 100%;
+  font-family: inherit;
+  border-radius: 7px;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 300ms ease;
+  -webkit-transition: transform 300ms ease;
+  transition: transform 300ms ease;
+}
+
+.c26:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.c30 {
+  background: transparent;
+  border: 1px solid;
+  color: undefined;
+  font-size: 1rem;
+  padding: 10px;
+  max-width: 150px;
+  width: 100%;
+  font-family: inherit;
+  border-radius: 7px;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 300ms ease;
+  -webkit-transition: transform 300ms ease;
+  transition: transform 300ms ease;
+}
+
+.c30:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.c14 {
+  border-radius: 50%;
+  padding: 12% 12% calc(12% + 2px);
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: inset 0px -2px 0px 0px rgb(0 0 0 / 30%);
+  background: linear-gradient(hsl(230,89%,62%),hsl(230,89%,65%));
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c14:active {
+  box-shadow: none;
+  padding: 12%;
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c17 {
+  border-radius: 50%;
+  padding: 12% 12% calc(12% + 2px);
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: inset 0px -2px 0px 0px rgb(0 0 0 / 30%);
+  background: linear-gradient(hsl(39,89%,49%),hsl(40,84%,53%));
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c17:active {
+  box-shadow: none;
+  padding: 12%;
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c18 {
+  border-radius: 50%;
+  padding: 12% 12% calc(12% + 2px);
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: inset 0px -2px 0px 0px rgb(0 0 0 / 30%);
+  background: linear-gradient(hsl(349,71%,52%),hsl(349,70%,56%));
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c18:active {
+  box-shadow: none;
+  padding: 12%;
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.c15 {
+  box-shadow: inset 0px 1.25px 0px 0px rgb(0 0 0 / 20%);
+  background: #f1f1f2;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c15:hover {
+  background: #fff;
+}
+
+.c16 {
+  object-fit: contain;
+  width: 17.5px;
+  height: 17.5px;
+}
+
+.c11 {
+  -webkit-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  transform: rotate(225deg);
+  width: 53.03351718285957px;
+  height: 53.03351718285957px;
+}
+
+.c12 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.c12::after {
+  content: "";
+  position: absolute;
+  -webkit-transform-origin: -10px -10px;
+  -ms-transform-origin: -10px -10px;
+  transform-origin: -10px -10px;
+  height: calc(100% / (3/ 4));
+  width: 5px;
+  background: rgba(0,0,0,0.2);
+  top: 0;
+  left: 0;
+  -webkit-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  transform: rotate(-15deg);
+}
+
+.c13 {
+  position: absolute;
+}
+
+.c9 {
+  -webkit-animation: ceFhYK 1s linear 0s 1;
+  animation: ceFhYK 1s linear 0s 1;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  display: none;
+  width: 100%;
+}
+
+.c7 {
+  height: 60%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c7 .c8[value="1"] {
+  display: block;
+}
+
+.c0 {
+  -webkit-animation: hOYTOz 2s linear 0s 1;
+  animation: hOYTOz 2s linear 0s 1;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 auto;
+  height: 100vh;
+  padding: 0 2%;
+}
+
+.c2 {
+  -webkit-align-self: start;
+  -ms-flex-item-align: start;
+  align-self: start;
+}
+
+.c31 {
+  -webkit-align-self: end;
+  -ms-flex-item-align: end;
+  align-self: end;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 40%;
+  border: 3px solid;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.c4 {
+  text-transform: uppercase;
+  line-height: 0.9;
+  text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
+  padding-left: 10px;
+  width: 10%;
+  margin: 0;
+  font-size: 1.30rem;
+}
+
+.c6 {
+  font-size: 2.5rem;
+  margin: -5px;
+  font-weight: normal;
+  -webkit-animation: hOYTOz 1s linear 0s 1;
+  animation: hOYTOz 1s linear 0s 1;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.c6:first-child {
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+.c6:last-child {
+  -webkit-order: 3;
+  -ms-flex-order: 3;
+  order: 3;
+}
+
+.c5 {
+  width: 25%;
+  max-width: 100px;
+  height: 75%;
+  border-radius: 5px;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 3% 2%;
+  gap: 0 10px;
+}
+
+.c5::before {
+  content: "label.score";
+  font-size: 1rem;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 1.5px;
+  -moz-letter-spacing: 1.5px;
+  -ms-letter-spacing: 1.5px;
+  letter-spacing: 1.5px;
+  width: 100%;
+  text-align: center;
+}
+
+.c5::after {
+  content: "-";
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+.c10 {
+  height: 75px;
+  width: 75px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 100px;
+  margin: 0 auto;
+}
+
+.c21 {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  background-color: rgb(0 0 0 / 25%);
+  margin: 0 5%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  border-radius: 50%;
+}
+
+.c21::before {
+  content: 'label.userChoice';
+  position: absolute;
+  top: -5rem;
+  text-transform: uppercase;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.c28 {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  background-color: rgb(0 0 0 / 25%);
+  margin: 0 5%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  border-radius: 50%;
+}
+
+.c28::before {
+  content: 'label.houseChoice';
+  position: absolute;
+  top: -5rem;
+  text-transform: uppercase;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.c22 {
+  -webkit-animation-name: hHVLPS;
+  animation-name: hHVLPS;
+}
+
+.c29 {
+  -webkit-animation-name: fMgjAL;
+  animation-name: fMgjAL;
+}
+
+.c29 > * {
+  -webkit-animation-name: hOYTOz;
+  animation-name: hOYTOz;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.c24 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-animation-name: juGfwl;
+  animation-name: juGfwl;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  z-index: 1;
+  width: 100%;
+  margin: 0 5%;
+}
+
+.c25 {
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+}
+
+.c19 .c20 {
+  -webkit-animation-duration: 0s;
+  animation-duration: 0s;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.c19 .c20 > * {
+  -webkit-animation-duration: 0s;
+  animation-duration: 0s;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.c19 .c23 {
+  -webkit-animation-duration: 0s;
+  animation-duration: 0s;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.c19 .c27 {
+  position: relative;
+}
+
+.c19 .c27::after {
+  content: "";
+  width: 300%;
+  height: 300%;
+  position: absolute;
+  border-radius: 50%;
+  top: -100%;
+  left: -100%;
+  z-index: -1;
+  -webkit-animation-name: drnpoP;
+  animation-name: drnpoP;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+@media only screen and (max-width:820px) {
+  .c9 {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c0 {
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c31 {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    margin-bottom: 10%;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c3 {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width:281px) and (max-width:767px) {
+  .c6 {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width:280px) {
+  .c6 {
+    font-size: 1.25rem;
+  }
+}
+
+@media only screen and (min-width:281px) and (max-width:767px) {
+  .c5::before {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width:280px) {
+  .c5::before {
+    font-size: 0.5rem;
+  }
+}
+
+@media only screen and (min-width:281px) and (max-width:767px) {
+  .c5::after {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width:280px) {
+  .c5::after {
+    font-size: 1.25rem;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c21::before {
+    top: unset;
+  }
+}
+
+@media only screen and (max-width:280px) {
+  .c21::before {
+    font-size: 0.75rem;
+    bottom: -3rem;
+  }
+}
+
+@media only screen and (min-width:281px) and (max-width:767px) {
+  .c21::before {
+    bottom: -3rem;
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width:768px) and (max-width:820px) {
+  .c21::before {
+    bottom: -5rem;
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c28::before {
+    top: unset;
+  }
+}
+
+@media only screen and (max-width:280px) {
+  .c28::before {
+    font-size: 0.75rem;
+    bottom: -3rem;
+  }
+}
+
+@media only screen and (min-width:281px) and (max-width:767px) {
+  .c28::before {
+    bottom: -3rem;
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width:768px) and (max-width:820px) {
+  .c28::before {
+    bottom: -5rem;
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c22 {
+    -webkit-animation-name: none;
+    animation-name: none;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c29 {
+    -webkit-animation-name: none;
+    animation-name: none;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c24 {
+    -webkit-animation-name: hOYTOz;
+    animation-name: hOYTOz;
+    margin: 0 5%;
+    opacity: 0;
+    -webkit-order: 3;
+    -ms-flex-order: 3;
+    order: 3;
+  }
+}
+
+@media only screen and (max-width:820px) {
+  .c19 {
+    height: 100%;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+<Game>
+  <styled.div>
+    <div
+      className="c0"
+    >
+      <Styled(styled.button)
+        onClick={[Function]}
+      >
+        <button
+          className="c1 c2"
+          onClick={[Function]}
+          type="button"
+        >
+          <ArrowBackIcon />
+        </button>
+      </Styled(styled.button)>
+      <styled.div>
+        <div
+          className="c3"
+        >
+          <styled.h1>
+            <h1
+              className="c4"
+            >
+              gameName.original
+            </h1>
+          </styled.h1>
+          <styled.div
+            label="label.score"
+          >
+            <div
+              className="c5"
+              label="label.score"
+            >
+              <styled.div
+                name="user"
+              >
+                <div
+                  className="c6"
+                  key="0"
+                  name="user"
+                >
+                  0
+                </div>
+              </styled.div>
+              <styled.div
+                name="house"
+              >
+                <div
+                  className="c6"
+                  key="0"
+                  name="house"
+                >
+                  0
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </div>
+      </styled.div>
+      <styled.div
+        height="60%"
+        value={1}
+      >
+        <div
+          className="c7"
+          height="60%"
+          value={1}
+        >
+          <styled.div
+            value={1}
+          >
+            <div
+              className="c8 c9"
+              value={1}
+            >
+              <styled.div
+                size={75}
+              >
+                <div
+                  className="c10"
+                  size={75}
+                >
+                  <PolygonalList
+                    ItemComponent={[Function]}
+                    data={
+                      Array [
+                        Object {
+                          "color": Array [
+                            "hsl(230, 89%, 62%)",
+                            "hsl(230, 89%, 65%)",
+                          ],
+                          "icon": "src/images/icon-paper.svg",
+                          "name": "paper",
+                          "winRules": Object {
+                            "rock": true,
+                            "scissors": false,
+                          },
+                        },
+                        Object {
+                          "color": Array [
+                            "hsl(39, 89%, 49%)",
+                            "hsl(40, 84%, 53%)",
+                          ],
+                          "icon": "src/images/icon-scissors.svg",
+                          "name": "scissors",
+                          "winRules": Object {
+                            "paper": true,
+                            "rock": false,
+                          },
+                        },
+                        Object {
+                          "color": Array [
+                            "hsl(349, 71%, 52%)",
+                            "hsl(349, 70%, 56%)",
+                          ],
+                          "icon": "src/images/icon-rock.svg",
+                          "name": "rock",
+                          "winRules": Object {
+                            "paper": false,
+                            "scissors": true,
+                          },
+                        },
+                      ]
+                    }
+                    itemProps={
+                      Object {
+                        "onClick": [Function],
+                        "size": 50,
+                      }
+                    }
+                    itemSize={50}
+                    pointingUp={false}
+                    size={75}
+                  >
+                    <styled.div
+                      pointingUp={false}
+                      size={75}
+                    >
+                      <div
+                        className="c11"
+                        size="53.03351718285957px"
+                      >
+                        <PolygonalListItem
+                          ItemComponent={[Function]}
+                          data={
+                            Array [
+                              Object {
+                                "color": Array [
+                                  "hsl(230, 89%, 62%)",
+                                  "hsl(230, 89%, 65%)",
+                                ],
+                                "icon": "src/images/icon-paper.svg",
+                                "name": "paper",
+                                "winRules": Object {
+                                  "rock": true,
+                                  "scissors": false,
+                                },
+                              },
+                              Object {
+                                "color": Array [
+                                  "hsl(39, 89%, 49%)",
+                                  "hsl(40, 84%, 53%)",
+                                ],
+                                "icon": "src/images/icon-scissors.svg",
+                                "name": "scissors",
+                                "winRules": Object {
+                                  "paper": true,
+                                  "rock": false,
+                                },
+                              },
+                              Object {
+                                "color": Array [
+                                  "hsl(349, 71%, 52%)",
+                                  "hsl(349, 70%, 56%)",
+                                ],
+                                "icon": "src/images/icon-rock.svg",
+                                "name": "rock",
+                                "winRules": Object {
+                                  "paper": false,
+                                  "scissors": true,
+                                },
+                              },
+                            ]
+                          }
+                          index={0}
+                          itemProps={
+                            Object {
+                              "onClick": [Function],
+                              "size": 50,
+                            }
+                          }
+                          itemSize={50}
+                          length={3}
+                          pointingUp={false}
+                          polygonExteriorAngle={120}
+                        >
+                          <styled.div
+                            itemSize={50}
+                            length={3}
+                            polygonExteriorAngle={120}
+                            zIndex={3}
+                          >
+                            <div
+                              className="c12"
+                              style={
+                                Object {
+                                  "transform": "rotate(120deg)",
+                                  "zIndex": 3,
+                                }
+                              }
+                            >
+                              <styled.div
+                                index={0}
+                                itemSize={50}
+                                length={3}
+                                pointingUp={false}
+                                polygonExteriorAngle={120}
+                                zIndex={3}
+                              >
+                                <div
+                                  className="c13"
+                                  style={
+                                    Object {
+                                      "height": "50px",
+                                      "left": "-25px",
+                                      "top": "-25px",
+                                      "transform": "rotate(-345deg)",
+                                      "width": "50px",
+                                      "zIndex": 3,
+                                    }
+                                  }
+                                >
+                                  <Option
+                                    color={
+                                      Array [
+                                        "hsl(230, 89%, 62%)",
+                                        "hsl(230, 89%, 65%)",
+                                      ]
+                                    }
+                                    icon="src/images/icon-paper.svg"
+                                    name="paper"
+                                    onClick={[Function]}
+                                    size={50}
+                                    winRules={
+                                      Object {
+                                        "rock": true,
+                                        "scissors": false,
+                                      }
+                                    }
+                                  >
+                                    <styled.button
+                                      background={
+                                        Array [
+                                          "hsl(230, 89%, 62%)",
+                                          "hsl(230, 89%, 65%)",
+                                        ]
+                                      }
+                                      clickable={true}
+                                      id="paper"
+                                      onClick={[Function]}
+                                      size={50}
+                                      type="button"
+                                    >
+                                      <button
+                                        className="c14"
+                                        id="paper"
+                                        onClick={[Function]}
+                                        size="2px"
+                                        type="button"
+                                      >
+                                        <styled.div
+                                          size={50}
+                                        >
+                                          <div
+                                            className="c15"
+                                            size={50}
+                                          >
+                                            <styled.img
+                                              alt="paper"
+                                              size={50}
+                                              src="src/images/icon-paper.svg"
+                                            >
+                                              <img
+                                                alt="paper"
+                                                className="c16"
+                                                size="17.5px"
+                                                src="src/images/icon-paper.svg"
+                                              />
+                                            </styled.img>
+                                          </div>
+                                        </styled.div>
+                                      </button>
+                                    </styled.button>
+                                  </Option>
+                                </div>
+                              </styled.div>
+                              <PolygonalListItem
+                                ItemComponent={[Function]}
+                                data={
+                                  Array [
+                                    Object {
+                                      "color": Array [
+                                        "hsl(230, 89%, 62%)",
+                                        "hsl(230, 89%, 65%)",
+                                      ],
+                                      "icon": "src/images/icon-paper.svg",
+                                      "name": "paper",
+                                      "winRules": Object {
+                                        "rock": true,
+                                        "scissors": false,
+                                      },
+                                    },
+                                    Object {
+                                      "color": Array [
+                                        "hsl(39, 89%, 49%)",
+                                        "hsl(40, 84%, 53%)",
+                                      ],
+                                      "icon": "src/images/icon-scissors.svg",
+                                      "name": "scissors",
+                                      "winRules": Object {
+                                        "paper": true,
+                                        "rock": false,
+                                      },
+                                    },
+                                    Object {
+                                      "color": Array [
+                                        "hsl(349, 71%, 52%)",
+                                        "hsl(349, 70%, 56%)",
+                                      ],
+                                      "icon": "src/images/icon-rock.svg",
+                                      "name": "rock",
+                                      "winRules": Object {
+                                        "paper": false,
+                                        "scissors": true,
+                                      },
+                                    },
+                                  ]
+                                }
+                                index={1}
+                                itemProps={
+                                  Object {
+                                    "onClick": [Function],
+                                    "size": 50,
+                                  }
+                                }
+                                itemSize={50}
+                                length={3}
+                                pointingUp={false}
+                                polygonExteriorAngle={120}
+                              >
+                                <styled.div
+                                  itemSize={50}
+                                  length={3}
+                                  polygonExteriorAngle={120}
+                                  zIndex={2}
+                                >
+                                  <div
+                                    className="c12"
+                                    style={
+                                      Object {
+                                        "transform": "rotate(120deg)",
+                                        "zIndex": 2,
+                                      }
+                                    }
+                                  >
+                                    <styled.div
+                                      index={1}
+                                      itemSize={50}
+                                      length={3}
+                                      pointingUp={false}
+                                      polygonExteriorAngle={120}
+                                      zIndex={2}
+                                    >
+                                      <div
+                                        className="c13"
+                                        style={
+                                          Object {
+                                            "height": "50px",
+                                            "left": "-25px",
+                                            "top": "-25px",
+                                            "transform": "rotate(-465deg)",
+                                            "width": "50px",
+                                            "zIndex": 2,
+                                          }
+                                        }
+                                      >
+                                        <Option
+                                          color={
+                                            Array [
+                                              "hsl(39, 89%, 49%)",
+                                              "hsl(40, 84%, 53%)",
+                                            ]
+                                          }
+                                          icon="src/images/icon-scissors.svg"
+                                          name="scissors"
+                                          onClick={[Function]}
+                                          size={50}
+                                          winRules={
+                                            Object {
+                                              "paper": true,
+                                              "rock": false,
+                                            }
+                                          }
+                                        >
+                                          <styled.button
+                                            background={
+                                              Array [
+                                                "hsl(39, 89%, 49%)",
+                                                "hsl(40, 84%, 53%)",
+                                              ]
+                                            }
+                                            clickable={true}
+                                            id="scissors"
+                                            onClick={[Function]}
+                                            size={50}
+                                            type="button"
+                                          >
+                                            <button
+                                              className="c17"
+                                              id="scissors"
+                                              onClick={[Function]}
+                                              size="2px"
+                                              type="button"
+                                            >
+                                              <styled.div
+                                                size={50}
+                                              >
+                                                <div
+                                                  className="c15"
+                                                  size={50}
+                                                >
+                                                  <styled.img
+                                                    alt="scissors"
+                                                    size={50}
+                                                    src="src/images/icon-scissors.svg"
+                                                  >
+                                                    <img
+                                                      alt="scissors"
+                                                      className="c16"
+                                                      size="17.5px"
+                                                      src="src/images/icon-scissors.svg"
+                                                    />
+                                                  </styled.img>
+                                                </div>
+                                              </styled.div>
+                                            </button>
+                                          </styled.button>
+                                        </Option>
+                                      </div>
+                                    </styled.div>
+                                    <PolygonalListItem
+                                      ItemComponent={[Function]}
+                                      data={
+                                        Array [
+                                          Object {
+                                            "color": Array [
+                                              "hsl(230, 89%, 62%)",
+                                              "hsl(230, 89%, 65%)",
+                                            ],
+                                            "icon": "src/images/icon-paper.svg",
+                                            "name": "paper",
+                                            "winRules": Object {
+                                              "rock": true,
+                                              "scissors": false,
+                                            },
+                                          },
+                                          Object {
+                                            "color": Array [
+                                              "hsl(39, 89%, 49%)",
+                                              "hsl(40, 84%, 53%)",
+                                            ],
+                                            "icon": "src/images/icon-scissors.svg",
+                                            "name": "scissors",
+                                            "winRules": Object {
+                                              "paper": true,
+                                              "rock": false,
+                                            },
+                                          },
+                                          Object {
+                                            "color": Array [
+                                              "hsl(349, 71%, 52%)",
+                                              "hsl(349, 70%, 56%)",
+                                            ],
+                                            "icon": "src/images/icon-rock.svg",
+                                            "name": "rock",
+                                            "winRules": Object {
+                                              "paper": false,
+                                              "scissors": true,
+                                            },
+                                          },
+                                        ]
+                                      }
+                                      index={2}
+                                      itemProps={
+                                        Object {
+                                          "onClick": [Function],
+                                          "size": 50,
+                                        }
+                                      }
+                                      itemSize={50}
+                                      length={3}
+                                      pointingUp={false}
+                                      polygonExteriorAngle={120}
+                                    >
+                                      <styled.div
+                                        itemSize={50}
+                                        length={3}
+                                        polygonExteriorAngle={120}
+                                        zIndex={1}
+                                      >
+                                        <div
+                                          className="c12"
+                                          style={
+                                            Object {
+                                              "transform": "rotate(120deg)",
+                                              "zIndex": 1,
+                                            }
+                                          }
+                                        >
+                                          <styled.div
+                                            index={2}
+                                            itemSize={50}
+                                            length={3}
+                                            pointingUp={false}
+                                            polygonExteriorAngle={120}
+                                            zIndex={1}
+                                          >
+                                            <div
+                                              className="c13"
+                                              style={
+                                                Object {
+                                                  "height": "50px",
+                                                  "left": "-25px",
+                                                  "top": "-25px",
+                                                  "transform": "rotate(-585deg)",
+                                                  "width": "50px",
+                                                  "zIndex": 1,
+                                                }
+                                              }
+                                            >
+                                              <Option
+                                                color={
+                                                  Array [
+                                                    "hsl(349, 71%, 52%)",
+                                                    "hsl(349, 70%, 56%)",
+                                                  ]
+                                                }
+                                                icon="src/images/icon-rock.svg"
+                                                name="rock"
+                                                onClick={[Function]}
+                                                size={50}
+                                                winRules={
+                                                  Object {
+                                                    "paper": false,
+                                                    "scissors": true,
+                                                  }
+                                                }
+                                              >
+                                                <styled.button
+                                                  background={
+                                                    Array [
+                                                      "hsl(349, 71%, 52%)",
+                                                      "hsl(349, 70%, 56%)",
+                                                    ]
+                                                  }
+                                                  clickable={true}
+                                                  id="rock"
+                                                  onClick={[Function]}
+                                                  size={50}
+                                                  type="button"
+                                                >
+                                                  <button
+                                                    className="c18"
+                                                    id="rock"
+                                                    onClick={[Function]}
+                                                    size="2px"
+                                                    type="button"
+                                                  >
+                                                    <styled.div
+                                                      size={50}
+                                                    >
+                                                      <div
+                                                        className="c15"
+                                                        size={50}
+                                                      >
+                                                        <styled.img
+                                                          alt="rock"
+                                                          size={50}
+                                                          src="src/images/icon-rock.svg"
+                                                        >
+                                                          <img
+                                                            alt="rock"
+                                                            className="c16"
+                                                            size="17.5px"
+                                                            src="src/images/icon-rock.svg"
+                                                          />
+                                                        </styled.img>
+                                                      </div>
+                                                    </styled.div>
+                                                  </button>
+                                                </styled.button>
+                                              </Option>
+                                            </div>
+                                          </styled.div>
+                                        </div>
+                                      </styled.div>
+                                    </PolygonalListItem>
+                                  </div>
+                                </styled.div>
+                              </PolygonalListItem>
+                            </div>
+                          </styled.div>
+                        </PolygonalListItem>
+                      </div>
+                    </styled.div>
+                  </PolygonalList>
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+          <styled.div
+            value={2}
+          >
+            <div
+              className="c8 c9"
+              value={2}
+            >
+              <styled.div
+                showHouseChoiceDelay={0}
+                showHouseChoiceDuration={0}
+                showResultDelay={0}
+                showResultDuration={0}
+                updateScoreDelay={0}
+                userWins={false}
+                winnerBackgroundEffectDelay={0}
+              >
+                <div
+                  className="c19"
+                >
+                  <Styled(styled.div)
+                    label="label.userChoice"
+                    size={50}
+                  >
+                    <div
+                      className="c20 c21 c22"
+                      label="label.userChoice"
+                      size={50}
+                    />
+                  </Styled(styled.div)>
+                  <styled.div>
+                    <div
+                      className="c23 c24"
+                    >
+                      <styled.p>
+                        <p
+                          className="c25"
+                        >
+                          message.defeat
+                        </p>
+                      </styled.p>
+                      <styled.button
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="c26"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          label.retryButton
+                        </button>
+                      </styled.button>
+                    </div>
+                  </styled.div>
+                  <Styled(styled.div)
+                    label="label.houseChoice"
+                    size={50}
+                  >
+                    <div
+                      className="c20 c27 c28 c29"
+                      label="label.houseChoice"
+                      size={50}
+                    />
+                  </Styled(styled.div)>
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </div>
+      </styled.div>
+      <Styled(styled.button)
+        onClick={[Function]}
+      >
+        <button
+          className="c30 c31"
+          onClick={[Function]}
+          type="button"
+        >
+          label.rulesButton
+        </button>
+      </Styled(styled.button)>
+      <Modal
+        onClick={[Function]}
+        show={false}
+        title="label.rulesModal"
+      />
+    </div>
+  </styled.div>
+</Game>
+`;

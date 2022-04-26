@@ -2,7 +2,7 @@ import "jsdom-global/register";
 import "jest-styled-components";
 
 import React from "react";
-import { render, mount } from "enzyme";
+import { mount } from "enzyme";
 import Game from "../src/pages/Game";
 import { navigateMock, useParamsMock } from "../__mocks__/react-router-dom";
 import {
@@ -11,7 +11,7 @@ import {
   ScoreValue,
 } from "../src/pages/Game/styles";
 import random from "../src/utils/random";
-import { save, setSaveOnExitListener } from "../src/services/score";
+import { save } from "../src/services/score";
 
 jest.mock("../src/services/score", () => ({
   __esModule: true,
@@ -89,20 +89,13 @@ jest.mock("../src/gameConfig.json", () => [
   },
 ]);
 
-// /utils/isMobile, window?
-// score
-// size
-// times
-// win rock
-/// loose scissor
-
 describe("Game", () => {
   it("should render correctly", () => {
     useParamsMock.mockImplementation(() => {
       return { gameName: "original" };
     });
 
-    const wrapper = render(<Game />);
+    const wrapper = mount(<Game />);
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -117,7 +110,7 @@ describe("Game", () => {
     expect(navigateMock).toHaveBeenCalledWith("/");
   });
 
-  it("should win and update score", () => {
+  it("should win and update user score", () => {
     useParamsMock.mockImplementation(() => {
       return { gameName: "original" };
     });
@@ -136,5 +129,29 @@ describe("Game", () => {
     );
     expect(save).toHaveBeenCalledWith("original", 1, false);
     expect(wrapper.find(ScoreValue).find("div[name='user']").text()).toBe("1");
+  });
+
+  it("should lose and update house score", () => {
+    useParamsMock.mockImplementation(() => {
+      return { gameName: "original" };
+    });
+    random.mockClear();
+    random.mockImplementation(() => 0);
+
+    const wrapper = mount(<Game />);
+
+    wrapper.find("Option[name='rock']").simulate("click");
+
+    expect(
+      wrapper
+        .find(GameResultHouseChoice)
+        .children()
+        .find("Option[name='paper']")
+    ).toBeTruthy();
+    expect(wrapper.find(GameResult).children().find("p").text()).toBe(
+      "message.defeat"
+    );
+    expect(save).toHaveBeenCalledWith("original", 1, true);
+    expect(wrapper.find(ScoreValue).find("div[name='house']").text()).toBe("1");
   });
 });

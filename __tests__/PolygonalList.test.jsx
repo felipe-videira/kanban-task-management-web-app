@@ -6,25 +6,36 @@ import React from "react";
 import { mount, render } from "enzyme";
 import PolygonalList from "../src/components/PolygonalList";
 
-const props = {
-  data: [{ value: "value" }, { value: "value" }, { value: "value" }],
-  ItemComponent: jest.fn().mockImplementation(() => null),
-  itemProps: {
-    prop: "prop",
-  },
-  itemSize: 200,
-  size: 400,
-  pointingUp: true,
-};
-
 describe("PolygonalList", () => {
   it("should render correctly with all props", () => {
+    const props = {
+      data: [{ value: "value" }, { value: "value" }, { value: "value" }],
+      ItemComponent: jest.fn().mockImplementation(() => null),
+      itemProps: {
+        prop: "prop",
+      },
+      itemSize: 200,
+      size: 400,
+      pointingUp: true,
+    };
+
     const wrapper = render(<PolygonalList {...props} />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should nest the items according to the prop "data"', () => {
+    const props = {
+      data: [{ value: "value" }, { value: "value" }, { value: "value" }],
+      ItemComponent: jest.fn().mockImplementation(() => null),
+      itemProps: {
+        prop: "prop",
+      },
+      itemSize: 200,
+      size: 400,
+      pointingUp: true,
+    };
+
     const wrapper = mount(<PolygonalList {...props} />);
 
     const lastElement = wrapper
@@ -38,6 +49,17 @@ describe("PolygonalList", () => {
   });
 
   it('should rotate the container according to the prop "pointingUp"', () => {
+    const props = {
+      data: [{ value: "value" }, { value: "value" }, { value: "value" }],
+      ItemComponent: jest.fn().mockImplementation(() => null),
+      itemProps: {
+        prop: "prop",
+      },
+      itemSize: 200,
+      size: 400,
+      pointingUp: true,
+    };
+
     const wrapper = mount(<PolygonalList {...props} />);
 
     const containerElement = wrapper.first("div").getDOMNode();
@@ -54,6 +76,17 @@ describe("PolygonalList", () => {
   });
 
   it("should rotate the items according to the data's length", () => {
+    const props = {
+      data: [{ value: "value" }, { value: "value" }, { value: "value" }],
+      ItemComponent: jest.fn().mockImplementation(() => null),
+      itemProps: {
+        prop: "prop",
+      },
+      itemSize: 200,
+      size: 400,
+      pointingUp: true,
+    };
+
     const wrapper = mount(<PolygonalList {...props} />);
 
     const firstItemElement = wrapper.first("div").getDOMNode().children.item(0);
@@ -64,6 +97,17 @@ describe("PolygonalList", () => {
   });
 
   it("should rotate the item content to be the item's absolute negative rotation", () => {
+    const props = {
+      data: [{ value: "value" }, { value: "value" }, { value: "value" }],
+      ItemComponent: jest.fn().mockImplementation(() => null),
+      itemProps: {
+        prop: "prop",
+      },
+      itemSize: 200,
+      size: 400,
+      pointingUp: true,
+    };
+
     const wrapper = mount(<PolygonalList {...props} />);
 
     const secondItemContentElement = wrapper
@@ -79,6 +123,17 @@ describe("PolygonalList", () => {
   });
 
   it("should position the item content to be centered at the end of the container", () => {
+    const props = {
+      data: [{ value: "value" }, { value: "value" }, { value: "value" }],
+      ItemComponent: jest.fn().mockImplementation(() => null),
+      itemProps: {
+        prop: "prop",
+      },
+      itemSize: 200,
+      size: 400,
+      pointingUp: true,
+    };
+
     const wrapper = mount(<PolygonalList {...props} />);
 
     const firstItemContentElement = wrapper
@@ -94,6 +149,17 @@ describe("PolygonalList", () => {
   });
 
   it('should pass on the "itemProps" and "data" as props to the "ItemComponent"', () => {
+    const props = {
+      data: [{ value: "value" }, { value: "value" }, { value: "value" }],
+      ItemComponent: jest.fn().mockImplementation(() => null),
+      itemProps: {
+        prop: "prop",
+      },
+      itemSize: 200,
+      size: 400,
+      pointingUp: true,
+    };
+
     props.ItemComponent.mockClear();
 
     mount(<PolygonalList {...props} />);

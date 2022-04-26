@@ -1,7 +1,16 @@
+import { InferProps, number } from "prop-types";
 import styled, { keyframes, css } from "styled-components/macro";
 import Button from "../../components/Button";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
+
+const gameResultPropTypes = {
+  showHouseChoiceDelay: number.isRequired,
+  showHouseChoiceDuration: number.isRequired,
+  showResultDelay: number.isRequired,
+  showResultDuration: number.isRequired,
+  winnerBackgroundEffectDelay: number.isRequired,
+};
 
 type ScoreContainerProps = {
   readonly label: string;
@@ -17,12 +26,7 @@ type OptionsProps = {
 
 type GameResultProps = {
   readonly userWins: boolean;
-  readonly showHouseChoiceDelay: number;
-  readonly showHouseChoiceDuration: number;
-  readonly showResultDelay: number;
-  readonly showResultDuration: number;
-  readonly winnerBackgroundEffectDelay: number;
-};
+} & InferProps<typeof gameResultPropTypes>;
 
 type GameResultChoiceProps = {
   readonly size: number;
@@ -389,6 +393,7 @@ export const GameResultContainer = styled.div<GameResultProps>`
     ${GameResulChoicetWinner}
   }
 `;
+GameResultContainer.propTypes = gameResultPropTypes;
 
 export const RulesImageContainer = styled.div`
   display: flex;
