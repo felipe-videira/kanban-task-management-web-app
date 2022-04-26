@@ -111,7 +111,7 @@ export const Container = styled.div`
     ". game game game ."
     ". . . . rules";
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 1fr 60% 0.5fr;
+  grid-template-rows: 1fr 60% 0.25fr;
 
   ${mobile} {
     display: flex;
@@ -143,14 +143,14 @@ export const RulesButton = styled(Button).attrs(() => ({
   align-self: center;
   grid-area: rules;
   justify-self: end;
-  margin: 5%;
+  margin: 7.5%;
   border-radius: 8px;
   width: 130px;
   z-index: 2;
 
   ${mobile} {
     align-self: center;
-    margin: 0 0 10% 0;
+    margin: 0 0 15% 0;
   }
 `;
 
@@ -160,15 +160,11 @@ export const TitleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
-  padding: 10px 15px;
+  padding: 2%;
   grid-area: header;
   width: 80%;
   margin: 0 auto;
   z-index: 2;
-
-  ${mobile} {
-    width: 60%;
-  }
 
   ${phone} {
     border-radius: 7px;
@@ -406,6 +402,7 @@ export const GameResult = styled.div`
     margin 0 5%;
   	opacity: 0;
     order: 3;
+    width: 60%;
   }
 `;
 

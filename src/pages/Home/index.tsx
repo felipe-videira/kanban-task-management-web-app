@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import getFontSize from "../../utils/getFontSize";
-import { mobile } from "../../utils/breakpoints";
+import { mobile, phone, tablet } from "../../utils/breakpoints";
 
 const Container = styled.div`
   gap: 5%;
@@ -32,7 +32,14 @@ const SelectGameButton = styled(Button)`
   text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
   height: 175px;
 
-  ${mobile} {
+  ${tablet} {
+    font-size: ${(props) => getFontSize(props.children, 3)};
+    height: 250px;
+    width: 250px;
+    padding: 0 25px;
+  }
+
+  ${phone} {
     font-size: ${(props) => getFontSize(props.children, 1)};
     height: 125px;
     width: 125px;

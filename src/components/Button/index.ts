@@ -26,12 +26,13 @@ const Button = styled.button.attrs(() => ({
     props.small
       ? `
       padding: 10px;
-      max-width: 150px;`
+      max-width: 150px;
+      font-size: 1rem;`
       : `
       padding: 14px;
-      max-width: 350px;`}
+      max-width: 350px;
+      font-size: 1.1rem;`}
       
-  font-size: 1rem;
   width: 100%;
   font-family: inherit;
   border-radius: 7px;

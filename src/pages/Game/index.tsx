@@ -78,16 +78,15 @@ function Game() {
 
   function getSize(
     optionsLength: number,
-    mobileRatio = 1.0,
-    desktopRatio = 0.4,
+    screenRatio = 1.0,
     minSize = 50,
-    maxSize = -1,
-    screenWidth: number = screen.width
+    maxSize = 1000
   ) {
     return clamp(
-      (screenWidth / optionsLength) * (isMobile() ? mobileRatio : desktopRatio),
+      ((screen.width / optionsLength + screen.height / optionsLength) / 2) *
+        screenRatio,
       minSize,
-      maxSize > -1 ? maxSize : screenWidth / 4
+      maxSize
     );
   }
 
@@ -159,11 +158,11 @@ function Game() {
 
       const { length } = selectedGame.options;
 
-      const size = getSize(length);
+      const size = getSize(length, isMobile() ? 0.7 : 0.5);
       setOptionSize(size);
       setListSize(size * (length / 2));
 
-      setResultSize(getSize(2, 0.75));
+      setResultSize(getSize(2, 0.5));
 
       setUserScore(scoreService.get(selectedGame.name));
       setHouseScore(scoreService.get(selectedGame.name, true));
