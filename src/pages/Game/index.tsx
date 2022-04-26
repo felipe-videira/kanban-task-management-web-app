@@ -8,7 +8,7 @@ import * as scoreService from "../../services/score";
 import Button from "../../components/Button";
 import Option from "../../components/Option";
 import PolygonalList from "../../components/PolygonalList";
-import { Stepper, Step } from "../../components/Stepper";
+import { Step } from "../../components/Stepper";
 import Modal from "../../components/Modal";
 import {
   Container,
@@ -26,6 +26,7 @@ import {
   GoBackButton,
   ScoreContainer,
   ScoreValue,
+  GameStepper,
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
 import { ArrowBackIcon } from "../../icons";
@@ -77,17 +78,16 @@ function Game() {
 
   function getSize(
     optionsLength: number,
-    mobileRatio = 1.15,
+    mobileRatio = 1.0,
     desktopRatio = 0.4,
     minSize = 50,
+    maxSize = -1,
     screenWidth: number = screen.width
   ) {
     return clamp(
       (screenWidth / optionsLength) * (isMobile() ? mobileRatio : desktopRatio),
       minSize,
-      isMobile()
-        ? (screenWidth / optionsLength) * mobileRatio
-        : screenWidth / 3 / optionsLength
+      maxSize > -1 ? maxSize : screenWidth / 4
     );
   }
 
@@ -204,7 +204,7 @@ function Game() {
         </ScoreContainer>
       </TitleContainer>
 
-      <Stepper value={step} height="60%">
+      <GameStepper value={step}>
         <Step value={1}>
           <OptionsContainer size={listSize}>
             <PolygonalList
@@ -246,7 +246,7 @@ function Game() {
             </GameResultHouseChoice>
           </GameResultContainer>
         </Step>
-      </Stepper>
+      </GameStepper>
 
       <RulesButton onClick={toggleRules}>{t("label.rulesButton")}</RulesButton>
 

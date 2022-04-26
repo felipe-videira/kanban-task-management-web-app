@@ -1,5 +1,5 @@
 import { bool, func, InferProps, node, string } from "prop-types";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useMemo, useState } from "react";
 import isMobile from "../../utils/isMobile";
 import {
   ModalOverlay,
@@ -19,7 +19,9 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   }
 
   useEffect(() => {
-    if (!show && props.show) setShow(true);
+    if (!show && props.show) {
+      setShow(true);
+    }
   }, [props.show]);
 
   return show ? (
@@ -31,7 +33,7 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
             <CloseIcon />
           </ModalCloseButton>
         </ModalHeader>
-        {props.children}
+        {props.show ? props.children : null}
       </ModalContainer>
     </ModalOverlay>
   ) : null;

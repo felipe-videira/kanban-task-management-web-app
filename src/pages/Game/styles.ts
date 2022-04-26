@@ -1,6 +1,7 @@
 import { InferProps, number } from "prop-types";
 import styled, { keyframes, css } from "styled-components/macro";
 import Button from "../../components/Button";
+import Stepper from "../../components/Stepper";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
 
@@ -57,7 +58,7 @@ const growAndfadeIn = keyframes`
 
 const moveLeft = keyframes`
   from  {
-    transform: translateX(70%);
+    transform: translateX(45%);
   }
   to {
     transform: translateX(0);
@@ -66,7 +67,7 @@ const moveLeft = keyframes`
 
 const moveRight = keyframes`
   from  {
-    transform: translateX(-70%);
+    transform: translateX(-45%);
   }
   to {
     transform: translateX(0);
@@ -91,24 +92,30 @@ const radialBackgroundEffect = keyframes`
       rgba(255,255,255,0.05) 56%, 
       rgba(255,255,255,0.025) 75%, 
       rgba(255,255,255,0.0) 76%);
-    opacity: 0.3;
+    opacity: 0.4;
   }
 `;
 
 export const Container = styled.div`
   animation: ${fadeIn} 2s linear 0s 1;
   animation-fill-mode: both;
-
-  display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
   overflow: hidden;
   margin: 0 auto;
   height: 100vh;
-  padding: 0 2%;
+  display: grid;
+  grid-template:
+    ". header header header ."
+    ". game game game ."
+    ". . . . rules";
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 60% 0.5fr;
 
   ${mobile} {
+    display: flex;
+    gap: 2.5%;
     padding: 5px;
   }
 }
@@ -119,53 +126,79 @@ export const GoBackButton = styled(Button).attrs(() => ({
   small: true,
 }))`
   align-self: start;
+  margin: 5%;
+  z-index: 2;
+  transform: scale(0.75);
+  display: none;
+
+  ${mobile} {
+    display: block;
+  }
 `;
 
 export const RulesButton = styled(Button).attrs(() => ({
   outlined: true,
   small: true,
 }))`
-  align-self: end;
+  align-self: center;
+  grid-area: rules;
+  justify-self: end;
+  margin: 5%;
+  border-radius: 8px;
+  width: 130px;
+  z-index: 2;
 
   ${mobile} {
     align-self: center;
-    margin-bottom: 10%;
+    margin: 0 0 10% 0;
   }
 `;
 
 export const TitleContainer = styled.div`
+  border: 3px solid ${(props) => props.theme.contrast.low};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 40%;
-  border: 3px solid ${(props) => props.theme.lowContrast};
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 15px;
+  padding: 10px 15px;
+  grid-area: header;
+  width: 80%;
+  margin: 0 auto;
+  z-index: 2;
 
   ${mobile} {
-    width: 70%;
+    width: 60%;
+  }
+
+  ${phone} {
+    border-radius: 7px;
+    padding: 10px;
   }
 `;
 
 export const Title = styled.h1`
   text-transform: uppercase;
-  line-height: 0.9;
+  line-height: 0.8;
   text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
-  padding-left: 10px;
   width: 10%;
-  margin: 0;
-  font-size: ${(props) => getFontSize(props.children, 3)};
+  font-weight: normal;
+  font-size: ${(props) => getFontSize(props.children, 2)};
+  margin: 0 0 0 25px;
+
+  ${mobile} {
+    margin-left: 15px;
+  }
 `;
 
 export const ScoreValue = styled.div.attrs<ScoreValueProps>((props) => ({
   key: props.children,
 }))<ScoreValueProps>`
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: ${(props) => props.theme.dark};
   margin: -5px;
-  font-weight: normal;
   animation: ${fadeIn} 1s linear 0s 1;
   animation-fill-mode: both;
+  font-weight: bold;
 
   &:first-child {
     order: 1;
@@ -173,6 +206,10 @@ export const ScoreValue = styled.div.attrs<ScoreValueProps>((props) => ({
 
   &:last-child {
     order: 3;
+  }
+
+  ${tablet} {
+    font-size: 3rem;
   }
 
   ${phone} {
@@ -187,24 +224,28 @@ export const ScoreValue = styled.div.attrs<ScoreValueProps>((props) => ({
 export const ScoreContainer = styled.div<ScoreContainerProps>`
   background: ${(props) => props.theme.primary};
   width: 25%;
-  max-width: 100px;
-  height: 75%;
-  border-radius: 5px;
+  max-width: 125px;
+  border-radius: 7px;
   flex-wrap: wrap;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3% 2%;
-  gap: 0 10px;
+  padding: 4% 3%;
+  gap: 0 15%;
+
+  ${phone} {
+    border-radius: 3px;
+  }
 
   &::before {
     content: "${(props) => props.label}";
-    font-size: 1rem;
-    color: ${(props) => props.theme.highContrast};
+    font-size: 1.2rem;
+    color: ${(props) => props.theme.contrast.high};
     text-transform: uppercase;
     letter-spacing: 1.5px;
     width: 100%;
     text-align: center;
+    font-weight: bold;
 
     ${phone} {
       font-size: 0.7rem;
@@ -216,11 +257,11 @@ export const ScoreContainer = styled.div<ScoreContainerProps>`
   }
 
   &::after {
-    content: "-";
+    content: "x";
     order: 2;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: ${(props) => props.theme.dark};
-    font-weight: normal;
+    font-weight: bold;
 
     ${phone} {
       font-size: 1.5rem;
@@ -230,6 +271,15 @@ export const ScoreContainer = styled.div<ScoreContainerProps>`
       font-size: 1.25rem;
     }
   }
+`;
+
+export const GameStepper = styled(Stepper)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: game;
+  height: 60%;
+  z-index: 1;
 `;
 
 export const OptionsContainer = styled.div<OptionsProps>`
@@ -272,8 +322,12 @@ export const GameResultChoice = styled.div<GameResultChoiceProps>`
       height: ${props.size}px;
       position: relative;
       background-color: rgb(0 0 0 / 25%);
-      margin: 0 5%;
+      margin: 5rem 5% 0;
       flex-shrink: 0;
+
+      ${mobile} {
+        margin: 0 5%;
+      }
 
       &::before {
         content: '${props.label}';
@@ -361,6 +415,10 @@ export const GameResultMessage = styled.p`
   font-size: 3.5rem;
   font-weight: bold;
   margin: 10px 0;
+
+  ${phone} {
+    font-size: 3rem;
+  }
 `;
 
 export const GameResultContainer = styled.div<GameResultProps>`

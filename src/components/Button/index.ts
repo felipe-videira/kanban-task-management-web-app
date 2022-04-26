@@ -15,7 +15,7 @@ const Button = styled.button.attrs(() => ({
     props.outlined
       ? `
     background: transparent;
-    border: 1px solid;
+    border: 2px solid ${props.theme.contrast.medium};
     color: ${props.theme.primary};`
       : `
     background: ${props.theme.primary};
@@ -25,14 +25,13 @@ const Button = styled.button.attrs(() => ({
   ${(props) =>
     props.small
       ? `
-    font-size: 1rem;
-    padding: 10px;
-    max-width: 150px;`
+      padding: 10px;
+      max-width: 150px;`
       : `
-    font-size: 1.5rem;
-    padding: 14px;
-    max-width: 350px;`}
-   
+      padding: 14px;
+      max-width: 350px;`}
+      
+  font-size: 1rem;
   width: 100%;
   font-family: inherit;
   border-radius: 7px;
@@ -55,7 +54,7 @@ const Button = styled.button.attrs(() => ({
     border-radius: 50%;
     cursor: pointer;
     font-size: 2rem;
-    color: ${props.theme.lowContrast};
+    color: ${props.theme.contrast.low};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +63,7 @@ const Button = styled.button.attrs(() => ({
     padding: 0;
 
     svg {
-      fill: ${props.theme.lowContrast};
+      fill: ${props.theme.contrast.low};
       height: inherit;
       width: inherit;
     }

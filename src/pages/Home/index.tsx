@@ -26,17 +26,17 @@ const SelectGameButton = styled(Button)`
   text-align: left;
   word-spacing: 100vh;
   font-weight: bold;
-  padding: 15px;
-  font-size: ${(props) => getFontSize(props.children, 4)};
+  padding: 15px 35px;
+  font-size: ${(props) => getFontSize(props.children, 2)};
   line-height: 0.9;
   text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
-  height: 200px;
+  height: 175px;
 
   ${mobile} {
-    font-size: ${(props) => getFontSize(props.children, 3)};
+    font-size: ${(props) => getFontSize(props.children, 1)};
     height: 125px;
     width: 125px;
-}
+    padding: 15px 20px;
   }
 `;
 
