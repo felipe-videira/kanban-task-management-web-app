@@ -104,8 +104,8 @@ describe("Option", () => {
 
     const wrapper = shallow(<Option {...props} />);
 
-    wrapper.find("#paper").simulate("click");
+    wrapper.simulate("click");
 
-    expect(props.onClick).toHaveBeenCalledWith(props.name);
+    expect(props.onClick).toHaveBeenCalledWith("paper");
   });
 });

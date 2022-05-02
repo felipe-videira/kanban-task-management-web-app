@@ -1,6 +1,6 @@
 import { bool, func, InferProps, node, string } from "prop-types";
-import { SyntheticEvent, useEffect, useMemo, useState } from "react";
-import isMobile from "../../utils/isMobile";
+import { SyntheticEvent, useEffect, useState } from "react";
+import isMobile from "../../utils/isScreenMobileSize";
 import {
   ModalOverlay,
   ModalContainer,

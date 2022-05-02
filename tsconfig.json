@@ -19,6 +19,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
   },
-  "include": ["src", "__tests__", "setupTests.js", "__mocks__", "vite.config.ts", "scripts"],
+  "include": ["src", "__tests__", "setupTests.js", "__mocks__", "vite.config.ts", "scripts", "testUtils.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

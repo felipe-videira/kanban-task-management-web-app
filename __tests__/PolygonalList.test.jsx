@@ -2,7 +2,6 @@ import "jsdom-global/register";
 import "jest-styled-components";
 import "../scripts/throwOnPropTypeError";
 
-import React from "react";
 import { mount, render } from "enzyme";
 import PolygonalList from "../src/components/PolygonalList";
 
@@ -62,16 +61,18 @@ describe("PolygonalList", () => {
 
     const wrapper = mount(<PolygonalList {...props} />);
 
-    const containerElement = wrapper.first("div").getDOMNode();
-
     expect(
-      getComputedStyle(containerElement).getPropertyValue("transform")
+      getComputedStyle(wrapper.first("div").getDOMNode()).getPropertyValue(
+        "transform"
+      )
     ).toBe("rotate(45deg)");
 
     wrapper.setProps({ pointingUp: false });
 
     expect(
-      getComputedStyle(containerElement).getPropertyValue("transform")
+      getComputedStyle(wrapper.first("div").getDOMNode()).getPropertyValue(
+        "transform"
+      )
     ).toBe("rotate(225deg)");
   });
 

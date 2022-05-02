@@ -4,47 +4,36 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import getFontSize from "../../utils/getFontSize";
-import { mobile, phone, tablet } from "../../utils/breakpoints";
+import { mobile } from "../../utils/breakpoints";
 
 const Container = styled.div`
-  gap: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  min-height: 98vh;
+`;
+
+const List = styled.div`
+  display: grid;
+  gap: 2.5em;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 25rem));
+  grid-auto-rows: 1fr;
+  width: 70%;
+  justify-content: center;
 
   ${mobile} {
-    width: 90%;
-    padding: 5%;
-    justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
   }
 `;
 
 const SelectGameButton = styled(Button)`
-  text-align: left;
-  word-spacing: 100vh;
-  font-weight: bold;
-  padding: 15px 35px;
-  font-size: ${(props) => getFontSize(props.children, 2)};
   line-height: 0.9;
   text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
-  height: 175px;
-
-  ${tablet} {
-    font-size: ${(props) => getFontSize(props.children, 3)};
-    height: 250px;
-    width: 250px;
-    padding: 0 25px;
-  }
-
-  ${phone} {
-    font-size: ${(props) => getFontSize(props.children, 1)};
-    height: 125px;
-    width: 125px;
-    padding: 15px 20px;
-  }
+  font-weight: normal;
+  text-align: left;
+  word-spacing: 100vh;
+  font-size: ${(props) => getFontSize(props.children, 2)};
+  padding: 5% 7.5%;
 `;
 
 function Home() {
@@ -53,15 +42,17 @@ function Home() {
 
   return (
     <Container>
-      {gameConfig.map((game) => (
-        <SelectGameButton
-          outlined
-          key={game.name}
-          onClick={() => navigate(`/${game.name}`)}
-        >
-          {t(`gameName.${game.name}`)}
-        </SelectGameButton>
-      ))}
+      <List>
+        {gameConfig.map((game) => (
+          <SelectGameButton
+            outlined
+            key={game.name}
+            onClick={() => navigate(`/${game.name}`)}
+          >
+            {t(`gameName.${game.name}`)}
+          </SelectGameButton>
+        ))}
+      </List>
     </Container>
   );
 }

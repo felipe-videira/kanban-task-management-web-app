@@ -1,4 +1,6 @@
-export default {
+import { DefaultTheme } from "styled-components";
+
+const theme: DefaultTheme = {
   primary: "#fff",
   secondary: "#1f3756",
   dark: "hsl(229, 25%, 31%)",
@@ -8,3 +10,5 @@ export default {
     low: "hsl(217, 16%, 45%)",
   },
 };
+
+export default theme;

@@ -23,11 +23,12 @@ body {
     sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+  background-image: radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
   margin: 0;
   min-height: 100vh;
   color: #fff;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   font-size: 100%;
 }
 
@@ -40,9 +41,3 @@ code {
   text-align: center;
   font-weight: 600;
 }
-
-@media only screen and (max-width: 820px) {
-  body {
-    background: linear-gradient(#1f3756, #141539);
-  }
-} 

@@ -12,6 +12,7 @@ import {
 } from "../src/pages/Game/styles";
 import random from "../src/utils/random";
 import { save } from "../src/services/score";
+import { withTheme } from "../testUtils";
 
 jest.mock("../src/services/score", () => ({
   __esModule: true,
@@ -95,7 +96,7 @@ describe("Game", () => {
       return { gameName: "original" };
     });
 
-    const wrapper = mount(<Game />);
+    const wrapper = mount(withTheme(<Game />));
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -105,7 +106,7 @@ describe("Game", () => {
       return { gameName: "wrong" };
     });
 
-    mount(<Game />);
+    mount(withTheme(<Game />));
 
     expect(navigateMock).toHaveBeenCalledWith("/");
   });
@@ -117,7 +118,7 @@ describe("Game", () => {
     random.mockClear();
     random.mockImplementation(() => 2);
 
-    const wrapper = mount(<Game />);
+    const wrapper = mount(withTheme(<Game />));
 
     wrapper.find("Option[name='paper']").simulate("click");
 
@@ -138,7 +139,7 @@ describe("Game", () => {
     random.mockClear();
     random.mockImplementation(() => 0);
 
-    const wrapper = mount(<Game />);
+    const wrapper = mount(withTheme(<Game />));
 
     wrapper.find("Option[name='rock']").simulate("click");
 

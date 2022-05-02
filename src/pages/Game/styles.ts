@@ -1,7 +1,7 @@
 import { InferProps, number } from "prop-types";
 import styled, { keyframes, css } from "styled-components/macro";
 import Button from "../../components/Button";
-import Stepper from "../../components/Stepper";
+import _Stepper from "../../components/Stepper";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
 
@@ -30,8 +30,8 @@ type GameResultProps = {
 } & InferProps<typeof gameResultPropTypes>;
 
 type GameResultChoiceProps = {
-  readonly size: number;
   readonly label: string;
+  readonly size: number;
 };
 
 export const fadeIn = keyframes`
@@ -99,24 +99,25 @@ const radialBackgroundEffect = keyframes`
 export const Container = styled.div`
   animation: ${fadeIn} 2s linear 0s 1;
   animation-fill-mode: both;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   overflow: hidden;
   margin: 0 auto;
-  height: 100vh;
+  height: 98vh;
   display: grid;
   grid-template:
-    ". header header header ."
-    ". game game game ."
-    ". . . . rules";
+  ". header header header ."
+  ". game game game ."
+  ". . . . rules";
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr 60% 0.25fr;
-
+  align-items: center;
+  justify-content: center;
+  
   ${mobile} {
     display: flex;
-    gap: 2.5%;
-    padding: 5px;
+    flex-direction: column;
+    justify-content: start;
+    height: auto;
+    min-height: 99vh;
   }
 }
 `;
@@ -126,13 +127,20 @@ export const GoBackButton = styled(Button).attrs(() => ({
   small: true,
 }))`
   align-self: start;
-  margin: 5%;
   z-index: 2;
   transform: scale(0.75);
-  display: none;
+  display: block;
 
-  ${mobile} {
-    display: block;
+  ${tablet} {
+    margin: 2%;
+    height: 7.5%;
+    width: 7.5%;
+  }
+
+  ${phone} {
+    margin: 5%;
+    height: 10%;
+    width: 10%;
   }
 `;
 
@@ -145,16 +153,17 @@ export const RulesButton = styled(Button).attrs(() => ({
   justify-self: end;
   margin: 7.5%;
   border-radius: 8px;
-  width: 130px;
+  min-width: 130px;
+  width: 20%;
   z-index: 2;
 
   ${mobile} {
     align-self: center;
-    margin: 0 0 15% 0;
-  }
+    margin: 5% 0;
+  }.
 `;
 
-export const TitleContainer = styled.div`
+export const Header = styled.div`
   border: 3px solid ${(props) => props.theme.contrast.low};
   display: flex;
   justify-content: space-between;
@@ -163,7 +172,7 @@ export const TitleContainer = styled.div`
   padding: 2%;
   grid-area: header;
   width: 80%;
-  margin: 0 auto;
+  margin: 10px auto;
   z-index: 2;
 
   ${phone} {
@@ -176,8 +185,9 @@ export const Title = styled.h1`
   text-transform: uppercase;
   line-height: 0.8;
   text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
-  width: 10%;
   font-weight: normal;
+  word-spacing: 100vh;
+  flex: 0.5;
   font-size: ${(props) => getFontSize(props.children, 2)};
   margin: 0 0 0 25px;
 
@@ -219,8 +229,7 @@ export const ScoreValue = styled.div.attrs<ScoreValueProps>((props) => ({
 
 export const ScoreContainer = styled.div<ScoreContainerProps>`
   background: ${(props) => props.theme.primary};
-  width: 25%;
-  max-width: 125px;
+  width: 17.5%;
   border-radius: 7px;
   flex-wrap: wrap;
   display: flex;
@@ -231,6 +240,7 @@ export const ScoreContainer = styled.div<ScoreContainerProps>`
 
   ${phone} {
     border-radius: 3px;
+    max-width: 125px;
   }
 
   &::before {
@@ -269,13 +279,17 @@ export const ScoreContainer = styled.div<ScoreContainerProps>`
   }
 `;
 
-export const GameStepper = styled(Stepper)`
+export const Stepper = styled(_Stepper)`
   display: flex;
   align-items: center;
   justify-content: center;
   grid-area: game;
   height: 60%;
   z-index: 1;
+
+  ${mobile} {
+    min-height: 60vh;
+  }
 `;
 
 export const OptionsContainer = styled.div<OptionsProps>`
@@ -290,10 +304,10 @@ export const OptionsContainer = styled.div<OptionsProps>`
 `}
 `;
 
-const GameResulChoicetWinner = css<GameResultProps>`
+const GameResultChoicetWinner = css<GameResultProps>`
   position: relative;
 
-  &::after {
+  &::before {
     content: "";
     width: 300%;
     height: 300%;
@@ -313,52 +327,61 @@ const GameResulChoicetWinner = css<GameResultProps>`
 `;
 
 export const GameResultChoice = styled.div<GameResultChoiceProps>`
-  ${(props) => `
-      width: ${props.size}px;
-      height: ${props.size}px;
+  position: relative;
+  margin: 5rem 5% 0;
+  flex-shrink: 0;
+
+  background-size: ${(props) => `${props.size}px ${props.size}px}`}
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-image: radial-gradient(
+    circle,
+    rgba(0 0 0 / 0.2) 0%,
+    rgba(0 0 0 / 0.2) 70%,
+    rgba(0, 0, 0, 0) 70%
+  );
+
+  ${mobile} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-center: center;
+    margin: 0;
+  }
+
+  &::after {
+    content: "${(props) => props.label}";
+    position: absolute;
+    top: -5rem;
+    text-transform: uppercase;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 2px;
+
+    ${mobile} {
+      top: unset;
       position: relative;
-      background-color: rgb(0 0 0 / 25%);
-      margin: 5rem 5% 0;
-      flex-shrink: 0;
+      margin: 1rem 0;
+    }
 
-      ${mobile} {
-        margin: 0 5%;
-      }
+    ${phoneSm} {
+      font-size: 0.75rem;
+    }
 
-      &::before {
-        content: '${props.label}';
-        position: absolute;
-        top: -5rem;
-        text-transform: uppercase;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        font-size: 1.5rem;
-        white-space: nowrap;
-        display: flex;
-        justify-content: center;
-        letter-spacing: 2px;
+    ${phone} {
+      font-size: 1rem;
+    }
 
-        ${mobile} {
-          top: unset;
-        }
-
-        ${phoneSm} {
-          font-size: 0.75rem;
-          bottom: -3rem;
-        }
-
-        ${phone} {
-          bottom: -3rem;
-          font-size: 1rem;
-        }
-
-        ${tablet} {
-          bottom: -5rem;
-          font-size: 2rem;
-        }
-      }
-  `}
+    ${tablet} {
+      font-size: 2rem;
+    }
+  }
 
   animation-fill-mode: both;
   border-radius: 50%;
@@ -424,6 +447,7 @@ export const GameResultContainer = styled.div<GameResultProps>`
 
   ${mobile} {
     height: 100%;
+    min-height: 60vh;
     flex-wrap: wrap;
     align-items: center;
   }
@@ -445,7 +469,7 @@ export const GameResultContainer = styled.div<GameResultProps>`
 
   ${(props) =>
     props.userWins ? GameResultUserChoice : GameResultHouseChoice} {
-    ${GameResulChoicetWinner}
+    ${GameResultChoicetWinner}
   }
 `;
 GameResultContainer.propTypes = gameResultPropTypes;

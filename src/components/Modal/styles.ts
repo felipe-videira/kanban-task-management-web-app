@@ -45,8 +45,6 @@ export const ModalContainer = styled.div`
   background: #fff;
   width: 30%;
   height: 60%;
-  max-width: 500px;
-  max-height: 700px;
   position: absolute;
   border-radius: 8px;
   padding: 2%;
@@ -56,8 +54,7 @@ export const ModalContainer = styled.div`
   ${mobile} {
     width: 100%;
     height: 100%;
-    max-height: none;
-    max-width: none;
+    overflow: auto;-
   }
 `;
 
@@ -79,6 +76,9 @@ export const ModalHeader = styled.div`
 export const ModalCloseButton = styled(Button).attrs(() => ({
   icon: true,
 }))`
+  height: 10%;
+  width: 10%;
+
   ${mobile} {
     display: none;
   }

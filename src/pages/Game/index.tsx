@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import clamp from "../../utils/clamp";
-import isMobile from "../../utils/isMobile";
+import isMobile from "../../utils/isScreenMobileSize";
 import random from "../../utils/random";
 import * as scoreService from "../../services/score";
 import Button from "../../components/Button";
@@ -13,7 +13,7 @@ import Modal from "../../components/Modal";
 import {
   Container,
   OptionsContainer,
-  TitleContainer,
+  Header,
   Title,
   GameResultContainer,
   GameResultUserChoice,
@@ -26,11 +26,12 @@ import {
   GoBackButton,
   ScoreContainer,
   ScoreValue,
-  GameStepper,
+  Stepper,
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
 import { ArrowBackIcon } from "../../icons";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
+import isMobileDevice from "../../utils/isMobileDevice";
 
 type GameOption = {
   name: string;
@@ -63,7 +64,7 @@ function Game() {
   const { gameName } = useParams();
   const { t } = useTranslation();
 
-  const [game, setGame] = useState<GameConfig>(null);
+  const [game, setGame, getGame] = useStateWithGetter<GameConfig>(null);
   const [listSize, setListSize] = useState<number>(0);
   const [optionSize, setOptionSize] = useState<number>(0);
   const [resultSize, setResultSize] = useState<number>(0);
@@ -83,7 +84,9 @@ function Game() {
     maxSize = 1000
   ) {
     return clamp(
-      ((screen.width / optionsLength + screen.height / optionsLength) / 2) *
+      ((window.innerWidth / optionsLength +
+        window.innerHeight / optionsLength) /
+        2) *
         screenRatio,
       minSize,
       maxSize
@@ -141,6 +144,21 @@ function Game() {
     setShowRulesModal(!showRulesModal);
   }
 
+  function setSizes(selectedGame = getGame()) {
+    if (!selectedGame) return;
+
+    const { length } = selectedGame.options;
+
+    const size = getSize(length, isMobile() ? 0.7 : 0.5);
+    setOptionSize(size);
+    setListSize(size * (length / 2));
+    setResultSize(getSize(2, 0.5));
+  }
+
+  function onScreenResize() {
+    setSizes();
+  }
+
   function resetGame() {
     setStep(1);
     setUserChoice(null);
@@ -155,15 +173,7 @@ function Game() {
 
     if (selectedGame) {
       setGame(selectedGame);
-
-      const { length } = selectedGame.options;
-
-      const size = getSize(length, isMobile() ? 0.7 : 0.5);
-      setOptionSize(size);
-      setListSize(size * (length / 2));
-
-      setResultSize(getSize(2, 0.5));
-
+      setSizes(selectedGame);
       setUserScore(scoreService.get(selectedGame.name));
       setHouseScore(scoreService.get(selectedGame.name, true));
     }
@@ -179,6 +189,8 @@ function Game() {
     const selectedGame = setupGame();
 
     if (selectedGame) {
+      window.addEventListener("resize", onScreenResize);
+
       scoreService.setSaveOnExitListener(() => ({
         game: selectedGame.name,
         userScore: getUserScore(),
@@ -187,23 +199,29 @@ function Game() {
     } else {
       navigateToHome();
     }
+
+    return () => {
+      window.removeEventListener("resize", onScreenResize);
+    };
   }, []);
 
   return game ? (
     <Container>
-      <GoBackButton onClick={navigateToHome}>
-        <ArrowBackIcon />
-      </GoBackButton>
+      {isMobileDevice() ? (
+        <GoBackButton onClick={navigateToHome}>
+          <ArrowBackIcon />
+        </GoBackButton>
+      ) : null}
 
-      <TitleContainer>
+      <Header>
         <Title>{t(`gameName.${game.name}`)}</Title>
         <ScoreContainer label={t("label.score")}>
           <ScoreValue name="user">{userScore}</ScoreValue>
           <ScoreValue name="house">{houseScore}</ScoreValue>
         </ScoreContainer>
-      </TitleContainer>
+      </Header>
 
-      <GameStepper value={step}>
+      <Stepper value={step}>
         <Step value={1}>
           <OptionsContainer size={listSize}>
             <PolygonalList
@@ -221,31 +239,33 @@ function Game() {
         </Step>
 
         <Step value={2}>
-          <GameResultContainer userWins={userWins} {...game.settings}>
-            <GameResultUserChoice
-              size={resultSize}
-              label={t("label.userChoice")}
-            >
-              {userChoice && <Option {...userChoice} size={resultSize} />}
-            </GameResultUserChoice>
+          {userChoice && houseChoice ? (
+            <GameResultContainer userWins={userWins} {...game.settings}>
+              <GameResultUserChoice
+                label={t("label.userChoice")}
+                size={resultSize}
+              >
+                <Option {...userChoice} size={resultSize} />
+              </GameResultUserChoice>
 
-            <GameResult>
-              <GameResultMessage>
-                {t(userWins ? "message.victory" : "message.defeat")}
-              </GameResultMessage>
+              <GameResult>
+                <GameResultMessage>
+                  {t(userWins ? "message.victory" : "message.defeat")}
+                </GameResultMessage>
 
-              <Button onClick={resetGame}>{t("label.retryButton")}</Button>
-            </GameResult>
+                <Button onClick={resetGame}>{t("label.retryButton")}</Button>
+              </GameResult>
 
-            <GameResultHouseChoice
-              size={resultSize}
-              label={t("label.houseChoice")}
-            >
-              {houseChoice && <Option {...houseChoice} size={resultSize} />}
-            </GameResultHouseChoice>
-          </GameResultContainer>
+              <GameResultHouseChoice
+                label={t("label.houseChoice")}
+                size={resultSize}
+              >
+                <Option {...houseChoice} size={resultSize} />
+              </GameResultHouseChoice>
+            </GameResultContainer>
+          ) : null}
         </Step>
-      </GameStepper>
+      </Stepper>
 
       <RulesButton onClick={toggleRules}>{t("label.rulesButton")}</RulesButton>
 

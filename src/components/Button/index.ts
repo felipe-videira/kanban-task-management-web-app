@@ -26,11 +26,9 @@ const Button = styled.button.attrs(() => ({
     props.small
       ? `
       padding: 10px;
-      max-width: 150px;
       font-size: 1rem;`
       : `
       padding: 14px;
-      max-width: 350px;
       font-size: 1.1rem;`}
       
   width: 100%;
@@ -50,8 +48,6 @@ const Button = styled.button.attrs(() => ({
       ? `
     border: none;
     background: none;
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 2rem;
@@ -65,8 +61,6 @@ const Button = styled.button.attrs(() => ({
 
     svg {
       fill: ${props.theme.contrast.low};
-      height: inherit;
-      width: inherit;
     }
     
     `

@@ -21,16 +21,17 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
   }
 
   return {
-    size: `${props.size * 0.04}px`,
     background,
   };
 })<ButtonProps>`
   border-radius: 50%;
-  padding: ${(props) => `12% 12% calc(12% + ${props.size})`};
-  width: 100%;
-  height: 100%;
+  padding: ${(props) =>
+    `${props.size * 0.12}px ${props.size * 0.12}px ${props.size * 0.16}px`};
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
   border: none;
-  box-shadow: ${(props) => `inset 0px -${props.size} 0px 0px rgb(0 0 0 / 30%)`};
+  box-shadow: ${(props) =>
+    `inset 0px -${props.size * 0.04}px 0px 0px rgb(0 0 0 / 30%)`};
 
   background: ${(props) => props.background};
 
@@ -46,7 +47,7 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
   &:active {
     box-shadow: none;
     padding: 12%;
-    transform: ${(props) => `translateY(${props.size})`};
+    transform: ${(props) => `translateY(${props.size * 0.04}px)`};
   }
 `;
 
