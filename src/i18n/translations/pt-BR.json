@@ -9,10 +9,28 @@
         "rulesModal": "Regras",
         "retryButton": "Jogar Novamente",
         "userChoice": "Você Escolheu",
-        "houseChoice": "A Casa Escolheu"
+        "houseChoice": "A Casa Escolheu",
+        "rock": "Pedra", 
+        "paper": "Papel", 
+        "scissors": "Tesoura", 
+        "lizard": "Lagarto", 
+        "spock": "Spock",
+        "user": "Jogador",
+        "house": "Casa",
+        "options": "Escolha uma opção",
+        "gameList": "Escolha um jogo",
+        "animationToggle": "Animações"
+    },
+    "ariaLabel": {
+        "score": "Placar Jogador {{userScore}} Casa {{houseScore}}",
+        "rules": {
+            "original": "Pedra esmaga Tesoura, Tesoura corta papel e Papel cobre pedra",
+            "lizard-spock": "Pedra esmaga Tesoura, Tesoura corta Papel, Papel cobre Pedra, Pedra esmaga Lagarto, Lagarto envenena Spock, Spock esmaga Tesoura, Tesoura decapita Lagarto, Lagarto come Papel, Papel refuta Spock e Spock vaporiza Pedra"
+        }
     },
     "message": {
         "victory": "Você Ganhou",
-        "defeat": "Você Perdeu"
+        "defeat": "Você Perdeu",
+        "attribution": "Desafio por <a href=\"https://www.frontendmentor.io?ref=challenge\" target=\"_blank\" rel=\"noreferrer\">Frontend Mentor</a>. Desenvolvido por <a href=\"https://github.com/felipe-videira\" target=\"_blank\" rel=\"noreferrer\">Felipe Videira</a>."
     }
 }

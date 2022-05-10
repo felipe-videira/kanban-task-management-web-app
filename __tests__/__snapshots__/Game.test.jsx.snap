@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Game should render correctly 1`] = `
-.c18 {
+.c20 {
   background: transparent;
   border: 2px solid hsl(217,10%,65%);
   color: #fff;
@@ -21,74 +21,74 @@ exports[`Game should render correctly 1`] = `
   transition: transform 300ms ease;
 }
 
-.c18:hover {
+.c20:hover {
   -webkit-transform: scale(1.05);
   -ms-transform: scale(1.05);
   transform: scale(1.05);
 }
 
-.c13 {
+.c15 {
   border-radius: 50%;
-  padding: 17.919999999999998px 17.919999999999998px 23.89333333333333px;
-  width: 149.33333333333331px;
-  height: 149.33333333333331px;
+  padding: 14.335999999999999px 14.335999999999999px 19.114666666666665px;
+  width: 119.46666666666665px;
+  height: 119.46666666666665px;
   border: none;
-  box-shadow: inset 0px -5.973333333333333px 0px 0px rgb(0 0 0 / 30%);
+  box-shadow: inset 0px -4.778666666666666px 0px 0px rgb(0 0 0 / 30%);
   background: linear-gradient(hsl(230,89%,62%),hsl(230,89%,65%));
   cursor: pointer;
   pointer-events: auto;
 }
 
-.c13:active {
+.c15:active {
   box-shadow: none;
   padding: 12%;
-  -webkit-transform: translateY(5.973333333333333px);
-  -ms-transform: translateY(5.973333333333333px);
-  transform: translateY(5.973333333333333px);
+  -webkit-transform: translateY(4.778666666666666px);
+  -ms-transform: translateY(4.778666666666666px);
+  transform: translateY(4.778666666666666px);
 }
 
-.c16 {
+.c18 {
   border-radius: 50%;
-  padding: 17.919999999999998px 17.919999999999998px 23.89333333333333px;
-  width: 149.33333333333331px;
-  height: 149.33333333333331px;
+  padding: 14.335999999999999px 14.335999999999999px 19.114666666666665px;
+  width: 119.46666666666665px;
+  height: 119.46666666666665px;
   border: none;
-  box-shadow: inset 0px -5.973333333333333px 0px 0px rgb(0 0 0 / 30%);
+  box-shadow: inset 0px -4.778666666666666px 0px 0px rgb(0 0 0 / 30%);
   background: linear-gradient(hsl(39,89%,49%),hsl(40,84%,53%));
   cursor: pointer;
   pointer-events: auto;
 }
 
-.c16:active {
+.c18:active {
   box-shadow: none;
   padding: 12%;
-  -webkit-transform: translateY(5.973333333333333px);
-  -ms-transform: translateY(5.973333333333333px);
-  transform: translateY(5.973333333333333px);
+  -webkit-transform: translateY(4.778666666666666px);
+  -ms-transform: translateY(4.778666666666666px);
+  transform: translateY(4.778666666666666px);
 }
 
-.c17 {
+.c19 {
   border-radius: 50%;
-  padding: 17.919999999999998px 17.919999999999998px 23.89333333333333px;
-  width: 149.33333333333331px;
-  height: 149.33333333333331px;
+  padding: 14.335999999999999px 14.335999999999999px 19.114666666666665px;
+  width: 119.46666666666665px;
+  height: 119.46666666666665px;
   border: none;
-  box-shadow: inset 0px -5.973333333333333px 0px 0px rgb(0 0 0 / 30%);
+  box-shadow: inset 0px -4.778666666666666px 0px 0px rgb(0 0 0 / 30%);
   background: linear-gradient(hsl(349,71%,52%),hsl(349,70%,56%));
   cursor: pointer;
   pointer-events: auto;
 }
 
-.c17:active {
+.c19:active {
   box-shadow: none;
   padding: 12%;
-  -webkit-transform: translateY(5.973333333333333px);
-  -ms-transform: translateY(5.973333333333333px);
-  transform: translateY(5.973333333333333px);
+  -webkit-transform: translateY(4.778666666666666px);
+  -ms-transform: translateY(4.778666666666666px);
+  transform: translateY(4.778666666666666px);
 }
 
-.c14 {
-  box-shadow: inset 0px 3.733333333333333px 0px 0px rgb(0 0 0 / 20%);
+.c16 {
+  box-shadow: inset 0px 2.9866666666666664px 0px 0px rgb(0 0 0 / 20%);
   background: #f1f1f2;
   border-radius: 50%;
   width: 100%;
@@ -107,25 +107,25 @@ exports[`Game should render correctly 1`] = `
   justify-content: center;
 }
 
-.c14:hover {
+.c16:hover {
   background: #fff;
 }
 
-.c15 {
+.c17 {
   object-fit: contain;
-  width: 52.26666666666666px;
-  height: 52.26666666666666px;
+  width: 41.813333333333325px;
+  height: 41.813333333333325px;
 }
 
-.c10 {
+.c12 {
   -webkit-transform: rotate(225deg);
   -ms-transform: rotate(225deg);
   transform: rotate(225deg);
-  width: 158.39343798614055px;
-  height: 158.39343798614055px;
+  width: 126.71475038891246px;
+  height: 126.71475038891246px;
 }
 
-.c11 {
+.c13 {
   position: absolute;
   top: 0;
   left: 0;
@@ -133,14 +133,14 @@ exports[`Game should render correctly 1`] = `
   height: 100%;
 }
 
-.c11::after {
+.c13::after {
   content: "";
   position: absolute;
   -webkit-transform-origin: -10px -10px;
   -ms-transform-origin: -10px -10px;
   transform-origin: -10px -10px;
   height: calc(100% / (3/ 4));
-  width: 14.933333333333332px;
+  width: 11.946666666666665px;
   background: rgba(0,0,0,0.2);
   top: 0;
   left: 0;
@@ -149,11 +149,11 @@ exports[`Game should render correctly 1`] = `
   transform: rotate(-15deg);
 }
 
-.c12 {
+.c14 {
   position: absolute;
 }
 
-.c8 {
+.c10 {
   -webkit-animation: ceFhYK 1s linear 0s 1;
   animation: ceFhYK 1s linear 0s 1;
   -webkit-animation-fill-mode: both;
@@ -162,7 +162,7 @@ exports[`Game should render correctly 1`] = `
   width: 100%;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -177,7 +177,7 @@ exports[`Game should render correctly 1`] = `
   justify-content: center;
 }
 
-.c5 .c7[value="1"] {
+.c7 .c9[value="1"] {
   display: block;
 }
 
@@ -186,13 +186,11 @@ exports[`Game should render correctly 1`] = `
   animation: hOYTOz 2s linear 0s 1;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  overflow: hidden;
   margin: 0 auto;
-  height: 98vh;
   display: grid;
   grid-template: ". header header header ." ". game game game ." ". . . . rules";
   grid-template-columns: repeat(5,1fr);
-  grid-template-rows: 1fr 60% 0.25fr;
+  grid-template-rows: auto 45vh auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -201,9 +199,13 @@ exports[`Game should render correctly 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  gap: 1rem;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
-.c19 {
+.c21 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -212,7 +214,7 @@ exports[`Game should render correctly 1`] = `
   margin: 7.5%;
   border-radius: 8px;
   min-width: 130px;
-  width: 20%;
+  width: auto;
   z-index: 2;
 }
 
@@ -234,8 +236,12 @@ exports[`Game should render correctly 1`] = `
   padding: 2%;
   grid-area: header;
   width: 80%;
-  margin: 10px auto;
+  margin: 0 auto;
   z-index: 2;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 1rem 0;
 }
 
 .c2 {
@@ -251,10 +257,9 @@ exports[`Game should render correctly 1`] = `
   margin: 0 0 0 25px;
 }
 
-.c4 {
+.c6 {
   font-size: 3rem;
   color: hsl(229,25%,31%);
-  margin: -5px;
   -webkit-animation: hOYTOz 1s linear 0s 1;
   animation: hOYTOz 1s linear 0s 1;
   -webkit-animation-fill-mode: both;
@@ -262,13 +267,13 @@ exports[`Game should render correctly 1`] = `
   font-weight: bold;
 }
 
-.c4:first-child {
+.c6:first-child {
   -webkit-order: 1;
   -ms-flex-order: 1;
   order: 1;
 }
 
-.c4:last-child {
+.c6:last-child {
   -webkit-order: 3;
   -ms-flex-order: 3;
   order: 3;
@@ -276,7 +281,7 @@ exports[`Game should render correctly 1`] = `
 
 .c3 {
   background: #fff;
-  width: 17.5%;
+  min-width: 17.5%;
   border-radius: 7px;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
@@ -293,12 +298,18 @@ exports[`Game should render correctly 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 4% 3%;
-  gap: 0 15%;
+  padding: 4% 0;
 }
 
-.c3::before {
-  content: "label.score";
+.c3 .c5 + .c5::before {
+  content: "x";
+  font-size: 2rem;
+  color: hsl(229,25%,31%);
+  font-weight: bold;
+  margin: 1rem;
+}
+
+.c4 {
   font-size: 1.2rem;
   color: hsl(229,64%,46%);
   text-transform: uppercase;
@@ -308,20 +319,12 @@ exports[`Game should render correctly 1`] = `
   letter-spacing: 1.5px;
   width: 100%;
   text-align: center;
+  margin: 0;
+  margin-block: 0;
   font-weight: bold;
 }
 
-.c3::after {
-  content: "x";
-  -webkit-order: 2;
-  -ms-flex-order: 2;
-  order: 2;
-  font-size: 2rem;
-  color: hsl(229,25%,31%);
-  font-weight: bold;
-}
-
-.c6 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -339,9 +342,9 @@ exports[`Game should render correctly 1`] = `
   z-index: 1;
 }
 
-.c9 {
-  height: 223.99999999999997px;
-  width: 223.99999999999997px;
+.c11 {
+  height: 179.2px;
+  width: 179.2px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -356,15 +359,16 @@ exports[`Game should render correctly 1`] = `
   justify-content: center;
   padding: 100px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
-@media only screen and (max-width:820px) {
-  .c8 {
+@media only screen and (max-width:820px),(max-width:40rem) {
+  .c10 {
     height: 100%;
   }
 }
 
-@media only screen and (max-width:820px) {
+@media only screen and (max-width:820px),(max-width:40rem) {
   .c0 {
     display: -webkit-box;
     display: -webkit-flex;
@@ -378,12 +382,13 @@ exports[`Game should render correctly 1`] = `
     -ms-flex-pack: start;
     justify-content: start;
     height: auto;
-    min-height: 99vh;
+    gap: 0;
+    margin: 0;
   }
 }
 
-@media only screen and (max-width:820px) {
-  .c19 {
+@media only screen and (max-width:820px),(max-width:40rem) {
+  .c21 {
     -webkit-align-self: center;
     -ms-flex-item-align: center;
     align-self: center;
@@ -398,26 +403,26 @@ exports[`Game should render correctly 1`] = `
   }
 }
 
-@media only screen and (max-width:820px) {
+@media only screen and (max-width:820px),(max-width:40rem) {
   .c2 {
     margin-left: 15px;
   }
 }
 
 @media only screen and (min-width:768px) and (max-width:820px) {
-  .c4 {
+  .c6 {
     font-size: 3rem;
   }
 }
 
 @media only screen and (min-width:281px) and (max-width:767px) {
-  .c4 {
+  .c6 {
     font-size: 1.5rem;
   }
 }
 
 @media only screen and (max-width:280px) {
-  .c4 {
+  .c6 {
     font-size: 1.25rem;
   }
 }
@@ -430,31 +435,31 @@ exports[`Game should render correctly 1`] = `
 }
 
 @media only screen and (min-width:281px) and (max-width:767px) {
-  .c3::before {
-    font-size: 0.7rem;
-  }
-}
-
-@media only screen and (max-width:280px) {
-  .c3::before {
-    font-size: 0.5rem;
-  }
-}
-
-@media only screen and (min-width:281px) and (max-width:767px) {
-  .c3::after {
+  .c3 .c5 + .c5::before {
     font-size: 1.5rem;
   }
 }
 
 @media only screen and (max-width:280px) {
-  .c3::after {
+  .c3 .c5 + .c5::before {
     font-size: 1.25rem;
   }
 }
 
-@media only screen and (max-width:820px) {
-  .c6 {
+@media only screen and (min-width:281px) and (max-width:767px) {
+  .c4 {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width:280px) {
+  .c4 {
+    font-size: 0.5rem;
+  }
+}
+
+@media only screen and (max-width:820px),(max-width:40rem) {
+  .c8 {
     min-height: 60vh;
   }
 }
@@ -489,21 +494,41 @@ exports[`Game should render correctly 1`] = `
                 gameName.original
               </h1>
             </styled.h1>
-            <styled.div
-              label="label.score"
-            >
+            <styled.div>
               <div
                 className="c3"
-                label="label.score"
               >
+                <styled.h2>
+                  <h2
+                    className="c4"
+                  >
+                    label.score
+                  </h2>
+                </styled.h2>
                 <styled.div
                   name="user"
                 >
                   <div
-                    className="c4"
-                    key="0"
+                    aria-live="polite"
+                    className="c5 c6"
+                    key="[object Object],0"
                     name="user"
                   >
+                    <AriaLabel
+                      live="off"
+                    >
+                      <div
+                        aria-live="off"
+                        style={
+                          Object {
+                            "color": "transparent",
+                            "position": "absolute",
+                          }
+                        }
+                      >
+                        Jogador
+                      </div>
+                    </AriaLabel>
                     0
                   </div>
                 </styled.div>
@@ -511,10 +536,26 @@ exports[`Game should render correctly 1`] = `
                   name="house"
                 >
                   <div
-                    className="c4"
-                    key="0"
+                    aria-live="polite"
+                    className="c5 c6"
+                    key="[object Object],0"
                     name="house"
                   >
+                    <AriaLabel
+                      live="off"
+                    >
+                      <div
+                        aria-live="off"
+                        style={
+                          Object {
+                            "color": "transparent",
+                            "position": "absolute",
+                          }
+                        }
+                      >
+                        Casa
+                      </div>
+                    </AriaLabel>
                     0
                   </div>
                 </styled.div>
@@ -526,23 +567,38 @@ exports[`Game should render correctly 1`] = `
           value={1}
         >
           <div
-            className="c5 c6"
+            className="c7 c8"
             value={1}
           >
             <styled.div
               value={1}
             >
               <div
-                className="c7 c8"
+                className="c9 c10"
                 value={1}
               >
                 <styled.div
-                  size={223.99999999999997}
+                  size={179.2}
                 >
                   <div
-                    className="c9"
-                    size={223.99999999999997}
+                    className="c11"
+                    size={179.2}
                   >
+                    <AriaLabel
+                      live="off"
+                    >
+                      <div
+                        aria-live="off"
+                        style={
+                          Object {
+                            "color": "transparent",
+                            "position": "absolute",
+                          }
+                        }
+                      >
+                        label.options
+                      </div>
+                    </AriaLabel>
                     <PolygonalList
                       ItemComponent={[Function]}
                       data={
@@ -587,21 +643,22 @@ exports[`Game should render correctly 1`] = `
                       }
                       itemProps={
                         Object {
+                          "alt": [Function],
                           "onClick": [Function],
-                          "size": 149.33333333333331,
+                          "size": 119.46666666666665,
                         }
                       }
-                      itemSize={149.33333333333331}
+                      itemSize={119.46666666666665}
                       pointingUp={false}
-                      size={223.99999999999997}
+                      size={179.2}
                     >
                       <styled.div
                         pointingUp={false}
-                        size={223.99999999999997}
+                        size={179.2}
                       >
                         <div
-                          className="c10"
-                          size="158.39343798614055px"
+                          className="c12"
+                          size="126.71475038891246px"
                         >
                           <PolygonalListItem
                             ItemComponent={[Function]}
@@ -648,23 +705,24 @@ exports[`Game should render correctly 1`] = `
                             index={0}
                             itemProps={
                               Object {
+                                "alt": [Function],
                                 "onClick": [Function],
-                                "size": 149.33333333333331,
+                                "size": 119.46666666666665,
                               }
                             }
-                            itemSize={149.33333333333331}
+                            itemSize={119.46666666666665}
                             length={3}
                             pointingUp={false}
                             polygonExteriorAngle={120}
                           >
                             <styled.div
-                              itemSize={149.33333333333331}
+                              itemSize={119.46666666666665}
                               length={3}
                               polygonExteriorAngle={120}
                               zIndex={3}
                             >
                               <div
-                                className="c11"
+                                className="c13"
                                 style={
                                   Object {
                                     "transform": "rotate(120deg)",
@@ -674,26 +732,27 @@ exports[`Game should render correctly 1`] = `
                               >
                                 <styled.div
                                   index={0}
-                                  itemSize={149.33333333333331}
+                                  itemSize={119.46666666666665}
                                   length={3}
                                   pointingUp={false}
                                   polygonExteriorAngle={120}
                                   zIndex={3}
                                 >
                                   <div
-                                    className="c12"
+                                    className="c14"
                                     style={
                                       Object {
-                                        "height": "149.33333333333331px",
-                                        "left": "-74.66666666666666px",
-                                        "top": "-74.66666666666666px",
+                                        "height": "119.46666666666665px",
+                                        "left": "-59.73333333333333px",
+                                        "top": "-59.73333333333333px",
                                         "transform": "rotate(-345deg)",
-                                        "width": "149.33333333333331px",
+                                        "width": "119.46666666666665px",
                                         "zIndex": 3,
                                       }
                                     }
                                   >
                                     <Option
+                                      alt={[Function]}
                                       color={
                                         Array [
                                           "hsl(230, 89%, 62%)",
@@ -703,7 +762,7 @@ exports[`Game should render correctly 1`] = `
                                       icon="src/images/icon-paper.svg"
                                       name="paper"
                                       onClick={[Function]}
-                                      size={149.33333333333331}
+                                      size={119.46666666666665}
                                       winRules={
                                         Object {
                                           "rock": true,
@@ -721,32 +780,33 @@ exports[`Game should render correctly 1`] = `
                                         clickable={true}
                                         id="paper"
                                         onClick={[Function]}
-                                        size={149.33333333333331}
+                                        size={119.46666666666665}
                                         type="button"
                                       >
                                         <button
-                                          className="c13"
+                                          className="c15"
+                                          disabled={false}
                                           id="paper"
                                           onClick={[Function]}
-                                          size={149.33333333333331}
+                                          size={119.46666666666665}
                                           type="button"
                                         >
                                           <styled.div
-                                            size={149.33333333333331}
+                                            size={119.46666666666665}
                                           >
                                             <div
-                                              className="c14"
-                                              size={149.33333333333331}
+                                              className="c16"
+                                              size={119.46666666666665}
                                             >
                                               <styled.img
-                                                alt="paper"
-                                                size={149.33333333333331}
+                                                alt="label.paper"
+                                                size={119.46666666666665}
                                                 src="src/images/icon-paper.svg"
                                               >
                                                 <img
-                                                  alt="paper"
-                                                  className="c15"
-                                                  size="52.26666666666666px"
+                                                  alt="label.paper"
+                                                  className="c17"
+                                                  size="41.813333333333325px"
                                                   src="src/images/icon-paper.svg"
                                                 />
                                               </styled.img>
@@ -802,23 +862,24 @@ exports[`Game should render correctly 1`] = `
                                   index={1}
                                   itemProps={
                                     Object {
+                                      "alt": [Function],
                                       "onClick": [Function],
-                                      "size": 149.33333333333331,
+                                      "size": 119.46666666666665,
                                     }
                                   }
-                                  itemSize={149.33333333333331}
+                                  itemSize={119.46666666666665}
                                   length={3}
                                   pointingUp={false}
                                   polygonExteriorAngle={120}
                                 >
                                   <styled.div
-                                    itemSize={149.33333333333331}
+                                    itemSize={119.46666666666665}
                                     length={3}
                                     polygonExteriorAngle={120}
                                     zIndex={2}
                                   >
                                     <div
-                                      className="c11"
+                                      className="c13"
                                       style={
                                         Object {
                                           "transform": "rotate(120deg)",
@@ -828,26 +889,27 @@ exports[`Game should render correctly 1`] = `
                                     >
                                       <styled.div
                                         index={1}
-                                        itemSize={149.33333333333331}
+                                        itemSize={119.46666666666665}
                                         length={3}
                                         pointingUp={false}
                                         polygonExteriorAngle={120}
                                         zIndex={2}
                                       >
                                         <div
-                                          className="c12"
+                                          className="c14"
                                           style={
                                             Object {
-                                              "height": "149.33333333333331px",
-                                              "left": "-74.66666666666666px",
-                                              "top": "-74.66666666666666px",
+                                              "height": "119.46666666666665px",
+                                              "left": "-59.73333333333333px",
+                                              "top": "-59.73333333333333px",
                                               "transform": "rotate(-465deg)",
-                                              "width": "149.33333333333331px",
+                                              "width": "119.46666666666665px",
                                               "zIndex": 2,
                                             }
                                           }
                                         >
                                           <Option
+                                            alt={[Function]}
                                             color={
                                               Array [
                                                 "hsl(39, 89%, 49%)",
@@ -857,7 +919,7 @@ exports[`Game should render correctly 1`] = `
                                             icon="src/images/icon-scissors.svg"
                                             name="scissors"
                                             onClick={[Function]}
-                                            size={149.33333333333331}
+                                            size={119.46666666666665}
                                             winRules={
                                               Object {
                                                 "paper": true,
@@ -875,32 +937,33 @@ exports[`Game should render correctly 1`] = `
                                               clickable={true}
                                               id="scissors"
                                               onClick={[Function]}
-                                              size={149.33333333333331}
+                                              size={119.46666666666665}
                                               type="button"
                                             >
                                               <button
-                                                className="c16"
+                                                className="c18"
+                                                disabled={false}
                                                 id="scissors"
                                                 onClick={[Function]}
-                                                size={149.33333333333331}
+                                                size={119.46666666666665}
                                                 type="button"
                                               >
                                                 <styled.div
-                                                  size={149.33333333333331}
+                                                  size={119.46666666666665}
                                                 >
                                                   <div
-                                                    className="c14"
-                                                    size={149.33333333333331}
+                                                    className="c16"
+                                                    size={119.46666666666665}
                                                   >
                                                     <styled.img
-                                                      alt="scissors"
-                                                      size={149.33333333333331}
+                                                      alt="label.scissors"
+                                                      size={119.46666666666665}
                                                       src="src/images/icon-scissors.svg"
                                                     >
                                                       <img
-                                                        alt="scissors"
-                                                        className="c15"
-                                                        size="52.26666666666666px"
+                                                        alt="label.scissors"
+                                                        className="c17"
+                                                        size="41.813333333333325px"
                                                         src="src/images/icon-scissors.svg"
                                                       />
                                                     </styled.img>
@@ -956,23 +1019,24 @@ exports[`Game should render correctly 1`] = `
                                         index={2}
                                         itemProps={
                                           Object {
+                                            "alt": [Function],
                                             "onClick": [Function],
-                                            "size": 149.33333333333331,
+                                            "size": 119.46666666666665,
                                           }
                                         }
-                                        itemSize={149.33333333333331}
+                                        itemSize={119.46666666666665}
                                         length={3}
                                         pointingUp={false}
                                         polygonExteriorAngle={120}
                                       >
                                         <styled.div
-                                          itemSize={149.33333333333331}
+                                          itemSize={119.46666666666665}
                                           length={3}
                                           polygonExteriorAngle={120}
                                           zIndex={1}
                                         >
                                           <div
-                                            className="c11"
+                                            className="c13"
                                             style={
                                               Object {
                                                 "transform": "rotate(120deg)",
@@ -982,26 +1046,27 @@ exports[`Game should render correctly 1`] = `
                                           >
                                             <styled.div
                                               index={2}
-                                              itemSize={149.33333333333331}
+                                              itemSize={119.46666666666665}
                                               length={3}
                                               pointingUp={false}
                                               polygonExteriorAngle={120}
                                               zIndex={1}
                                             >
                                               <div
-                                                className="c12"
+                                                className="c14"
                                                 style={
                                                   Object {
-                                                    "height": "149.33333333333331px",
-                                                    "left": "-74.66666666666666px",
-                                                    "top": "-74.66666666666666px",
+                                                    "height": "119.46666666666665px",
+                                                    "left": "-59.73333333333333px",
+                                                    "top": "-59.73333333333333px",
                                                     "transform": "rotate(-585deg)",
-                                                    "width": "149.33333333333331px",
+                                                    "width": "119.46666666666665px",
                                                     "zIndex": 1,
                                                   }
                                                 }
                                               >
                                                 <Option
+                                                  alt={[Function]}
                                                   color={
                                                     Array [
                                                       "hsl(349, 71%, 52%)",
@@ -1011,7 +1076,7 @@ exports[`Game should render correctly 1`] = `
                                                   icon="src/images/icon-rock.svg"
                                                   name="rock"
                                                   onClick={[Function]}
-                                                  size={149.33333333333331}
+                                                  size={119.46666666666665}
                                                   winRules={
                                                     Object {
                                                       "paper": false,
@@ -1029,32 +1094,33 @@ exports[`Game should render correctly 1`] = `
                                                     clickable={true}
                                                     id="rock"
                                                     onClick={[Function]}
-                                                    size={149.33333333333331}
+                                                    size={119.46666666666665}
                                                     type="button"
                                                   >
                                                     <button
-                                                      className="c17"
+                                                      className="c19"
+                                                      disabled={false}
                                                       id="rock"
                                                       onClick={[Function]}
-                                                      size={149.33333333333331}
+                                                      size={119.46666666666665}
                                                       type="button"
                                                     >
                                                       <styled.div
-                                                        size={149.33333333333331}
+                                                        size={119.46666666666665}
                                                       >
                                                         <div
-                                                          className="c14"
-                                                          size={149.33333333333331}
+                                                          className="c16"
+                                                          size={119.46666666666665}
                                                         >
                                                           <styled.img
-                                                            alt="rock"
-                                                            size={149.33333333333331}
+                                                            alt="label.rock"
+                                                            size={119.46666666666665}
                                                             src="src/images/icon-rock.svg"
                                                           >
                                                             <img
-                                                              alt="rock"
-                                                              className="c15"
-                                                              size="52.26666666666666px"
+                                                              alt="label.rock"
+                                                              className="c17"
+                                                              size="41.813333333333325px"
                                                               src="src/images/icon-rock.svg"
                                                             />
                                                           </styled.img>
@@ -1085,7 +1151,7 @@ exports[`Game should render correctly 1`] = `
               value={2}
             >
               <div
-                className="c7 c8"
+                className="c9 c10"
                 value={2}
               />
             </styled.div>
@@ -1095,7 +1161,7 @@ exports[`Game should render correctly 1`] = `
           onClick={[Function]}
         >
           <button
-            className="c18 c19"
+            className="c20 c21"
             onClick={[Function]}
             type="button"
           >

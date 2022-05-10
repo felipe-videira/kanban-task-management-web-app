@@ -4,6 +4,7 @@ import Button from "../Button";
 
 type ModalOverlayProps = {
   readonly show: boolean;
+  readonly animationDuration: number;
 };
 
 const modalFadeIn = keyframes`
@@ -26,7 +27,7 @@ export const ModalOverlay = styled.div.attrs<ModalOverlayProps>((props) => ({
   },
 }))<ModalOverlayProps>`
   animation-name: ${modalFadeIn};
-  animation-duration: 0.4s;
+  animation-duration: ${(props) => props.animationDuration}s;
   animation-fill-mode: forwards;
   position: fixed;
   background: rgba(0, 0, 0, 0.5);

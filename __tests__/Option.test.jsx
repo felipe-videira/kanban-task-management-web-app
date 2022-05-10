@@ -26,6 +26,7 @@ describe("Option", () => {
       color: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
       size: 200,
       onClick: jest.fn(),
+      alt: "alt",
     };
 
     isColor.mockClear();
@@ -46,6 +47,7 @@ describe("Option", () => {
       color: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
       size: 200,
       onClick: jest.fn(),
+      alt: "alt",
     };
 
     expect(() => shallow(<Option {...props} />)).toThrow();
@@ -58,6 +60,7 @@ describe("Option", () => {
       color: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
       size: 200,
       onClick: jest.fn(),
+      alt: "alt",
     };
 
     isColor.mockClear();
@@ -76,6 +79,7 @@ describe("Option", () => {
       color: "invalid",
       size: 200,
       onClick: jest.fn(),
+      alt: "alt",
     };
 
     isColor.mockClear();
@@ -94,6 +98,7 @@ describe("Option", () => {
       color: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
       size: 200,
       onClick: jest.fn(),
+      alt: "alt",
     };
 
     isColor.mockClear();

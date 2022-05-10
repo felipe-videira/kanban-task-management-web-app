@@ -100,7 +100,7 @@
                 "icon": "/icon-lizard.svg",
                 "color": [
                     "hsl(261, 73%, 60%)", 
-                    "hsl(230, 89%, 62%)"
+                    "hsl(261, 72%, 63%)"
                 ],
                 "winRules": {
                     "scissors": false,

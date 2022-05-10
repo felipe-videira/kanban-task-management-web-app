@@ -22,6 +22,7 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
 
   return {
     background,
+    disabled: !props.clickable,
   };
 })<ButtonProps>`
   border-radius: 50%;

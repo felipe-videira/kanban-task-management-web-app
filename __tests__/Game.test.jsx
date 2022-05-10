@@ -6,8 +6,8 @@ import { mount } from "enzyme";
 import Game from "../src/pages/Game";
 import { navigateMock, useParamsMock } from "../__mocks__/react-router-dom";
 import {
-  GameResult,
-  GameResultHouseChoice,
+  Result,
+  ResultHouseChoice,
   ScoreValue,
 } from "../src/pages/Game/styles";
 import random from "../src/utils/random";
@@ -123,13 +123,15 @@ describe("Game", () => {
     wrapper.find("Option[name='paper']").simulate("click");
 
     expect(
-      wrapper.find(GameResultHouseChoice).children().find("Option[name='rock']")
+      wrapper.find(ResultHouseChoice).children().find("Option[name='rock']")
     ).toBeTruthy();
-    expect(wrapper.find(GameResult).children().find("p").text()).toBe(
+    expect(wrapper.find(Result).children().find("p").text()).toBe(
       "message.victory"
     );
     expect(save).toHaveBeenCalledWith("original", 1, false);
-    expect(wrapper.find(ScoreValue).find("div[name='user']").text()).toBe("1");
+    expect(
+      wrapper.find(ScoreValue).find("div[name='user']").contains("1")
+    ).toBeTruthy();
   });
 
   it("should lose and update house score", () => {
@@ -144,15 +146,14 @@ describe("Game", () => {
     wrapper.find("Option[name='rock']").simulate("click");
 
     expect(
-      wrapper
-        .find(GameResultHouseChoice)
-        .children()
-        .find("Option[name='paper']")
+      wrapper.find(ResultHouseChoice).children().find("Option[name='paper']")
     ).toBeTruthy();
-    expect(wrapper.find(GameResult).children().find("p").text()).toBe(
+    expect(wrapper.find(Result).children().find("p").text()).toBe(
       "message.defeat"
     );
     expect(save).toHaveBeenCalledWith("original", 1, true);
-    expect(wrapper.find(ScoreValue).find("div[name='house']").text()).toBe("1");
+    expect(
+      wrapper.find(ScoreValue).find("div[name='house']").contains("1")
+    ).toBeTruthy();
   });
 });

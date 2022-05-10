@@ -9,6 +9,8 @@ import {
 } from "./styles";
 import { CloseIcon } from "../../icons";
 
+const ANIMATION_DURATION = 0.4;
+
 export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   const [show, setShow] = useState(false);
 
@@ -19,13 +21,21 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   }
 
   useEffect(() => {
-    if (!show && props.show) {
+    if (props.show) {
       setShow(true);
+    } else {
+      setTimeout(() => {
+        setShow(false);
+      }, ANIMATION_DURATION * 1000);
     }
   }, [props.show]);
 
   return show ? (
-    <ModalOverlay show={props.show} onClick={props.onClick}>
+    <ModalOverlay
+      show={props.show}
+      onClick={props.onClick}
+      animationDuration={ANIMATION_DURATION}
+    >
       <ModalContainer onClick={onContainerClick}>
         <ModalHeader>
           {props.title}

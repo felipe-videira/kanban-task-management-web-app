@@ -12,26 +12,29 @@ import { Step } from "../../components/Stepper";
 import Modal from "../../components/Modal";
 import {
   Container,
-  OptionsContainer,
+  Options,
   Header,
   Title,
-  GameResultContainer,
-  GameResultUserChoice,
-  GameResult,
-  GameResultHouseChoice,
-  GameResultMessage,
+  ResultContainer,
+  ResultUserChoice,
+  Result,
+  ResultHouseChoice,
+  ResultMessage,
   RulesImageContainer,
   RulesImage,
   RulesButton,
   GoBackButton,
-  ScoreContainer,
+  Score,
+  ScoreLabel,
   ScoreValue,
   Stepper,
+  ResultChoiceLabel,
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
 import { ArrowBackIcon } from "../../icons";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
 import isMobileDevice from "../../utils/isMobileDevice";
+import AriaLabel from "../../components/AriaLabel";
 
 type GameOption = {
   name: string;
@@ -76,6 +79,7 @@ function Game() {
   const [userWins, setUserWins] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
   const [showRulesModal, setShowRulesModal] = useState<boolean>(false);
+  const [resultMessage, setResultMessage] = useState<string>("");
 
   function getSize(
     optionsLength: number,
@@ -129,6 +133,7 @@ function Game() {
     setUserChoice(userOption);
     setHouseChoice(houseOption);
     setUserWins(isWinner);
+    setResultMessage(t(isWinner ? "message.victory" : "message.defeat"));
     setStep(2);
 
     if (game && game.settings.updateScoreDelay > 0) {
@@ -149,10 +154,10 @@ function Game() {
 
     const { length } = selectedGame.options;
 
-    const size = getSize(length, isMobile() ? 0.7 : 0.5);
+    const size = getSize(length, isMobile() ? 0.7 : 0.4);
     setOptionSize(size);
     setListSize(size * (length / 2));
-    setResultSize(getSize(2, 0.5));
+    setResultSize(getSize(2, 0.35));
   }
 
   function onScreenResize() {
@@ -215,54 +220,75 @@ function Game() {
 
       <Header>
         <Title>{t(`gameName.${game.name}`)}</Title>
-        <ScoreContainer label={t("label.score")}>
-          <ScoreValue name="user">{userScore}</ScoreValue>
-          <ScoreValue name="house">{houseScore}</ScoreValue>
-        </ScoreContainer>
+        <Score>
+          <ScoreLabel>{t("label.score")}</ScoreLabel>
+          <ScoreValue name="user">
+            <AriaLabel live="off">Jogador</AriaLabel>
+            {userScore}
+          </ScoreValue>
+          <ScoreValue name="house">
+            <AriaLabel live="off">Casa</AriaLabel>
+            {houseScore}
+          </ScoreValue>
+        </Score>
       </Header>
 
       <Stepper value={step}>
         <Step value={1}>
-          <OptionsContainer size={listSize}>
+          <Options size={listSize}>
+            <AriaLabel live="off">{t("label.options")}</AriaLabel>
+
             <PolygonalList
               data={game.options || []}
               ItemComponent={Option}
               itemProps={{
                 size: optionSize,
                 onClick: onOptionClick,
+                alt: (name: string) => t(`label.${name}`),
               }}
               itemSize={optionSize}
               size={listSize}
               pointingUp={game.listSetup.pointingUp}
             />
-          </OptionsContainer>
+          </Options>
         </Step>
 
         <Step value={2}>
           {userChoice && houseChoice ? (
-            <GameResultContainer userWins={userWins} {...game.settings}>
-              <GameResultUserChoice
-                label={t("label.userChoice")}
-                size={resultSize}
-              >
-                <Option {...userChoice} size={resultSize} />
-              </GameResultUserChoice>
+            <ResultContainer
+              userWins={userWins}
+              {...game.settings}
+              size={resultSize}
+            >
+              <ResultUserChoice size={resultSize}>
+                <ResultChoiceLabel aria-label={t("label.userChoice")}>
+                  {t("label.userChoice")}
+                </ResultChoiceLabel>
+                <Option
+                  {...userChoice}
+                  size={resultSize}
+                  alt={t(`label.${userChoice.name}`)}
+                />
+              </ResultUserChoice>
 
-              <GameResult>
-                <GameResultMessage>
-                  {t(userWins ? "message.victory" : "message.defeat")}
-                </GameResultMessage>
+              <ResultHouseChoice size={resultSize}>
+                <ResultChoiceLabel aria-label={t("label.houseChoice")}>
+                  {t("label.houseChoice")}
+                </ResultChoiceLabel>
+                <Option
+                  {...houseChoice}
+                  size={resultSize}
+                  alt={t(`label.${houseChoice.name}`)}
+                />
+              </ResultHouseChoice>
 
+              <Result>
+                <ResultMessage aria-label={resultMessage}>
+                  {resultMessage}
+                </ResultMessage>
                 <Button onClick={resetGame}>{t("label.retryButton")}</Button>
-              </GameResult>
-
-              <GameResultHouseChoice
-                label={t("label.houseChoice")}
-                size={resultSize}
-              >
-                <Option {...houseChoice} size={resultSize} />
-              </GameResultHouseChoice>
-            </GameResultContainer>
+              </Result>
+            </ResultContainer>
           ) : null}
         </Step>
       </Stepper>
@@ -274,6 +300,8 @@ function Game() {
         title={t("label.rulesModal")}
         onClick={toggleRules}
       >
+        <AriaLabel live="polite">{t(`ariaLabel.rules.${game.name}`)}</AriaLabel>
+
         <RulesImageContainer>
           <RulesImage src={game.rules} alt={t("label.rulesModal")} />
         </RulesImageContainer>

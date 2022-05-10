@@ -1,6 +1,6 @@
 import { InferProps, number } from "prop-types";
 import styled, { keyframes } from "styled-components/macro";
-import { mobile } from "../../utils/breakpoints";
+import { mobile } from "../utils/breakpoints";
 
 const proptypes = {
   value: number.isRequired,

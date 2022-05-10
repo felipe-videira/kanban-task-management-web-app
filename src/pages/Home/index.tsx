@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import getFontSize from "../../utils/getFontSize";
 import { mobile } from "../../utils/breakpoints";
+import AriaLabel from "../../components/AriaLabel";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 98vh;
+  flex: 1;
 `;
 
 const List = styled.div`
@@ -43,6 +44,7 @@ function Home() {
   return (
     <Container>
       <List>
+        <AriaLabel live="polite">{t("label.gameList")}</AriaLabel>
         {gameConfig.map((game) => (
           <SelectGameButton
             outlined
