@@ -27,10 +27,13 @@
         "rules": {
             "original": "Rock crushes Scissors, Scissors cuts Paper, and Paper covers Rock.",
             "lizard-spock": "Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock crushes Scissors, Scissors decapitate Lizard, Lizard eats Paper, Paper disproves Spock, and Spock vaporizes Rock."
-        }
+        },
+        "animationToggle": "Toggle Animations",
+        "close": "Close rules"
     },
     "message": {
         "victory": "You Win",
-        "defeat": "You Lose"
+        "defeat": "You Lose",
+        "attribution": "Challenge by <a href=\"https://www.frontendmentor.io?ref=challenge\" target=\"_blank\" rel=\"noreferrer\">Frontend Mentor</a>. Develop by <a href=\"https://github.com/felipe-videira\" target=\"_blank\" rel=\"noreferrer\">Felipe Videira</a>."
     }
 }

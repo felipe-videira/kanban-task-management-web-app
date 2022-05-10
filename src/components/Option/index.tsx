@@ -1,4 +1,4 @@
-import { InferProps, number } from "prop-types";
+import { bool, InferProps, number } from "prop-types";
 import { useMemo } from "react";
 import {
   string,
@@ -37,6 +37,7 @@ function Option(props: InferProps<typeof Option.propTypes>) {
       size={props.size}
       background={props.color}
       clickable={!!props.onClick}
+      aria-hidden={props.ariaHidden || false}
     >
       <OptionIconContainer size={props.size}>
         <OptionIcon src={props.icon} alt={alt} size={props.size} />
@@ -52,6 +53,7 @@ Option.propTypes = {
   onClick: func<OnClick>(),
   size: number.isRequired,
   alt: oneOfType([string.lenght(2), func<GetAltText>()]).isRequired,
+  ariaHidden: bool,
 };
 
 export default Option;

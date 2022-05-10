@@ -26,7 +26,10 @@
         "rules": {
             "original": "Pedra esmaga Tesoura, Tesoura corta papel e Papel cobre pedra",
             "lizard-spock": "Pedra esmaga Tesoura, Tesoura corta Papel, Papel cobre Pedra, Pedra esmaga Lagarto, Lagarto envenena Spock, Spock esmaga Tesoura, Tesoura decapita Lagarto, Lagarto come Papel, Papel refuta Spock e Spock vaporiza Pedra"
-        }
+        },
+        "animationToggle": "Ligar/Desligar Animações",
+        "close": "Fechar regras"
+
     },
     "message": {
         "victory": "Você Ganhou",

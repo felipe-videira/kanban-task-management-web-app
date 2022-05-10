@@ -483,9 +483,14 @@ exports[`Game should render correctly 1`] = `
       <div
         className="c0"
       >
-        <styled.div>
+        <styled.div
+          role="region"
+          tabIndex={0}
+        >
           <div
             className="c1"
+            role="region"
+            tabIndex={0}
           >
             <styled.h1>
               <h1
@@ -494,9 +499,12 @@ exports[`Game should render correctly 1`] = `
                 gameName.original
               </h1>
             </styled.h1>
-            <styled.div>
+            <styled.div
+              tabIndex={0}
+            >
               <div
                 className="c3"
+                tabIndex={0}
               >
                 <styled.h2>
                   <h2
@@ -506,12 +514,13 @@ exports[`Game should render correctly 1`] = `
                   </h2>
                 </styled.h2>
                 <styled.div
+                  aria-hidden="false"
+                  key="user0"
                   name="user"
                 >
                   <div
-                    aria-live="polite"
+                    aria-hidden="false"
                     className="c5 c6"
-                    key="[object Object],0"
                     name="user"
                   >
                     <AriaLabel
@@ -533,12 +542,13 @@ exports[`Game should render correctly 1`] = `
                   </div>
                 </styled.div>
                 <styled.div
+                  aria-hidden="false"
+                  key="house0"
                   name="house"
                 >
                   <div
-                    aria-live="polite"
+                    aria-hidden="false"
                     className="c5 c6"
-                    key="[object Object],0"
                     name="house"
                   >
                     <AriaLabel
@@ -564,10 +574,14 @@ exports[`Game should render correctly 1`] = `
           </div>
         </styled.div>
         <Styled(styled.div)
+          role="main"
+          tabIndex={0}
           value={1}
         >
           <div
             className="c7 c8"
+            role="main"
+            tabIndex={0}
             value={1}
           >
             <styled.div
@@ -771,6 +785,7 @@ exports[`Game should render correctly 1`] = `
                                       }
                                     >
                                       <styled.button
+                                        aria-hidden={false}
                                         background={
                                           Array [
                                             "hsl(230, 89%, 62%)",
@@ -784,6 +799,7 @@ exports[`Game should render correctly 1`] = `
                                         type="button"
                                       >
                                         <button
+                                          aria-hidden={false}
                                           className="c15"
                                           disabled={false}
                                           id="paper"
@@ -928,6 +944,7 @@ exports[`Game should render correctly 1`] = `
                                             }
                                           >
                                             <styled.button
+                                              aria-hidden={false}
                                               background={
                                                 Array [
                                                   "hsl(39, 89%, 49%)",
@@ -941,6 +958,7 @@ exports[`Game should render correctly 1`] = `
                                               type="button"
                                             >
                                               <button
+                                                aria-hidden={false}
                                                 className="c18"
                                                 disabled={false}
                                                 id="scissors"
@@ -1085,6 +1103,7 @@ exports[`Game should render correctly 1`] = `
                                                   }
                                                 >
                                                   <styled.button
+                                                    aria-hidden={false}
                                                     background={
                                                       Array [
                                                         "hsl(349, 71%, 52%)",
@@ -1098,6 +1117,7 @@ exports[`Game should render correctly 1`] = `
                                                     type="button"
                                                   >
                                                     <button
+                                                      aria-hidden={false}
                                                       className="c19"
                                                       disabled={false}
                                                       id="rock"
@@ -1169,6 +1189,7 @@ exports[`Game should render correctly 1`] = `
           </button>
         </Styled(styled.button)>
         <Modal
+          closeButtonAriaLabel="ariaLabel.close"
           onClick={[Function]}
           show={false}
           title="label.rulesModal"

@@ -218,22 +218,27 @@ function Game() {
         </GoBackButton>
       ) : null}
 
-      <Header>
+      <Header tabIndex={0} role="region">
         <Title>{t(`gameName.${game.name}`)}</Title>
-        <Score>
+
+        <Score tabIndex={0}>
           <ScoreLabel>{t("label.score")}</ScoreLabel>
-          <ScoreValue name="user">
+          <ScoreValue name="user" key={"user" + userScore} aria-hidden="false">
             <AriaLabel live="off">Jogador</AriaLabel>
             {userScore}
           </ScoreValue>
-          <ScoreValue name="house">
+          <ScoreValue
+            name="house"
+            key={"house" + houseScore}
+            aria-hidden="false"
+          >
             <AriaLabel live="off">Casa</AriaLabel>
             {houseScore}
           </ScoreValue>
         </Score>
       </Header>
 
-      <Stepper value={step}>
+      <Stepper value={step} tabIndex={0} role="main">
         <Step value={1}>
           <Options size={listSize}>
             <AriaLabel live="off">{t("label.options")}</AriaLabel>
@@ -259,11 +264,11 @@ function Game() {
               userWins={userWins}
               {...game.settings}
               size={resultSize}
+              aria-live="polite"
+              aria-atomic="true"
             >
               <ResultUserChoice size={resultSize}>
-                <ResultChoiceLabel aria-label={t("label.userChoice")}>
-                  {t("label.userChoice")}
-                </ResultChoiceLabel>
+                <ResultChoiceLabel>{t("label.userChoice")}</ResultChoiceLabel>
                 <Option
                   {...userChoice}
                   size={resultSize}
@@ -272,20 +277,17 @@ function Game() {
               </ResultUserChoice>
 
               <ResultHouseChoice size={resultSize}>
-                <ResultChoiceLabel aria-label={t("label.houseChoice")}>
-                  {t("label.houseChoice")}
-                </ResultChoiceLabel>
+                <ResultChoiceLabel>{t("label.houseChoice")}</ResultChoiceLabel>
                 <Option
                   {...houseChoice}
                   size={resultSize}
                   alt={t(`label.${houseChoice.name}`)}
+                  ariaHidden={false}
                 />
               </ResultHouseChoice>
 
-              <Result>
-                <ResultMessage aria-label={resultMessage}>
-                  {resultMessage}
-                </ResultMessage>
+              <Result aria-hidden="false">
+                <ResultMessage>{resultMessage}</ResultMessage>
                 <Button onClick={resetGame}>{t("label.retryButton")}</Button>
               </Result>
             </ResultContainer>
@@ -299,11 +301,14 @@ function Game() {
         show={showRulesModal}
         title={t("label.rulesModal")}
         onClick={toggleRules}
+        closeButtonAriaLabel={t("ariaLabel.close")}
       >
-        <AriaLabel live="polite">{t(`ariaLabel.rules.${game.name}`)}</AriaLabel>
-
         <RulesImageContainer>
-          <RulesImage src={game.rules} alt={t("label.rulesModal")} />
+          <RulesImage
+            src={game.rules}
+            alt={t(`ariaLabel.rules.${game.name}`)}
+            tabIndex={0}
+          />
         </RulesImageContainer>
       </Modal>
     </Container>

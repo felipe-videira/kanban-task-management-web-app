@@ -1,5 +1,6 @@
 import styled from "styled-components/macro";
 import { bool, func, InferProps, string } from "prop-types";
+import { useCallback } from "react";
 
 const Label = styled.label`
   display: flex;
@@ -9,6 +10,7 @@ const Label = styled.label`
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 0.9rem;
+  width: fit-content;
 `;
 
 const Button = styled.input.attrs(() => ({
@@ -60,19 +62,30 @@ const Button = styled.input.attrs(() => ({
 export default function ToggleButton(
   props: InferProps<typeof ToggleButton.propTypes>
 ) {
+  const onChange = useCallback(
+    () => props.onChange && props.onChange(),
+    [props.onChange]
+  );
   return (
-    <Label>
+    <Label aria-label={props.ariaLabel}>
       {props.label}
       <Button
+        role="switch"
         checked={props.checked}
-        onChange={() => props.onChange && props.onChange()}
+        onChange={onChange}
+        onKeyDown={(e) => {
+          if (e.key && e.key === "Enter") {
+            onChange();
+          }
+        }}
       />
     </Label>
   );
 }
 
 ToggleButton.propTypes = {
-  label: string,
+  label: string.isRequired,
+  ariaLabel: string.isRequired,
   checked: bool.isRequired,
   onChange: func,
 };

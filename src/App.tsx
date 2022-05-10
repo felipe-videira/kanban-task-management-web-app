@@ -25,10 +25,8 @@ const AppContainer = styled.div<{ animationsEnabled: boolean }>`
 const AnimationToggleContainer = styled.div`
   z-index: 1;
   padding: 1rem;
-
-  label {
-    justify-content: flex-end;
-  }
+  display: flex;
+  justify-content: flex-end;
 
   ${mobile} {
     padding: 0.5rem;
@@ -63,6 +61,7 @@ function App() {
       <AnimationToggleContainer>
         <ToggleButton
           label={t("label.animationToggle")}
+          ariaLabel={t("ariaLabel.animationToggle")}
           checked={animationsEnabled}
           onChange={toggleAnimations}
         />
@@ -71,6 +70,8 @@ function App() {
       <Routes />
 
       <Attribution
+        tabIndex={0}
+        role="navigation"
         dangerouslySetInnerHTML={{ __html: t("message.attribution") }}
       />
     </AppContainer>

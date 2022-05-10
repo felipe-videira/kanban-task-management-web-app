@@ -52,6 +52,7 @@ exports[`Option should render correctly with all props 1`] = `
 }
 
 <button
+  aria-hidden="false"
   class="c0"
   id="paper"
   size="200"

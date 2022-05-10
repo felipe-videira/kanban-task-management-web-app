@@ -36,10 +36,14 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
       onClick={props.onClick}
       animationDuration={ANIMATION_DURATION}
     >
-      <ModalContainer onClick={onContainerClick}>
+      <ModalContainer onClick={onContainerClick} role="dialog" tabIndex={0}>
         <ModalHeader>
           {props.title}
-          <ModalCloseButton type="button" onClick={props.onClick}>
+          <ModalCloseButton
+            type="button"
+            aria-label={props.closeButtonAriaLabel}
+            onClick={props.onClick}
+          >
             <CloseIcon />
           </ModalCloseButton>
         </ModalHeader>
@@ -54,4 +58,5 @@ Modal.propTypes = {
   title: string,
   children: node,
   onClick: func.isRequired,
+  closeButtonAriaLabel: string.isRequired,
 };

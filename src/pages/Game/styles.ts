@@ -3,7 +3,7 @@ import styled, { keyframes, css } from "styled-components/macro";
 import Button from "../../components/Button";
 import { OptionButton } from "../../components/Option/styles";
 import _Stepper from "../../components/Stepper";
-import { mobile, phone, phoneSm, rem, tablet } from "../../utils/breakpoints";
+import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
 
 const resultPropTypes = {
@@ -196,10 +196,7 @@ export const Title = styled.h1`
   }
 `;
 
-export const ScoreValue = styled.div.attrs<ScoreValueProps>((props) => ({
-  key: props.children,
-  "aria-live": "polite",
-}))<ScoreValueProps>`
+export const ScoreValue = styled.div<ScoreValueProps>`
   font-size: 3rem;
   color: ${(props) => props.theme.dark};
   animation: ${fadeIn} 1s linear 0s 1;
