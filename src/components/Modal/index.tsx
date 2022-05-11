@@ -33,16 +33,21 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   return show ? (
     <ModalOverlay
       show={props.show}
-      onClick={props.onClick}
+      onClick={props.onChange}
       animationDuration={ANIMATION_DURATION}
     >
-      <ModalContainer onClick={onContainerClick} role="dialog" tabIndex={0}>
+      <ModalContainer
+        onClick={onContainerClick}
+        role="dialog"
+        tabIndex={0}
+        onBlur={props.onChange}
+      >
         <ModalHeader>
           {props.title}
           <ModalCloseButton
             type="button"
             aria-label={props.closeButtonAriaLabel}
-            onClick={props.onClick}
+            onClick={props.onChange}
           >
             <CloseIcon />
           </ModalCloseButton>
@@ -57,6 +62,6 @@ Modal.propTypes = {
   show: bool.isRequired,
   title: string,
   children: node,
-  onClick: func.isRequired,
+  onChange: func.isRequired,
   closeButtonAriaLabel: string.isRequired,
 };

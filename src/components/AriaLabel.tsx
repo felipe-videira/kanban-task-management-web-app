@@ -8,9 +8,8 @@ export default function AriaLabel(
     <div
       style={{ position: "absolute", color: "transparent" }}
       aria-live={props.live}
-    >
-      {props.children}
-    </div>
+      aria-label={props.children.toString()}
+    ></div>
   );
 }
 

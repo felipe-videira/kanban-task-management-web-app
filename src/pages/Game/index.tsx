@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import clamp from "../../utils/clamp";
@@ -250,6 +250,7 @@ function Game() {
                 size: optionSize,
                 onClick: onOptionClick,
                 alt: (name: string) => t(`label.${name}`),
+                disabled: step !== 1,
               }}
               itemSize={optionSize}
               size={listSize}
@@ -299,8 +300,8 @@ function Game() {
 
       <Modal
         show={showRulesModal}
+        onChange={toggleRules}
         title={t("label.rulesModal")}
-        onClick={toggleRules}
         closeButtonAriaLabel={t("ariaLabel.close")}
       >
         <RulesImageContainer>

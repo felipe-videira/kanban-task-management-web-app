@@ -29,7 +29,8 @@
             "lizard-spock": "Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock crushes Scissors, Scissors decapitate Lizard, Lizard eats Paper, Paper disproves Spock, and Spock vaporizes Rock."
         },
         "animationToggle": "Toggle Animations",
-        "close": "Close rules"
+        "close": "Close rules",
+        "touchInstructions": "touchInstructions to do"
     },
     "message": {
         "victory": "You Win",

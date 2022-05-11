@@ -6,7 +6,6 @@ type StyleProps = {
 
 type ButtonProps = {
   readonly background: string | string[];
-  readonly clickable: boolean;
 } & StyleProps;
 
 export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
@@ -22,7 +21,6 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
 
   return {
     background,
-    disabled: !props.clickable,
   };
 })<ButtonProps>`
   border-radius: 50%;
@@ -37,7 +35,7 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
   background: ${(props) => props.background};
 
   ${(props) =>
-    props.clickable
+    !props.disabled
       ? `
     cursor: pointer;
     pointer-events: auto;`

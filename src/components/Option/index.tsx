@@ -36,8 +36,8 @@ function Option(props: InferProps<typeof Option.propTypes>) {
       onClick={() => props.onClick && props.onClick(props.name)}
       size={props.size}
       background={props.color}
-      clickable={!!props.onClick}
       aria-hidden={props.ariaHidden || false}
+      disabled={!props.onClick || props.disabled || false}
     >
       <OptionIconContainer size={props.size}>
         <OptionIcon src={props.icon} alt={alt} size={props.size} />
@@ -54,6 +54,7 @@ Option.propTypes = {
   size: number.isRequired,
   alt: oneOfType([string.lenght(2), func<GetAltText>()]).isRequired,
   ariaHidden: bool,
+  disabled: bool,
 };
 
 export default Option;
