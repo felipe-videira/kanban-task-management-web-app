@@ -5,3 +5,4 @@ export * from "./image";
 export * from "./oneOfType";
 export * from "./string";
 export * from "./types";
+export * from "./ref";

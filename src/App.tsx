@@ -5,10 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import ToggleButton from "./components/ToggleButton";
 import { useTranslation } from "react-i18next";
 import { mobile } from "./utils/breakpoints";
-import clamp from "./utils/clamp";
 import isMobileDevice from "./utils/isMobileDevice";
 import useTouch from "./hooks/useTouch";
-import useRefList from "./hooks/useRefList";
+import useFocusProvider from "./hooks/focus/useFocusProvider";
 
 const AppContainer = styled.div<{ animationsEnabled: boolean }>`
   display: flex;
@@ -64,7 +63,19 @@ const Attribution = styled.div`
 function App() {
   const { t } = useTranslation();
 
-  const focusedElement = useRef<HTMLElement>();
+  const [
+    FocusProvider,
+    nextFocus,
+    previousFocus,
+    nextKeyFocus,
+    previousKeyFocus,
+    clickFocused,
+    focusRefList,
+    keyFocusRefList,
+    focusedElementRef,
+  ] = useFocusProvider();
+
+  const appRef = useRef<HTMLDivElement>(null);
 
   const [animationsEnabled, setAnimationsEnabled] = useState<boolean>(true);
   const [ariaTouchInstructionsText, setAriaTouchInstructionsText] =
@@ -75,11 +86,8 @@ function App() {
   }
 
   function screenFullScan() {
-    document.querySelector("#app")?.setAttribute("tabindex", "0");
-    (document.querySelector("#app") as HTMLElement)?.focus();
+    appRef.current?.focus();
   }
-
-  const [refList, addToRefList] = useRefList();
 
   useTouch(
     ({ count, doubleTap, swipe, swipeDirection }) => {
@@ -87,34 +95,23 @@ function App() {
         screenFullScan();
       }
 
-      if (swipe) {
-        const focusableElements = Array.from(
-          document.querySelectorAll(
-            'a[href], button:not([disabled]), input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
-          )
-        );
-
-        const currentIndex = focusableElements.findIndex(
-          (el) => el === document.activeElement
-        );
-
-        const nextEl = focusableElements[
-          clamp(
-            currentIndex + swipeDirection.x,
-            0,
-            focusableElements.length - 1
-          )
-        ] as HTMLElement;
-
-        nextEl.focus();
-        focusedElement.current = nextEl;
+      if (swipe && (swipeDirection.x === 0 || swipeDirection.y === 0)) {
+        if (swipeDirection.x === 1) {
+          nextFocus();
+        } else if (swipeDirection.x === -1) {
+          previousFocus();
+        } else if (swipeDirection.y === 1) {
+          nextKeyFocus();
+        } else if (swipeDirection.y === -1) {
+          previousKeyFocus();
+        }
       }
 
-      if (focusedElement.current && doubleTap) {
-        focusedElement.current.click();
+      if (doubleTap) {
+        clickFocused();
       }
     },
-    [focusedElement.current]
+    [focusedElementRef.current, focusRefList.current, keyFocusRefList.current]
   );
 
   useEffect(() => {
@@ -124,7 +121,7 @@ function App() {
   }, []);
 
   return (
-    <AppContainer animationsEnabled={animationsEnabled} id="app">
+    <AppContainer animationsEnabled={animationsEnabled} ref={appRef}>
       <AriaTouchInstructionsContainer
         aria-live="polite"
         aria-atomic="true"
@@ -143,7 +140,9 @@ function App() {
         />
       </AnimationToggleContainer>
 
-      <Routes />
+      <FocusProvider>
+        <Routes />
+      </FocusProvider>
 
       <Attribution
         tabIndex={0}

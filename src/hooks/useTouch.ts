@@ -5,10 +5,12 @@ type Touch = {
   doubleTap: boolean;
   swipe: boolean;
   swipeDirection: {
-    x: number;
-    y: number;
+    x: 1 | 0 | -1;
+    y: 1 | 0 | -1;
   };
 };
+
+const MIN_DIST_TO_SWIPE = 50;
 
 export default function useTouch(
   onTouch: (touch: Touch) => void,
@@ -16,7 +18,7 @@ export default function useTouch(
 ) {
   const touchCount = useRef(0);
   const swipeDir = useRef({ x: 0, y: 0 });
-  const lastScreenPos = useRef({
+  const startPosition = useRef({
     x: 0,
     y: 0,
   });
@@ -26,17 +28,21 @@ export default function useTouch(
   function handleTouchStart(event: TouchEvent) {
     swipeStarted.current = false;
     touchCount.current = event.touches.length;
+    startPosition.current = {
+      x: event.touches[0].screenX,
+      y: event.touches[0].screenY,
+    };
   }
 
   function handleTouchMove(event: TouchEvent) {
     swipeStarted.current = true;
+
+    const xDiff = event.touches[0].screenX - startPosition.current.x;
+    const yDiff = startPosition.current.y - event.touches[0].screenY;
+
     swipeDir.current = {
-      x: Math.sign(event.touches[0].screenX - lastScreenPos.current.x),
-      y: Math.sign(lastScreenPos.current.y - event.touches[0].screenY),
-    };
-    lastScreenPos.current = {
-      x: event.touches[0].screenX,
-      y: event.touches[0].screenY,
+      x: Math.abs(xDiff) >= MIN_DIST_TO_SWIPE ? Math.sign(xDiff) : 0,
+      y: Math.abs(yDiff) >= MIN_DIST_TO_SWIPE ? Math.sign(yDiff) : 0,
     };
   }
 
@@ -45,7 +51,7 @@ export default function useTouch(
       count: touchCount.current,
       doubleTap: doubleTapStarted.current,
       swipe: swipeStarted.current,
-      swipeDirection: swipeDir.current,
+      swipeDirection: swipeDir.current as Touch["swipeDirection"],
     });
 
     if (!doubleTapStarted.current) {

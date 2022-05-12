@@ -5,14 +5,14 @@ export default function useStateWithGetter<T>(
 ): [state: T, setState: React.Dispatch<SetStateAction<T>>, getState: () => T] {
   const [state, setState] = useState(initialState);
 
-  const getState = () => {
+  function getState() {
     let value = state;
     setState((currState) => {
       value = currState;
       return currState;
     });
     return value;
-  };
+  }
 
   return [state, setState, getState];
 }

@@ -1,6 +1,7 @@
 import styled from "styled-components/macro";
 import { bool, func, InferProps, string } from "prop-types";
 import { useCallback } from "react";
+import { ref } from "../utils/validators";
 
 const Label = styled.label`
   display: flex;
@@ -72,6 +73,7 @@ export default function ToggleButton(
       <Button
         role="switch"
         checked={props.checked}
+        ref={props.forwardRef}
         onChange={onChange}
         onKeyDown={(e) => {
           if (e.key && e.key === "Enter") {
@@ -88,4 +90,5 @@ ToggleButton.propTypes = {
   ariaLabel: string.isRequired,
   checked: bool.isRequired,
   onChange: func,
+  forwardRef: ref,
 };

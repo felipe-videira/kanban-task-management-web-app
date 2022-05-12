@@ -4,9 +4,10 @@ import {
   string,
   image,
   color,
-  func,
+  func as funcWithType,
   arrayOf,
   oneOfType,
+  ref,
 } from "../../utils/validators";
 import { OptionButton, OptionIconContainer, OptionIcon } from "./styles";
 
@@ -38,6 +39,7 @@ function Option(props: InferProps<typeof Option.propTypes>) {
       background={props.color}
       aria-hidden={props.ariaHidden || false}
       disabled={!props.onClick || props.disabled || false}
+      ref={props.forwardRef}
     >
       <OptionIconContainer size={props.size}>
         <OptionIcon src={props.icon} alt={alt} size={props.size} />
@@ -50,11 +52,12 @@ Option.propTypes = {
   name: string.lenght(2).isRequired,
   icon: image.isRequired,
   color: oneOfType([color, arrayOf(color).lenght(2)]).isRequired,
-  onClick: func<OnClick>(),
+  onClick: funcWithType<OnClick>(),
   size: number.isRequired,
-  alt: oneOfType([string.lenght(2), func<GetAltText>()]).isRequired,
+  alt: oneOfType([string.lenght(2), funcWithType<GetAltText>()]).isRequired,
   ariaHidden: bool,
   disabled: bool,
+  forwardRef: ref,
 };
 
 export default Option;
