@@ -35,7 +35,6 @@ import { ArrowBackIcon } from "../../icons";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
 import isMobileDevice from "../../utils/isMobileDevice";
 import AriaLabel from "../../components/AriaLabel";
-import useFocus from "../../hooks/focus/useFocus";
 
 type GameOption = {
   name: string;
@@ -67,8 +66,6 @@ function Game() {
   const navigate = useNavigate();
   const { gameName } = useParams();
   const { t } = useTranslation();
-
-  const [focusRef, keyFocusRef] = useFocus();
 
   const [game, setGame, getGame] = useStateWithGetter<GameConfig>(null);
   const [listSize, setListSize] = useState<number>(0);
@@ -217,18 +214,18 @@ function Game() {
     <Container>
       {isMobileDevice() ? (
         <GoBackButton onClick={navigateToHome}>
+          <AriaLabel live="off">{t("ariaLabel.goBack")}</AriaLabel>
           <ArrowBackIcon />
         </GoBackButton>
       ) : null}
 
-      <Header tabIndex={0} role="region" ref={focusRef}>
+      <Header tabIndex={0} role="region">
         <Title>{t(`gameName.${game.name}`)}</Title>
 
-        <Score tabIndex={0} ref={keyFocusRef}>
+        <Score tabIndex={0}>
           <ScoreLabel>{t("label.score")}</ScoreLabel>
           <ScoreValue name="user" key={"user" + userScore} aria-hidden="false">
-            {/*TODO*/}
-            <AriaLabel live="off">Jogador</AriaLabel>
+            <AriaLabel live="off">{t("ariaLabel.userScore")}</AriaLabel>
             {userScore}
           </ScoreValue>
           <ScoreValue
@@ -236,13 +233,13 @@ function Game() {
             key={"house" + houseScore}
             aria-hidden="false"
           >
-            <AriaLabel live="off">Casa</AriaLabel>
+            <AriaLabel live="off">{t("ariaLabel.houseScore")}</AriaLabel>
             {houseScore}
           </ScoreValue>
         </Score>
       </Header>
 
-      <Stepper value={step} tabIndex={0} role="main" ref={keyFocusRef}>
+      <Stepper value={step} tabIndex={0} role="main">
         <Step value={1}>
           <Options size={listSize}>
             <AriaLabel live="off">{t("label.options")}</AriaLabel>
@@ -255,7 +252,6 @@ function Game() {
                 onClick: onOptionClick,
                 alt: (name: string) => t(`label.${name}`),
                 disabled: step !== 1,
-                forwardRef: focusRef,
               }}
               itemSize={optionSize}
               size={listSize}
@@ -294,18 +290,14 @@ function Game() {
 
               <Result aria-hidden="false">
                 <ResultMessage>{resultMessage}</ResultMessage>
-                <Button onClick={resetGame} ref={keyFocusRef}>
-                  {t("label.retryButton")}
-                </Button>
+                <Button onClick={resetGame}>{t("label.retryButton")}</Button>
               </Result>
             </ResultContainer>
           ) : null}
         </Step>
       </Stepper>
 
-      <RulesButton onClick={toggleRules} ref={focusRef}>
-        {t("label.rulesButton")}
-      </RulesButton>
+      <RulesButton onClick={toggleRules}>{t("label.rulesButton")}</RulesButton>
 
       <Modal
         show={showRulesModal}
@@ -318,7 +310,6 @@ function Game() {
             src={game.rules}
             alt={t(`ariaLabel.rules.${game.name}`)}
             tabIndex={0}
-            ref={focusRef}
           />
         </RulesImageContainer>
       </Modal>

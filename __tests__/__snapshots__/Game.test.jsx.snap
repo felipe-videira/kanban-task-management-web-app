@@ -357,7 +357,7 @@ exports[`Game should render correctly 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 100px;
+  padding: 12.5vh;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -527,6 +527,7 @@ exports[`Game should render correctly 1`] = `
                       live="off"
                     >
                       <div
+                        aria-label="ariaLabel.userScore"
                         aria-live="off"
                         style={
                           Object {
@@ -534,9 +535,7 @@ exports[`Game should render correctly 1`] = `
                             "position": "absolute",
                           }
                         }
-                      >
-                        Jogador
-                      </div>
+                      />
                     </AriaLabel>
                     0
                   </div>
@@ -555,6 +554,7 @@ exports[`Game should render correctly 1`] = `
                       live="off"
                     >
                       <div
+                        aria-label="ariaLabel.houseScore"
                         aria-live="off"
                         style={
                           Object {
@@ -562,9 +562,7 @@ exports[`Game should render correctly 1`] = `
                             "position": "absolute",
                           }
                         }
-                      >
-                        Casa
-                      </div>
+                      />
                     </AriaLabel>
                     0
                   </div>
@@ -602,6 +600,7 @@ exports[`Game should render correctly 1`] = `
                       live="off"
                     >
                       <div
+                        aria-label="label.options"
                         aria-live="off"
                         style={
                           Object {
@@ -609,9 +608,7 @@ exports[`Game should render correctly 1`] = `
                             "position": "absolute",
                           }
                         }
-                      >
-                        label.options
-                      </div>
+                      />
                     </AriaLabel>
                     <PolygonalList
                       ItemComponent={[Function]}
@@ -658,6 +655,7 @@ exports[`Game should render correctly 1`] = `
                       itemProps={
                         Object {
                           "alt": [Function],
+                          "disabled": false,
                           "onClick": [Function],
                           "size": 119.46666666666665,
                         }
@@ -720,6 +718,7 @@ exports[`Game should render correctly 1`] = `
                             itemProps={
                               Object {
                                 "alt": [Function],
+                                "disabled": false,
                                 "onClick": [Function],
                                 "size": 119.46666666666665,
                               }
@@ -773,6 +772,7 @@ exports[`Game should render correctly 1`] = `
                                           "hsl(230, 89%, 65%)",
                                         ]
                                       }
+                                      disabled={false}
                                       icon="src/images/icon-paper.svg"
                                       name="paper"
                                       onClick={[Function]}
@@ -792,7 +792,7 @@ exports[`Game should render correctly 1`] = `
                                             "hsl(230, 89%, 65%)",
                                           ]
                                         }
-                                        clickable={true}
+                                        disabled={false}
                                         id="paper"
                                         onClick={[Function]}
                                         size={119.46666666666665}
@@ -879,6 +879,7 @@ exports[`Game should render correctly 1`] = `
                                   itemProps={
                                     Object {
                                       "alt": [Function],
+                                      "disabled": false,
                                       "onClick": [Function],
                                       "size": 119.46666666666665,
                                     }
@@ -932,6 +933,7 @@ exports[`Game should render correctly 1`] = `
                                                 "hsl(40, 84%, 53%)",
                                               ]
                                             }
+                                            disabled={false}
                                             icon="src/images/icon-scissors.svg"
                                             name="scissors"
                                             onClick={[Function]}
@@ -951,7 +953,7 @@ exports[`Game should render correctly 1`] = `
                                                   "hsl(40, 84%, 53%)",
                                                 ]
                                               }
-                                              clickable={true}
+                                              disabled={false}
                                               id="scissors"
                                               onClick={[Function]}
                                               size={119.46666666666665}
@@ -1038,6 +1040,7 @@ exports[`Game should render correctly 1`] = `
                                         itemProps={
                                           Object {
                                             "alt": [Function],
+                                            "disabled": false,
                                             "onClick": [Function],
                                             "size": 119.46666666666665,
                                           }
@@ -1091,6 +1094,7 @@ exports[`Game should render correctly 1`] = `
                                                       "hsl(349, 70%, 56%)",
                                                     ]
                                                   }
+                                                  disabled={false}
                                                   icon="src/images/icon-rock.svg"
                                                   name="rock"
                                                   onClick={[Function]}
@@ -1110,7 +1114,7 @@ exports[`Game should render correctly 1`] = `
                                                         "hsl(349, 70%, 56%)",
                                                       ]
                                                     }
-                                                    clickable={true}
+                                                    disabled={false}
                                                     id="rock"
                                                     onClick={[Function]}
                                                     size={119.46666666666665}
@@ -1190,7 +1194,7 @@ exports[`Game should render correctly 1`] = `
         </Styled(styled.button)>
         <Modal
           closeButtonAriaLabel="ariaLabel.close"
-          onClick={[Function]}
+          onChange={[Function]}
           show={false}
           title="label.rulesModal"
         />

@@ -3,7 +3,7 @@ import { bool, func, InferProps, string } from "prop-types";
 import { useCallback } from "react";
 import { ref } from "../utils/validators";
 
-const Label = styled.label`
+export const ToggleButtonLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +14,7 @@ const Label = styled.label`
   width: fit-content;
 `;
 
-const Button = styled.input.attrs(() => ({
+export const ToggleButtonInput = styled.input.attrs(() => ({
   type: "checkbox",
 }))`
   appearance: none;
@@ -68,9 +68,9 @@ export default function ToggleButton(
     [props.onChange]
   );
   return (
-    <Label aria-label={props.ariaLabel}>
+    <ToggleButtonLabel aria-label={props.ariaLabel}>
       {props.label}
-      <Button
+      <ToggleButtonInput
         role="switch"
         checked={props.checked}
         ref={props.forwardRef}
@@ -81,7 +81,7 @@ export default function ToggleButton(
           }
         }}
       />
-    </Label>
+    </ToggleButtonLabel>
   );
 }
 

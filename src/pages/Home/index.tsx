@@ -6,7 +6,6 @@ import styled from "styled-components/macro";
 import getFontSize from "../../utils/getFontSize";
 import { mobile } from "../../utils/breakpoints";
 import AriaLabel from "../../components/AriaLabel";
-import useFocus from "../../hooks/focus/useFocus";
 
 const Container = styled.div`
   display: flex;
@@ -42,18 +41,15 @@ function Home() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [ref, keyRef] = useFocus();
-
   return (
     <Container>
-      <List tabIndex={0} role="navigation" ref={ref}>
+      <List tabIndex={0} role="navigation">
         <AriaLabel live="off">{t("label.gameList")}</AriaLabel>
         {gameConfig.map((game) => (
           <SelectGameButton
             outlined
             key={game.name}
             onClick={() => navigate(`/${game.name}`)}
-            ref={keyRef}
           >
             {t(`gameName.${game.name}`)}
           </SelectGameButton>

@@ -19,7 +19,8 @@
         "house": "Casa",
         "options": "Escolha uma opção",
         "gameList": "Escolha um jogo",
-        "animationToggle": "Animações"
+        "animationToggle": "Animações",
+        "useBrowserFont": "Usar fonte do navegador"
     },
     "ariaLabel": {
         "score": "Placar Jogador {{userScore}} Casa {{houseScore}}",
@@ -28,9 +29,13 @@
             "lizard-spock": "Pedra esmaga Tesoura, Tesoura corta Papel, Papel cobre Pedra, Pedra esmaga Lagarto, Lagarto envenena Spock, Spock esmaga Tesoura, Tesoura decapita Lagarto, Lagarto come Papel, Papel refuta Spock e Spock vaporiza Pedra"
         },
         "animationToggle": "Ligar/Desligar Animações",
+        "useBrowserFont": "Ligar/Desligar Usar fonte do navegador",
         "close": "Fechar regras",
-        "touchInstructions": "touchInstructions to do"
-
+        "touchInstructions": "touchInstructions to do",
+        "userScore": "Jogador",
+        "houseScore": "Casa",
+        "goBack": "Voltar",
+        "settings": "Configurações"
     },
     "message": {
         "victory": "Você Ganhou",

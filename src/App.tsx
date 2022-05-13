@@ -2,17 +2,31 @@ import "./App.scss";
 import Routes from "./Routes";
 import styled from "styled-components/macro";
 import { useEffect, useRef, useState } from "react";
-import ToggleButton from "./components/ToggleButton";
+import ToggleButton, {
+  ToggleButtonInput,
+  ToggleButtonLabel,
+} from "./components/ToggleButton";
 import { useTranslation } from "react-i18next";
 import { mobile } from "./utils/breakpoints";
 import isMobileDevice from "./utils/isMobileDevice";
 import useTouch from "./hooks/useTouch";
-import useFocusProvider from "./hooks/focus/useFocusProvider";
+import useFocus from "./hooks/useFocus";
+import { fadeIn } from "./utils/keyframes";
+import { SettingsIcon } from "./icons";
 
-const AppContainer = styled.div<{ animationsEnabled: boolean }>`
+const AppContainer = styled.div<{
+  animationsEnabled: boolean;
+  useBrowserFont: boolean;
+}>`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  ${(props) =>
+    !props.useBrowserFont
+      ? `
+      font-family: "Barlow Semi Condensed", sans-serif;`
+      : ""}
 
   ${(props) =>
     !props.animationsEnabled
@@ -35,14 +49,53 @@ const AriaTouchInstructionsContainer = styled.div`
   top: -100%;
 `;
 
-const AnimationToggleContainer = styled.div`
-  z-index: 1;
+const UserSettingsList = styled.div`
+  position: absolute;
+  right: 1rem;
+  flex-direction: column;
+  align-items: flex-end;
+  background: ${(props) => props.theme.primary};
+  border-radius: 5px;
+  color: ${(props) => props.theme.dark};
+  z-index: 9999;
+  display: none;
+  animation: ${fadeIn} 0.2s linear 0s 1;
+  animation-fill-mode: both;
+
+  ${mobile} {
+    right: 0.5rem;
+  }
+`;
+
+const UserSettingsContainer = styled.div`
   padding: 1rem;
-  display: flex;
-  justify-content: flex-end;
+  text-align: right;
 
   ${mobile} {
     padding: 0.5rem;
+  }
+
+  label:not(${ToggleButtonLabel}) {
+    text-transform: uppercase;
+
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      fill: ${(props) => props.theme.primary};
+    }
+  }
+
+  ${ToggleButtonLabel} {
+    margin: 1rem;
+  }
+
+  input[type="checkbox"]:not(${ToggleButtonInput}) {
+    display: none;
+  }
+
+  input[type="checkbox"]:not(${ToggleButtonInput}):checked
+    + ${UserSettingsList} {
+    display: flex;
   }
 `;
 
@@ -63,21 +116,13 @@ const Attribution = styled.div`
 function App() {
   const { t } = useTranslation();
 
-  const [
-    FocusProvider,
-    nextFocus,
-    previousFocus,
-    nextKeyFocus,
-    previousKeyFocus,
-    clickFocused,
-    focusRefList,
-    keyFocusRefList,
-    focusedElementRef,
-  ] = useFocusProvider();
+  const [nextFocus, previousFocus] = useFocus();
 
   const appRef = useRef<HTMLDivElement>(null);
+  const currentFocused = useRef<HTMLElement>();
 
   const [animationsEnabled, setAnimationsEnabled] = useState<boolean>(true);
+  const [useBrowserFont, setUseBrowserFont] = useState<boolean>(false);
   const [ariaTouchInstructionsText, setAriaTouchInstructionsText] =
     useState<string>("");
 
@@ -85,34 +130,33 @@ function App() {
     setAnimationsEnabled(!animationsEnabled);
   }
 
+  function toggleUseBrowserFont() {
+    setUseBrowserFont(!useBrowserFont);
+  }
+
   function screenFullScan() {
     appRef.current?.focus();
   }
 
-  useTouch(
-    ({ count, doubleTap, swipe, swipeDirection }) => {
-      if (doubleTap && count === 2) {
-        screenFullScan();
-      }
+  useTouch(({ count, doubleTap, swipe, swipeDirection, event }) => {
+    if (doubleTap && count === 2) {
+      screenFullScan();
+    }
 
-      if (swipe && (swipeDirection.x === 0 || swipeDirection.y === 0)) {
-        if (swipeDirection.x === 1) {
-          nextFocus();
-        } else if (swipeDirection.x === -1) {
-          previousFocus();
-        } else if (swipeDirection.y === 1) {
-          nextKeyFocus();
-        } else if (swipeDirection.y === -1) {
-          previousKeyFocus();
-        }
+    if (swipe) {
+      if (swipeDirection.x === 1) {
+        currentFocused.current = nextFocus();
+      } else if (swipeDirection.x === -1) {
+        currentFocused.current = previousFocus();
       }
+    }
 
-      if (doubleTap) {
-        clickFocused();
-      }
-    },
-    [focusedElementRef.current, focusRefList.current, keyFocusRefList.current]
-  );
+    if (doubleTap && currentFocused.current) {
+      event.preventDefault();
+      currentFocused.current.click();
+      currentFocused.current.focus();
+    }
+  });
 
   useEffect(() => {
     if (isMobileDevice()) {
@@ -121,7 +165,11 @@ function App() {
   }, []);
 
   return (
-    <AppContainer animationsEnabled={animationsEnabled} ref={appRef}>
+    <AppContainer
+      animationsEnabled={animationsEnabled}
+      useBrowserFont={useBrowserFont}
+      ref={appRef}
+    >
       <AriaTouchInstructionsContainer
         aria-live="polite"
         aria-atomic="true"
@@ -131,18 +179,32 @@ function App() {
         {ariaTouchInstructionsText}
       </AriaTouchInstructionsContainer>
 
-      <AnimationToggleContainer>
-        <ToggleButton
-          label={t("label.animationToggle")}
-          ariaLabel={t("ariaLabel.animationToggle")}
-          checked={animationsEnabled}
-          onChange={toggleAnimations}
-        />
-      </AnimationToggleContainer>
+      <UserSettingsContainer>
+        <label
+          htmlFor="check"
+          tabIndex={0}
+          aria-label={t("ariaLabel.settings")}
+        >
+          <SettingsIcon />
+        </label>
+        <input type="checkbox" id="check" />
+        <UserSettingsList>
+          <ToggleButton
+            label={t("label.useBrowserFont")}
+            ariaLabel={t("ariaLabel.useBrowserFont")}
+            checked={useBrowserFont}
+            onChange={toggleUseBrowserFont}
+          />
+          <ToggleButton
+            label={t("label.animationToggle")}
+            ariaLabel={t("ariaLabel.animationToggle")}
+            checked={animationsEnabled}
+            onChange={toggleAnimations}
+          />
+        </UserSettingsList>
+      </UserSettingsContainer>
 
-      <FocusProvider>
-        <Routes />
-      </FocusProvider>
+      <Routes />
 
       <Attribution
         tabIndex={0}

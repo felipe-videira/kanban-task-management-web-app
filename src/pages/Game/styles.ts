@@ -5,6 +5,7 @@ import { OptionButton } from "../../components/Option/styles";
 import _Stepper from "../../components/Stepper";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
+import { fadeIn } from "../../utils/keyframes";
 
 const resultPropTypes = {
   showHouseChoiceDelay: number.isRequired,
@@ -31,15 +32,7 @@ type ResultProps = {
 } & InferProps<typeof resultPropTypes> &
   ResultChoiceProps;
 
-export const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }`;
-
-const growAndfadeIn = keyframes`
+export const growAndfadeIn = keyframes`
   0%  {
   	opacity: 0;
     transform: scale(0);
@@ -136,6 +129,12 @@ export const GoBackButton = styled(Button).attrs(() => ({
   }
 
   ${phone} {
+    margin: 5%;
+    height: 10%;
+    width: 10%;
+  }
+
+  ${phoneSm} {
     margin: 5%;
     height: 10%;
     width: 10%;
@@ -296,7 +295,7 @@ export const Options = styled.div<OptionsProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 100px;
+    padding: 12.5vh;
     margin: 0 auto;
     overflow: hidden;
 `}
@@ -422,7 +421,6 @@ export const Result = styled.div`
   ${mobile} {
     animation-name: ${fadeIn};
     margin 0 5%;
-  	opacity: 0;
     order: 3;
     width: 60%;
   }

@@ -8,13 +8,14 @@ type Touch = {
     x: 1 | 0 | -1;
     y: 1 | 0 | -1;
   };
+  event: TouchEvent;
 };
 
 const MIN_DIST_TO_SWIPE = 50;
 
 export default function useTouch(
   onTouch: (touch: Touch) => void,
-  deps: DependencyList
+  deps?: DependencyList
 ) {
   const touchCount = useRef(0);
   const swipeDir = useRef({ x: 0, y: 0 });
@@ -46,12 +47,13 @@ export default function useTouch(
     };
   }
 
-  function handleTouchEnd() {
+  function handleTouchEnd(event: TouchEvent) {
     onTouch({
       count: touchCount.current,
       doubleTap: doubleTapStarted.current,
       swipe: swipeStarted.current,
       swipeDirection: swipeDir.current as Touch["swipeDirection"],
+      event,
     });
 
     if (!doubleTapStarted.current) {
