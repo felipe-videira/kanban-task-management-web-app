@@ -58,7 +58,6 @@ const UserSettingsList = styled.div`
   border-radius: 5px;
   color: ${(props) => props.theme.dark};
   z-index: 9999;
-  display: none;
   animation: ${fadeIn} 0.2s linear 0s 1;
   animation-fill-mode: both;
 
@@ -90,6 +89,10 @@ const UserSettingsContainer = styled.div`
   }
 
   input[type="checkbox"]:not(${ToggleButtonInput}) {
+    display: none;
+  }
+
+  ${UserSettingsList} {
     display: none;
   }
 
@@ -188,7 +191,7 @@ function App() {
         >
           <SettingsIcon />
         </label>
-        <input type="checkbox" id="check" />
+        <input type="checkbox" id="check" tabIndex={-1} />
         <UserSettingsList>
           <ToggleButton
             label={t("label.useBrowserFont")}

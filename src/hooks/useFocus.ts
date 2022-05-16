@@ -5,22 +5,31 @@ export default function useDOMFocus(): [
   previousFocus: () => HTMLElement,
   getFocused: () => HTMLElement
 ] {
-  function switchFocus(direction: -1 | 1) {
+  function switchFocus(direction: -1 | 1, currentIndex = -1): HTMLElement {
     const focusableElements = Array.from(
       document.querySelectorAll(
-        'a[href], button:not([disabled]), input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+        'a[href]:not([tabindex="-1"]), button:not([tabindex="-1"]):not([disabled]), input:not([tabindex="-1"]):not([disabled]), textarea:not([tabindex="-1"]):not([disabled]), select:not([tabindex="-1"]):not([disabled]), details, [tabindex]:not([tabindex="-1"])'
       )
     );
 
-    const currentIndex = focusableElements.findIndex(
-      (el) => el === document.activeElement
+    if (currentIndex < 0) {
+      currentIndex = focusableElements.findIndex(
+        (el) => el === document.activeElement
+      );
+    }
+    const nextIndex = clamp(
+      currentIndex + direction,
+      0,
+      focusableElements.length - 1
     );
 
-    const nextEl = focusableElements[
-      clamp(currentIndex + direction, 0, focusableElements.length - 1)
-    ] as HTMLElement;
+    const nextEl = focusableElements[nextIndex] as HTMLElement;
 
     nextEl.focus();
+
+    if (document.activeElement !== nextEl) {
+      return switchFocus(direction, nextIndex);
+    }
 
     return nextEl;
   }
