@@ -13,6 +13,7 @@ import useTouch from "./hooks/useTouch";
 import useFocus from "./hooks/useFocus";
 import { fadeIn } from "./utils/keyframes";
 import { SettingsIcon } from "./icons";
+import clickOnEnter from "./utils/clickOnEnter";
 
 const AppContainer = styled.div<{
   animationsEnabled: boolean;
@@ -24,8 +25,7 @@ const AppContainer = styled.div<{
 
   ${(props) =>
     !props.useBrowserFont
-      ? `
-      font-family: "Barlow Semi Condensed", sans-serif;`
+      ? 'font-family: "Barlow Semi Condensed", sans-serif;'
       : ""}
 
   ${(props) =>
@@ -38,8 +38,8 @@ const AppContainer = styled.div<{
       : ""}
 
   *:focus {
-    outline: 3px solid #fff;
-    box-shadow: 2px 2px 20px #fff;
+    outline: 3px solid orange;
+    box-shadow: 2px 2px 15px 2px orange;
   }
 `;
 
@@ -184,6 +184,7 @@ function App() {
           htmlFor="check"
           tabIndex={0}
           aria-label={t("ariaLabel.settings")}
+          onKeyDown={clickOnEnter}
         >
           <SettingsIcon />
         </label>
