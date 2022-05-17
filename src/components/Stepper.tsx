@@ -36,6 +36,7 @@ const Stepper = styled.div<InferProps<typeof proptypes>>`
     align-items: center;
     justify-content: center;
 
+
     ${Step}[value="${props.value}"] {
       display: block;
     }

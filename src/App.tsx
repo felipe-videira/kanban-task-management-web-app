@@ -1,7 +1,7 @@
 import "./App.scss";
 import Routes from "./Routes";
 import styled from "styled-components/macro";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ToggleButton, {
   ToggleButtonInput,
   ToggleButtonLabel,
@@ -14,6 +14,14 @@ import useFocus from "./hooks/useFocus";
 import { fadeIn } from "./utils/keyframes";
 import { SettingsIcon } from "./icons";
 import clickOnEnter from "./utils/clickOnEnter";
+import Modal from "./components/Modal";
+import { ModalProvider } from "./hooks/useModal";
+import { SettingsProvider } from "./providers/settings";
+import {
+  get as getSettings,
+  save as saveSettings,
+  Settings,
+} from "./services/settings";
 
 const AppContainer = styled.div<{
   animationsEnabled: boolean;
@@ -124,17 +132,57 @@ function App() {
   const appRef = useRef<HTMLDivElement>(null);
   const currentFocused = useRef<HTMLElement>();
 
-  const [animationsEnabled, setAnimationsEnabled] = useState<boolean>(true);
-  const [useBrowserFont, setUseBrowserFont] = useState<boolean>(false);
-  const [ariaTouchInstructionsText, setAriaTouchInstructionsText] =
+  const [settings, setSettings] = useState<Settings>(getSettings());
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalTitle, setModalTitle] = useState<string>("");
+  const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
+  const [ariaTouchInstructions, setAriaTouchInstructions] =
     useState<string>("");
 
+  function toggleModal({
+    title,
+    children,
+  }: {
+    title: string;
+    children: React.ReactNode;
+  }) {
+    const newValue = !showModal;
+
+    if (newValue) {
+      setModalTitle(title);
+      setModalChildren(children);
+    } else {
+      setModalTitle("");
+      setModalChildren(null);
+    }
+
+    setShowModal(newValue);
+
+    return newValue;
+  }
+
+  function updateSettings(values: {
+    animationsEnabled?: boolean;
+    useBrowserFont?: boolean;
+  }) {
+    const newSettings = {
+      ...settings,
+      ...values,
+    };
+    setSettings(newSettings);
+    saveSettings(newSettings);
+  }
+
   function toggleAnimations() {
-    setAnimationsEnabled(!animationsEnabled);
+    updateSettings({
+      animationsEnabled: !settings.animationsEnabled,
+    });
   }
 
   function toggleUseBrowserFont() {
-    setUseBrowserFont(!useBrowserFont);
+    updateSettings({
+      useBrowserFont: !settings.useBrowserFont,
+    });
   }
 
   function screenFullScan() {
@@ -163,14 +211,14 @@ function App() {
 
   useEffect(() => {
     if (isMobileDevice()) {
-      setAriaTouchInstructionsText(t("ariaLabel.touchInstructions"));
+      setAriaTouchInstructions(t("ariaLabel.touchInstructions"));
     }
   }, []);
 
   return (
     <AppContainer
-      animationsEnabled={animationsEnabled}
-      useBrowserFont={useBrowserFont}
+      animationsEnabled={settings.animationsEnabled}
+      useBrowserFont={settings.useBrowserFont}
       ref={appRef}
     >
       <AriaTouchInstructionsContainer
@@ -179,7 +227,7 @@ function App() {
         aria-hidden="false"
         role="alert"
       >
-        {ariaTouchInstructionsText}
+        {ariaTouchInstructions}
       </AriaTouchInstructionsContainer>
 
       <UserSettingsContainer>
@@ -196,25 +244,38 @@ function App() {
           <ToggleButton
             label={t("label.useBrowserFont")}
             ariaLabel={t("ariaLabel.useBrowserFont")}
-            checked={useBrowserFont}
+            checked={settings.useBrowserFont}
             onChange={toggleUseBrowserFont}
           />
           <ToggleButton
             label={t("label.animationToggle")}
             ariaLabel={t("ariaLabel.animationToggle")}
-            checked={animationsEnabled}
+            checked={settings.animationsEnabled}
             onChange={toggleAnimations}
           />
         </UserSettingsList>
       </UserSettingsContainer>
 
-      <Routes />
+      <SettingsProvider value={settings}>
+        <ModalProvider value={{ toggle: toggleModal }}>
+          <Routes />
+        </ModalProvider>
+      </SettingsProvider>
 
       <Attribution
         tabIndex={0}
         role="navigation"
         dangerouslySetInnerHTML={{ __html: t("message.attribution") }}
       />
+
+      <Modal
+        show={showModal}
+        onChange={toggleModal}
+        title={modalTitle}
+        closeButtonAriaLabel={t("ariaLabel.close")}
+      >
+        {modalChildren}
+      </Modal>
     </AppContainer>
   );
 }

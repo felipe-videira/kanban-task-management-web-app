@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import clamp from "../../utils/clamp";
@@ -35,6 +35,8 @@ import { ArrowBackIcon } from "../../icons";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
 import isMobileDevice from "../../utils/isMobileDevice";
 import AriaLabel from "../../components/AriaLabel";
+import useModal from "../../hooks/useModal";
+import { SettingsContext } from "../../providers/settings";
 
 type GameOption = {
   name: string;
@@ -67,6 +69,9 @@ function Game() {
   const { gameName } = useParams();
   const { t } = useTranslation();
 
+  const { animationsEnabled } = useContext(SettingsContext);
+  const toggleModal = useModal();
+
   const [game, setGame, getGame] = useStateWithGetter<GameConfig>(null);
   const [listSize, setListSize] = useState<number>(0);
   const [optionSize, setOptionSize] = useState<number>(0);
@@ -78,8 +83,10 @@ function Game() {
   const [houseChoice, setHouseChoice] = useState<GameOption>(null);
   const [userWins, setUserWins] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
-  const [showRulesModal, setShowRulesModal] = useState<boolean>(false);
   const [resultMessage, setResultMessage] = useState<string>("");
+  const [showHouseChoice, setShowHouseChoice] =
+    useState<boolean>(animationsEnabled);
+  const [showResult, setShowResult] = useState<boolean>(animationsEnabled);
 
   function getSize(
     optionsLength: number,
@@ -124,11 +131,22 @@ function Game() {
     });
   }
 
+  function displayResult() {
+    if (!animationsEnabled && game && game.settings.showResultDelay > 0) {
+      setTimeout(() => {
+        setShowResult(true);
+        setShowHouseChoice(true);
+      }, game.settings.showResultDelay * 1000);
+    } else {
+      setShowHouseChoice(true);
+      setShowResult(true);
+    }
+  }
+
   function onOptionClick(name: string) {
-    const [isWinner, userOption, houseOption] = playMatch(
-      name,
-      game?.options || []
-    );
+    if (!game) return;
+
+    const [isWinner, userOption, houseOption] = playMatch(name, game.options);
 
     setUserChoice(userOption);
     setHouseChoice(houseOption);
@@ -136,7 +154,7 @@ function Game() {
     setResultMessage(t(isWinner ? "message.victory" : "message.defeat"));
     setStep(2);
 
-    if (game && game.settings.updateScoreDelay > 0) {
+    if (game.settings.updateScoreDelay > 0) {
       setTimeout(() => {
         incrementScore(isWinner);
       }, game.settings.updateScoreDelay * 1000);
@@ -146,7 +164,20 @@ function Game() {
   }
 
   function toggleRules() {
-    setShowRulesModal(!showRulesModal);
+    if (!game) return;
+
+    toggleModal({
+      title: t("label.rulesModal"),
+      children: () => (
+        <RulesImageContainer>
+          <RulesImage
+            src={game.rules}
+            alt={t(`ariaLabel.rules.${game.name}`)}
+            tabIndex={0}
+          />
+        </RulesImageContainer>
+      ),
+    });
   }
 
   function setSizes(selectedGame = getGame()) {
@@ -169,6 +200,8 @@ function Game() {
     setUserChoice(null);
     setHouseChoice(null);
     setUserWins(false);
+    setShowResult(false);
+    setShowHouseChoice(false);
   }
 
   function setupGame(): GameConfig | undefined {
@@ -189,6 +222,15 @@ function Game() {
   function navigateToHome() {
     navigate("/");
   }
+
+  useEffect(() => {
+    setShowResult(animationsEnabled);
+    setShowHouseChoice(animationsEnabled);
+
+    if (step === 2) {
+      displayResult();
+    }
+  }, [animationsEnabled, step]);
 
   useEffect(() => {
     const selectedGame = setupGame();
@@ -280,39 +322,35 @@ function Game() {
 
               <ResultHouseChoice size={resultSize}>
                 <ResultChoiceLabel>{t("label.houseChoice")}</ResultChoiceLabel>
-                <Option
-                  {...houseChoice}
-                  size={resultSize}
-                  alt={t(`label.${houseChoice.name}`)}
-                  ariaHidden={false}
-                />
+                {showHouseChoice ? (
+                  <Option
+                    {...houseChoice}
+                    size={resultSize}
+                    alt={t(`label.${houseChoice.name}`)}
+                    ariaHidden={false}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: `${resultSize}px`,
+                      height: `${resultSize}px`,
+                    }}
+                  />
+                )}
               </ResultHouseChoice>
 
-              <Result aria-hidden="false">
-                <ResultMessage>{resultMessage}</ResultMessage>
-                <Button onClick={resetGame}>{t("label.retryButton")}</Button>
-              </Result>
+              {showResult ? (
+                <Result aria-hidden="false">
+                  <ResultMessage>{resultMessage}</ResultMessage>
+                  <Button onClick={resetGame}>{t("label.retryButton")}</Button>
+                </Result>
+              ) : null}
             </ResultContainer>
           ) : null}
         </Step>
       </Stepper>
 
       <RulesButton onClick={toggleRules}>{t("label.rulesButton")}</RulesButton>
-
-      <Modal
-        show={showRulesModal}
-        onChange={toggleRules}
-        title={t("label.rulesModal")}
-        closeButtonAriaLabel={t("ariaLabel.close")}
-      >
-        <RulesImageContainer>
-          <RulesImage
-            src={game.rules}
-            alt={t(`ariaLabel.rules.${game.name}`)}
-            tabIndex={0}
-          />
-        </RulesImageContainer>
-      </Modal>
     </Container>
   ) : null;
 }

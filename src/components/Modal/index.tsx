@@ -36,24 +36,26 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
       onClick={props.onChange}
       animationDuration={ANIMATION_DURATION}
     >
-      <ModalContainer
-        onClick={onContainerClick}
-        role="dialog"
-        tabIndex={0}
-        onBlur={props.onChange}
-      >
-        <ModalHeader>
-          {props.title}
-          <ModalCloseButton
-            type="button"
-            aria-label={props.closeButtonAriaLabel}
-            onClick={props.onChange}
-          >
-            <CloseIcon />
-          </ModalCloseButton>
-        </ModalHeader>
-        {props.show ? props.children : null}
-      </ModalContainer>
+      {props.show ? (
+        <ModalContainer
+          onClick={onContainerClick}
+          role="dialog"
+          tabIndex={0}
+          onBlur={props.onChange}
+        >
+          <ModalHeader>
+            {props.title}
+            <ModalCloseButton
+              type="button"
+              aria-label={props.closeButtonAriaLabel}
+              onClick={props.onChange}
+            >
+              <CloseIcon />
+            </ModalCloseButton>
+          </ModalHeader>
+          {props.children}
+        </ModalContainer>
+      ) : null}
     </ModalOverlay>
   ) : null;
 }

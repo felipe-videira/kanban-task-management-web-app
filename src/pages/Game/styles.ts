@@ -2,7 +2,8 @@ import { InferProps, number } from "prop-types";
 import styled, { keyframes, css } from "styled-components/macro";
 import Button from "../../components/Button";
 import { OptionButton } from "../../components/Option/styles";
-import _Stepper from "../../components/Stepper";
+import { SCALE_ROTATION_45DEG } from "../../components/PolygonalList/constants";
+import _Stepper, { Step } from "../../components/Stepper";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
 import { fadeIn } from "../../utils/keyframes";
@@ -284,18 +285,23 @@ export const Stepper = styled(_Stepper)`
   z-index: 1;
 
   ${mobile} {
-    min-height: 60vh;
+    height: 50vh;
+  }
+
+  ${Step}[value="1"][value="${(props) => props.value}"] {
+    display: flex;
+    align-items: center;
   }
 `;
 
 export const Options = styled.div<OptionsProps>`
   ${(props) => `
-    height: ${props.size}px;
-    width: ${props.size}px;
+    height: ${props.size * SCALE_ROTATION_45DEG}px;
+    width: ${props.size * SCALE_ROTATION_45DEG}px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12.5vh;
+    padding: 0;
     margin: 0 auto;
     overflow: hidden;
 `}
@@ -447,7 +453,7 @@ export const ResultContainer = styled.div<ResultProps>`
     width: 100%;
     overflow-x: hidden;
     height: 100%;
-    min-height: 60vh;
+    height: 50vh;
     flex-wrap: wrap;
     align-items: center;
   }

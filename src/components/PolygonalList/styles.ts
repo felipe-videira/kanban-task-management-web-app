@@ -1,8 +1,9 @@
 import styled from "styled-components/macro";
-
-const SCALE_ROTATION_45DEG = 1.4142;
-const POINTING_UP_ROTATION = 45;
-const POINTING_DOWN_ROTATION = 225;
+import {
+  POINTING_DOWN_ROTATION,
+  POINTING_UP_ROTATION,
+  SCALE_ROTATION_45DEG,
+} from "./constants";
 
 type ContainerProps = {
   readonly size: number;

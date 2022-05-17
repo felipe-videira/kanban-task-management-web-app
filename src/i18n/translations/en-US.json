@@ -31,7 +31,7 @@
         "animationToggle": "Toggle Animations",
         "useBrowserFont": "Toggle Use Browser Font",
         "close": "Close rules",
-        "touchInstructions": "Swipe horizontally to select items on the page, double tap to select",
+        "touchInstructions": "Swipe horizontally to navigate through the items on the page, double tap to select",
         "userScore": "Player",
         "houseScore": "House",
         "goBack": "Go Back",
