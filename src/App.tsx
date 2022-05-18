@@ -1,17 +1,11 @@
-import "./App.scss";
 import Routes from "./Routes";
-import styled from "styled-components/macro";
 import React, { useEffect, useRef, useState } from "react";
-import ToggleButton, {
-  ToggleButtonInput,
-  ToggleButtonLabel,
-} from "./components/ToggleButton";
+import ToggleButton from "./components/ToggleButton";
+import { useNavigate, useMatch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { mobile } from "./utils/breakpoints";
 import isMobileDevice from "./utils/isMobileDevice";
 import useTouch from "./hooks/useTouch";
 import useFocus from "./hooks/useFocus";
-import { fadeIn } from "./utils/keyframes";
 import { SettingsIcon } from "./icons";
 import clickOnEnter from "./utils/clickOnEnter";
 import Modal from "./components/Modal";
@@ -22,110 +16,22 @@ import {
   save as saveSettings,
   Settings,
 } from "./services/settings";
-
-const AppContainer = styled.div<{
-  animationsEnabled: boolean;
-  useBrowserFont: boolean;
-}>`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  ${(props) =>
-    !props.useBrowserFont
-      ? 'font-family: "Barlow Semi Condensed", sans-serif;'
-      : ""}
-
-  ${(props) =>
-    !props.animationsEnabled
-      ? `
-    *, *:after, *:before {
-      animation-name: none !important;
-      transition: none !important; 
-    }`
-      : ""}
-
-  *:focus {
-    outline: 3px solid orange;
-    box-shadow: 2px 2px 15px 2px orange;
-  }
-`;
-
-const AriaTouchInstructionsContainer = styled.div`
-  position: absolute;
-  background-color: transparent;
-  top: -100%;
-`;
-
-const UserSettingsList = styled.div`
-  position: absolute;
-  right: 1rem;
-  flex-direction: column;
-  align-items: flex-end;
-  background: ${(props) => props.theme.primary};
-  border-radius: 5px;
-  color: ${(props) => props.theme.dark};
-  z-index: 9999;
-  animation: ${fadeIn} 0.2s linear 0s 1;
-  animation-fill-mode: both;
-
-  ${mobile} {
-    right: 0.5rem;
-  }
-`;
-
-const UserSettingsContainer = styled.div`
-  padding: 1rem;
-  text-align: right;
-
-  ${mobile} {
-    padding: 0.5rem;
-  }
-
-  label:not(${ToggleButtonLabel}) {
-    text-transform: uppercase;
-
-    svg {
-      width: 2.5rem;
-      height: 2.5rem;
-      fill: ${(props) => props.theme.primary};
-    }
-  }
-
-  ${ToggleButtonLabel} {
-    margin: 1rem;
-  }
-
-  input[type="checkbox"]:not(${ToggleButtonInput}) {
-    display: none;
-  }
-
-  ${UserSettingsList} {
-    display: none;
-  }
-
-  input[type="checkbox"]:not(${ToggleButtonInput}):checked
-    + ${UserSettingsList} {
-    display: flex;
-  }
-`;
-
-const Attribution = styled.div`
-  font-size: 0.75rem;
-  text-align: center;
-  bottom: 10px;
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  z-index: -1;
-
-  a {
-    color: hsl(228, 45%, 44%);
-  }
-`;
+import { ArrowBackIcon } from "./icons";
+import AriaLabel from "./components/AriaLabel";
+import {
+  AppContainer,
+  AriaTouchInstructionsContainer,
+  Toolbar,
+  GoBackButton,
+  UserSettingsContainer,
+  UserSettingsList,
+  Attribution,
+} from "./App.styles";
 
 function App() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const inHomePage = useMatch("/");
 
   const [nextFocus, previousFocus] = useFocus();
 
@@ -189,6 +95,10 @@ function App() {
     appRef.current?.focus();
   }
 
+  function goBack() {
+    navigate(-1);
+  }
+
   useTouch(({ count, doubleTap, swipe, swipeDirection, event }) => {
     if (doubleTap && count === 2) {
       screenFullScan();
@@ -230,31 +140,40 @@ function App() {
         {ariaTouchInstructions}
       </AriaTouchInstructionsContainer>
 
-      <UserSettingsContainer>
-        <label
-          htmlFor="check"
-          tabIndex={0}
-          aria-label={t("ariaLabel.settings")}
-          onKeyDown={clickOnEnter}
-        >
-          <SettingsIcon />
-        </label>
-        <input type="checkbox" id="check" tabIndex={-1} />
-        <UserSettingsList>
-          <ToggleButton
-            label={t("label.useBrowserFont")}
-            ariaLabel={t("ariaLabel.useBrowserFont")}
-            checked={settings.useBrowserFont}
-            onChange={toggleUseBrowserFont}
-          />
-          <ToggleButton
-            label={t("label.animationToggle")}
-            ariaLabel={t("ariaLabel.animationToggle")}
-            checked={settings.animationsEnabled}
-            onChange={toggleAnimations}
-          />
-        </UserSettingsList>
-      </UserSettingsContainer>
+      <Toolbar>
+        <UserSettingsContainer>
+          <label
+            htmlFor="check"
+            tabIndex={0}
+            aria-label={t("ariaLabel.settings")}
+            onKeyDown={clickOnEnter}
+          >
+            <SettingsIcon />
+          </label>
+          <input type="checkbox" id="check" tabIndex={-1} />
+          <UserSettingsList>
+            <ToggleButton
+              label={t("label.useBrowserFont")}
+              ariaLabel={t("ariaLabel.useBrowserFont")}
+              checked={settings.useBrowserFont}
+              onChange={toggleUseBrowserFont}
+            />
+            <ToggleButton
+              label={t("label.animationToggle")}
+              ariaLabel={t("ariaLabel.animationToggle")}
+              checked={settings.animationsEnabled}
+              onChange={toggleAnimations}
+            />
+          </UserSettingsList>
+        </UserSettingsContainer>
+
+        {!inHomePage ? (
+          <GoBackButton onClick={goBack}>
+            <AriaLabel live="off">{t("ariaLabel.goBack")}</AriaLabel>
+            <ArrowBackIcon />
+          </GoBackButton>
+        ) : null}
+      </Toolbar>
 
       <SettingsProvider value={settings}>
         <ModalProvider value={{ toggle: toggleModal }}>

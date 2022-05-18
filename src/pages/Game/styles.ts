@@ -2,7 +2,6 @@ import { InferProps, number } from "prop-types";
 import styled, { keyframes, css } from "styled-components/macro";
 import Button from "../../components/Button";
 import { OptionButton } from "../../components/Option/styles";
-import { SCALE_ROTATION_45DEG } from "../../components/PolygonalList/constants";
 import _Stepper, { Step } from "../../components/Stepper";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
 import getFontSize from "../../utils/getFontSize";
@@ -18,10 +17,7 @@ const resultPropTypes = {
 
 type ScoreValueProps = {
   readonly name: string;
-};
-
-type OptionsProps = {
-  readonly size: number;
+  readonly small: boolean;
 };
 
 type ResultChoiceProps = {
@@ -92,64 +88,35 @@ export const Container = styled.div`
   animation-fill-mode: both;
   margin: 0 auto;
   display: grid;
-  grid-template:
-  ". header header header ."
-  ". game game game ."
-  ". . . . rules";
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: auto 45vh auto;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
   flex: 1;
+  grid-template:
+  ". header ."
+  ". game rules";
+  grid-template-columns: 1fr 60% 1fr;
+  grid-template-rows: max-content 1fr;
+  width: 100%;
+
 
   ${mobile} {
     display: flex;
     flex-direction: column;
     justify-content: start;
     height: auto;
-    gap: 0;
     margin: 0;
   }
 }
-`;
-
-export const GoBackButton = styled(Button).attrs(() => ({
-  icon: true,
-  small: true,
-}))`
-  align-self: start;
-  z-index: 2;
-  transform: scale(0.75);
-  display: block;
-
-  ${tablet} {
-    margin: 2%;
-    height: 7.5%;
-    width: 7.5%;
-  }
-
-  ${phone} {
-    margin: 5%;
-    height: 10%;
-    width: 10%;
-  }
-
-  ${phoneSm} {
-    margin: 5%;
-    height: 10%;
-    width: 10%;
-  }
 `;
 
 export const RulesButton = styled(Button).attrs(() => ({
   outlined: true,
   small: true,
 }))`
-  align-self: center;
-  grid-area: rules;
+  align-self: end;
   justify-self: end;
-  margin: 7.5%;
+  grid-area: rules;
+  margin: 0 7.5%;
   border-radius: 8px;
   min-width: 130px;
   width: auto;
@@ -157,7 +124,7 @@ export const RulesButton = styled(Button).attrs(() => ({
 
   ${mobile} {
     align-self: center;
-    margin: 5% 0;
+    margin: 0;
   }.
 `;
 
@@ -197,11 +164,39 @@ export const Title = styled.h1`
 `;
 
 export const ScoreValue = styled.div<ScoreValueProps>`
-  font-size: 3rem;
   color: ${(props) => props.theme.dark};
   animation: ${fadeIn} 1s linear 0s 1;
   animation-fill-mode: both;
   font-weight: bold;
+
+  ${(props) =>
+    props.small
+      ? `
+        font-size: 3rem;
+
+        ${phone} {
+          font-size: 1.5rem;
+        }
+      
+        ${phoneSm} {
+          font-size: 1.25rem;
+        }
+      `
+      : `
+      font-size: 4.5rem;
+      line-height: 4.5rem;
+
+      ${phone} {
+        font-size: 2rem;
+        line-height: 2rem;
+
+      }
+    
+      ${phoneSm} {
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+      }
+    `}
 
   &:first-child {
     order: 1;
@@ -209,18 +204,6 @@ export const ScoreValue = styled.div<ScoreValueProps>`
 
   &:last-child {
     order: 3;
-  }
-
-  ${tablet} {
-    font-size: 3rem;
-  }
-
-  ${phone} {
-    font-size: 1.5rem;
-  }
-
-  ${phoneSm} {
-    font-size: 1.25rem;
   }
 `;
 
@@ -232,7 +215,7 @@ export const Score = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4% 0;
+  padding: 2.5%;
 
   ${phone} {
     border-radius: 3px;
@@ -281,11 +264,12 @@ export const Stepper = styled(_Stepper)`
   align-items: center;
   justify-content: center;
   grid-area: game;
-  height: 60%;
   z-index: 1;
+  height: 57.5vh;
 
   ${mobile} {
-    height: 50vh;
+    min-height: 57.5vh;
+    height: auto;
   }
 
   ${Step}[value="1"][value="${(props) => props.value}"] {
@@ -294,17 +278,8 @@ export const Stepper = styled(_Stepper)`
   }
 `;
 
-export const Options = styled.div<OptionsProps>`
-  ${(props) => `
-    height: ${props.size * SCALE_ROTATION_45DEG}px;
-    width: ${props.size * SCALE_ROTATION_45DEG}px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0 auto;
-    overflow: hidden;
-`}
+export const Options = styled.div`
+  margin: 0 auto;
 `;
 
 const ResultChoicetWinner = css<ResultProps>`
@@ -315,12 +290,12 @@ const ResultChoicetWinner = css<ResultProps>`
 
     &:before {
       content: "";
-      width: ${(props) => props.size * 2.5}px;
-      height: ${(props) => props.size * 2.5}px;
+      width: 300%;
+      height: 300%;
       position: absolute;
       border-radius: 50%;
-      top: -75%;
-      left: -75%;
+      top: -100%;
+      left: -100%;
       z-index: -1;
       animation-name: ${radialBackgroundEffect};
       animation-duration: 1s;
@@ -448,12 +423,12 @@ export const ResultContainer = styled.div<ResultProps>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  height: 57.5vh;
 
   ${mobile} {
     width: 100%;
+    height: auto;
     overflow-x: hidden;
-    height: 100%;
-    height: 50vh;
     flex-wrap: wrap;
     align-items: center;
   }

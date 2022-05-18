@@ -1,3 +1,0 @@
-export const SCALE_ROTATION_45DEG = 1.4142;
-export const POINTING_UP_ROTATION = 45;
-export const POINTING_DOWN_ROTATION = 225;

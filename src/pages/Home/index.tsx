@@ -6,6 +6,8 @@ import styled from "styled-components/macro";
 import getFontSize from "../../utils/getFontSize";
 import { mobile } from "../../utils/breakpoints";
 import AriaLabel from "../../components/AriaLabel";
+import PolygonalList from "../../components/PolygonalList";
+import Option from "../../components/Option";
 
 const Container = styled.div`
   display: flex;
@@ -45,7 +47,7 @@ function Home() {
     <Container>
       <List tabIndex={0} role="navigation">
         <AriaLabel live="off">{t("label.gameList")}</AriaLabel>
-        {gameConfig.map((game) => (
+        {gameConfig.games.map((game) => (
           <SelectGameButton
             outlined
             key={game.name}

@@ -1,5 +1,5 @@
-import { bool, InferProps, number } from "prop-types";
 import { useMemo } from "react";
+import { bool, InferProps, number } from "prop-types";
 import {
   string,
   image,
@@ -33,6 +33,7 @@ function Option(props: InferProps<typeof Option.propTypes>) {
   return (
     <OptionButton
       id={props.name}
+      name={props.name}
       type="button"
       onClick={() => props.onClick && props.onClick(props.name)}
       size={props.size}

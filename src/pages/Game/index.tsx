@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import clamp from "../../utils/clamp";
-import isMobile from "../../utils/isScreenMobileSize";
 import random from "../../utils/random";
 import * as scoreService from "../../services/score";
 import Button from "../../components/Button";
@@ -22,7 +21,6 @@ import {
   RulesImageContainer,
   RulesImage,
   RulesButton,
-  GoBackButton,
   Score,
   ScoreLabel,
   ScoreValue,
@@ -30,9 +28,7 @@ import {
   ResultChoiceLabel,
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
-import { ArrowBackIcon } from "../../icons";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
-import isMobileDevice from "../../utils/isMobileDevice";
 import AriaLabel from "../../components/AriaLabel";
 import useModal from "../../hooks/useModal";
 import { SettingsContext } from "../../providers/settings";
@@ -86,22 +82,7 @@ function Game() {
   const [showHouseChoice, setShowHouseChoice] =
     useState<boolean>(animationsEnabled);
   const [showResult, setShowResult] = useState<boolean>(animationsEnabled);
-
-  function getSize(
-    optionsLength: number,
-    screenRatio = 1.0,
-    minSize = 50,
-    maxSize = 1000
-  ) {
-    return clamp(
-      ((window.innerWidth / optionsLength +
-        window.innerHeight / optionsLength) /
-        2) *
-        screenRatio,
-      minSize,
-      maxSize
-    );
-  }
+  const [showHouseScore, setShowHouseScore] = useState<boolean>(true);
 
   function playMatch(
     optionName: string,
@@ -184,10 +165,22 @@ function Game() {
 
     const { length } = selectedGame.options;
 
-    const size = getSize(length, isMobile() ? 0.7 : 0.4);
-    setOptionSize(size);
-    setListSize(size * (length / 2));
-    setResultSize(getSize(2, 0.35));
+    const containerSize =
+      window.innerWidth > window.innerHeight
+        ? window.innerHeight * 0.6
+        : window.innerWidth * 0.85;
+    const containerSizeByLen = containerSize / length;
+
+    setListSize(containerSize);
+    setOptionSize(
+      containerSizeByLen / containerSize <= 0.25
+        ? containerSizeByLen + containerSize * 0.05
+        : containerSizeByLen
+    );
+
+    setResultSize(
+      clamp(window.innerWidth * 0.1 + window.innerHeight * 0.1, 50, 1000)
+    );
   }
 
   function onScreenResize() {
@@ -204,11 +197,12 @@ function Game() {
   }
 
   function setupGame(): GameConfig | undefined {
-    const selectedGame = gameConfig.find(
+    const selectedGame = gameConfig.games.find(
       (config) => config.name === gameName
     ) as GameConfig | undefined;
 
     if (selectedGame) {
+      setShowHouseScore(gameConfig.globalSettings.showHouseScore);
       setGame(selectedGame);
       setSizes(selectedGame);
       setUserScore(scoreService.get(selectedGame.name));
@@ -253,36 +247,37 @@ function Game() {
 
   return game ? (
     <Container>
-      {isMobileDevice() ? (
-        <GoBackButton onClick={navigateToHome}>
-          <AriaLabel live="off">{t("ariaLabel.goBack")}</AriaLabel>
-          <ArrowBackIcon />
-        </GoBackButton>
-      ) : null}
-
       <Header tabIndex={0} role="region">
         <Title>{t(`gameName.${game.name}`)}</Title>
 
         <Score tabIndex={0}>
           <ScoreLabel>{t("label.score")}</ScoreLabel>
-          <ScoreValue name="user" key={"user" + userScore} aria-hidden="false">
+          <ScoreValue
+            name="user"
+            small={showHouseScore}
+            key={"user" + userScore}
+            aria-hidden="false"
+          >
             <AriaLabel live="off">{t("ariaLabel.userScore")}</AriaLabel>
             {userScore}
           </ScoreValue>
-          <ScoreValue
-            name="house"
-            key={"house" + houseScore}
-            aria-hidden="false"
-          >
-            <AriaLabel live="off">{t("ariaLabel.houseScore")}</AriaLabel>
-            {houseScore}
-          </ScoreValue>
+          {showHouseScore ? (
+            <ScoreValue
+              name="house"
+              small={showHouseScore}
+              key={"house" + houseScore}
+              aria-hidden="false"
+            >
+              <AriaLabel live="off">{t("ariaLabel.houseScore")}</AriaLabel>
+              {houseScore}
+            </ScoreValue>
+          ) : null}
         </Score>
       </Header>
 
       <Stepper value={step} tabIndex={0} role="main">
         <Step value={1}>
-          <Options size={listSize}>
+          <Options>
             <AriaLabel live="off">{t("label.options")}</AriaLabel>
 
             <PolygonalList

@@ -23,6 +23,7 @@ export const OptionButton = styled.button.attrs<ButtonProps>((props) => {
     background,
   };
 })<ButtonProps>`
+  grid-area: ${(props) => props.name};
   border-radius: 50%;
   padding: ${(props) =>
     `${props.size * 0.12}px ${props.size * 0.12}px ${props.size * 0.16}px`};
