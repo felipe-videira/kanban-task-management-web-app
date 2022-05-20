@@ -41,5 +41,15 @@
         "victory": "You Win",
         "defeat": "You Lose",
         "attribution": "Challenge by <a href=\"https://www.frontendmentor.io?ref=challenge\" target=\"_blank\" rel=\"noreferrer\">Frontend Mentor</a>. Develop by <a href=\"https://github.com/felipe-videira\" target=\"_blank\" rel=\"noreferrer\">Felipe Videira</a>."
+    },
+    "image": {
+        "logo": {
+            "original": "/logo-original.svg",
+            "lizard-spock": "/logo-lizard-spock.svg"
+        },
+        "rules": {
+            "original": "/image-rules.svg",
+            "lizard-spock": "/image-rules-bonus.svg"
+        }
     }
 }

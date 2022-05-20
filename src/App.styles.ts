@@ -3,7 +3,7 @@ import {
   ToggleButtonInput,
   ToggleButtonLabel,
 } from "./components/ToggleButton";
-import { mobile, phone, phoneSm, tablet } from "./utils/breakpoints";
+import { mobile } from "./utils/breakpoints";
 import { fadeIn } from "./utils/keyframes";
 import Button from "./components/Button";
 
@@ -47,7 +47,14 @@ export const Toolbar = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: row-reverse;
+  position: absolute;
+  width: calc(100% - 2rem);
   padding: 1rem;
+  z-index: 1;
+
+  ${mobile} {
+    bottom: 0;
+  }
 `;
 
 export const UserSettingsList = styled.div`
@@ -75,7 +82,7 @@ export const UserSettingsContainer = styled.div`
     svg {
       width: 2.5rem;
       height: 2.5rem;
-      fill: ${(props) => props.theme.primary};
+      fill: ${(props) => props.theme.contrast.low};
     }
   }
 
@@ -102,7 +109,6 @@ export const GoBackButton = styled(Button).attrs(() => ({
   small: true,
 }))`
   align-self: start;
-  z-index: 2;
   display: block;
   width: 2.5rem;
   height: 2.5rem;

@@ -1,11 +1,9 @@
 import { ReactNode } from "react";
 import clamp from "./clamp";
 
-export default (text: string | ReactNode, base = 1, max = 10) =>
+export default (text: string | ReactNode, containerSizeRem = 10) =>
   text
-    ? `${clamp(
-        base + screen.width * 0.001 - text.toString().length * 0.05,
-        1,
-        max
-      ).toFixed(2)}rem`
+    ? `${clamp(containerSizeRem / text.toString().length, 0.75, 10).toFixed(
+        2
+      )}rem`
     : "1em";

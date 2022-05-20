@@ -96,7 +96,7 @@ function App() {
   }
 
   function goBack() {
-    navigate(-1);
+    navigate("/");
   }
 
   useTouch(({ count, doubleTap, swipe, swipeDirection, event }) => {
@@ -181,11 +181,13 @@ function App() {
         </ModalProvider>
       </SettingsProvider>
 
-      <Attribution
-        tabIndex={0}
-        role="navigation"
-        dangerouslySetInnerHTML={{ __html: t("message.attribution") }}
-      />
+      {inHomePage || !isMobileDevice() ? (
+        <Attribution
+          tabIndex={0}
+          role="navigation"
+          dangerouslySetInnerHTML={{ __html: t("message.attribution") }}
+        />
+      ) : null}
 
       <Modal
         show={showModal}

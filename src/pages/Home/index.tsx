@@ -3,11 +3,9 @@ import gameConfig from "../../gameConfig.json";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import getFontSize from "../../utils/getFontSize";
 import { mobile } from "../../utils/breakpoints";
 import AriaLabel from "../../components/AriaLabel";
-import PolygonalList from "../../components/PolygonalList";
-import Option from "../../components/Option";
+import Logo from "../../components/Logo";
 
 const Container = styled.div`
   display: flex;
@@ -30,13 +28,8 @@ const List = styled.div`
 `;
 
 const SelectGameButton = styled(Button)`
-  line-height: 0.9;
-  text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
-  font-weight: normal;
+  padding: 7.5%;
   text-align: left;
-  word-spacing: 100vh;
-  font-size: ${(props) => getFontSize(props.children, 2)};
-  padding: 5% 7.5%;
 `;
 
 function Home() {
@@ -53,7 +46,10 @@ function Home() {
             key={game.name}
             onClick={() => navigate(`/${game.name}`)}
           >
-            {t(`gameName.${game.name}`)}
+            <Logo
+              src={t(`image.logo.${game.name}`)}
+              alt={t(`gameName.${game.name}`)}
+            />
           </SelectGameButton>
         ))}
       </List>

@@ -12,7 +12,6 @@ import {
   Container,
   Options,
   Header,
-  Title,
   ResultContainer,
   ResultUserChoice,
   Result,
@@ -32,6 +31,7 @@ import useStateWithGetter from "../../hooks/useStateWithGetter";
 import AriaLabel from "../../components/AriaLabel";
 import useModal from "../../hooks/useModal";
 import { SettingsContext } from "../../providers/settings";
+import Logo from "../../components/Logo";
 
 type GameOption = {
   name: string;
@@ -44,6 +44,7 @@ type GameOption = {
 
 type GameConfig = {
   name: string;
+  logo: string;
   rules: string;
   settings: {
     showHouseChoiceDelay: number;
@@ -151,7 +152,7 @@ function Game() {
       children: () => (
         <RulesImageContainer>
           <RulesImage
-            src={game.rules}
+            src={t(`image.rules.${game.name}`)}
             alt={t(`ariaLabel.rules.${game.name}`)}
             tabIndex={0}
           />
@@ -168,7 +169,7 @@ function Game() {
     const containerSize =
       window.innerWidth > window.innerHeight
         ? window.innerHeight * 0.6
-        : window.innerWidth * 0.85;
+        : window.innerWidth * 1;
     const containerSizeByLen = containerSize / length;
 
     setListSize(containerSize);
@@ -248,7 +249,10 @@ function Game() {
   return game ? (
     <Container>
       <Header tabIndex={0} role="region">
-        <Title>{t(`gameName.${game.name}`)}</Title>
+        <Logo
+          src={t(`image.logo.${game.name}`)}
+          alt={t(`gameName.${game.name}`)}
+        />
 
         <Score tabIndex={0}>
           <ScoreLabel>{t("label.score")}</ScoreLabel>

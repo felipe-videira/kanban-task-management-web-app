@@ -1,10 +1,10 @@
 import { InferProps, number } from "prop-types";
 import styled, { keyframes, css } from "styled-components/macro";
 import Button from "../../components/Button";
+import { LogoAltText, LogoImg } from "../../components/Logo";
 import { OptionButton } from "../../components/Option/styles";
 import _Stepper, { Step } from "../../components/Stepper";
 import { mobile, phone, phoneSm, tablet } from "../../utils/breakpoints";
-import getFontSize from "../../utils/getFontSize";
 import { fadeIn } from "../../utils/keyframes";
 
 const resultPropTypes = {
@@ -62,24 +62,31 @@ const moveRight = keyframes`
 `;
 
 const radialBackgroundEffect = keyframes`
-  0% {
-    background: radial-gradient(circle, 
-      rgba(255,255,255,0.2) 0%, 
-      rgba(255,255,255,0.2) 42.5%, 
-      rgba(255,255,255,0.15) 42.5%, 
-      rgba(255,255,255,0) 42.5%);
+  0% { 
+    --result-rg-first: 0; --result-rg-first-border: 0;
+    --result-rg-second: 0; --result-rg-second-border: 0;
+    --result-rg-third: 0; --result-rg-third-border: 0;
     opacity: 0;
   }
-  100% {
-    background: radial-gradient(circle, 
-      rgba(255,255,255,0.2) 0%, 
-      rgba(255,255,255,0.2) 42.5%, 
-      rgba(255,255,255,0.15) 42.5%, 
-      rgba(255,255,255,0.1) 55%, 
-      rgba(255,255,255,0.05) 55%, 
-      rgba(255,255,255,0.025) 75%, 
-      rgba(255,255,255,0.0) 75%);
-    opacity: 0.4;
+  20% { 
+    --result-rg-first: 0.075; --result-rg-first-border: 0;
+    --result-rg-second: 0; --result-rg-second-border: 0;
+    --result-rg-third: 0; --result-rg-third-border: 0;
+  }
+  40% { 
+    --result-rg-first: 0.075; --result-rg-first-border: 0.045;
+    --result-rg-second: 0.05; --result-rg-second-border: 0;
+    --result-rg-third: 0; --result-rg-third-border: 0;
+  }
+  80% { 
+    --result-rg-first: 0.075; --result-rg-first-border: 0.045;
+    --result-rg-second: 0.05; --result-rg-second-border: 0.02;
+    --result-rg-third: 0.025; --result-rg-third-border: 0;
+  }
+  100% { 
+    --result-rg-first: 0.075; --result-rg-first-border: 0.045;
+    --result-rg-second: 0.05; --result-rg-second-border: 0.02;
+    --result-rg-third: 0.025; --result-rg-third-border: 0.01;
   }
 `;
 
@@ -97,14 +104,15 @@ export const Container = styled.div`
   grid-template-columns: 1fr 60% 1fr;
   grid-template-rows: max-content 1fr;
   width: 100%;
-
+  padding: 2rem 0 0 0;
 
   ${mobile} {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-around;
     height: auto;
     margin: 0;
+    padding: 0;
   }
 }
 `;
@@ -142,24 +150,13 @@ export const Header = styled.div`
   flex-wrap: wrap;
   gap: 1rem 0;
 
+  ${LogoImg}, ${LogoAltText} {
+    flex: 0.25;
+  }
+
   ${phone} {
     border-radius: 7px;
     padding: 10px;
-  }
-`;
-
-export const Title = styled.h1`
-  text-transform: uppercase;
-  line-height: 0.8;
-  text-shadow: 1px 1px 5px rgb(0 0 0 / 25%);
-  font-weight: normal;
-  word-spacing: 100vh;
-  flex: 0.5;
-  font-size: ${(props) => getFontSize(props.children, 2)};
-  margin: 0 0 0 25px;
-
-  ${mobile} {
-    margin-left: 15px;
   }
 `;
 
@@ -297,8 +294,21 @@ const ResultChoicetWinner = css<ResultProps>`
       top: -100%;
       left: -100%;
       z-index: -1;
+      background-image: radial-gradient(
+        circle,
+        rgba(255, 255, 255, var(--result-rg-first)) 37.5%,
+        rgba(255, 255, 255, var(--result-rg-first-border)) 37.5%,
+
+        rgba(255, 255, 255, var(--result-rg-second)) 52.5%,
+        rgba(255, 255, 255, var(--result-rg-second-border)) 52.5%,
+
+        rgba(255, 255, 255, var(--result-rg-third)) 68.5%,
+        rgba(255, 255, 255, var(--result-rg-third-border)) 68.5%,
+
+        rgba(255, 255, 255, 0) 0%
+      );
       animation-name: ${radialBackgroundEffect};
-      animation-duration: 1s;
+      animation-duration: 1.2s;
       animation-iteration-count: infinite;
       animation-direction: alternate;
       animation-fill-mode: both;
@@ -428,7 +438,6 @@ export const ResultContainer = styled.div<ResultProps>`
   ${mobile} {
     width: 100%;
     height: auto;
-    overflow-x: hidden;
     flex-wrap: wrap;
     align-items: center;
   }

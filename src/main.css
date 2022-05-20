@@ -6,7 +6,6 @@
   font-weight: 600;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Barlow Semi Condensed';
   src: local('Barlow Semi Condensed'), 
@@ -14,6 +13,37 @@
       format('truetype');
   font-weight: 700;
   font-display: swap;
+}
+
+@property --result-rg-first {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --result-rg-first-border {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --result-rg-second {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --result-rg-second-border {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --result-rg-third {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --result-rg-third-border {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
 }
 
 body {
