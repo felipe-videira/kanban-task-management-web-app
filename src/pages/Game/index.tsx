@@ -224,12 +224,7 @@ function Game() {
 
         <Score tabIndex={0}>
           <ScoreLabel>{t("label.score")}</ScoreLabel>
-          <ScoreValue
-            name="user"
-            key={"user" + userScore}
-            aria-hidden="false"
-            small={false}
-          >
+          <ScoreValue key={userScore} aria-hidden="false">
             <AriaLabel live="off">{t("ariaLabel.userScore")}</AriaLabel>
             {userScore}
           </ScoreValue>

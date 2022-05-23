@@ -7,7 +7,7 @@ import {
   PolygonalListItemContent as ItemContent,
 } from "./styles";
 
-function PolygonalListItem(
+export function PolygonalListItem(
   props: InferProps<typeof PolygonalList.propTypes> & {
     readonly index: number;
     readonly length: number;

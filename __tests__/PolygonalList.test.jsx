@@ -18,9 +18,7 @@ describe("PolygonalList", () => {
       pointingUp: true,
     };
 
-    const wrapper = render(<PolygonalList {...props} />);
-
-    expect(wrapper).toMatchSnapshot();
+    expect(render(<PolygonalList {...props} />)).toMatchSnapshot();
   });
 
   it('should nest the items according to the prop "data"', () => {
@@ -35,16 +33,14 @@ describe("PolygonalList", () => {
       pointingUp: true,
     };
 
-    const wrapper = mount(<PolygonalList {...props} />);
-
-    const lastElement = wrapper
-      .first("div")
-      .getDOMNode()
-      .children.item(0)
-      .children.item(1)
-      .children.item(1);
-
-    expect(lastElement).toBeTruthy();
+    expect(
+      mount(<PolygonalList {...props} />)
+        .first("div")
+        .getDOMNode()
+        .children.item(0)
+        .children.item(1)
+        .children.item(1)
+    ).toBeTruthy();
   });
 
   it('should rotate the container according to the prop "pointingUp"', () => {
@@ -62,17 +58,17 @@ describe("PolygonalList", () => {
     const wrapper = mount(<PolygonalList {...props} />);
 
     expect(
-      getComputedStyle(wrapper.first("div").getDOMNode()).getPropertyValue(
-        "transform"
-      )
+      getComputedStyle(
+        wrapper.find("PolygonalListItem[index=0]").getDOMNode()
+      ).getPropertyValue("transform")
     ).toBe("rotate(45deg)");
 
     wrapper.setProps({ pointingUp: false });
 
     expect(
-      getComputedStyle(wrapper.first("div").getDOMNode()).getPropertyValue(
-        "transform"
-      )
+      getComputedStyle(
+        wrapper.find("PolygonalListItem[index=0]").getDOMNode()
+      ).getPropertyValue("transform")
     ).toBe("rotate(225deg)");
   });
 
@@ -90,11 +86,11 @@ describe("PolygonalList", () => {
 
     const wrapper = mount(<PolygonalList {...props} />);
 
-    const firstItemElement = wrapper.first("div").getDOMNode().children.item(0);
+    const style = getComputedStyle(
+      wrapper.find("PolygonalListItem[index=1]").getDOMNode()
+    );
 
-    expect(
-      getComputedStyle(firstItemElement).getPropertyValue("transform")
-    ).toBe(`rotate(120deg)`);
+    expect(style.getPropertyValue("transform")).toBe(`rotate(120deg)`);
   });
 
   it("should rotate the item content to be the item's absolute negative rotation", () => {
@@ -111,19 +107,16 @@ describe("PolygonalList", () => {
 
     const wrapper = mount(<PolygonalList {...props} />);
 
-    const secondItemContentElement = wrapper
-      .first("div")
-      .getDOMNode()
-      .children.item(0)
-      .children.item(1)
-      .children.item(0);
+    const style = getComputedStyle(
+      wrapper.find("PolygonalListItem[index=1]").getDOMNode().children.item(0)
+    );
 
-    expect(
-      getComputedStyle(secondItemContentElement).getPropertyValue("transform")
-    ).toBe(`rotate(-285deg)`);
+    expect(style.getPropertyValue("transform")).toBe(
+      `rotate(calc(((120deg * 1) + 45deg) * -1))`
+    );
   });
 
-  it("should position the item content to be centered at the end of the container", () => {
+  it("should position the item content at the end of the container", () => {
     const props = {
       data: [{ value: "value" }, { value: "value" }, { value: "value" }],
       ItemComponent: jest.fn().mockImplementation(() => null),
@@ -137,16 +130,12 @@ describe("PolygonalList", () => {
 
     const wrapper = mount(<PolygonalList {...props} />);
 
-    const firstItemContentElement = wrapper
-      .first("div")
-      .getDOMNode()
-      .children.item(0)
-      .children.item(0);
+    const style = getComputedStyle(
+      wrapper.find("PolygonalListItem[index=0]").getDOMNode().children.item(0)
+    );
 
-    const style = getComputedStyle(firstItemContentElement);
-
-    expect(style.getPropertyValue("top")).toBe(`-100px`);
-    expect(style.getPropertyValue("left")).toBe(`-100px`);
+    expect(style.getPropertyValue("top")).toBe(`0px`);
+    expect(style.getPropertyValue("left")).toBe(`0px`);
   });
 
   it('should pass on the "itemProps" and "data" as props to the "ItemComponent"', () => {

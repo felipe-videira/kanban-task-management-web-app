@@ -11,8 +11,13 @@ import {
   ScoreValue,
 } from "../src/pages/Game/styles";
 import random from "../src/utils/random";
-import { save } from "../src/services/score";
+import { get, save } from "../src/services/score";
 import { withTheme } from "../testUtils";
+
+jest.mock("../src/i18n", () => ({
+  __esModule: true,
+  addTranslation: () => {},
+}));
 
 jest.mock("../src/services/score", () => ({
   __esModule: true,
@@ -43,52 +48,71 @@ jest.mock("../src/utils/random", () => ({
   default: jest.fn(),
 }));
 
-jest.mock("../src/gameConfig.json", () => [
-  {
-    name: "original",
-    rules: "src/images/images-rules.svg",
-    settings: {
-      showHouseChoiceDelay: 0,
-      showHouseChoiceDuration: 0,
-      showResultDelay: 0,
-      showResultDuration: 0,
-      updateScoreDelay: 0,
-      winnerBackgroundEffectDelay: 0,
+jest.mock("../src/gameConfig.json", () => ({
+  games: [
+    {
+      name: "original",
+      settings: {
+        showHouseChoiceDelay: 0,
+        showHouseChoiceDuration: 0,
+        showResultDelay: 0,
+        showResultDuration: 0,
+        updateScoreDelay: 0,
+        winnerBackgroundEffectDelay: 0,
+      },
+      translations: {
+        en: {
+          gameName: "Rock Paper Scissors",
+          option: {
+            rock: "Rock",
+            paper: "Paper",
+            scissors: "Scissors",
+          },
+          image: {
+            logo: "/logo-original.svg",
+            rules: "/image-rules.svg",
+          },
+          ariaLabel: {
+            rules:
+              "Rock crushes Scissors, Scissors cuts Paper, and Paper covers Rock.",
+          },
+        },
+      },
+      listSetup: {
+        pointingUp: false,
+      },
+      options: [
+        {
+          name: "paper",
+          icon: "src/images/icon-paper.svg",
+          color: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
+          winRules: {
+            scissors: false,
+            rock: true,
+          },
+        },
+        {
+          name: "scissors",
+          icon: "src/images/icon-scissors.svg",
+          color: ["hsl(39, 89%, 49%)", "hsl(40, 84%, 53%)"],
+          winRules: {
+            rock: false,
+            paper: true,
+          },
+        },
+        {
+          name: "rock",
+          icon: "src/images/icon-rock.svg",
+          color: ["hsl(349, 71%, 52%)", "hsl(349, 70%, 56%)"],
+          winRules: {
+            scissors: true,
+            paper: false,
+          },
+        },
+      ],
     },
-    listSetup: {
-      pointingUp: false,
-    },
-    options: [
-      {
-        name: "paper",
-        icon: "src/images/icon-paper.svg",
-        color: ["hsl(230, 89%, 62%)", "hsl(230, 89%, 65%)"],
-        winRules: {
-          scissors: false,
-          rock: true,
-        },
-      },
-      {
-        name: "scissors",
-        icon: "src/images/icon-scissors.svg",
-        color: ["hsl(39, 89%, 49%)", "hsl(40, 84%, 53%)"],
-        winRules: {
-          rock: false,
-          paper: true,
-        },
-      },
-      {
-        name: "rock",
-        icon: "src/images/icon-rock.svg",
-        color: ["hsl(349, 71%, 52%)", "hsl(349, 70%, 56%)"],
-        winRules: {
-          scissors: true,
-          paper: false,
-        },
-      },
-    ],
-  },
-]);
+  ],
+}));
 
 describe("Game", () => {
   it("should render correctly", () => {
@@ -111,7 +135,7 @@ describe("Game", () => {
     expect(navigateMock).toHaveBeenCalledWith("/");
   });
 
-  it("should win and update user score", () => {
+  it("should win and add 1 to the score", () => {
     useParamsMock.mockImplementation(() => {
       return { gameName: "original" };
     });
@@ -128,18 +152,18 @@ describe("Game", () => {
     expect(wrapper.find(Result).children().find("p").text()).toBe(
       "message.victory"
     );
-    expect(save).toHaveBeenCalledWith("original", 1, false);
-    expect(
-      wrapper.find(ScoreValue).find("div[name='user']").contains("1")
-    ).toBeTruthy();
+    expect(save).toHaveBeenCalledWith("original", 1);
+    expect(wrapper.find(ScoreValue).contains("1")).toBeTruthy();
   });
 
-  it("should lose and update house score", () => {
+  it("should lose and subtract 1 to the score", () => {
     useParamsMock.mockImplementation(() => {
       return { gameName: "original" };
     });
     random.mockClear();
     random.mockImplementation(() => 0);
+    get.mockClear();
+    get.mockImplementation(() => 3);
 
     const wrapper = mount(withTheme(<Game />));
 
@@ -151,9 +175,7 @@ describe("Game", () => {
     expect(wrapper.find(Result).children().find("p").text()).toBe(
       "message.defeat"
     );
-    expect(save).toHaveBeenCalledWith("original", 1, true);
-    expect(
-      wrapper.find(ScoreValue).find("div[name='house']").contains("1")
-    ).toBeTruthy();
+    expect(save).toHaveBeenCalledWith("original", 2);
+    expect(wrapper.find(ScoreValue).contains("2")).toBeTruthy();
   });
 });

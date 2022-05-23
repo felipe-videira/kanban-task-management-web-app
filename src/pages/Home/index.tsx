@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 import Button from "../../components/Button";
 import { mobile } from "../../utils/breakpoints";
 import AriaLabel from "../../components/AriaLabel";
-import Logo from "../../components/Logo";
+import Logo, { LogoImg } from "../../components/Logo";
 import gameConfig from "../../gameConfig.json";
 import DynamicTranslation from "../../components/DynamicTranslation";
 
@@ -31,6 +31,12 @@ const List = styled.div`
 const SelectGameButton = styled(Button)`
   padding: 7.5%;
   text-align: left;
+
+  ${LogoImg} {
+    ${mobile} {
+      height: 6rem;
+    }
+  }
 `;
 
 function Home() {

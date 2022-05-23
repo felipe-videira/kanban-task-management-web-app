@@ -15,11 +15,6 @@ const resultPropTypes = {
   winnerBackgroundEffectDelay: number.isRequired,
 };
 
-type ScoreValueProps = {
-  readonly name: string;
-  readonly small: boolean;
-};
-
 type ResultChoiceProps = {
   readonly size: number;
 };
@@ -157,40 +152,24 @@ export const Header = styled.div`
   }
 `;
 
-export const ScoreValue = styled.div<ScoreValueProps>`
+export const ScoreValue = styled.div`
   color: ${(props) => props.theme.dark};
   animation: ${fadeIn} 1s linear 0s 1;
   animation-fill-mode: both;
   font-weight: bold;
 
-  ${(props) =>
-    props.small
-      ? `
-        font-size: 3rem;
+  font-size: 4.5rem;
+  line-height: 4.5rem;
 
-        ${phone} {
-          font-size: 1.5rem;
-        }
-      
-        ${phoneSm} {
-          font-size: 1.25rem;
-        }
-      `
-      : `
-      font-size: 4.5rem;
-      line-height: 4.5rem;
+  ${phone} {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
 
-      ${phone} {
-        font-size: 2rem;
-        line-height: 2rem;
-
-      }
-    
-      ${phoneSm} {
-        font-size: 1.5rem;
-        line-height: 1.5rem;
-      }
-    `}
+  ${phoneSm} {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
 
   &:first-child {
     order: 1;

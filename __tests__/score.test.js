@@ -10,37 +10,20 @@ describe("score", () => {
     global.localStorage.getItem.mockClear();
     global.localStorage.getItem.mockImplementation(() => "1");
 
-    expect(get("original", false)).toBe(1);
+    expect(get("original")).toBe(1);
     expect(global.localStorage.getItem).toHaveBeenCalledWith(
       "user-score-original"
-    );
-
-    global.localStorage.getItem.mockClear();
-    global.localStorage.getItem.mockImplementation(() => "23");
-
-    expect(get("lizard-spock", true)).toBe(23);
-    expect(global.localStorage.getItem).toHaveBeenCalledWith(
-      "house-score-lizard-spock"
     );
   });
 
   it("should save item in localStorage with the correct params", () => {
     global.localStorage.setItem.mockClear();
 
-    save("original", 2, false);
+    save("original", 2);
 
     expect(global.localStorage.setItem).toHaveBeenCalledWith(
       "user-score-original",
       "2"
-    );
-
-    global.localStorage.setItem.mockClear();
-
-    save("lizard-spock", 323, true);
-
-    expect(global.localStorage.setItem).toHaveBeenCalledWith(
-      "house-score-lizard-spock",
-      "323"
     );
   });
 
@@ -58,8 +41,7 @@ describe("score", () => {
 
     setSaveOnExitListener(() => ({
       game: "original",
-      userScore: 3,
-      houseScore: 10,
+      score: 3,
     }));
 
     listener(event);
@@ -71,10 +53,6 @@ describe("score", () => {
     expect(global.localStorage.setItem).toHaveBeenCalledWith(
       "user-score-original",
       "3"
-    );
-    expect(global.localStorage.setItem).toHaveBeenCalledWith(
-      "house-score-original",
-      "10"
     );
     expect(event.returnValue).toBe("");
   });
