@@ -9,21 +9,11 @@
         "user": "Player",
         "house": "House",
         "animationToggle": "Animations",
-        "useBrowserFont": "Use Browser Font",
-        
-        "rock": "Rock", 
-        "paper": "Paper", 
-        "scissors": "Scissors", 
-        "lizard": "Lizard", 
-        "spock": "Spock"
+        "useBrowserFont": "Use Browser Font"
     },
     "ariaLabel": {
         "options": "Choose an option",
         "gameList": "Choose a game",
-        "rules": {
-            "original": "Rock crushes Scissors, Scissors cuts Paper, and Paper covers Rock.",
-            "lizard-spock": "Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock crushes Scissors, Scissors decapitate Lizard, Lizard eats Paper, Paper disproves Spock, and Spock vaporizes Rock."
-        },
         "animationToggle": "Toggle Animations",
         "useBrowserFont": "Toggle Use Browser Font",
         "close": "Close rules",
@@ -36,20 +26,5 @@
         "victory": "You Win",
         "defeat": "You Lose",
         "attribution": "Challenge by <a href=\"https://www.frontendmentor.io?ref=challenge\" target=\"_blank\" rel=\"noreferrer\">Frontend Mentor</a>. Develop by <a href=\"https://github.com/felipe-videira\" target=\"_blank\" rel=\"noreferrer\">Felipe Videira</a>."
-    },
-    
-    "gameName": {
-        "original": "Rock Paper Scissors",
-        "lizard-spock": "Rock Paper Scissors Lizard Spock"
-    },
-    "image": {
-        "logo": {
-            "original": "/logo-original.svg",
-            "lizard-spock": "/logo-lizard-spock.svg"
-        },
-        "rules": {
-            "original": "/image-rules.svg",
-            "lizard-spock": "/image-rules-bonus.svg"
-        }
     }
 }

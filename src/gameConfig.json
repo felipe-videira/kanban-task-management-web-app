@@ -10,6 +10,23 @@
                 "updateScoreDelay": 3,
                 "winnerBackgroundEffectDelay": 3
             },
+            "translations": {
+                "en": {
+                    "gameName": "Rock Paper Scissors",
+                    "option": {
+                        "rock": "Rock", 
+                        "paper": "Paper", 
+                        "scissors": "Scissors"
+                    },
+                    "image": {
+                        "logo": "/logo-original.svg",
+                        "rules":  "/image-rules.svg"
+                    },
+                    "ariaLabel": {
+                        "rules": "Rock crushes Scissors, Scissors cuts Paper, and Paper covers Rock."
+                    }
+                }
+            },
             "listSetup": {
                 "pointingUp": false
             },
@@ -61,6 +78,25 @@
                 "showResultDuration": 0.5,
                 "updateScoreDelay": 3,
                 "winnerBackgroundEffectDelay": 3
+            },
+            "translations": {
+                "en": {
+                    "gameName": "Rock Paper Scissors Lizard Spock",
+                    "option": {
+                        "rock": "Rock", 
+                        "paper": "Paper", 
+                        "scissors": "Scissors", 
+                        "lizard": "Lizard", 
+                        "spock": "Spock"
+                    },
+                    "image": {
+                        "logo":  "/logo-lizard-spock.svg",
+                        "rules":  "/image-rules-bonus.svg"
+                    },
+                    "ariaLabel": {
+                        "rules": "Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock crushes Scissors, Scissors decapitate Lizard, Lizard eats Paper, Paper disproves Spock, and Spock vaporizes Rock."
+                    }
+                }
             },
             "listSetup": {
                 "pointingUp": true

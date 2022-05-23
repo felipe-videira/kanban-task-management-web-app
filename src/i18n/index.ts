@@ -1,22 +1,21 @@
-import i18n from "i18next";
+import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import detector from "i18next-browser-languagedetector";
 import enUS from "./translations/en-US.json";
 
 const resources = {
-  "en-US": {
-    translation: enUS,
-  },
   en: {
-    translation: enUS,
+    common: enUS,
   },
 };
 
-i18n
+i18next
   .use(detector)
   .use(initReactI18next)
   .init({
     resources,
+    ns: ["common", "selectedGame"],
+    defaultNS: "common",
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,
@@ -25,3 +24,9 @@ i18n
       order: ["navigator"],
     },
   });
+
+export function addTranslation(game: NonNullable<Game>) {
+  for (const key in game.translations) {
+    i18next.addResourceBundle(key, "selectedGame", game.translations[key]);
+  }
+}

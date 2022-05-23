@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
-import gameConfig from "../../gameConfig.json";
-import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
+import Button from "../../components/Button";
 import { mobile } from "../../utils/breakpoints";
 import AriaLabel from "../../components/AriaLabel";
 import Logo from "../../components/Logo";
+import gameConfig from "../../gameConfig.json";
+import DynamicTranslation from "../../components/DynamicTranslation";
 
 const Container = styled.div`
   display: flex;
@@ -40,16 +41,16 @@ function Home() {
     <Container>
       <List tabIndex={0} role="navigation">
         <AriaLabel live="off">{t("ariaLabel.gameList")}</AriaLabel>
-        {gameConfig.games.map((game) => (
+
+        {(gameConfig.games as unknown as NonNullable<Game>[]).map((game) => (
           <SelectGameButton
             outlined
             key={game.name}
             onClick={() => navigate(`/${game.name}`)}
           >
-            <Logo
-              src={t(`image.logo.${game.name}`)}
-              alt={t(`gameName.${game.name}`)}
-            />
+            <DynamicTranslation values={game.translations}>
+              {({ dt }) => <Logo src={dt("image.logo")} alt={dt("gameName")} />}
+            </DynamicTranslation>
           </SelectGameButton>
         ))}
       </List>

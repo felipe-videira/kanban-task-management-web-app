@@ -32,43 +32,18 @@ import AriaLabel from "../../components/AriaLabel";
 import useModal from "../../hooks/useModal";
 import { SettingsContext } from "../../providers/settings";
 import Logo from "../../components/Logo";
-
-type GameOption = {
-  name: string;
-  icon: string;
-  color: string[] | string;
-  winRules: {
-    [key: string]: boolean;
-  };
-} | null;
-
-type GameConfig = {
-  name: string;
-  logo: string;
-  rules: string;
-  settings: {
-    showHouseChoiceDelay: number;
-    showHouseChoiceDuration: number;
-    showResultDelay: number;
-    showResultDuration: number;
-    updateScoreDelay: number;
-    winnerBackgroundEffectDelay: number;
-  };
-  listSetup: {
-    pointingUp: boolean;
-  };
-  options: NonNullable<GameOption>[];
-} | null;
+import isScreenMobileSize from "../../utils/isScreenMobileSize";
+import { addTranslation } from "../../i18n";
 
 function Game() {
   const navigate = useNavigate();
   const { gameName } = useParams();
-  const { t } = useTranslation();
+  const { t } = useTranslation(["common", "selectedGame"]);
 
   const { animationsEnabled } = useContext(SettingsContext);
   const toggleModal = useModal();
 
-  const [game, setGame, getGame] = useStateWithGetter<GameConfig>(null);
+  const [game, setGame, getGame] = useStateWithGetter<Game>(null);
   const [listSize, setListSize] = useState<number>(0);
   const [optionSize, setOptionSize] = useState<number>(0);
   const [resultSize, setResultSize] = useState<number>(0);
@@ -146,8 +121,8 @@ function Game() {
       children: () => (
         <RulesImageContainer>
           <RulesImage
-            src={t(`image.rules.${game.name}`)}
-            alt={t(`ariaLabel.rules.${game.name}`)}
+            src={t("image.rules", { ns: "selectedGame" })}
+            alt={t("ariaLabel.rules", { ns: "selectedGame" })}
             tabIndex={0}
           />
         </RulesImageContainer>
@@ -160,10 +135,9 @@ function Game() {
 
     const { length } = selectedGame.options;
 
-    const containerSize =
-      window.innerWidth > window.innerHeight
-        ? window.innerHeight * 0.6
-        : window.innerWidth * 0.9;
+    const containerSize = !isScreenMobileSize()
+      ? window.innerHeight * 0.6
+      : window.innerWidth * 0.9;
     setListSize(containerSize);
 
     const containerSizeByLen = containerSize / length;
@@ -173,16 +147,14 @@ function Game() {
     );
 
     setResultSize(
-      clamp(
-        containerSize / (window.innerWidth > window.innerHeight ? 1.75 : 2.5),
-        50,
-        1000
-      )
+      clamp(containerSize / (!isScreenMobileSize() ? 1.75 : 2.5), 50, 1000)
     );
   }
 
   function onScreenResize() {
-    setSizes();
+    if (window.innerWidth < window.outerWidth) {
+      setSizes();
+    }
   }
 
   function resetGame() {
@@ -194,10 +166,10 @@ function Game() {
     setShowHouseChoice(false);
   }
 
-  function setupGame(): GameConfig | undefined {
+  function setupGame(): Game | undefined {
     const selectedGame = gameConfig.games.find(
       (config) => config.name === gameName
-    ) as GameConfig | undefined;
+    ) as Game | undefined;
 
     if (selectedGame) {
       setGame(selectedGame);
@@ -225,6 +197,8 @@ function Game() {
     const selectedGame = setupGame();
 
     if (selectedGame) {
+      addTranslation(selectedGame);
+
       window.addEventListener("resize", onScreenResize);
 
       scoreService.setSaveOnExitListener(() => ({
@@ -244,8 +218,8 @@ function Game() {
     <Container>
       <Header tabIndex={0} role="region">
         <Logo
-          src={t(`image.logo.${game.name}`)}
-          alt={t(`gameName.${game.name}`)}
+          src={t("image.logo", { ns: "selectedGame" })}
+          alt={t("gameName", { ns: "selectedGame" })}
         />
 
         <Score tabIndex={0}>
@@ -273,7 +247,8 @@ function Game() {
               itemProps={{
                 size: optionSize,
                 onClick: onOptionClick,
-                alt: (name: string) => t(`label.${name}`),
+                alt: (name: string) =>
+                  t(`option.${name}`, { ns: "selectedGame" }),
                 disabled: step !== 1,
               }}
               itemSize={optionSize}
