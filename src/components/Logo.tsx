@@ -4,7 +4,7 @@ import { phone, phoneSm, tablet } from "../utils/breakpoints";
 
 export const LogoImg = styled.img`
   margin: 0 0 0 1rem;
-  height: 7rem;
+  height: 8rem;
   object-fit: contain;
   object-position: left center;
 

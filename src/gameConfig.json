@@ -1,11 +1,7 @@
 {
-    "globalSettings": {
-        "showHouseScore": false
-    },
     "games": [
         {
             "name": "original",
-            "rules": "/image-rules-no-labels.svg",
             "settings": {
                 "showHouseChoiceDelay": 2,
                 "showHouseChoiceDuration": 1,
@@ -58,7 +54,6 @@
         },
         {
             "name": "lizard-spock",
-            "rules": "/image-rules-bonus-no-labels.svg",
             "settings": {
                 "showHouseChoiceDelay": 2,
                 "showHouseChoiceDuration": 1,

@@ -49,11 +49,14 @@ export const Toolbar = styled.div`
   flex-direction: row-reverse;
   position: absolute;
   width: calc(100% - 2rem);
-  padding: 1rem;
+  padding: 2rem 1rem;
   z-index: 1;
 
   ${mobile} {
     bottom: 0;
+    padding: 1rem;
+    position: relative;
+    order: 2;
   }
 `;
 
@@ -68,6 +71,7 @@ export const UserSettingsList = styled.div`
   z-index: 9999;
   animation: ${fadeIn} 0.2s linear 0s 1;
   animation-fill-mode: both;
+  width: max-content;
 
   ${mobile} {
     right: 0.5rem;
@@ -75,9 +79,12 @@ export const UserSettingsList = styled.div`
 `;
 
 export const UserSettingsContainer = styled.div`
+  position: relative;
+
   label:not(${ToggleButtonLabel}) {
     text-transform: uppercase;
     cursor: pointer;
+    display: block;
 
     svg {
       width: 2.5rem;
@@ -101,6 +108,11 @@ export const UserSettingsContainer = styled.div`
   input[type="checkbox"]:not(${ToggleButtonInput}):checked
     + ${UserSettingsList} {
     display: flex;
+
+    ${mobile} {
+      bottom: 0;
+      right: 100%;
+    }
   }
 `;
 
@@ -122,6 +134,7 @@ export const Attribution = styled.div`
   width: 100%;
   text-align: center;
   z-index: -1;
+  order: 3;
 
   a {
     color: hsl(228, 45%, 44%);

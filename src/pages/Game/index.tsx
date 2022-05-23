@@ -73,8 +73,6 @@ function Game() {
   const [optionSize, setOptionSize] = useState<number>(0);
   const [resultSize, setResultSize] = useState<number>(0);
   const [userScore, setUserScore, getUserScore] = useStateWithGetter<number>(0);
-  const [houseScore, setHouseScore, getHouseScore] =
-    useStateWithGetter<number>(0);
   const [userChoice, setUserChoice] = useState<GameOption>(null);
   const [houseChoice, setHouseChoice] = useState<GameOption>(null);
   const [userWins, setUserWins] = useState<boolean>(false);
@@ -83,7 +81,6 @@ function Game() {
   const [showHouseChoice, setShowHouseChoice] =
     useState<boolean>(animationsEnabled);
   const [showResult, setShowResult] = useState<boolean>(animationsEnabled);
-  const [showHouseScore, setShowHouseScore] = useState<boolean>(true);
 
   function playMatch(
     optionName: string,
@@ -100,16 +97,13 @@ function Game() {
     return [false, null, null];
   }
 
-  function incrementScore(userIsWinner: boolean) {
-    const setStateAction = userIsWinner ? setUserScore : setHouseScore;
+  function updateScore(userIsWinner: boolean) {
+    if (!game) return;
 
-    setStateAction((prevValue) => {
-      const newScore = prevValue + 1;
+    const newScore = Math.max(getUserScore() + (userIsWinner ? 1 : -1), 0);
 
-      scoreService.save(game?.name || "", newScore, !userIsWinner);
-
-      return newScore;
-    });
+    scoreService.save(game.name, newScore);
+    setUserScore(newScore);
   }
 
   function displayResult() {
@@ -137,10 +131,10 @@ function Game() {
 
     if (game.settings.updateScoreDelay > 0) {
       setTimeout(() => {
-        incrementScore(isWinner);
+        updateScore(isWinner);
       }, game.settings.updateScoreDelay * 1000);
     } else {
-      incrementScore(isWinner);
+      updateScore(isWinner);
     }
   }
 
@@ -169,18 +163,21 @@ function Game() {
     const containerSize =
       window.innerWidth > window.innerHeight
         ? window.innerHeight * 0.6
-        : window.innerWidth * 1;
-    const containerSizeByLen = containerSize / length;
-
+        : window.innerWidth * 0.9;
     setListSize(containerSize);
+
+    const containerSizeByLen = containerSize / length;
     setOptionSize(
-      containerSizeByLen / containerSize <= 0.25
-        ? containerSizeByLen + containerSize * 0.05
-        : containerSizeByLen
+      containerSizeByLen +
+        (containerSizeByLen / containerSize <= 0.25 ? containerSize * 0.05 : 0)
     );
 
     setResultSize(
-      clamp(window.innerWidth * 0.1 + window.innerHeight * 0.1, 50, 1000)
+      clamp(
+        containerSize / (window.innerWidth > window.innerHeight ? 1.75 : 2.5),
+        50,
+        1000
+      )
     );
   }
 
@@ -203,11 +200,9 @@ function Game() {
     ) as GameConfig | undefined;
 
     if (selectedGame) {
-      setShowHouseScore(gameConfig.globalSettings.showHouseScore);
       setGame(selectedGame);
       setSizes(selectedGame);
       setUserScore(scoreService.get(selectedGame.name));
-      setHouseScore(scoreService.get(selectedGame.name, true));
     }
 
     return selectedGame;
@@ -234,8 +229,7 @@ function Game() {
 
       scoreService.setSaveOnExitListener(() => ({
         game: selectedGame.name,
-        userScore: getUserScore(),
-        houseScore: getHouseScore(),
+        score: getUserScore(),
       }));
     } else {
       navigateToHome();
@@ -258,31 +252,20 @@ function Game() {
           <ScoreLabel>{t("label.score")}</ScoreLabel>
           <ScoreValue
             name="user"
-            small={showHouseScore}
             key={"user" + userScore}
             aria-hidden="false"
+            small={false}
           >
             <AriaLabel live="off">{t("ariaLabel.userScore")}</AriaLabel>
             {userScore}
           </ScoreValue>
-          {showHouseScore ? (
-            <ScoreValue
-              name="house"
-              small={showHouseScore}
-              key={"house" + houseScore}
-              aria-hidden="false"
-            >
-              <AriaLabel live="off">{t("ariaLabel.houseScore")}</AriaLabel>
-              {houseScore}
-            </ScoreValue>
-          ) : null}
         </Score>
       </Header>
 
       <Stepper value={step} tabIndex={0} role="main">
         <Step value={1}>
           <Options>
-            <AriaLabel live="off">{t("label.options")}</AriaLabel>
+            <AriaLabel live="off">{t("ariaLabel.options")}</AriaLabel>
 
             <PolygonalList
               data={game.options || []}

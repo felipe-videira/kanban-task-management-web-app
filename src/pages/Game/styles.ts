@@ -109,10 +109,7 @@ export const Container = styled.div`
   ${mobile} {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    height: auto;
-    margin: 0;
-    padding: 0;
+    justify-content: space-between;
   }
 }
 `;
@@ -314,6 +311,23 @@ const ResultChoicetWinner = css<ResultProps>`
       animation-fill-mode: both;
       animation-timing-function: ease;
       animation-delay: ${(props) => props.winnerBackgroundEffectDelay}s;
+
+      ${mobile} {
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background-image: radial-gradient(
+          circle,
+          rgba(255, 255, 255, var(--result-rg-first)) 43%,
+          rgba(255, 255, 255, var(--result-rg-first-border)) 43%,
+          rgba(255, 255, 255, var(--result-rg-second)) 57%,
+          rgba(255, 255, 255, var(--result-rg-second-border)) 57%,
+          rgba(255, 255, 255, var(--result-rg-third)) 100%,
+          rgba(255, 255, 255, var(--result-rg-third-border)) 100%,
+          rgba(255, 255, 255, 0) 0%
+        );
+      }
     }
   }
 `;
@@ -357,10 +371,13 @@ export const ResultChoiceLabel = styled.p`
   justify-content: center;
   letter-spacing: 2px;
   margin: 0;
+  position: absolute;
+  top: -25%;
 
   ${mobile} {
     top: unset;
-    bottom: -3rem;
+    bottom: -1rem;
+    position: relative;
   }
 
   ${phoneSm} {
@@ -406,14 +423,11 @@ export const Result = styled.div`
   animation-name: ${growAndfadeIn};
   animation-fill-mode: both;
   z-index: 1;
-
   margin 0 5%;
 
   ${mobile} {
     animation-name: ${fadeIn};
-    margin 0 5%;
     order: 3;
-    width: 60%;
   }
 `;
 
@@ -424,8 +438,8 @@ export const ResultMessage = styled.p`
   font-weight: bold;
   margin: 10px 0;
 
-  @media only screen and (max-width: 820px), (max-width: 60rem) {
-    font-size: 2rem;
+  ${mobile} {
+    font-size: 4rem;
   }
 `;
 
@@ -433,11 +447,10 @@ export const ResultContainer = styled.div<ResultProps>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 57.5vh;
+  min-height: 57.5vh;
 
   ${mobile} {
     width: 100%;
-    height: auto;
     flex-wrap: wrap;
     align-items: center;
   }
