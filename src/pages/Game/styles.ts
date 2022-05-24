@@ -86,7 +86,7 @@ const radialBackgroundEffect = keyframes`
 `;
 
 export const Container = styled.div`
-  animation: ${fadeIn} 2s linear 0s 1;
+  animation: ${fadeIn} 0.2s linear 0s 1;
   animation-fill-mode: both;
   margin: 0 auto;
   display: grid;
@@ -100,7 +100,8 @@ export const Container = styled.div`
   grid-template-rows: max-content 1fr;
   width: 100%;
   padding: 2rem 0 0 0;
-
+  z-index: 0;
+  
   ${mobile} {
     display: flex;
     flex-direction: column;

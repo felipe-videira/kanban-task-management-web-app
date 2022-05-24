@@ -153,7 +153,7 @@ describe("Game", () => {
       "message.victory"
     );
     expect(save).toHaveBeenCalledWith("original", 1);
-    expect(wrapper.find(ScoreValue).contains("1")).toBeTruthy();
+    expect(wrapper.find(ScoreValue).text()).toBe("1");
   });
 
   it("should lose and subtract 1 to the score", () => {
@@ -176,6 +176,6 @@ describe("Game", () => {
       "message.defeat"
     );
     expect(save).toHaveBeenCalledWith("original", 2);
-    expect(wrapper.find(ScoreValue).contains("2")).toBeTruthy();
+    expect(wrapper.find(ScoreValue).text()).toBe("2");
   });
 });

@@ -189,8 +189,8 @@ exports[`Game should render correctly 1`] = `
 }
 
 .c0 {
-  -webkit-animation: hOYTOz 2s linear 0s 1;
-  animation: hOYTOz 2s linear 0s 1;
+  -webkit-animation: hOYTOz 0.2s linear 0s 1;
+  animation: hOYTOz 0.2s linear 0s 1;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   margin: 0 auto;
@@ -211,6 +211,7 @@ exports[`Game should render correctly 1`] = `
   grid-template-rows: max-content 1fr;
   width: 100%;
   padding: 2rem 0 0 0;
+  z-index: 0;
 }
 
 .c21 {
@@ -528,20 +529,6 @@ exports[`Game should render correctly 1`] = `
                     aria-hidden="false"
                     className="c5 c6"
                   >
-                    <AriaLabel
-                      live="off"
-                    >
-                      <div
-                        aria-label="ariaLabel.userScore"
-                        aria-live="off"
-                        style={
-                          Object {
-                            "color": "transparent",
-                            "position": "absolute",
-                          }
-                        }
-                      />
-                    </AriaLabel>
                     0
                   </div>
                 </styled.div>
@@ -550,14 +537,10 @@ exports[`Game should render correctly 1`] = `
           </div>
         </styled.div>
         <Styled(styled.div)
-          role="main"
-          tabIndex={0}
           value={1}
         >
           <div
             className="c7 c8"
-            role="main"
-            tabIndex={0}
             value={1}
           >
             <styled.div
@@ -567,24 +550,17 @@ exports[`Game should render correctly 1`] = `
                 className="c9 c10"
                 value={1}
               >
-                <styled.div>
+                <styled.div
+                  aria-label="ariaLabel.options"
+                  role="main"
+                  tabIndex={0}
+                >
                   <div
+                    aria-label="ariaLabel.options"
                     className="c11"
+                    role="main"
+                    tabIndex={0}
                   >
-                    <AriaLabel
-                      live="off"
-                    >
-                      <div
-                        aria-label="ariaLabel.options"
-                        aria-live="off"
-                        style={
-                          Object {
-                            "color": "transparent",
-                            "position": "absolute",
-                          }
-                        }
-                      />
-                    </AriaLabel>
                     <PolygonalList
                       ItemComponent={[Function]}
                       data={
