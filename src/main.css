@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Barlow Semi Condensed';
   src: local('Barlow Semi Condensed'), 
-      url('fonts/BarlowSemiCondensed/BarlowSemiCondensed-SemiBold.ttf') 
+      url('/fonts/BarlowSemiCondensed/BarlowSemiCondensed-SemiBold.ttf') 
       format('truetype');
   font-weight: 600;
   font-display: swap;
@@ -9,7 +9,7 @@
 @font-face {
   font-family: 'Barlow Semi Condensed';
   src: local('Barlow Semi Condensed'), 
-      url('fonts/BarlowSemiCondensed/BarlowSemiCondensed-Bold.ttf') 
+      url('/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Bold.ttf') 
       format('truetype');
   font-weight: 700;
   font-display: swap;
