@@ -8,17 +8,17 @@ services:
       - key: NODE_ENV
         value: production
     headers:
-      - path: /icons/**"
+      - path: /icons/**
         name: Cache-Control
         value: public, max-age=31536000 
-      - path: /images/**"
-        name:   Cache-Control
+      - path: /images/**
+        name: Cache-Control
         value: public, max-age=31536000 
-      - path: /fonts/**"
-        name:   Cache-Control
+      - path: /fonts/**
+        name: Cache-Control
         value: public, max-age=31536000
-      - path: /assets/**"
-        name:   Cache-Control
+      - path: /assets/**
+        name: Cache-Control
         value: public, max-age=512000
     routes:
       - type: redirect
