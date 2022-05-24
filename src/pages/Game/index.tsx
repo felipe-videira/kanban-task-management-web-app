@@ -28,7 +28,6 @@ import {
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
-import AriaLabel from "../../components/AriaLabel";
 import useModal from "../../hooks/useModal";
 import { SettingsContext } from "../../providers/settings";
 import Logo from "../../components/Logo";
@@ -225,17 +224,14 @@ function Game() {
         <Score tabIndex={0}>
           <ScoreLabel>{t("label.score")}</ScoreLabel>
           <ScoreValue key={userScore} aria-hidden="false">
-            <AriaLabel>{t("ariaLabel.userScore")}</AriaLabel>
             {userScore}
           </ScoreValue>
         </Score>
       </Header>
 
-      <Stepper value={step} tabIndex={0} role="main">
+      <Stepper value={step}>
         <Step value={1}>
-          <Options>
-            <AriaLabel>{t("ariaLabel.options")}</AriaLabel>
-
+          <Options role="main" tabIndex={0} aria-label={t("ariaLabel.options")}>
             <PolygonalList
               data={game.options || []}
               ItemComponent={Option}
@@ -261,13 +257,15 @@ function Game() {
               size={resultSize}
               aria-live="polite"
               aria-atomic="true"
+              role="main"
+              tabIndex={0}
             >
               <ResultUserChoice size={resultSize}>
                 <ResultChoiceLabel>{t("label.userChoice")}</ResultChoiceLabel>
                 <Option
                   {...userChoice}
                   size={resultSize}
-                  alt={t(`label.${userChoice.name}`)}
+                  alt={t(`option.${userChoice.name}`, { ns: "selectedGame" })}
                 />
               </ResultUserChoice>
 
@@ -277,7 +275,9 @@ function Game() {
                   <Option
                     {...houseChoice}
                     size={resultSize}
-                    alt={t(`label.${houseChoice.name}`)}
+                    alt={t(`option.${houseChoice.name}`, {
+                      ns: "selectedGame",
+                    })}
                     ariaHidden={false}
                   />
                 ) : (

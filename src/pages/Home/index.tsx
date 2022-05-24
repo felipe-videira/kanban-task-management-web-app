@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import Button from "../../components/Button";
 import { mobile } from "../../utils/breakpoints";
-import AriaLabel from "../../components/AriaLabel";
 import Logo, { LogoImg } from "../../components/Logo";
 import gameConfig from "../../gameConfig.json";
 import DynamicTranslation from "../../components/DynamicTranslation";
@@ -45,9 +44,7 @@ function Home() {
 
   return (
     <Container>
-      <List tabIndex={0} role="navigation">
-        <AriaLabel>{t("ariaLabel.gameList")}</AriaLabel>
-
+      <List tabIndex={0} role="navigation" aria-label={t("ariaLabel.gameList")}>
         {(gameConfig.games as unknown as NonNullable<Game>[]).map((game) => (
           <SelectGameButton
             outlined

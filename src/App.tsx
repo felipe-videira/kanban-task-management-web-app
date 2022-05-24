@@ -17,7 +17,6 @@ import {
   Settings,
 } from "./services/settings";
 import { ArrowBackIcon } from "./icons";
-import AriaLabel from "./components/AriaLabel";
 import {
   AppContainer,
   AriaTouchInstructionsContainer,
@@ -168,8 +167,7 @@ function App() {
         </UserSettingsContainer>
 
         {!inHomePage ? (
-          <GoBackButton onClick={goBack}>
-            <AriaLabel>{t("ariaLabel.goBack")}</AriaLabel>
+          <GoBackButton onClick={goBack} aria-label={t("ariaLabel.goBack")}>
             <ArrowBackIcon />
           </GoBackButton>
         ) : null}
