@@ -17,7 +17,9 @@ export default defineConfig({
         "favicon.ico",
         "robots.txt",
         "apple-touch-icon.png",
-        "assets/BarlowSemiCondensed-Bold.1067f010.ttf",
+        "assets/*",
+        "*.svg",
+        "*.png",
       ],
       manifest: {
         name: "Jankenpon",
