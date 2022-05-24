@@ -12,7 +12,7 @@ export default defineConfig({
     macrosPlugin(),
     svgr(),
     VitePWA({
-      includeAssets: ["*.ico", "*.svg", "*.png", "fonts/**", "robots.txt"],
+      includeAssets: ["icons/**", "images/**", "fonts/**", "robots.txt"],
       manifest: {
         name: "Jankenpon",
         short_name: "Jankenpon",
@@ -23,17 +23,17 @@ export default defineConfig({
         display: "fullscreen",
         icons: [
           {
-            src: "android-chrome-192x192.png",
+            src: "icons/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "android-chrome-512x512.png",
+            src: "icons/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "android-chrome-512x512.png",
+            src: "icons/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
