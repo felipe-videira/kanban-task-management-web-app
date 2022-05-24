@@ -1,5 +1,4 @@
-import { InferProps, node, oneOf } from "prop-types";
-import { AriaAttributes } from "react";
+import { InferProps, node } from "prop-types";
 
 export default function AriaLabel(
   props: InferProps<typeof AriaLabel.propTypes>
@@ -7,7 +6,6 @@ export default function AriaLabel(
   return (
     <div
       style={{ position: "absolute", color: "transparent" }}
-      aria-live={props.live}
       aria-label={props.children.toString()}
     ></div>
   );
@@ -15,10 +13,4 @@ export default function AriaLabel(
 
 AriaLabel.propTypes = {
   children: node.isRequired,
-  live: oneOf<AriaAttributes["aria-live"]>([
-    "assertive",
-    "off",
-    "polite",
-    undefined,
-  ]).isRequired,
 };

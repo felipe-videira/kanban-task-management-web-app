@@ -169,7 +169,7 @@ function App() {
 
         {!inHomePage ? (
           <GoBackButton onClick={goBack}>
-            <AriaLabel live="off">{t("ariaLabel.goBack")}</AriaLabel>
+            <AriaLabel>{t("ariaLabel.goBack")}</AriaLabel>
             <ArrowBackIcon />
           </GoBackButton>
         ) : null}

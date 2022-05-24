@@ -46,7 +46,7 @@ function Home() {
   return (
     <Container>
       <List tabIndex={0} role="navigation">
-        <AriaLabel live="off">{t("ariaLabel.gameList")}</AriaLabel>
+        <AriaLabel>{t("ariaLabel.gameList")}</AriaLabel>
 
         {(gameConfig.games as unknown as NonNullable<Game>[]).map((game) => (
           <SelectGameButton

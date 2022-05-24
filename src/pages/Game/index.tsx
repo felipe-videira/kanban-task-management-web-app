@@ -225,7 +225,7 @@ function Game() {
         <Score tabIndex={0}>
           <ScoreLabel>{t("label.score")}</ScoreLabel>
           <ScoreValue key={userScore} aria-hidden="false">
-            <AriaLabel live="off">{t("ariaLabel.userScore")}</AriaLabel>
+            <AriaLabel>{t("ariaLabel.userScore")}</AriaLabel>
             {userScore}
           </ScoreValue>
         </Score>
@@ -234,7 +234,7 @@ function Game() {
       <Stepper value={step} tabIndex={0} role="main">
         <Step value={1}>
           <Options>
-            <AriaLabel live="off">{t("ariaLabel.options")}</AriaLabel>
+            <AriaLabel>{t("ariaLabel.options")}</AriaLabel>
 
             <PolygonalList
               data={game.options || []}
