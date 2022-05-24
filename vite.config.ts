@@ -12,7 +12,7 @@ export default defineConfig({
     macrosPlugin(),
     svgr(),
     VitePWA({
-      includeAssets: ["*.ico", "*.svg", "*.png", "*.ttf", "robots.txt"],
+      includeAssets: ["*.ico", "*.svg", "*.png", "fonts/*", "robots.txt"],
       manifest: {
         name: "Jankenpon",
         short_name: "Jankenpon",
