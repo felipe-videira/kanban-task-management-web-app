@@ -3,5 +3,19 @@
     "clean_urls": false,
     "routes": {
       "/**": "index.html"
+    },
+    "headers": {
+      "*.svg": {
+        "Cache-Control": "public, max-age=512000"
+      }, 
+      "*.png": {
+        "Cache-Control": "public, max-age=512000"
+      }, 
+      "/fonts/**": {
+        "Cache-Control": "public, max-age=512000"
+      },
+      "/assets/**": {
+        "Cache-Control": "public, max-age=512000"
+      }
     }
 }
