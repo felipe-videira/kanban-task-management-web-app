@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: jankenpon
+    name: Jankenpon
     env: static
     buildCommand: npm run build
     staticPublishPath: ./dist
