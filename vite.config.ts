@@ -12,7 +12,12 @@ export default defineConfig({
     macrosPlugin(),
     svgr(),
     VitePWA({
-      includeAssets: ["/public/*"],
+      includeAssets: [
+        "favicon.svg",
+        "favicon.ico",
+        "robots.txt",
+        "apple-touch-icon.png",
+      ],
       manifest: {
         name: "Jankenpon",
         short_name: "Jankenpon",
