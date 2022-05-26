@@ -24,7 +24,8 @@ import {
   ScoreLabel,
   ScoreValue,
   Stepper,
-  ResultChoiceLabel,
+  ResultUserChoiceLabel,
+  ResultHouseChoiceLabel,
 } from "./styles";
 import gameConfig from "../../gameConfig.json";
 import useStateWithGetter from "../../hooks/useStateWithGetter";
@@ -253,25 +254,28 @@ function Game() {
         <Step value={2}>
           {userChoice && houseChoice ? (
             <ResultContainer
-              userWins={userWins}
               {...game.settings}
+              userWins={userWins}
               size={resultSize}
               aria-live="polite"
               aria-atomic="true"
               role="main"
               tabIndex={0}
             >
+              <ResultUserChoiceLabel>
+                {t("label.userChoice")}
+              </ResultUserChoiceLabel>
+              <ResultHouseChoiceLabel>
+                {t("label.houseChoice")}
+              </ResultHouseChoiceLabel>
               <ResultUserChoice size={resultSize}>
-                <ResultChoiceLabel>{t("label.userChoice")}</ResultChoiceLabel>
                 <Option
                   {...userChoice}
                   size={resultSize}
                   alt={t(`option.${userChoice.name}`, { ns: "selectedGame" })}
                 />
               </ResultUserChoice>
-
               <ResultHouseChoice size={resultSize}>
-                <ResultChoiceLabel>{t("label.houseChoice")}</ResultChoiceLabel>
                 {showHouseChoice ? (
                   <Option
                     {...houseChoice}
@@ -290,7 +294,6 @@ function Game() {
                   />
                 )}
               </ResultHouseChoice>
-
               {showResult ? (
                 <Result aria-hidden="false">
                   <ResultMessage>{resultMessage}</ResultMessage>

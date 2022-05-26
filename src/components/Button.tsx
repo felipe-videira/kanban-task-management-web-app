@@ -40,7 +40,7 @@ const Button = styled.button.attrs(() => ({
   transition: transform 300ms ease;
 
   &:hover {
-    ${(props) => (props.icon ? "" : "transform: scale(1.05);")}
+    ${(props) => (props.icon ? "" : "color: hsl(349, 70%, 56%)")}
   }
 
   ${(props) =>

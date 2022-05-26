@@ -1,6 +1,5 @@
 import { InferProps, number } from "prop-types";
 import styled, { keyframes } from "styled-components/macro";
-import { mobile } from "../utils/breakpoints";
 
 const proptypes = {
   value: number.isRequired,
@@ -24,10 +23,7 @@ const Step = styled.div<InferProps<typeof proptypes>>`
   animation-fill-mode: both;
   display: none;
   width: 100%;
-
-  ${mobile} {
-    height: 100%;
-  }
+  height: 100%;
 `;
 
 const Stepper = styled.div<InferProps<typeof proptypes>>`
