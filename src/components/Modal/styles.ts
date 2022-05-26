@@ -44,31 +44,32 @@ export const ModalOverlay = styled.div.attrs<ModalOverlayProps>((props) => ({
 
 export const ModalContainer = styled.div`
   background: #fff;
-  width: 30%;
-  height: 60%;
+  width: 25%;
+  height: 55%;
   position: absolute;
   border-radius: 8px;
-  padding: 2%;
+  padding: 2% 2% 1%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 
   ${mobile} {
     width: 100%;
     height: 100%;
-    overflow: auto;-
+    overflow: auto;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
   }
 `;
 
-export const ModalHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 2.5rem;
+export const ModalTitle = styled.div`
+  font-size: 2.25rem;
   text-transform: uppercase;
   font-weight: bold;
+  flex: 1;
 
   ${mobile} {
-    font-size: 3rem;
+    font-size: 2rem;
     flex: 0.25;
     justify-content: center;
   }
@@ -77,10 +78,19 @@ export const ModalHeader = styled.div`
 export const ModalCloseButton = styled(Button).attrs(() => ({
   icon: true,
 }))`
-  height: 10%;
-  width: 10%;
+  height: 2.5rem;
+  width: 2.5rem;
+
+  svg {
+    fill: rgba(0 0 0 / 0.2);
+  }
 
   ${mobile} {
-    display: none;
+    order: 3;
   }
+`;
+
+export const ModalContent = styled.div`
+  width: 90%;
+  margin: 10% auto;
 `;

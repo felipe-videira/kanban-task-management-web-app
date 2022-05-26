@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import Option from "../../components/Option";
 import PolygonalList from "../../components/PolygonalList";
 import { Step } from "../../components/Stepper";
+import { ReactSVG } from "react-svg";
 import {
   Container,
   Options,
@@ -18,7 +19,6 @@ import {
   ResultHouseChoice,
   ResultMessage,
   RulesImageContainer,
-  RulesImage,
   RulesButton,
   Score,
   ScoreLabel,
@@ -118,11 +118,12 @@ function Game() {
     toggleModal({
       title: t("label.rulesModal"),
       children: () => (
-        <RulesImageContainer>
-          <RulesImage
+        <RulesImageContainer
+          aria-label={t("ariaLabel.rules", { ns: "selectedGame" })}
+        >
+          <ReactSVG
             src={t("image.rules", { ns: "selectedGame" })}
-            alt={t("ariaLabel.rules", { ns: "selectedGame" })}
-            tabIndex={0}
+            fallback={t("ariaLabel.rules", { ns: "selectedGame" })}
           />
         </RulesImageContainer>
       ),

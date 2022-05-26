@@ -457,12 +457,7 @@ export const ResultContainer = styled.div<ResultProps>`
 ResultContainer.propTypes = resultPropTypes;
 
 export const RulesImageContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-`;
-
-export const RulesImage = styled.img`
-  width: 80%;
+  svg {
+    width: 100%;
+  }
 `;

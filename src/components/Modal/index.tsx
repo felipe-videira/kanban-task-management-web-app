@@ -1,11 +1,11 @@
 import { bool, func, InferProps, node, string } from "prop-types";
-import { SyntheticEvent, useEffect, useState } from "react";
-import isMobile from "../../utils/isScreenMobileSize";
+import { useEffect, useState } from "react";
 import {
   ModalOverlay,
   ModalContainer,
-  ModalHeader,
+  ModalTitle,
   ModalCloseButton,
+  ModalContent,
 } from "./styles";
 import { CloseIcon } from "../../icons";
 
@@ -13,12 +13,6 @@ const ANIMATION_DURATION = 0.4;
 
 export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   const [show, setShow] = useState(false);
-
-  function onContainerClick(evt: SyntheticEvent) {
-    if (!isMobile()) {
-      evt.stopPropagation();
-    }
-  }
 
   useEffect(() => {
     if (props.show) {
@@ -38,22 +32,21 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
     >
       {props.show ? (
         <ModalContainer
-          onClick={onContainerClick}
+          onClick={(evt) => evt.stopPropagation()}
           role="dialog"
           tabIndex={0}
           onBlur={props.onChange}
         >
-          <ModalHeader>
-            {props.title}
-            <ModalCloseButton
-              type="button"
-              aria-label={props.closeButtonAriaLabel}
-              onClick={props.onChange}
-            >
-              <CloseIcon />
-            </ModalCloseButton>
-          </ModalHeader>
-          {props.children}
+          <ModalTitle>{props.title}</ModalTitle>
+          <ModalCloseButton
+            type="button"
+            aria-label={props.closeButtonAriaLabel}
+            onClick={props.onChange}
+          >
+            <CloseIcon />
+          </ModalCloseButton>
+
+          <ModalContent>{props.children}</ModalContent>
         </ModalContainer>
       ) : null}
     </ModalOverlay>
