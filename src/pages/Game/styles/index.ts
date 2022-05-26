@@ -169,27 +169,25 @@ export const ScoreLabel = styled.h2`
 `;
 
 export const Stepper = styled(_Stepper)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   grid-area: game;
   z-index: 1;
-  height: 100%;
-  width: 100%;
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
 
-  ${mobile} {
-    min-height: 57.5vh;
-    height: auto;
-  }
-
-  ${Step}[value="1"][value="${(props) => props.value}"] {
-    display: flex;
-    align-items: center;
+  ${Step} {
+    height: unset;
   }
 `;
 
 export const Options = styled.div`
-  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 `;
 
 export const RulesImageContainer = styled.div`
@@ -204,7 +202,7 @@ const ResultChoiceLabel = styled.p`
   width: 100%;
   font-size: 1.5rem;
   white-space: nowrap;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   margin: 0;
   animation-fill-mode: both;
 
@@ -213,18 +211,19 @@ const ResultChoiceLabel = styled.p`
     align-items: center;
     justify-content: center;
     animation-name: none !important;
-  }
-
-  ${phone} {
-    font-size: 1rem;
-  }
-
-  ${phoneSm} {
-    font-size: 0.75rem;
+    letter-spacing: 2px;
   }
 
   ${tablet} {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  ${phone} {
+    font-size: 0.9rem;
+  }
+
+  ${phoneSm} {
+    font-size: 0.65rem;
   }
 `;
 
@@ -285,32 +284,58 @@ export const ResultHouseChoice = styled(ResultChoice)`
 `;
 
 export const Result = styled.div`
-  display: flex;  
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   animation-name: ${growAndfadeIn};
   animation-fill-mode: both;
   z-index: 1;
-  margin 0 5%;
-  overflow: hidden;
   grid-area: 2 / 2;
+  width: 100%;
 
   ${mobile} {
     animation-name: ${fadeIn};
-    grid-area: 3 / 1 / 3 /span 2;
+    grid-area: 3 / 1 / 3 / span 2;
   }
 `;
 
 export const ResultMessage = styled.p`
   text-transform: uppercase;
   white-space: nowrap;
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: bold;
-  margin: 10px 0;
+  margin: 0 0 15px 0;
 
   ${mobile} {
+    margin: 0 0 10px 0;
+  }
+
+  ${tablet} {
     font-size: 4rem;
+  }
+
+  ${phone} {
+    font-size: 3.5rem;
+  }
+
+  ${phoneSm} {
+    font-size: 3rem;
+  }
+`;
+
+export const RetryButton = styled(Button)`
+  &:hover {
+    color: hsl(349, 70%, 56%);
+  }
+
+  ${mobile} {
+    width: 60%;
+    max-width: 280px;
+  }
+
+  ${phoneSm} {
+    font-size: 0.8rem;
   }
 `;
 
@@ -318,14 +343,14 @@ export const ResultContainer = styled.div<ResultProps>`
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template: 0.6fr max-content / repeat(3, max-content);
+  grid-template: 0.6fr max-content / max-content 20% max-content;
   place-items: center;
   place-content: start center;
   gap: 0 10%;
 
   ${mobile} {
-    grid-template: repeat(3, max-content) / 1fr 1fr;
-    place-content: center;
+    grid-template: max-content max-content 0.75fr / 1fr 1fr;
+    place-content: end;
     gap: 5%;
   }
 

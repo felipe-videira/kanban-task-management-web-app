@@ -1,39 +1,39 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+import gameConfig from "../../gameConfig.json";
+import { addTranslation } from "../../i18n";
+import * as scoreService from "../../services/score";
 import clamp from "../../utils/clamp";
 import random from "../../utils/random";
-import * as scoreService from "../../services/score";
-import Button from "../../components/Button";
+import isScreenMobileSize from "../../utils/isScreenMobileSize";
+import { SettingsContext } from "../../providers/settings";
+import useModal from "../../hooks/useModal";
 import Option from "../../components/Option";
 import PolygonalList from "../../components/PolygonalList";
 import { Step } from "../../components/Stepper";
-import { ReactSVG } from "react-svg";
+import useStateWithGetter from "../../hooks/useStateWithGetter";
+import Logo from "../../components/Logo";
 import {
   Container,
-  Options,
   Header,
-  ResultContainer,
-  ResultUserChoice,
-  Result,
-  ResultHouseChoice,
-  ResultMessage,
-  RulesImageContainer,
-  RulesButton,
   Score,
   ScoreLabel,
   ScoreValue,
   Stepper,
+  Options,
+  ResultContainer,
   ResultUserChoiceLabel,
   ResultHouseChoiceLabel,
+  ResultUserChoice,
+  ResultHouseChoice,
+  RulesImageContainer,
+  Result,
+  ResultMessage,
+  RetryButton,
+  RulesButton,
 } from "./styles";
-import gameConfig from "../../gameConfig.json";
-import useStateWithGetter from "../../hooks/useStateWithGetter";
-import useModal from "../../hooks/useModal";
-import { SettingsContext } from "../../providers/settings";
-import Logo from "../../components/Logo";
-import isScreenMobileSize from "../../utils/isScreenMobileSize";
-import { addTranslation } from "../../i18n";
 
 function Game() {
   const navigate = useNavigate();
@@ -297,7 +297,9 @@ function Game() {
               {showResult ? (
                 <Result aria-hidden="false">
                   <ResultMessage>{resultMessage}</ResultMessage>
-                  <Button onClick={resetGame}>{t("label.retryButton")}</Button>
+                  <RetryButton onClick={resetGame}>
+                    {t("label.retryButton")}
+                  </RetryButton>
                 </Result>
               ) : null}
             </ResultContainer>

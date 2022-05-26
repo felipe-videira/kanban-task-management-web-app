@@ -1,32 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Game should render correctly 1`] = `
-.c20 {
-  background: transparent;
-  border: 2px solid hsl(217,10%,65%);
-  color: #fff;
-  padding: 10px;
-  font-size: 1rem;
-  width: 100%;
-  font-family: inherit;
-  border-radius: 7px;
-  text-transform: uppercase;
-  -webkit-letter-spacing: 2px;
-  -moz-letter-spacing: 2px;
-  -ms-letter-spacing: 2px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  -webkit-transition: -webkit-transform 300ms ease;
-  -webkit-transition: transform 300ms ease;
-  transition: transform 300ms ease;
-}
-
-.c20:hover {
-  -webkit-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  transform: scale(1.05);
-}
-
 .c15 {
   grid-area: paper;
   border-radius: 50%;
@@ -163,21 +137,6 @@ exports[`Game should render correctly 1`] = `
   height: 100%;
 }
 
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
 .c7 .c9[value="1"] {
   display: block;
 }
@@ -187,6 +146,23 @@ exports[`Game should render correctly 1`] = `
   height: 8rem;
   object-fit: contain;
   object-position: left center;
+}
+
+.c20 {
+  width: 100%;
+  font-family: inherit;
+  border-radius: 7px;
+  text-transform: uppercase;
+  -webkit-letter-spacing: 3px;
+  -moz-letter-spacing: 3px;
+  -ms-letter-spacing: 3px;
+  letter-spacing: 3px;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 10px;
+  background: transparent;
+  border: 2px solid hsl(217,10%,65%);
+  color: #fff;
 }
 
 .c0 {
@@ -319,6 +295,31 @@ exports[`Game should render correctly 1`] = `
 }
 
 .c8 {
+  grid-area: game;
+  z-index: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.c8 .c9 {
+  height: unset;
+}
+
+.c11 {
+  height: 100%;
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -331,25 +332,6 @@ exports[`Game should render correctly 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  grid-area: game;
-  z-index: 1;
-  height: 100%;
-  width: 100%;
-}
-
-.c8 .c9[value="1"][value="1"] {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c11 {
-  margin: 0 auto;
 }
 
 @media only screen and (min-width:768px) and (max-width:820px) {
@@ -444,13 +426,6 @@ exports[`Game should render correctly 1`] = `
 @media only screen and (max-width:280px) {
   .c4 {
     font-size: 0.5rem;
-  }
-}
-
-@media only screen and (max-width:820px),(max-width:40rem) {
-  .c8 {
-    min-height: 57.5vh;
-    height: auto;
   }
 }
 

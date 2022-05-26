@@ -28,11 +28,6 @@ const Step = styled.div<InferProps<typeof proptypes>>`
 
 const Stepper = styled.div<InferProps<typeof proptypes>>`
   ${(props) => `
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-
     ${Step}[value="${props.value}"] {
       display: block;
     }
