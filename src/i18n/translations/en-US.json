@@ -17,10 +17,9 @@
         "animationToggle": "Toggle Animations",
         "useBrowserFont": "Toggle Use Browser Font",
         "close": "Close rules",
-        "touchInstructions": "Swipe horizontally to navigate through the items on the page, double tap to select",
         "userScore": "Player",
         "goBack": "Go Back",
-        "settings": "Settings"
+        "settings": "Toggle settings menu"
     },
     "message": {
         "victory": "You Win",

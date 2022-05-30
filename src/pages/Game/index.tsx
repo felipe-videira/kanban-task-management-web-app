@@ -153,9 +153,10 @@ function Game() {
   }
 
   function onScreenResize() {
-    if (window.innerWidth < window.outerWidth) {
-      setSizes();
-    }
+    // const zoom = Math.round(100 / (window.innerWidth / window.outerWidth));
+    // if (zoom >= 100) {
+    //   setSizes();
+    // }
   }
 
   function resetGame() {

@@ -3,43 +3,25 @@ import {
   ToggleButtonInput,
   ToggleButtonLabel,
 } from "./components/ToggleButton";
-import { mobile } from "./utils/breakpoints";
+import {
+  mobileOrTabletOrFontSizeLarge,
+  mobileSm,
+  mobileXs,
+} from "./utils/breakpoints";
 import { fadeIn } from "./utils/keyframes";
 import Button from "./components/Button";
 
-export const AppContainer = styled.div<{
-  animationsEnabled: boolean;
-  useBrowserFont: boolean;
-}>`
+export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
+  font-family: "Barlow Semi Condensed", sans-serif;
 
-  ${(props) =>
-    !props.useBrowserFont
-      ? 'font-family: "Barlow Semi Condensed", sans-serif;'
-      : ""}
-
-  ${(props) =>
-    !props.animationsEnabled
-      ? `
-      *, *:after, *:before {
-        animation-name: none !important;
-        transition: none !important; 
-      }`
-      : ""}
-  
-    *:focus {
+  *:focus {
     outline: 3px solid orange;
     box-shadow: 2px 2px 15px 2px orange;
   }
-`;
-
-export const AriaTouchInstructionsContainer = styled.div`
-  position: absolute;
-  background-color: transparent;
-  top: -100%;
 `;
 
 export const Toolbar = styled.div`
@@ -52,7 +34,7 @@ export const Toolbar = styled.div`
   padding: 2rem 1rem;
   z-index: 1;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     bottom: 0;
     padding: 1rem;
     position: relative;
@@ -73,13 +55,25 @@ export const UserSettingsList = styled.div`
   animation-fill-mode: both;
   width: max-content;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     right: 0.5rem;
+  }
+
+  ${mobileSm} {
+    width: 100vw;
   }
 `;
 
 export const UserSettingsContainer = styled.div`
   position: relative;
+
+  ${UserSettingsList} {
+    display: none;
+  }
+
+  ${ToggleButtonLabel} {
+    margin: 1rem;
+  }
 
   label:not(${ToggleButtonLabel}) {
     text-transform: uppercase;
@@ -87,21 +81,18 @@ export const UserSettingsContainer = styled.div`
     display: block;
 
     svg {
+      fill: ${(props) => props.theme.contrast.low};
       width: 2.5rem;
       height: 2.5rem;
-      fill: ${(props) => props.theme.contrast.low};
+
+      ${mobileXs} {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
     }
   }
 
-  ${ToggleButtonLabel} {
-    margin: 1rem;
-  }
-
   input[type="checkbox"]:not(${ToggleButtonInput}) {
-    display: none;
-  }
-
-  ${UserSettingsList} {
     display: none;
   }
 
@@ -109,9 +100,9 @@ export const UserSettingsContainer = styled.div`
     + ${UserSettingsList} {
     display: flex;
 
-    ${mobile} {
-      bottom: 0;
-      right: 100%;
+    ${mobileOrTabletOrFontSizeLarge} {
+      bottom: 3rem;
+      right: -1rem;
     }
   }
 `;
@@ -124,6 +115,11 @@ export const GoBackButton = styled(Button).attrs(() => ({
   display: block;
   width: 2.5rem;
   height: 2.5rem;
+
+  ${mobileXs} {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 `;
 
 export const Attribution = styled.div`
@@ -135,6 +131,10 @@ export const Attribution = styled.div`
   text-align: center;
   z-index: -1;
   order: 3;
+
+  ${mobileXs} {
+    font-size: 0.5rem;
+  }
 
   a {
     color: hsl(228, 45%, 44%);

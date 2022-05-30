@@ -1,5 +1,8 @@
 import styled, { keyframes } from "styled-components/macro";
-import { mobile } from "../../utils/breakpoints";
+import {
+  mobileOrTabletOrFontSizeLarge,
+  mobileXs,
+} from "../../utils/breakpoints";
 import Button from "../Button";
 
 type ModalOverlayProps = {
@@ -52,7 +55,7 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -68,10 +71,14 @@ export const ModalTitle = styled.div`
   font-weight: bold;
   flex: 1;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     font-size: 2rem;
     flex: 0.25;
     justify-content: center;
+  }
+
+  ${mobileXs} {
+    font-size: 1rem;
   }
 `;
 
@@ -85,7 +92,7 @@ export const ModalCloseButton = styled(Button).attrs(() => ({
     fill: rgba(0 0 0 / 0.2);
   }
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     order: 3;
   }
 `;

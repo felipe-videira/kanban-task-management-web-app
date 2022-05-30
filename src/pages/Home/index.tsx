@@ -2,7 +2,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import Button from "../../components/Button";
-import { mobile } from "../../utils/breakpoints";
+import {
+  mobileOrTabletOrFontSizeLarge,
+  mobileXs,
+  mobileSm,
+} from "../../utils/breakpoints";
 import Logo, { LogoImg } from "../../components/Logo";
 import gameConfig from "../../gameConfig.json";
 import DynamicTranslation from "../../components/DynamicTranslation";
@@ -22,8 +26,15 @@ const List = styled.div`
   width: 70%;
   justify-content: center;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
+  }
+
+  ${mobileXs} {
+    width: 100%;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(2.5rem, 6.5rem));
   }
 `;
 
@@ -32,8 +43,16 @@ const SelectGameButton = styled(Button)`
   text-align: left;
 
   ${LogoImg} {
-    ${mobile} {
+    ${mobileOrTabletOrFontSizeLarge} {
       height: 6rem;
+    }
+
+    ${mobileSm} {
+      height: 3rem;
+    }
+
+    ${mobileXs} {
+      height: 2.5rem;
     }
   }
 `;

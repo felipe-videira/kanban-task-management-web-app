@@ -9,7 +9,13 @@ import Button from "../../../components/Button";
 import { LogoAltText, LogoImg } from "../../../components/Logo";
 import { OptionButton } from "../../../components/Option/styles";
 import _Stepper, { Step } from "../../../components/Stepper";
-import { mobile, phone, phoneSm, tablet } from "../../../utils/breakpoints";
+import {
+  mobile,
+  mobileOrTablet,
+  mobileOrTabletOrFontSizeLarge,
+  mobileSm,
+  mobileXs,
+} from "../../../utils/breakpoints";
 import { fadeIn } from "../../../utils/keyframes";
 
 type ResultProps = {
@@ -38,10 +44,15 @@ export const Container = styled.div`
   padding: 2rem 0 1rem;
   z-index: 0;
   
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 2rem 0 1rem;
+  }
+
+  ${mobileXs} {
+    padding: 5% 0 0;
   }
 }
 `;
@@ -59,10 +70,15 @@ export const RulesButton = styled(Button).attrs(() => ({
   width: auto;
   z-index: 2;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     align-self: center;
     margin: 0;
-  }.
+  }
+
+  ${mobileXs} {
+    font-size: 0.5rem;
+    min-width: unset;
+  }
 `;
 
 export const Header = styled.div`
@@ -79,11 +95,32 @@ export const Header = styled.div`
   flex-wrap: wrap;
   gap: 1rem 0;
 
+  ${mobileOrTabletOrFontSizeLarge} {
+    width: 75%;
+    padding: 3%;
+    border-radius: 10px;
+  }
+
   ${LogoImg}, ${LogoAltText} {
     flex: 0.25;
   }
 
-  ${phone} {
+  ${LogoImg} {
+    ${mobileOrTabletOrFontSizeLarge} {
+      height: 6rem;
+    }
+
+    ${mobile} {
+      height: 3rem;
+    }
+
+    ${mobileXs} {
+      height: 2rem;
+      margin: 0 0 0 5%;
+    }
+  }
+
+  ${mobile} {
     border-radius: 7px;
     padding: 10px;
   }
@@ -97,12 +134,12 @@ export const ScoreValue = styled.div`
   font-size: 4.5rem;
   line-height: 4.5rem;
 
-  ${phone} {
+  ${mobile} {
     font-size: 2rem;
     line-height: 2rem;
   }
 
-  ${phoneSm} {
+  ${mobileSm} {
     font-size: 1.5rem;
     line-height: 1.5rem;
   }
@@ -126,7 +163,7 @@ export const Score = styled.div`
   justify-content: center;
   padding: 2.5%;
 
-  ${phone} {
+  ${mobile} {
     border-radius: 3px;
     max-width: 125px;
   }
@@ -138,11 +175,11 @@ export const Score = styled.div`
     font-weight: bold;
     margin: 1rem;
 
-    ${phone} {
+    ${mobile} {
       font-size: 1.5rem;
     }
 
-    ${phoneSm} {
+    ${mobileSm} {
       font-size: 1.25rem;
     }
   }
@@ -159,11 +196,7 @@ export const ScoreLabel = styled.h2`
   margin-block: 0;
   font-weight: bold;
 
-  ${phone} {
-    font-size: 0.7rem;
-  }
-
-  ${phoneSm} {
+  ${mobile} {
     font-size: 0.5rem;
   }
 `;
@@ -193,6 +226,11 @@ export const Options = styled.div`
 export const RulesImageContainer = styled.div`
   svg {
     width: 100%;
+
+    ${mobileXs} {
+      width: 60%;
+      margin: 0 20%;
+    }
   }
 `;
 
@@ -206,7 +244,7 @@ const ResultChoiceLabel = styled.p`
   margin: 0;
   animation-fill-mode: both;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -214,16 +252,20 @@ const ResultChoiceLabel = styled.p`
     letter-spacing: 2px;
   }
 
-  ${tablet} {
+  ${mobileOrTablet} {
     font-size: 1.5rem;
   }
 
-  ${phone} {
+  ${mobile} {
     font-size: 0.9rem;
   }
 
-  ${phoneSm} {
+  ${mobileSm} {
     font-size: 0.65rem;
+  }
+
+  ${mobileXs} {
+    font-size: 0.5rem;
   }
 `;
 
@@ -231,7 +273,7 @@ export const ResultUserChoiceLabel = styled(ResultChoiceLabel)`
   animation-name: ${moveLeft};
   grid-area: 1 / 1;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     grid-area: 2 / 1;
   }
 `;
@@ -240,7 +282,7 @@ export const ResultHouseChoiceLabel = styled(ResultChoiceLabel)`
   animation-name: ${moveRight};
   grid-area: 1 / 3;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     grid-area: 2 / 2;
   }
 `;
@@ -254,8 +296,9 @@ const ResultChoice = styled.div<{ readonly size: number }>`
     center no-repeat;
   animation-fill-mode: both;
   border-radius: 50%;
+  place-self: end center;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     animation-name: none !important;
   }
 `;
@@ -264,7 +307,7 @@ export const ResultUserChoice = styled(ResultChoice)`
   animation-name: ${moveLeft};
   grid-area: 2 / 1;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     grid-area: 1 / 1;
   }
 `;
@@ -273,7 +316,7 @@ export const ResultHouseChoice = styled(ResultChoice)`
   animation-name: ${moveRight};
   grid-area: 2 / 3;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     grid-area: 1 / 2;
   }
 
@@ -294,7 +337,7 @@ export const Result = styled.div`
   grid-area: 2 / 2;
   width: 100%;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     animation-name: ${fadeIn};
     grid-area: 3 / 1 / 3 / span 2;
   }
@@ -307,20 +350,24 @@ export const ResultMessage = styled.p`
   font-weight: bold;
   margin: 0 0 15px 0;
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     margin: 0 0 10px 0;
   }
 
-  ${tablet} {
+  ${mobileOrTablet} {
     font-size: 4rem;
   }
 
-  ${phone} {
+  ${mobile} {
     font-size: 3.5rem;
   }
 
-  ${phoneSm} {
+  ${mobileSm} {
     font-size: 3rem;
+  }
+
+  ${mobileXs} {
+    font-size: 2rem;
   }
 `;
 
@@ -329,13 +376,17 @@ export const RetryButton = styled(Button)`
     color: hsl(349, 70%, 56%);
   }
 
-  ${mobile} {
+  ${mobileOrTabletOrFontSizeLarge} {
     width: 60%;
     max-width: 280px;
   }
 
-  ${phoneSm} {
+  ${mobileSm} {
     font-size: 0.8rem;
+  }
+
+  ${mobileXs} {
+    font-size: 0.65rem;
   }
 `;
 
@@ -348,10 +399,10 @@ export const ResultContainer = styled.div<ResultProps>`
   place-content: start center;
   gap: 0 10%;
 
-  ${mobile} {
-    grid-template: max-content max-content 0.75fr / 1fr 1fr;
-    place-content: end;
-    gap: 5%;
+  ${mobileOrTabletOrFontSizeLarge} {
+    grid-template: 0.5fr 0.2fr 0.5fr / 1fr 1fr;
+    place-content: space-evenly;
+    gap: 0;
   }
 
   ${Result}, ${ResultChoice}, ${ResultChoiceLabel} {
@@ -391,11 +442,12 @@ export const ResultContainer = styled.div<ResultProps>`
           rgba(255, 255, 255, var(--result-rg-third-border)) 70%,
           rgba(255, 255, 255, 0) 0%
         );
+        will-change: background-image;
         animation: ${radialBackgroundEffect} 1.2s ease
           ${(props) => props.winnerBackgroundEffectDelay}s infinite alternate
           both;
 
-        ${mobile} {
+        ${mobileOrTabletOrFontSizeLarge} {
           width: 200%;
           height: 200%;
           top: -50%;

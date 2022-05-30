@@ -14,6 +14,9 @@ export const ToggleButtonLabel = styled.label`
   width: fit-content;
 `;
 
+export const ToggleButtonLabelText = styled.span`
+  flex: 1;
+`;
 export const ToggleButtonInput = styled.input.attrs(() => ({
   type: "checkbox",
 }))`
@@ -69,7 +72,7 @@ export default function ToggleButton(
   );
   return (
     <ToggleButtonLabel aria-label={props.ariaLabel}>
-      {props.label}
+      <ToggleButtonLabelText>{props.label}</ToggleButtonLabelText>
       <ToggleButtonInput
         role="switch"
         checked={props.checked}

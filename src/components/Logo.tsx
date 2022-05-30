@@ -1,24 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import { phone, phoneSm, tablet } from "../utils/breakpoints";
 
 export const LogoImg = styled.img`
-  margin: 0 0 0 1rem;
+  margin: 0 0 0 12.5%;
   height: 8rem;
   object-fit: contain;
   object-position: left center;
-
-  ${tablet} {
-    height: 6rem;
-  }
-
-  ${phone} {
-    height: 3rem;
-  }
-
-  ${phoneSm} {
-    height: 3rem;
-  }
 `;
 
 export const LogoAltText = styled.span`
