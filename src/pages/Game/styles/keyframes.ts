@@ -16,7 +16,7 @@ export const growAndfadeIn = keyframes`
 
 export const moveLeft = keyframes`
   from  {
-    transform: translateX(45%);
+    transform: translateX(25%);
   }
   to {
     transform: translateX(0);
@@ -25,7 +25,7 @@ export const moveLeft = keyframes`
 
 export const moveRight = keyframes`
   from  {
-    transform: translateX(-45%);
+    transform: translateX(-25%);
   }
   to {
     transform: translateX(0);

@@ -3,11 +3,7 @@ import {
   ToggleButtonInput,
   ToggleButtonLabel,
 } from "./components/ToggleButton";
-import {
-  mobileOrTabletOrFontSizeLarge,
-  mobileSm,
-  mobileXs,
-} from "./utils/breakpoints";
+import { laptopOrFontSizeLarge, mobileSm, mobileXs } from "./utils/breakpoints";
 import { fadeIn } from "./utils/keyframes";
 import Button from "./components/Button";
 
@@ -34,7 +30,7 @@ export const Toolbar = styled.div`
   padding: 2rem 1rem;
   z-index: 1;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     bottom: 0;
     padding: 1rem;
     position: relative;
@@ -55,7 +51,7 @@ export const UserSettingsList = styled.div`
   animation-fill-mode: both;
   width: max-content;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     right: 0.5rem;
   }
 
@@ -100,7 +96,7 @@ export const UserSettingsContainer = styled.div`
     + ${UserSettingsList} {
     display: flex;
 
-    ${mobileOrTabletOrFontSizeLarge} {
+    ${laptopOrFontSizeLarge} {
       bottom: 3rem;
       right: -1rem;
     }
@@ -125,12 +121,12 @@ export const GoBackButton = styled(Button).attrs(() => ({
 export const Attribution = styled.div`
   font-size: 0.75rem;
   text-align: center;
-  bottom: 10px;
   color: #fff;
-  width: 100%;
-  text-align: center;
   z-index: -1;
-  order: 3;
+
+  ${laptopOrFontSizeLarge} {
+    padding: 1rem 0 0 0;
+  }
 
   ${mobileXs} {
     font-size: 0.5rem;

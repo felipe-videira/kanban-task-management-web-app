@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import Button from "../../components/Button";
 import {
-  mobileOrTabletOrFontSizeLarge,
+  laptopOrFontSizeLarge,
   mobileXs,
   mobileSm,
 } from "../../utils/breakpoints";
@@ -26,7 +26,7 @@ const List = styled.div`
   width: 70%;
   justify-content: center;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
   }
 
@@ -43,7 +43,7 @@ const SelectGameButton = styled(Button)`
   text-align: left;
 
   ${LogoImg} {
-    ${mobileOrTabletOrFontSizeLarge} {
+    ${laptopOrFontSizeLarge} {
       height: 6rem;
     }
 

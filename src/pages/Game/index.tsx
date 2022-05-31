@@ -137,8 +137,8 @@ function Game() {
     const { length } = selectedGame.options;
 
     const containerSize = !isScreenMobileSize()
-      ? window.innerHeight * 0.6
-      : window.innerWidth * 0.9;
+      ? window.outerHeight * 0.6
+      : window.outerWidth * 0.9;
     setListSize(containerSize);
 
     const containerSizeByLen = containerSize / length;
@@ -150,13 +150,6 @@ function Game() {
     setResultSize(
       clamp(containerSize / (!isScreenMobileSize() ? 1.75 : 2.5), 50, 1000)
     );
-  }
-
-  function onScreenResize() {
-    // const zoom = Math.round(100 / (window.innerWidth / window.outerWidth));
-    // if (zoom >= 100) {
-    //   setSizes();
-    // }
   }
 
   function resetGame() {
@@ -201,8 +194,6 @@ function Game() {
     if (selectedGame) {
       addTranslation(selectedGame);
 
-      window.addEventListener("resize", onScreenResize);
-
       scoreService.setSaveOnExitListener(() => ({
         game: selectedGame.name,
         score: getUserScore(),
@@ -210,10 +201,6 @@ function Game() {
     } else {
       navigateToHome();
     }
-
-    return () => {
-      window.removeEventListener("resize", onScreenResize);
-    };
   }, []);
 
   return game ? (
@@ -257,7 +244,8 @@ function Game() {
             <ResultContainer
               {...game.settings}
               userWins={userWins}
-              size={resultSize}
+              size={listSize}
+              itemSize={optionSize}
               aria-live="polite"
               aria-atomic="true"
               role="main"

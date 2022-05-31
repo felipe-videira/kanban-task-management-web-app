@@ -12,7 +12,7 @@ import _Stepper, { Step } from "../../../components/Stepper";
 import {
   mobile,
   mobileOrTablet,
-  mobileOrTabletOrFontSizeLarge,
+  laptopOrFontSizeLarge,
   mobileSm,
   mobileXs,
 } from "../../../utils/breakpoints";
@@ -26,6 +26,7 @@ type ResultProps = {
   readonly showResultDuration: number;
   readonly winnerBackgroundEffectDelay: number;
   readonly size: number;
+  readonly itemSize: number;
 };
 
 export const Container = styled.div`
@@ -34,17 +35,18 @@ export const Container = styled.div`
   display: grid;
   align-items: center;
   justify-content: center;
+  place-items: center;
   flex: 1;
   grid-template:
   ". header ."
+  ". game ."
   ". game rules";
   grid-template-columns: 1fr 60% 1fr;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: auto 65% auto;
   width: 100%;
-  padding: 2rem 0 1rem;
   z-index: 0;
   
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -70,7 +72,7 @@ export const RulesButton = styled(Button).attrs(() => ({
   width: auto;
   z-index: 2;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     align-self: center;
     margin: 0;
   }
@@ -90,12 +92,12 @@ export const Header = styled.div`
   padding: 2%;
   grid-area: header;
   width: 70%;
-  margin: 0 auto;
   z-index: 2;
   flex-wrap: wrap;
   gap: 1rem 0;
+  margin: 1rem 0;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     width: 75%;
     padding: 3%;
     border-radius: 10px;
@@ -106,7 +108,7 @@ export const Header = styled.div`
   }
 
   ${LogoImg} {
-    ${mobileOrTabletOrFontSizeLarge} {
+    ${laptopOrFontSizeLarge} {
       height: 6rem;
     }
 
@@ -244,7 +246,7 @@ const ResultChoiceLabel = styled.p`
   margin: 0;
   animation-fill-mode: both;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,7 +275,7 @@ export const ResultUserChoiceLabel = styled(ResultChoiceLabel)`
   animation-name: ${moveLeft};
   grid-area: 1 / 1;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     grid-area: 2 / 1;
   }
 `;
@@ -282,7 +284,7 @@ export const ResultHouseChoiceLabel = styled(ResultChoiceLabel)`
   animation-name: ${moveRight};
   grid-area: 1 / 3;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     grid-area: 2 / 2;
   }
 `;
@@ -298,7 +300,7 @@ const ResultChoice = styled.div<{ readonly size: number }>`
   border-radius: 50%;
   place-self: end center;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     animation-name: none !important;
   }
 `;
@@ -307,7 +309,7 @@ export const ResultUserChoice = styled(ResultChoice)`
   animation-name: ${moveLeft};
   grid-area: 2 / 1;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     grid-area: 1 / 1;
   }
 `;
@@ -316,7 +318,7 @@ export const ResultHouseChoice = styled(ResultChoice)`
   animation-name: ${moveRight};
   grid-area: 2 / 3;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     grid-area: 1 / 2;
   }
 
@@ -337,7 +339,7 @@ export const Result = styled.div`
   grid-area: 2 / 2;
   width: 100%;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     animation-name: ${fadeIn};
     grid-area: 3 / 1 / 3 / span 2;
   }
@@ -350,7 +352,7 @@ export const ResultMessage = styled.p`
   font-weight: bold;
   margin: 0 0 15px 0;
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     margin: 0 0 10px 0;
   }
 
@@ -376,7 +378,7 @@ export const RetryButton = styled(Button)`
     color: hsl(349, 70%, 56%);
   }
 
-  ${mobileOrTabletOrFontSizeLarge} {
+  ${laptopOrFontSizeLarge} {
     width: 60%;
     max-width: 280px;
   }
@@ -391,18 +393,20 @@ export const RetryButton = styled(Button)`
 `;
 
 export const ResultContainer = styled.div<ResultProps>`
-  height: 100%;
-  width: 100%;
+  height: ${(props) => props.size}px;
+  width: ${(props) => props.size}px;
+  margin: 0 auto;
   display: grid;
-  grid-template: 0.6fr max-content / max-content 20% max-content;
+  grid-template: 0.6fr max-content / 1fr 1fr 1fr;
   place-items: center;
   place-content: start center;
   gap: 0 10%;
 
-  ${mobileOrTabletOrFontSizeLarge} {
-    grid-template: 0.5fr 0.2fr 0.5fr / 1fr 1fr;
+  ${laptopOrFontSizeLarge} {
+    grid-template: 0.4fr 0.2fr 0.5fr / 1fr 1fr;
     place-content: space-evenly;
-    gap: 0;
+    height: 100%;
+    width: 100%;
   }
 
   ${Result}, ${ResultChoice}, ${ResultChoiceLabel} {
@@ -447,7 +451,7 @@ export const ResultContainer = styled.div<ResultProps>`
           ${(props) => props.winnerBackgroundEffectDelay}s infinite alternate
           both;
 
-        ${mobileOrTabletOrFontSizeLarge} {
+        ${laptopOrFontSizeLarge} {
           width: 200%;
           height: 200%;
           top: -50%;

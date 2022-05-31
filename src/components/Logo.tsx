@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components/macro";
 
 export const LogoImg = styled.img`
-  margin: 0 0 0 12.5%;
+  margin: 0 0 0 1rem;
   height: 8rem;
   object-fit: contain;
   object-position: left center;
