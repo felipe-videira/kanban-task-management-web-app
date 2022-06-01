@@ -12,43 +12,38 @@ function App() {
   const [modalTitle, setModalTitle] = useState<string>("");
   const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
 
-  function toggleModal({
+  function openModal({
     title,
     children,
   }: {
     title: string;
     children: React.ReactNode;
   }) {
-    const newValue = !showModal;
+    setModalTitle(title);
+    setModalChildren(children);
+    setShowModal(true);
+  }
 
-    if (newValue) {
-      setModalTitle(title);
-      setModalChildren(children);
-    } else {
-      setModalTitle("");
-      setModalChildren(null);
-    }
-
-    setShowModal(newValue);
-
-    return newValue;
+  function closeModal() {
+    setShowModal(false);
+    setModalTitle("");
+    setModalChildren(null);
   }
 
   return (
     <AppContainer>
-      <ModalProvider value={{ toggle: toggleModal }}>
+      <ModalProvider value={{ open: openModal, close: closeModal }}>
         <Routes />
       </ModalProvider>
 
       <Attribution
-        tabIndex={0}
         role="navigation"
         dangerouslySetInnerHTML={{ __html: t("message.attribution") }}
       />
 
       <Modal
         show={showModal}
-        onChange={toggleModal}
+        onClose={closeModal}
         title={modalTitle}
         closeButtonAriaLabel={t("ariaLabel.close")}
       >

@@ -27,7 +27,7 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
   return show ? (
     <ModalOverlay
       show={props.show}
-      onClick={props.onChange}
+      onClick={props.onClose}
       animationDuration={ANIMATION_DURATION}
     >
       {props.show ? (
@@ -35,13 +35,13 @@ export default function Modal(props: InferProps<typeof Modal.propTypes>) {
           onClick={(evt) => evt.stopPropagation()}
           role="dialog"
           tabIndex={0}
-          onBlur={props.onChange}
+          onBlur={props.onClose}
         >
           <ModalTitle>{props.title}</ModalTitle>
           <ModalCloseButton
             type="button"
             aria-label={props.closeButtonAriaLabel}
-            onClick={props.onChange}
+            onClick={props.onClose}
           >
             <CloseIcon />
           </ModalCloseButton>
@@ -57,6 +57,6 @@ Modal.propTypes = {
   show: bool.isRequired,
   title: string,
   children: node,
-  onChange: func.isRequired,
+  onClose: func.isRequired,
   closeButtonAriaLabel: string.isRequired,
 };

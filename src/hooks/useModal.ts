@@ -1,18 +1,23 @@
 import { createContext, useContext } from "react";
 
 type UseModalContext = {
-  toggle: ({}: { title: string; children: React.ReactNode }) => boolean;
+  open: ({}: { title: string; children: React.ReactNode }) => void;
+  close: () => void;
 };
 
 const Context = createContext<UseModalContext>({
-  toggle: () => false,
+  open: () => {},
+  close: () => {},
 });
 
 export const ModalContext = Context;
 export const ModalProvider = Context.Provider;
 
-export default function useModal() {
-  const { toggle } = useContext(ModalContext);
+export default function useModal(): [
+  open: UseModalContext["open"],
+  close: UseModalContext["close"]
+] {
+  const { open, close } = useContext(ModalContext);
 
-  return toggle;
+  return [open, close];
 }

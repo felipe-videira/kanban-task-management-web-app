@@ -45,20 +45,19 @@ export const ModalOverlay = styled.div.attrs<ModalOverlayProps>((props) => ({
 export const ModalContainer = styled.div`
   background: #fff;
   width: 25%;
-  height: 55%;
   position: absolute;
   border-radius: 8px;
-  padding: 2% 2% 1%;
+  padding: 2% 2% 3%;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 0;
 
   ${laptopOrFontSizeLarge} {
     width: 100%;
     height: 100%;
     overflow: auto;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
   }
 `;
 
@@ -70,8 +69,8 @@ export const ModalTitle = styled.div`
 
   ${laptopOrFontSizeLarge} {
     font-size: 2rem;
-    flex: 0.25;
-    justify-content: center;
+    width: 100%;
+    text-align: center;
   }
 
   ${mobileXs} {
@@ -91,10 +90,12 @@ export const ModalCloseButton = styled(Button).attrs(() => ({
 
   ${laptopOrFontSizeLarge} {
     order: 3;
+    height: 2.5rem;
+    width: 2.5rem;
   }
 `;
 
 export const ModalContent = styled.div`
   width: 90%;
-  margin: 10% auto;
+  margin: 0 5%;
 `;

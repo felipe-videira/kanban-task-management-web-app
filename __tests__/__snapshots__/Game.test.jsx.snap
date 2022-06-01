@@ -1,57 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Game should render correctly 1`] = `
-.c15 {
+.c16 {
   grid-area: paper;
   border-radius: 50%;
-  padding: 18.432px 18.432px 24.576px;
-  width: 153.6px;
-  height: 153.6px;
+  padding: 19.968px 19.968px 26.624000000000002px;
+  width: 166.4px;
+  height: 166.4px;
   border: none;
-  box-shadow: inset 0px -6.144px 0px 0px rgb(0 0 0 / 30%);
+  box-shadow: inset 0px -6.656000000000001px 0px 0px rgb(0 0 0 / 30%);
   background: linear-gradient(hsl(230,89%,62%),hsl(230,89%,65%));
   cursor: pointer;
   pointer-events: auto;
 }
 
-.c15:active {
+.c16:active {
   box-shadow: none;
   padding: 12%;
-  -webkit-transform: translateY(6.144px);
-  -ms-transform: translateY(6.144px);
-  transform: translateY(6.144px);
-}
-
-.c18 {
-  grid-area: scissors;
-  border-radius: 50%;
-  padding: 18.432px 18.432px 24.576px;
-  width: 153.6px;
-  height: 153.6px;
-  border: none;
-  box-shadow: inset 0px -6.144px 0px 0px rgb(0 0 0 / 30%);
-  background: linear-gradient(hsl(39,89%,49%),hsl(40,84%,53%));
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.c18:active {
-  box-shadow: none;
-  padding: 12%;
-  -webkit-transform: translateY(6.144px);
-  -ms-transform: translateY(6.144px);
-  transform: translateY(6.144px);
+  -webkit-transform: translateY(6.656000000000001px);
+  -ms-transform: translateY(6.656000000000001px);
+  transform: translateY(6.656000000000001px);
 }
 
 .c19 {
-  grid-area: rock;
+  grid-area: scissors;
   border-radius: 50%;
-  padding: 18.432px 18.432px 24.576px;
-  width: 153.6px;
-  height: 153.6px;
+  padding: 19.968px 19.968px 26.624000000000002px;
+  width: 166.4px;
+  height: 166.4px;
   border: none;
-  box-shadow: inset 0px -6.144px 0px 0px rgb(0 0 0 / 30%);
-  background: linear-gradient(hsl(349,71%,52%),hsl(349,70%,56%));
+  box-shadow: inset 0px -6.656000000000001px 0px 0px rgb(0 0 0 / 30%);
+  background: linear-gradient(hsl(39,89%,49%),hsl(40,84%,53%));
   cursor: pointer;
   pointer-events: auto;
 }
@@ -59,13 +38,34 @@ exports[`Game should render correctly 1`] = `
 .c19:active {
   box-shadow: none;
   padding: 12%;
-  -webkit-transform: translateY(6.144px);
-  -ms-transform: translateY(6.144px);
-  transform: translateY(6.144px);
+  -webkit-transform: translateY(6.656000000000001px);
+  -ms-transform: translateY(6.656000000000001px);
+  transform: translateY(6.656000000000001px);
 }
 
-.c16 {
-  box-shadow: inset 0px 3.84px 0px 0px rgb(0 0 0 / 20%);
+.c20 {
+  grid-area: rock;
+  border-radius: 50%;
+  padding: 19.968px 19.968px 26.624000000000002px;
+  width: 166.4px;
+  height: 166.4px;
+  border: none;
+  box-shadow: inset 0px -6.656000000000001px 0px 0px rgb(0 0 0 / 30%);
+  background: linear-gradient(hsl(349,71%,52%),hsl(349,70%,56%));
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c20:active {
+  box-shadow: none;
+  padding: 12%;
+  -webkit-transform: translateY(6.656000000000001px);
+  -ms-transform: translateY(6.656000000000001px);
+  transform: translateY(6.656000000000001px);
+}
+
+.c17 {
+  box-shadow: inset 0px 4.16px 0px 0px rgb(0 0 0 / 20%);
   background: #f1f1f2;
   border-radius: 50%;
   width: 100%;
@@ -84,41 +84,19 @@ exports[`Game should render correctly 1`] = `
   justify-content: center;
 }
 
-.c16:hover {
+.c17:hover {
   background: #fff;
 }
 
-.c17 {
+.c18 {
   object-fit: contain;
-  width: 53.76px;
-  height: 53.76px;
-}
-
-.c12 {
-  position: relative;
-  overflow: hidden;
+  width: 58.239999999999995px;
+  height: 58.239999999999995px;
 }
 
 .c13 {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.c13::after {
-  content: "";
-  -webkit-transform-origin: -10px -10px;
-  -ms-transform-origin: -10px -10px;
-  transform-origin: -10px -10px;
-  position: absolute;
-  height: calc(50% / (3 / 4));
-  width: 15.36px;
-  background: rgba(0,0,0,0.2);
-  -webkit-transform: rotate(calc((90deg - 120deg) / 2));
-  -ms-transform: rotate(calc((90deg - 120deg) / 2));
-  transform: rotate(calc((90deg - 120deg) / 2));
-  top: calc(153.6px / 2);
-  left: calc(153.6px / 2);
+  position: relative;
+  overflow: hidden;
 }
 
 .c14 {
@@ -127,7 +105,29 @@ exports[`Game should render correctly 1`] = `
   left: 0;
 }
 
-.c10 {
+.c14::after {
+  content: "";
+  -webkit-transform-origin: -10px -10px;
+  -ms-transform-origin: -10px -10px;
+  transform-origin: -10px -10px;
+  position: absolute;
+  height: calc(50% / (3 / 4));
+  width: 16.64px;
+  background: rgba(0,0,0,0.2);
+  -webkit-transform: rotate(calc((90deg - 120deg) / 2));
+  -ms-transform: rotate(calc((90deg - 120deg) / 2));
+  transform: rotate(calc((90deg - 120deg) / 2));
+  top: calc(166.4px / 2);
+  left: calc(166.4px / 2);
+}
+
+.c15 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.c11 {
   -webkit-animation: ceFhYK 1s linear 0s 1;
   animation: ceFhYK 1s linear 0s 1;
   -webkit-animation-fill-mode: both;
@@ -137,18 +137,18 @@ exports[`Game should render correctly 1`] = `
   height: 100%;
 }
 
-.c7 .c9[value="1"] {
+.c8 .c10[value="1"] {
   display: block;
 }
 
-.c2 {
+.c3 {
   margin: 0 0 0 1rem;
   height: 8rem;
   object-fit: contain;
   object-position: left center;
 }
 
-.c20 {
+.c21 {
   width: 100%;
   font-family: inherit;
   border-radius: 7px;
@@ -178,24 +178,25 @@ exports[`Game should render correctly 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  place-items: center;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  grid-template: ". header ." ". game rules";
+  grid-template: ". header ." ". game ." ". game rules";
   grid-template-columns: 1fr 60% 1fr;
-  grid-template-rows: max-content 1fr;
-  width: 100%;
-  padding: 2rem 0 1rem;
+  grid-template-rows: auto 65% auto;
   z-index: 0;
+  width: 100%;
+  padding: 1rem 0;
 }
 
-.c21 {
+.c22 {
+  justify-self: end;
   -webkit-align-self: end;
   -ms-flex-item-align: end;
   align-self: end;
-  justify-self: end;
   grid-area: rules;
-  margin: 0 10%;
+  margin: 5% 10%;
   border-radius: 8px;
   min-width: 130px;
   width: auto;
@@ -220,15 +221,15 @@ exports[`Game should render correctly 1`] = `
   padding: 2%;
   grid-area: header;
   width: 70%;
-  margin: 0 auto;
   z-index: 2;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 1rem 0;
+  margin: 1rem 0 0;
 }
 
-.c6 {
+.c7 {
   color: hsl(229,25%,31%);
   -webkit-animation: hOYTOz 1s linear 0s 1 normal both;
   animation: hOYTOz 1s linear 0s 1 normal both;
@@ -237,19 +238,19 @@ exports[`Game should render correctly 1`] = `
   line-height: 4.5rem;
 }
 
-.c6:first-child {
+.c7:first-child {
   -webkit-order: 1;
   -ms-flex-order: 1;
   order: 1;
 }
 
-.c6:last-child {
+.c7:last-child {
   -webkit-order: 3;
   -ms-flex-order: 3;
   order: 3;
 }
 
-.c3 {
+.c4 {
   background: #fff;
   min-width: 17.5%;
   border-radius: 7px;
@@ -271,7 +272,7 @@ exports[`Game should render correctly 1`] = `
   padding: 2.5%;
 }
 
-.c3 .c5 + .c5::before {
+.c4 .c6 + .c6::before {
   content: "x";
   font-size: 2rem;
   color: hsl(229,25%,31%);
@@ -279,7 +280,7 @@ exports[`Game should render correctly 1`] = `
   margin: 1rem;
 }
 
-.c4 {
+.c5 {
   font-size: 1.2rem;
   color: hsl(229,64%,46%);
   text-transform: uppercase;
@@ -294,7 +295,7 @@ exports[`Game should render correctly 1`] = `
   font-weight: bold;
 }
 
-.c8 {
+.c9 {
   grid-area: game;
   z-index: 1;
   -webkit-flex: 1;
@@ -313,11 +314,11 @@ exports[`Game should render correctly 1`] = `
   align-items: stretch;
 }
 
-.c8 .c9 {
+.c9 .c10 {
   height: unset;
 }
 
-.c11 {
+.c12 {
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -334,25 +335,7 @@ exports[`Game should render correctly 1`] = `
   justify-content: center;
 }
 
-@media only screen and (min-width:768px) and (max-width:820px) {
-  .c2 {
-    height: 6rem;
-  }
-}
-
-@media only screen and (min-width:281px) and (max-width:767px) {
-  .c2 {
-    height: 3rem;
-  }
-}
-
-@media only screen and (max-width:280px) {
-  .c2 {
-    height: 3rem;
-  }
-}
-
-@media only screen and (max-width:820px),(max-width:40rem) {
+@media only screen and (max-width:1024px),(max-width:64rem) {
   .c0 {
     display: -webkit-box;
     display: -webkit-flex;
@@ -365,11 +348,18 @@ exports[`Game should render correctly 1`] = `
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    padding: 2rem 0 1rem;
   }
 }
 
-@media only screen and (max-width:820px),(max-width:40rem) {
-  .c21 {
+@media only screen and (max-width:240px) {
+  .c0 {
+    padding: 5% 0 0;
+  }
+}
+
+@media only screen and (max-width:1024px),(max-width:64rem) {
+  .c22 {
     -webkit-align-self: center;
     -ms-flex-item-align: center;
     align-self: center;
@@ -377,54 +367,82 @@ exports[`Game should render correctly 1`] = `
   }
 }
 
-@media only screen and (min-width:281px) and (max-width:767px) {
+@media only screen and (max-width:240px) {
+  .c22 {
+    font-size: 0.5rem;
+    min-width: unset;
+  }
+}
+
+@media only screen and (max-width:1024px),(max-width:64rem) {
+  .c1 {
+    width: 75%;
+    padding: 3%;
+    border-radius: 10px;
+  }
+}
+
+@media only screen and (max-width:1024px),(max-width:64rem) {
+  .c1 .c2 {
+    height: 6rem;
+  }
+}
+
+@media only screen and (max-width:767px) {
+  .c1 .c2 {
+    height: 3rem;
+  }
+}
+
+@media only screen and (max-width:240px) {
+  .c1 .c2 {
+    height: 2rem;
+    margin: 0 0 0 5%;
+  }
+}
+
+@media only screen and (max-width:767px) {
   .c1 {
     border-radius: 7px;
     padding: 10px;
   }
 }
 
-@media only screen and (min-width:281px) and (max-width:767px) {
-  .c6 {
+@media only screen and (max-width:767px) {
+  .c7 {
     font-size: 2rem;
     line-height: 2rem;
   }
 }
 
 @media only screen and (max-width:280px) {
-  .c6 {
+  .c7 {
     font-size: 1.5rem;
     line-height: 1.5rem;
   }
 }
 
-@media only screen and (min-width:281px) and (max-width:767px) {
-  .c3 {
+@media only screen and (max-width:767px) {
+  .c4 {
     border-radius: 3px;
     max-width: 125px;
   }
 }
 
-@media only screen and (min-width:281px) and (max-width:767px) {
-  .c3 .c5 + .c5::before {
+@media only screen and (max-width:767px) {
+  .c4 .c6 + .c6::before {
     font-size: 1.5rem;
   }
 }
 
 @media only screen and (max-width:280px) {
-  .c3 .c5 + .c5::before {
+  .c4 .c6 + .c6::before {
     font-size: 1.25rem;
   }
 }
 
-@media only screen and (min-width:281px) and (max-width:767px) {
-  .c4 {
-    font-size: 0.7rem;
-  }
-}
-
-@media only screen and (max-width:280px) {
-  .c4 {
+@media only screen and (max-width:767px) {
+  .c5 {
     font-size: 0.5rem;
   }
 }
@@ -450,12 +468,10 @@ exports[`Game should render correctly 1`] = `
       >
         <styled.div
           role="region"
-          tabIndex={0}
         >
           <div
             className="c1"
             role="region"
-            tabIndex={0}
           >
             <Logo
               alt="gameName"
@@ -468,33 +484,28 @@ exports[`Game should render correctly 1`] = `
               >
                 <img
                   alt="gameName"
-                  className="c2"
+                  className="c2 c3"
                   onError={[Function]}
                   src="image.logo"
                 />
               </styled.img>
             </Logo>
-            <styled.div
-              tabIndex={0}
-            >
+            <styled.div>
               <div
-                className="c3"
-                tabIndex={0}
+                className="c4"
               >
                 <styled.h2>
                   <h2
-                    className="c4"
+                    className="c5"
                   >
                     label.score
                   </h2>
                 </styled.h2>
                 <styled.div
-                  aria-hidden="false"
                   key="0"
                 >
                   <div
-                    aria-hidden="false"
-                    className="c5 c6"
+                    className="c6 c7"
                   >
                     0
                   </div>
@@ -507,26 +518,24 @@ exports[`Game should render correctly 1`] = `
           value={1}
         >
           <div
-            className="c7 c8"
+            className="c8 c9"
             value={1}
           >
             <styled.div
               value={1}
             >
               <div
-                className="c9 c10"
+                className="c10 c11"
                 value={1}
               >
                 <styled.div
                   aria-label="ariaLabel.options"
                   role="main"
-                  tabIndex={0}
                 >
                   <div
                     aria-label="ariaLabel.options"
-                    className="c11"
+                    className="c12"
                     role="main"
-                    tabIndex={0}
                   >
                     <PolygonalList
                       ItemComponent={[Function]}
@@ -575,23 +584,23 @@ exports[`Game should render correctly 1`] = `
                           "alt": [Function],
                           "disabled": false,
                           "onClick": [Function],
-                          "size": 153.6,
+                          "size": 166.4,
                         }
                       }
-                      itemSize={153.6}
+                      itemSize={166.4}
                       pointingUp={false}
-                      size={460.79999999999995}
+                      size={499.20000000000005}
                     >
                       <styled.div
-                        size={460.79999999999995}
+                        size={499.20000000000005}
                       >
                         <div
-                          className="c12"
-                          size={460.79999999999995}
+                          className="c13"
+                          size={499.20000000000005}
                           style={
                             Object {
-                              "height": "460.79999999999995px",
-                              "width": "460.79999999999995px",
+                              "height": "499.20000000000005px",
+                              "width": "499.20000000000005px",
                             }
                           }
                         >
@@ -643,52 +652,52 @@ exports[`Game should render correctly 1`] = `
                                 "alt": [Function],
                                 "disabled": false,
                                 "onClick": [Function],
-                                "size": 153.6,
+                                "size": 166.4,
                               }
                             }
-                            itemSize={153.6}
+                            itemSize={166.4}
                             length={3}
                             pointingUp={false}
                             polygonExteriorAngle={120}
-                            size={460.79999999999995}
+                            size={499.20000000000005}
                           >
                             <styled.div
                               index={0}
-                              itemSize={153.6}
+                              itemSize={166.4}
                               length={3}
                               pointingUp={false}
                               polygonExteriorAngle={120}
-                              size={460.79999999999995}
+                              size={499.20000000000005}
                               zIndex={3}
                             >
                               <div
-                                className="c13"
-                                size={460.79999999999995}
+                                className="c14"
+                                size={499.20000000000005}
                                 style={
                                   Object {
-                                    "height": "calc(460.79999999999995px / 1.4142)",
-                                    "left": "calc(50% - 460.79999999999995px / 1.4142 / 2)",
-                                    "top": "calc(50% - 460.79999999999995px / 1.4142 / 2)",
+                                    "height": "calc(499.20000000000005px / 1.4142)",
+                                    "left": "calc(50% - 499.20000000000005px / 1.4142 / 2)",
+                                    "top": "calc(50% - 499.20000000000005px / 1.4142 / 2)",
                                     "transform": "rotate(225deg)",
-                                    "width": "calc(460.79999999999995px / 1.4142)",
+                                    "width": "calc(499.20000000000005px / 1.4142)",
                                     "zIndex": 3,
                                   }
                                 }
                               >
                                 <styled.div
                                   index={0}
-                                  itemSize={153.6}
+                                  itemSize={166.4}
                                   pointingUp={false}
                                   polygonExteriorAngle={120}
                                   zIndex={3}
                                 >
                                   <div
-                                    className="c14"
+                                    className="c15"
                                     style={
                                       Object {
-                                        "height": "153.6px",
+                                        "height": "166.4px",
                                         "transform": "rotate(calc(((120deg * 0) + 225deg) * -1))",
-                                        "width": "153.6px",
+                                        "width": "166.4px",
                                         "zIndex": 3,
                                       }
                                     }
@@ -705,7 +714,7 @@ exports[`Game should render correctly 1`] = `
                                       icon="src/images/icon-paper.svg"
                                       name="paper"
                                       onClick={[Function]}
-                                      size={153.6}
+                                      size={166.4}
                                       winRules={
                                         Object {
                                           "rock": true,
@@ -725,35 +734,35 @@ exports[`Game should render correctly 1`] = `
                                         id="paper"
                                         name="paper"
                                         onClick={[Function]}
-                                        size={153.6}
+                                        size={166.4}
                                         type="button"
                                       >
                                         <button
                                           aria-hidden={false}
-                                          className="c15"
+                                          className="c16"
                                           disabled={false}
                                           id="paper"
                                           name="paper"
                                           onClick={[Function]}
-                                          size={153.6}
+                                          size={166.4}
                                           type="button"
                                         >
                                           <styled.div
-                                            size={153.6}
+                                            size={166.4}
                                           >
                                             <div
-                                              className="c16"
-                                              size={153.6}
+                                              className="c17"
+                                              size={166.4}
                                             >
                                               <styled.img
                                                 alt="option.paper"
-                                                size={153.6}
+                                                size={166.4}
                                                 src="src/images/icon-paper.svg"
                                               >
                                                 <img
                                                   alt="option.paper"
-                                                  className="c17"
-                                                  size="53.76px"
+                                                  className="c18"
+                                                  size="58.239999999999995px"
                                                   src="src/images/icon-paper.svg"
                                                 />
                                               </styled.img>
@@ -812,50 +821,50 @@ exports[`Game should render correctly 1`] = `
                                       "alt": [Function],
                                       "disabled": false,
                                       "onClick": [Function],
-                                      "size": 153.6,
+                                      "size": 166.4,
                                     }
                                   }
-                                  itemSize={153.6}
+                                  itemSize={166.4}
                                   length={3}
                                   pointingUp={false}
                                   polygonExteriorAngle={120}
-                                  size={460.79999999999995}
+                                  size={499.20000000000005}
                                 >
                                   <styled.div
                                     index={1}
-                                    itemSize={153.6}
+                                    itemSize={166.4}
                                     length={3}
                                     pointingUp={false}
                                     polygonExteriorAngle={120}
-                                    size={460.79999999999995}
+                                    size={499.20000000000005}
                                     zIndex={2}
                                   >
                                     <div
-                                      className="c13"
-                                      size={460.79999999999995}
+                                      className="c14"
+                                      size={499.20000000000005}
                                       style={
                                         Object {
-                                          "height": "calc(460.79999999999995px / 1.4142)",
+                                          "height": "calc(499.20000000000005px / 1.4142)",
                                           "transform": "rotate(120deg)",
-                                          "width": "calc(460.79999999999995px / 1.4142)",
+                                          "width": "calc(499.20000000000005px / 1.4142)",
                                           "zIndex": 2,
                                         }
                                       }
                                     >
                                       <styled.div
                                         index={1}
-                                        itemSize={153.6}
+                                        itemSize={166.4}
                                         pointingUp={false}
                                         polygonExteriorAngle={120}
                                         zIndex={2}
                                       >
                                         <div
-                                          className="c14"
+                                          className="c15"
                                           style={
                                             Object {
-                                              "height": "153.6px",
+                                              "height": "166.4px",
                                               "transform": "rotate(calc(((120deg * 1) + 225deg) * -1))",
-                                              "width": "153.6px",
+                                              "width": "166.4px",
                                               "zIndex": 2,
                                             }
                                           }
@@ -872,7 +881,7 @@ exports[`Game should render correctly 1`] = `
                                             icon="src/images/icon-scissors.svg"
                                             name="scissors"
                                             onClick={[Function]}
-                                            size={153.6}
+                                            size={166.4}
                                             winRules={
                                               Object {
                                                 "paper": true,
@@ -892,35 +901,35 @@ exports[`Game should render correctly 1`] = `
                                               id="scissors"
                                               name="scissors"
                                               onClick={[Function]}
-                                              size={153.6}
+                                              size={166.4}
                                               type="button"
                                             >
                                               <button
                                                 aria-hidden={false}
-                                                className="c18"
+                                                className="c19"
                                                 disabled={false}
                                                 id="scissors"
                                                 name="scissors"
                                                 onClick={[Function]}
-                                                size={153.6}
+                                                size={166.4}
                                                 type="button"
                                               >
                                                 <styled.div
-                                                  size={153.6}
+                                                  size={166.4}
                                                 >
                                                   <div
-                                                    className="c16"
-                                                    size={153.6}
+                                                    className="c17"
+                                                    size={166.4}
                                                   >
                                                     <styled.img
                                                       alt="option.scissors"
-                                                      size={153.6}
+                                                      size={166.4}
                                                       src="src/images/icon-scissors.svg"
                                                     >
                                                       <img
                                                         alt="option.scissors"
-                                                        className="c17"
-                                                        size="53.76px"
+                                                        className="c18"
+                                                        size="58.239999999999995px"
                                                         src="src/images/icon-scissors.svg"
                                                       />
                                                     </styled.img>
@@ -979,50 +988,50 @@ exports[`Game should render correctly 1`] = `
                                             "alt": [Function],
                                             "disabled": false,
                                             "onClick": [Function],
-                                            "size": 153.6,
+                                            "size": 166.4,
                                           }
                                         }
-                                        itemSize={153.6}
+                                        itemSize={166.4}
                                         length={3}
                                         pointingUp={false}
                                         polygonExteriorAngle={120}
-                                        size={460.79999999999995}
+                                        size={499.20000000000005}
                                       >
                                         <styled.div
                                           index={2}
-                                          itemSize={153.6}
+                                          itemSize={166.4}
                                           length={3}
                                           pointingUp={false}
                                           polygonExteriorAngle={120}
-                                          size={460.79999999999995}
+                                          size={499.20000000000005}
                                           zIndex={1}
                                         >
                                           <div
-                                            className="c13"
-                                            size={460.79999999999995}
+                                            className="c14"
+                                            size={499.20000000000005}
                                             style={
                                               Object {
-                                                "height": "calc(460.79999999999995px / 1.4142)",
+                                                "height": "calc(499.20000000000005px / 1.4142)",
                                                 "transform": "rotate(120deg)",
-                                                "width": "calc(460.79999999999995px / 1.4142)",
+                                                "width": "calc(499.20000000000005px / 1.4142)",
                                                 "zIndex": 1,
                                               }
                                             }
                                           >
                                             <styled.div
                                               index={2}
-                                              itemSize={153.6}
+                                              itemSize={166.4}
                                               pointingUp={false}
                                               polygonExteriorAngle={120}
                                               zIndex={1}
                                             >
                                               <div
-                                                className="c14"
+                                                className="c15"
                                                 style={
                                                   Object {
-                                                    "height": "153.6px",
+                                                    "height": "166.4px",
                                                     "transform": "rotate(calc(((120deg * 2) + 225deg) * -1))",
-                                                    "width": "153.6px",
+                                                    "width": "166.4px",
                                                     "zIndex": 1,
                                                   }
                                                 }
@@ -1039,7 +1048,7 @@ exports[`Game should render correctly 1`] = `
                                                   icon="src/images/icon-rock.svg"
                                                   name="rock"
                                                   onClick={[Function]}
-                                                  size={153.6}
+                                                  size={166.4}
                                                   winRules={
                                                     Object {
                                                       "paper": false,
@@ -1059,35 +1068,35 @@ exports[`Game should render correctly 1`] = `
                                                     id="rock"
                                                     name="rock"
                                                     onClick={[Function]}
-                                                    size={153.6}
+                                                    size={166.4}
                                                     type="button"
                                                   >
                                                     <button
                                                       aria-hidden={false}
-                                                      className="c19"
+                                                      className="c20"
                                                       disabled={false}
                                                       id="rock"
                                                       name="rock"
                                                       onClick={[Function]}
-                                                      size={153.6}
+                                                      size={166.4}
                                                       type="button"
                                                     >
                                                       <styled.div
-                                                        size={153.6}
+                                                        size={166.4}
                                                       >
                                                         <div
-                                                          className="c16"
-                                                          size={153.6}
+                                                          className="c17"
+                                                          size={166.4}
                                                         >
                                                           <styled.img
                                                             alt="option.rock"
-                                                            size={153.6}
+                                                            size={166.4}
                                                             src="src/images/icon-rock.svg"
                                                           >
                                                             <img
                                                               alt="option.rock"
-                                                              className="c17"
-                                                              size="53.76px"
+                                                              className="c18"
+                                                              size="58.239999999999995px"
                                                               src="src/images/icon-rock.svg"
                                                             />
                                                           </styled.img>
@@ -1118,7 +1127,7 @@ exports[`Game should render correctly 1`] = `
               value={2}
             >
               <div
-                className="c9 c10"
+                className="c10 c11"
                 value={2}
               />
             </styled.div>
@@ -1128,7 +1137,7 @@ exports[`Game should render correctly 1`] = `
           onClick={[Function]}
         >
           <button
-            className="c20 c21"
+            className="c21 c22"
             onClick={[Function]}
             type="button"
           >

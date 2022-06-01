@@ -43,9 +43,10 @@ export const Container = styled.div`
   ". game rules";
   grid-template-columns: 1fr 60% 1fr;
   grid-template-rows: auto 65% auto;
-  width: 100%;
   z-index: 0;
-  
+  width: 100%;
+  padding: 1rem 0;
+
   ${laptopOrFontSizeLarge} {
     display: flex;
     flex-direction: column;
@@ -63,10 +64,10 @@ export const RulesButton = styled(Button).attrs(() => ({
   outlined: true,
   small: true,
 }))`
-  align-self: end;
   justify-self: end;
+  align-self: end;
   grid-area: rules;
-  margin: 0 10%;
+  margin: 5% 10%;
   border-radius: 8px;
   min-width: 130px;
   width: auto;
@@ -95,7 +96,7 @@ export const Header = styled.div`
   z-index: 2;
   flex-wrap: wrap;
   gap: 1rem 0;
-  margin: 1rem 0;
+  margin: 1rem 0 0;
 
   ${laptopOrFontSizeLarge} {
     width: 75%;
@@ -227,7 +228,10 @@ export const Options = styled.div`
 
 export const RulesImageContainer = styled.div`
   svg {
-    width: 100%;
+    ${laptopOrFontSizeLarge} {
+      width: 90%;
+      margin: 0 5%;
+    }
 
     ${mobileXs} {
       width: 60%;
@@ -429,12 +433,12 @@ export const ResultContainer = styled.div<ResultProps>`
 
       &:before {
         content: "";
-        width: 275%;
-        height: 275%;
+        width: 250%;
+        height: 250%;
         position: absolute;
         border-radius: 50%;
-        top: -87.5%;
-        left: -87.5%;
+        top: -75%;
+        left: -75%;
         z-index: -1;
         background-image: radial-gradient(
           circle,

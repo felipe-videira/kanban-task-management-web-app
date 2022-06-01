@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -8,7 +8,6 @@ import * as scoreService from "../../services/score";
 import clamp from "../../utils/clamp";
 import random from "../../utils/random";
 import isScreenMobileSize from "../../utils/isScreenMobileSize";
-import { SettingsContext } from "../../providers/settings";
 import useModal from "../../hooks/useModal";
 import Option from "../../components/Option";
 import PolygonalList from "../../components/PolygonalList";
@@ -40,8 +39,7 @@ function Game() {
   const { gameName } = useParams();
   const { t } = useTranslation(["common", "selectedGame"]);
 
-  const { animationsEnabled } = useContext(SettingsContext);
-  const toggleModal = useModal();
+  const [openModal, closeModal] = useModal();
 
   const [game, setGame, getGame] = useStateWithGetter<Game>(null);
   const [listSize, setListSize] = useState<number>(0);
@@ -53,9 +51,6 @@ function Game() {
   const [userWins, setUserWins] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
   const [resultMessage, setResultMessage] = useState<string>("");
-  const [showHouseChoice, setShowHouseChoice] =
-    useState<boolean>(animationsEnabled);
-  const [showResult, setShowResult] = useState<boolean>(animationsEnabled);
 
   function playMatch(
     optionName: string,
@@ -81,18 +76,6 @@ function Game() {
     setUserScore(newScore);
   }
 
-  function displayResult() {
-    if (!animationsEnabled && game && game.settings.showResultDelay > 0) {
-      setTimeout(() => {
-        setShowResult(true);
-        setShowHouseChoice(true);
-      }, game.settings.showResultDelay * 1000);
-    } else {
-      setShowHouseChoice(true);
-      setShowResult(true);
-    }
-  }
-
   function onOptionClick(name: string) {
     if (!game) return;
 
@@ -116,7 +99,7 @@ function Game() {
   function toggleRules() {
     if (!game) return;
 
-    toggleModal({
+    openModal({
       title: t("label.rulesModal"),
       children: () => (
         <RulesImageContainer
@@ -137,7 +120,7 @@ function Game() {
     const { length } = selectedGame.options;
 
     const containerSize = !isScreenMobileSize()
-      ? window.outerHeight * 0.6
+      ? window.outerHeight * 0.65
       : window.outerWidth * 0.9;
     setListSize(containerSize);
 
@@ -157,8 +140,6 @@ function Game() {
     setUserChoice(null);
     setHouseChoice(null);
     setUserWins(false);
-    setShowResult(false);
-    setShowHouseChoice(false);
   }
 
   function setupGame(): Game | undefined {
@@ -180,15 +161,6 @@ function Game() {
   }
 
   useEffect(() => {
-    setShowResult(animationsEnabled);
-    setShowHouseChoice(animationsEnabled);
-
-    if (step === 2) {
-      displayResult();
-    }
-  }, [animationsEnabled, step]);
-
-  useEffect(() => {
     const selectedGame = setupGame();
 
     if (selectedGame) {
@@ -201,27 +173,29 @@ function Game() {
     } else {
       navigateToHome();
     }
+
+    return () => {
+      closeModal();
+    };
   }, []);
 
   return game ? (
     <Container>
-      <Header tabIndex={0} role="region">
+      <Header role="region">
         <Logo
           src={t("image.logo", { ns: "selectedGame" })}
           alt={t("gameName", { ns: "selectedGame" })}
         />
 
-        <Score tabIndex={0}>
+        <Score>
           <ScoreLabel>{t("label.score")}</ScoreLabel>
-          <ScoreValue key={userScore} aria-hidden="false">
-            {userScore}
-          </ScoreValue>
+          <ScoreValue key={userScore}>{userScore}</ScoreValue>
         </Score>
       </Header>
 
       <Stepper value={step}>
         <Step value={1}>
-          <Options role="main" tabIndex={0} aria-label={t("ariaLabel.options")}>
+          <Options role="main" aria-label={t("ariaLabel.options")}>
             <PolygonalList
               data={game.options || []}
               ItemComponent={Option}
@@ -249,7 +223,6 @@ function Game() {
               aria-live="polite"
               aria-atomic="true"
               role="main"
-              tabIndex={0}
             >
               <ResultUserChoiceLabel>
                 {t("label.userChoice")}
@@ -265,32 +238,21 @@ function Game() {
                 />
               </ResultUserChoice>
               <ResultHouseChoice size={resultSize}>
-                {showHouseChoice ? (
-                  <Option
-                    {...houseChoice}
-                    size={resultSize}
-                    alt={t(`option.${houseChoice.name}`, {
-                      ns: "selectedGame",
-                    })}
-                    ariaHidden={false}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: `${resultSize}px`,
-                      height: `${resultSize}px`,
-                    }}
-                  />
-                )}
+                <Option
+                  {...houseChoice}
+                  size={resultSize}
+                  alt={t(`option.${houseChoice.name}`, {
+                    ns: "selectedGame",
+                  })}
+                  ariaHidden={false}
+                />
               </ResultHouseChoice>
-              {showResult ? (
-                <Result aria-hidden="false">
-                  <ResultMessage>{resultMessage}</ResultMessage>
-                  <RetryButton onClick={resetGame}>
-                    {t("label.retryButton")}
-                  </RetryButton>
-                </Result>
-              ) : null}
+              <Result aria-hidden="false">
+                <ResultMessage>{resultMessage}</ResultMessage>
+                <RetryButton onClick={resetGame}>
+                  {t("label.retryButton")}
+                </RetryButton>
+              </Result>
             </ResultContainer>
           ) : null}
         </Step>
