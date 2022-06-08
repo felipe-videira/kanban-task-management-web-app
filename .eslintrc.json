@@ -1,10 +1,12 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest/globals": true
     },
     "extends": [
         "plugin:react/recommended",
+        "airbnb",
         "airbnb-typescript",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
@@ -21,18 +23,12 @@
     "plugins": [
         "react",
         "@typescript-eslint",
+        "jest",
         "prettier",
         "import"
     ],
     "rules": {
-        "react/react-in-jsx-scope": "off",
-        "import/no-unresolved": "error",
-        "prettier/prettier": [
-            "error",
-            {
-                "endOfLine": "auto"
-            }
-        ]
+        "react/react-in-jsx-scope": "off"
     },
     "settings": {
         "react": {
