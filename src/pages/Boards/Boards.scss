@@ -1,3 +1,95 @@
-.board-menu {
-  color: blue;
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.boards {
+  display: grid;
+  grid-template-areas:
+    "menu toolbar"
+    "menu tasks";
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: 0.15fr 1fr;
+  width: 100%;
+  min-height: 100vh;
+
+  &__menu {
+    grid-area: menu;
+    display: flex;
+    flex-direction: column-reverse;
+
+    #menu-toggle {
+      display: none;
+    }
+
+    &__toggle-label {
+      cursor: pointer;
+      margin: 1rem;
+      overflow: hidden;
+      width: 50px;
+      position: fixed;
+      bottom: 50px;
+      left: 0;
+
+      #menu-toggle:checked ~ & {
+        width: auto;
+        position: relative;
+        bottom: 0;
+      }
+    }
+
+    &__list {
+      flex: 1;
+      width: 0px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      #menu-toggle:checked ~ & {
+        width: 200px;
+        margin: 1.5rem;
+      }
+    }
+
+    &__theme-toggle {
+      display: none;
+
+      #menu-toggle:checked ~ & {
+        display: block;
+      }
+    }
+  }
+
+  &__toolbar {
+    grid-area: toolbar;
+  }
+
+  &__tasks {
+    grid-area: tasks;
+  }
+}
+
+@include themify($themes) {
+  .boards {
+    &__menu {
+      background-color: themed("background-contrast");
+      border-right: 1px solid themed("border");
+
+      &__toggle {
+        color: themed("secondary-text");
+      }
+    }
+
+    &__toolbar {
+      background-color: themed("background-contrast");
+      border-bottom: 1px solid themed("border");
+      color: themed("title-text");
+    }
+
+    &__tasks {
+      background-color: themed("background");
+    }
+  }
 }
