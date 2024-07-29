@@ -23,18 +23,42 @@
 
   &__sidebar-toggle-label {
     cursor: pointer;
-    margin: 1rem;
     overflow: hidden;
-    width: 50px;
     position: fixed;
-    bottom: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    gap: 0.8rem;
+    line-height: 1rem;
+    bottom: 10vh;
     left: 0;
+    border-radius: 0 50px 50px 0;
+    padding: 12px;
 
     #sidebar-toggle:checked ~ & {
       width: auto;
       position: relative;
       bottom: 0;
+      background: none;
+      margin: 1rem;
     }
+
+    #sidebar-toggle:checked ~ & .boards__sidebar-toggle-show-icon {
+      display: none;
+    }
+
+    #sidebar-toggle:checked ~ & .boards__sidebar-toggle-hide-icon,
+    #sidebar-toggle:checked ~ & .boards__sidebar-toggle-text {
+      display: block;
+    }
+  }
+
+  &__sidebar-toggle-hide-icon {
+    display: none;
+  }
+
+  &__sidebar-toggle-text {
+    display: none;
   }
 
   &__sidebar-content {
@@ -43,7 +67,11 @@
     flex-direction: column;
     transition: width 0.3s ease;
     width: 0px;
+    gap: 3rem;
     opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     #sidebar-toggle:checked ~ & {
       width: 200px;
@@ -54,20 +82,21 @@
 
   &__sidebar-options {
     flex: 1;
-    overflow: hidden;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+
+    & ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &__sidebar-options-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
   }
 
   &__theme-toggle {
-    // display: none;
-
-    // #sidebar-toggle:checked ~ & {
-    //   display: block;
-    // }
   }
 
   &__toolbar {
@@ -84,10 +113,11 @@
     &__sidebar {
       background-color: themed("background-contrast");
       border-right: 1px solid themed("border");
+      color: themed("secondary-text");
     }
 
-    &__toggle {
-      color: themed("secondary-text");
+    &__sidebar-toggle-label {
+      background-color: themed("primary");
     }
 
     &__toolbar {
