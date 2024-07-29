@@ -4,24 +4,28 @@
 .boards {
   display: grid;
   grid-template-areas:
-    "sidebar toolbar"
-    "sidebar tasks";
+    "menu toolbar"
+    "menu tasks";
   grid-template-columns: max-content 1fr;
   grid-template-rows: 0.15fr 1fr;
   width: 100%;
   min-height: 100vh;
 
-  #sidebar-toggle {
+  #menu-toggle {
     display: none;
   }
 
-  &__sidebar {
-    grid-area: sidebar;
+  &__menu {
+    grid-area: menu;
     display: flex;
     flex-direction: column-reverse;
   }
 
-  &__sidebar-toggle-label {
+  &__menu-logo {
+    margin: 1.5rem;
+  }
+
+  &__menu-toggle-label {
     cursor: pointer;
     overflow: hidden;
     position: fixed;
@@ -35,65 +39,77 @@
     border-radius: 0 50px 50px 0;
     padding: 12px;
 
-    #sidebar-toggle:checked ~ & {
+    #menu-toggle:checked ~ & {
       width: auto;
       position: relative;
       bottom: 0;
       background: none;
-      margin: 1rem;
+      margin: 1.5rem;
     }
 
-    #sidebar-toggle:checked ~ & .boards__sidebar-toggle-show-icon {
+    #menu-toggle:checked ~ & .boards__menu-toggle-show-icon {
       display: none;
     }
 
-    #sidebar-toggle:checked ~ & .boards__sidebar-toggle-hide-icon,
-    #sidebar-toggle:checked ~ & .boards__sidebar-toggle-text {
+    #menu-toggle:checked ~ & .boards__menu-toggle-hide-icon,
+    #menu-toggle:checked ~ & .boards__menu-toggle-text {
       display: block;
     }
   }
 
-  &__sidebar-toggle-hide-icon {
+  &__menu-toggle-hide-icon {
     display: none;
   }
 
-  &__sidebar-toggle-text {
+  &__menu-toggle-text {
     display: none;
   }
 
-  &__sidebar-content {
+  &__menu-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     transition: width 0.3s ease;
     width: 0px;
-    gap: 3rem;
     opacity: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    #sidebar-toggle:checked ~ & {
-      width: 200px;
+    #menu-toggle:checked ~ & {
+      width: 20vw;
       opacity: 1;
-      margin: 1.5rem;
     }
   }
 
-  &__sidebar-options {
+  &__menu-opts {
     flex: 1;
-
-    & ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
   }
 
-  &__sidebar-options-title {
+  &__menu-opts-list {
+  }
+
+  &__menu-opts-list-item {
+    display: flex;
+    gap: 1rem;
+    line-height: 1rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    border: none;
+    background: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0 50px 50px 0;
+    width: 90%;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  &__menu-opts-title {
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.15rem;
+    margin: 1.5rem;
   }
 
   &__theme-toggle {
@@ -110,14 +126,31 @@
 
 @include themify($themes) {
   .boards {
-    &__sidebar {
+    &__menu {
       background-color: themed("background-contrast");
       border-right: 1px solid themed("border");
       color: themed("secondary-text");
     }
 
-    &__sidebar-toggle-label {
+    &__menu-toggle-label {
       background-color: themed("primary");
+    }
+
+    &__menu-opts-list-item {
+      color: themed("secondary-text");
+
+      &:hover {
+        background-color: themed("secondary-hover");
+      }
+
+      &--selected {
+        background-color: themed("primary");
+        color: themed("contrast-text");
+
+        &:hover {
+          background-color: themed("primary");
+        }
+      }
     }
 
     &__toolbar {

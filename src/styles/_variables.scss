@@ -26,6 +26,9 @@ $themes: (
     border: $light-gray,
     title-text: $dark-blue,
     secondary-text: $gray,
+    contrast-text: $light-lavender,
+    primary-hover: $light-purple,
+    secondary-hover: $light-gray,
   ),
   dark: (
     primary: $primary,
@@ -34,5 +37,8 @@ $themes: (
     border: $slate,
     title-text: $light-lavender,
     secondary-text: $gray,
+    contrast-text: $light-lavender,
+    primary-hover: $light-purple,
+    secondary-hover: $light-gray,
   ),
 );
