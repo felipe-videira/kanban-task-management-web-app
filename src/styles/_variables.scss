@@ -1,3 +1,4 @@
+// -------- Colors -----------
 $primary: hsl(242, 48%, 58%);
 $light-purple: hsl(243, 100%, 82%);
 $dark-blue: hsl(237, 100%, 4%);
@@ -16,6 +17,7 @@ $blue: #49c4e5;
 $green: #67e2ae;
 $input-border: hsla(216, 15%, 57%, 25%);
 
+// -------- Themes -----------
 $themes: (
   light: (
     primary: $primary,

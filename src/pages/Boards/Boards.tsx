@@ -11,25 +11,31 @@ function Boards() {
 
   return (
     <div className="boards">
-      <div className="boards__menu">
-        <input type="checkbox" id="menu-toggle" />
-        <label htmlFor="menu-toggle" className="boards__menu__toggle-label">
+      <div className="boards__sidebar">
+        <input type="checkbox" id="sidebar-toggle" />
+        <label
+          htmlFor="sidebar-toggle"
+          className="boards__sidebar-toggle-label"
+        >
           Hide Sidebar
         </label>
 
-        <button
-          onClick={toggleTheme}
-          className="boards__menu__theme-toggle"
-          type="button"
-        >
-          toggle
-        </button>
+        <div className="boards__sidebar-content">
+          {/* <p>All boards (3)</p> */}
+          <ul className="boards__sidebar-options">
+            <li>Projeto Kanban</li>
+            <li>Projeto Mandan</li>
+            <li>Projeto Gandan</li>
+          </ul>
 
-        <ul className="boards__menu__list">
-          <li>Projeto Kanban</li>
-          <li>Projeto Mandan</li>
-          <li>Projeto Gandan</li>
-        </ul>
+          <button
+            onClick={toggleTheme}
+            className="boards__theme-toggle"
+            type="button"
+          >
+            toggle
+          </button>
+        </div>
       </div>
 
       <div className="boards__toolbar">

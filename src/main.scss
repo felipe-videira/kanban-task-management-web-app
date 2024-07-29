@@ -5,3 +5,15 @@ body {
   font-size: 100%;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
+
+.light-theme {
+  & .--dark-theme {
+    display: none;
+  }
+}
+
+.dark-theme {
+  & .--light-theme {
+    display: none;
+  }
+}
