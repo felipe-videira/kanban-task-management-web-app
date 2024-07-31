@@ -1,14 +1,21 @@
 import { createContext, useContext, useState, useMemo, ReactNode } from "react";
+import { getItem, setItem } from "../services/storage";
 
 const ThemeContext = createContext(
   {} as { theme: string; toggleTheme: () => void }
 );
 
 function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(getItem("theme", "light"));
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "light" ? "dark" : "light";
+
+      setItem("theme", newTheme);
+
+      return newTheme;
+    });
   };
 
   const value = useMemo(

@@ -1,10 +1,19 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import "./Sidebar.scss";
+import { arrayOf, func, object, shape, string } from "prop-types";
 import useTheme from "../../../../hooks/useTheme";
 import BoardIcon from "../../../../icons/icon-board.svg?react";
 
-function Sidebar({ boards, selectedBoard, onSelectboard }) {
+function Sidebar({
+  boards,
+  selectedBoard,
+  onSelectBoard,
+}: {
+  boards: Board[];
+  selectedBoard: Board;
+  onSelectBoard: (board: Board) => void;
+}) {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -46,15 +55,21 @@ function Sidebar({ boards, selectedBoard, onSelectboard }) {
           <h3 className="sidebar__opts-title">{`All boards (${boards.length})`}</h3>
           {boards.map((board) => (
             <button
+              key={board.id}
               type="button"
               className={`sidebar__opts-btn sidebar__opts-btn--list-item ${
-                selectedBoard.id === board.id
+                selectedBoard && selectedBoard.id === board.id
                   ? "sidebar__opts-btn--selected"
                   : ""
               }`}
-              onClick={() => onSelectboard(board)}
+              onClick={() => onSelectBoard(board)}
             >
-              <BoardIcon /> {board.title}
+              <label
+                htmlFor="sidebar-toggle"
+                className="sidebar__opts-toggle-label"
+              >
+                <BoardIcon /> {board.title}
+              </label>
             </button>
           ))}
           <button
@@ -74,7 +89,7 @@ function Sidebar({ boards, selectedBoard, onSelectboard }) {
             <input
               type="checkbox"
               checked={theme === "dark"}
-              onClick={toggleTheme}
+              onChange={toggleTheme}
             />
             <span />
           </label>
@@ -84,5 +99,23 @@ function Sidebar({ boards, selectedBoard, onSelectboard }) {
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  boards: arrayOf(
+    shape({
+      id: string.isRequired,
+      title: string.isRequired,
+    })
+  ).isRequired,
+  selectedBoard: shape({
+    id: string.isRequired,
+    title: string.isRequired,
+  }),
+  onSelectBoard: func.isRequired,
+};
+
+Sidebar.defaultProps = {
+  selectedBoard: null,
+};
 
 export default Sidebar;

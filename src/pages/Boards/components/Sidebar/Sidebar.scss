@@ -7,23 +7,32 @@
   display: flex;
   flex-direction: column-reverse;
 
+  @include breakpoint(mobile) {
+    position: fixed;
+    height: 100vh;
+  }
+
   #sidebar-toggle {
     display: none;
   }
 
   &__logo {
     margin: 1.5rem;
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
   }
 
   &__toggle-label {
     cursor: pointer;
     overflow: hidden;
-    position: fixed;
     font-size: 0.9rem;
     font-weight: 500;
     display: flex;
     gap: 0.8rem;
     line-height: 1rem;
+    position: fixed;
     bottom: 10vh;
     left: 0;
     border-radius: 0 50px 50px 0;
@@ -44,6 +53,10 @@
     #sidebar-toggle:checked ~ & .sidebar__toggle-hide-icon,
     #sidebar-toggle:checked ~ & .sidebar__toggle-text {
       display: block;
+    }
+
+    @include breakpoint(mobile) {
+      display: none;
     }
   }
 
@@ -69,29 +82,54 @@
     #sidebar-toggle:checked ~ & {
       width: 20vw;
       opacity: 1;
+      padding: 0 1rem 0 0;
+
+      @include breakpoint(mobile) {
+        width: 100vw;
+      }
     }
   }
 
   &__opts {
     flex: 1;
+    margin-bottom: 1.5rem;
   }
 
   &__opts-btn {
-    display: flex;
-    gap: 1rem;
-    line-height: 1rem;
+    display: list-item;
     font-family: "Plus Jakarta Sans", sans-serif;
     border: none;
     background: none;
     font-size: 0.9rem;
     font-weight: 600;
-    padding: 0.8rem 1.5rem;
     text-align: left;
     cursor: pointer;
+    padding: 0;
 
     &--list-item {
       width: 90%;
       border-radius: 0 50px 50px 0;
+    }
+
+    &--create {
+      display: flex;
+      gap: 1rem;
+      line-height: 1rem;
+      padding: 0.8rem 1.5rem;
+    }
+  }
+
+  &__opts-toggle-label {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    line-height: 1rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    pointer-events: none;
+
+    @include breakpoint(mobile) {
+      pointer-events: all;
     }
   }
 
@@ -111,6 +149,10 @@
     margin: 0 auto;
     padding: 12px;
     border-radius: 6px;
+
+    @include breakpoint(mobile) {
+      margin: 1.5rem auto;
+    }
   }
 
   &__theme-toggle {
