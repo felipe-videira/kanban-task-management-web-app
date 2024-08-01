@@ -18,7 +18,6 @@ function Sidebar({
 
   return (
     <div className="sidebar">
-      <input type="checkbox" id="sidebar-toggle" defaultChecked />
       <label htmlFor="sidebar-toggle" className="sidebar__toggle-label">
         <img
           src="/assets/icon-hide-sidebar.svg"

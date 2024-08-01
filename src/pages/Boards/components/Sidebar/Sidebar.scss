@@ -9,11 +9,9 @@
 
   @include breakpoint(mobile) {
     position: fixed;
-    height: 100vh;
-  }
-
-  #sidebar-toggle {
-    display: none;
+    height: 90vh;
+    width: max-content;
+    top: 10vh;
   }
 
   &__logo {
@@ -38,7 +36,7 @@
     border-radius: 0 50px 50px 0;
     padding: 12px;
 
-    #sidebar-toggle:checked ~ & {
+    #sidebar-toggle:checked ~ .sidebar > & {
       width: auto;
       position: relative;
       bottom: 0;
@@ -46,12 +44,12 @@
       margin: 1.5rem;
     }
 
-    #sidebar-toggle:checked ~ & .sidebar__toggle-show-icon {
+    #sidebar-toggle:checked ~ .sidebar > & .sidebar__toggle-show-icon {
       display: none;
     }
 
-    #sidebar-toggle:checked ~ & .sidebar__toggle-hide-icon,
-    #sidebar-toggle:checked ~ & .sidebar__toggle-text {
+    #sidebar-toggle:checked ~ .sidebar > & .sidebar__toggle-hide-icon,
+    #sidebar-toggle:checked ~ .sidebar > & .sidebar__toggle-text {
       display: block;
     }
 
@@ -79,13 +77,24 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    #sidebar-toggle:checked ~ & {
+    @include breakpoint(mobile) {
+      transition: opacity 0.3s ease;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar > & {
       width: 20vw;
       opacity: 1;
       padding: 0 1rem 0 0;
 
       @include breakpoint(mobile) {
-        width: 100vw;
+        background: white;
+        width: 80vw;
+        height: 80vh;
+        flex: none;
+        margin: 0 8vw;
+        bottom: 5vh;
+        position: relative;
+        border-radius: $border-radius;
       }
     }
   }
@@ -148,7 +157,7 @@
     width: 80%;
     margin: 0 auto;
     padding: 12px;
-    border-radius: 6px;
+    border-radius: $border-radius;
 
     @include breakpoint(mobile) {
       margin: 1.5rem auto;
@@ -198,6 +207,14 @@
     background-color: themed("background-contrast");
     border-right: 1px solid themed("border");
     color: themed("secondary-text");
+
+    @include breakpoint(mobile) {
+      background-color: themed("overlay");
+    }
+
+    &__content {
+      background: themed("background-contrast");
+    }
 
     &__toggle-label {
       background-color: themed("primary");

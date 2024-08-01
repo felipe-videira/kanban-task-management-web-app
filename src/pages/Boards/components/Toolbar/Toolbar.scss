@@ -1,0 +1,63 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+@import "../../../../styles/functions";
+
+.toolbar {
+  grid-area: toolbar;
+
+  @include breakpoint(mobile) {
+    height: 10vh;
+  }
+
+  &__sidebar-toggle-label {
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    gap: 1rem;
+    height: 100%;
+
+    @include breakpoint(mobile) {
+      pointer-events: all;
+      cursor: pointer;
+    }
+  }
+
+  &__logo-mobile {
+    padding: 0 0 0 1.5rem;
+
+    @include breakpoint(not-mobile) {
+      display: none;
+    }
+  }
+
+  &__title {
+    white-space: nowrap;
+    font-size: 1.5rem;
+    margin: 1.5rem 1.5rem 2rem;
+
+    @include breakpoint(mobile) {
+      font-size: 1.25rem;
+      margin: 0;
+    }
+  }
+
+  &__chevron {
+    display: none;
+
+    @include breakpoint(mobile) {
+      display: block;
+    }
+
+    #sidebar-toggle:checked ~ .toolbar > .toolbar__sidebar-toggle-label > & {
+      rotate: 180deg;
+    }
+  }
+}
+
+@include themify($themes) {
+  .toolbar {
+    background-color: themed("background-contrast");
+    border-bottom: 1px solid themed("border");
+    color: themed("title-text");
+  }
+}
