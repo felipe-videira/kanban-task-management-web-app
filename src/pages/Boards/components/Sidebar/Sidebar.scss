@@ -15,7 +15,7 @@
   }
 
   &__logo {
-    margin: 1.5rem;
+    margin: 2.25rem 1.5rem;
 
     @include breakpoint(mobile) {
       display: none;
@@ -82,12 +82,11 @@
     }
 
     #sidebar-toggle:checked ~ .sidebar > & {
-      width: 20vw;
+      width: calc(10vw + 10rem);
       opacity: 1;
       padding: 0 1rem 0 0;
 
       @include breakpoint(mobile) {
-        background: white;
         width: 80vw;
         height: 80vh;
         flex: none;
@@ -140,6 +139,10 @@
     @include breakpoint(mobile) {
       pointer-events: all;
     }
+  }
+
+  &__opts-board-icon {
+    width: 16px;
   }
 
   &__opts-title {
@@ -210,6 +213,12 @@
 
     @include breakpoint(mobile) {
       background-color: themed("overlay");
+    }
+
+    &__logo {
+      path {
+        fill: themed("title-text");
+      }
     }
 
     &__content {

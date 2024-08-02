@@ -28,7 +28,8 @@
         "import"
     ],
     "rules": {
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "jsx-a11y/label-has-associated-control": "off"
     },
     "settings": {
         "react": {

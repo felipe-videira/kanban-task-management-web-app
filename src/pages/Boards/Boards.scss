@@ -12,7 +12,11 @@
     "sidebar toolbar"
     "sidebar  main";
   grid-template-columns: max-content 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 6rem 1fr;
   width: 100%;
   min-height: 100vh;
+
+  @include breakpoint(mobile) {
+    grid-template-rows: max-content 1fr;
+  }
 }

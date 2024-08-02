@@ -4,6 +4,10 @@
 
 .toolbar {
   grid-area: toolbar;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid;
 
   @include breakpoint(mobile) {
     height: 10vh;
@@ -22,6 +26,26 @@
     }
   }
 
+  &__logo-wrapper {
+    height: 100%;
+    border-right: 1px solid;
+    width: 153px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+
+    #sidebar-toggle:checked ~ .toolbar > & {
+      width: 0;
+      border: none;
+    }
+  }
+
   &__logo-mobile {
     padding: 0 0 0 1.5rem;
 
@@ -33,7 +57,6 @@
   &__title {
     white-space: nowrap;
     font-size: 1.5rem;
-    margin: 1.5rem 1.5rem 2rem;
 
     @include breakpoint(mobile) {
       font-size: 1.25rem;
@@ -57,7 +80,17 @@
 @include themify($themes) {
   .toolbar {
     background-color: themed("background-contrast");
-    border-bottom: 1px solid themed("border");
+    border-color: themed("border");
     color: themed("title-text");
+
+    &__logo {
+      path {
+        fill: themed("title-text");
+      }
+    }
+
+    &__logo-wrapper {
+      border-color: themed("border");
+    }
   }
 }

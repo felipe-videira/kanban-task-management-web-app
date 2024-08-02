@@ -9,13 +9,13 @@ body {
 }
 
 .light-theme {
-  & .--dark-theme {
+  & .dark--theme {
     display: none;
   }
 }
 
 .dark-theme {
-  & .--light-theme {
+  & .light--theme {
     display: none;
   }
 }
