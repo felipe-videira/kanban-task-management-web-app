@@ -1,0 +1,48 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+@import "../../styles/functions";
+
+.base-button {
+  border: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  border-radius: 50px;
+  cursor: pointer;
+
+  &--block {
+    width: 100%;
+  }
+}
+
+@include themify($themes) {
+  .base-button {
+    &--primary {
+      background-color: themed("primary");
+      color: themed("primary-btn-text");
+
+      &:hover {
+        background-color: themed("primary-hover");
+      }
+    }
+
+    &--secondary {
+      background-color: themed("secondary-btn-bg");
+      color: themed("primary");
+
+      &:hover {
+        background-color: themed("secondary-btn-hover");
+      }
+    }
+
+    &--danger {
+      background-color: themed("danger-btn-bg");
+      color: themed("danger-btn-text");
+
+      &:hover {
+        background-color: themed("danger-btn-hover");
+      }
+    }
+  }
+}

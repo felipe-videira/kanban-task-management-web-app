@@ -1,3 +1,4 @@
+@import "./styles/mixins";
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 body {
@@ -16,6 +17,18 @@ body {
 
 .dark-theme {
   & .light--theme {
+    display: none;
+  }
+}
+
+.desktop--only {
+  @include breakpoint(mobile) {
+    display: none;
+  }
+}
+
+.mobile--only {
+  @include breakpoint(not-mobile) {
     display: none;
   }
 }

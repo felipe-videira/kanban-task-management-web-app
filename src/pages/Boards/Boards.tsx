@@ -27,6 +27,8 @@ function Boards() {
     setSelectedBoard(board);
   }, []);
 
+  const addNewTask = useCallback(() => {}, []);
+
   useEffect(() => {
     setBoards(mockBoards);
   }, []);
@@ -39,7 +41,7 @@ function Boards() {
         selectedBoard={selectedBoard}
         onSelectBoard={selectBoard}
       />
-      <Toolbar selectedBoard={selectedBoard} />
+      <Toolbar selectedBoard={selectedBoard} onAddNewTask={addNewTask} />
       <Main />
     </div>
   );

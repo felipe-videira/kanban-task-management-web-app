@@ -19,6 +19,7 @@
     pointer-events: none;
     gap: 1rem;
     height: 100%;
+    flex: 1;
 
     @include breakpoint(mobile) {
       pointer-events: all;
@@ -75,13 +76,21 @@
       rotate: 180deg;
     }
   }
+
+  &__add-btn {
+    margin: 0 1rem;
+  }
+
+  &__opts-dropdown {
+    margin: 0 1rem;
+  }
 }
 
 @include themify($themes) {
   .toolbar {
     background-color: themed("background-contrast");
-    border-color: themed("border");
     color: themed("title-text");
+    border-color: themed("border");
 
     &__logo {
       path {
