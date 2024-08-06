@@ -39,6 +39,7 @@ $themes: (
     danger-btn-bg: $red,
     danger-btn-text: $light-lavender,
     danger-btn-hover: $light-red,
+    box-shadow: $shadow,
   ),
   dark: (
     primary: $primary,
@@ -57,5 +58,6 @@ $themes: (
     danger-btn-bg: $red,
     danger-btn-text: $light-lavender,
     danger-btn-hover: $light-red,
+    box-shadow: $shadow,
   ),
 );

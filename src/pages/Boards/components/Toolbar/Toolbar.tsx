@@ -4,8 +4,9 @@ import LogoIcon from "../../../../icons/logo-light.svg?react";
 import LogoMobileIcon from "../../../../icons/logo-mobile.svg?react";
 import ChevronIcon from "../../../../icons/icon-chevron-down.svg?react";
 import AddIcon from "../../../../icons/icon-add-task-mobile.svg?react";
+import EllipsisIcon from "../../../../icons/icon-vertical-ellipsis.svg?react";
 import Button from "../../../../components/Button/Button";
-import DropdownOptions from "../../../../components/DropdownOptions/DropdownOptions";
+import Dropdown from "../../../../components/Dropdown/Dropdown";
 
 function Toolbar({
   selectedBoard,
@@ -29,16 +30,23 @@ function Toolbar({
 
         <ChevronIcon className="toolbar__chevron" />
       </label>
+
       <Button onClick={onAddNewTask} className="toolbar__add-btn">
         <span className="desktop--only">+ Add new task</span>
         <AddIcon className="mobile--only" />
       </Button>
-      <DropdownOptions
-        editText="Edit Board"
-        deleteText="Delete Board"
-        onEdit={() => {}}
-        onDelete={() => {}}
-      />
+
+      <Dropdown
+        toggleIcon={<EllipsisIcon />}
+        className="toolbar__opts-dropdown"
+      >
+        <button type="button" onClick={() => {}}>
+          Edit Board
+        </button>
+        <button type="button" onClick={() => {}}>
+          Delete Board
+        </button>
+      </Dropdown>
     </div>
   );
 }
