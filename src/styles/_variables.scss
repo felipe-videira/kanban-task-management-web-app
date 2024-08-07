@@ -1,5 +1,6 @@
 // -------- Measures -----------
 $border-radius: 6px;
+$box-shadow: 0px 5px 20px 0px;
 
 // -------- Colors -----------
 $primary: hsl(242, 48%, 58%);
@@ -19,6 +20,7 @@ $light-red: hsl(0, 100%, 80%);
 $blue: #49c4e5;
 $green: #67e2ae;
 $input-border: hsla(216, 15%, 57%, 25%);
+$overlay: rgba(0, 0, 0, 0.25);
 
 // -------- Themes -----------
 $themes: (
@@ -32,7 +34,7 @@ $themes: (
     contrast-text: $light-lavender,
     primary-hover: $light-purple,
     secondary-hover: $light-gray,
-    overlay: $shadow,
+    overlay: $overlay,
     primary-btn-text: $light-lavender,
     secondary-btn-bg: $light-gray,
     secondary-btn-hover: $soft-lavender,
@@ -51,7 +53,7 @@ $themes: (
     contrast-text: $light-lavender,
     primary-hover: $light-purple,
     secondary-hover: $slate,
-    overlay: $shadow,
+    overlay: $overlay,
     primary-btn-text: $light-lavender,
     secondary-btn-bg: $light-lavender,
     secondary-btn-hover: $soft-lavender,

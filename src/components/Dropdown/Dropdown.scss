@@ -39,7 +39,7 @@
     right: 30%;
     top: 125%;
     transition: opacity 0.3s ease;
-    border-radius: 6px;
+    border-radius: $border-radius;
     border: 1px solid;
 
     #toggle-dropdown:focus ~ & {
@@ -71,7 +71,7 @@
 
     &__content {
       background-color: themed("background-contrast");
-      box-shadow: 0px 5px 20px 0px themed("box-shadow");
+      box-shadow: $box-shadow themed("box-shadow");
       border-color: themed("border");
     }
   }
