@@ -2,7 +2,7 @@ import "./Dropdown.scss";
 import { node, string } from "prop-types";
 import { ReactNode } from "react";
 
-function DropdownOptions({
+export default function Dropdown({
   className,
   children,
   toggleIcon,
@@ -12,24 +12,22 @@ function DropdownOptions({
   toggleIcon: ReactNode;
 }) {
   return (
-    <div className={`opts-dropdown ${className}`}>
-      <input id="toggle-opts-dropdown" type="checkbox" />
-      <label htmlFor="toggle-opts-dropdown" className="opts-dropdown__label">
+    <div className={`dropdown ${className}`}>
+      <input id="toggle-dropdown" type="checkbox" />
+      <label htmlFor="toggle-dropdown" className="dropdown__label">
         {toggleIcon}
       </label>
-      <div className="opts-dropdown__content">{children}</div>
+      <div className="dropdown__content">{children}</div>
     </div>
   );
 }
 
-DropdownOptions.propTypes = {
+Dropdown.propTypes = {
   toggleIcon: node.isRequired,
   children: node.isRequired,
   className: string,
 };
 
-DropdownOptions.defaultProps = {
+Dropdown.defaultProps = {
   className: "",
 };
-
-export default DropdownOptions;

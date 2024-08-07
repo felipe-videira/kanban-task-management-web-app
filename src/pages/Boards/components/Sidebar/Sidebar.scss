@@ -6,6 +6,7 @@
   grid-area: sidebar;
   display: flex;
   flex-direction: column-reverse;
+  z-index: 1;
 
   @include breakpoint(mobile) {
     position: fixed;
@@ -84,7 +85,6 @@
     #sidebar-toggle:checked ~ .sidebar > & {
       width: calc(10vw + 10rem);
       opacity: 1;
-      padding: 0 1rem 0 0;
 
       @include breakpoint(mobile) {
         width: 80vw;
@@ -152,56 +152,8 @@
     margin: 1.5rem;
   }
 
-  &__theme-toggle-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    width: 80%;
-    margin: 0 auto;
-    padding: 12px;
-    border-radius: $border-radius;
-
-    @include breakpoint(mobile) {
-      margin: 1.5rem auto;
-    }
-  }
-
   &__theme-toggle {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-
-    & input {
-      display: none;
-    }
-
-    & span {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      transition: 0.4s;
-      border-radius: 34px;
-    }
-
-    & span:before {
-      position: absolute;
-      content: "";
-      height: 15px;
-      width: 15px;
-      left: 3px;
-      bottom: 3px;
-      transition: 0.4s;
-      border-radius: 50%;
-    }
-
-    & input:checked + span:before {
-      transform: translateX(120%);
-    }
+    width: 80% !important;
   }
 }
 
@@ -257,20 +209,6 @@
           color: themed("primary-hover");
           fill: themed("primary-hover");
         }
-      }
-    }
-
-    &__theme-toggle-container {
-      background-color: themed("background");
-    }
-
-    &__theme-toggle {
-      & span {
-        background-color: themed("primary");
-      }
-
-      & span:before {
-        background-color: themed("contrast-text");
       }
     }
   }

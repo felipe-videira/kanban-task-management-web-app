@@ -7,18 +7,23 @@ import AddIcon from "../../../../icons/icon-add-task-mobile.svg?react";
 import EllipsisIcon from "../../../../icons/icon-vertical-ellipsis.svg?react";
 import Button from "../../../../components/Button/Button";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
+import DropdownItem from "../../../../components/Dropdown/DropdownItem";
 
 function Toolbar({
   selectedBoard,
-  onAddNewTask,
+  onAddTask,
+  onEditBoard,
+  onDeleteBoard,
 }: {
   selectedBoard: Board;
-  onAddNewTask: () => void;
+  onAddTask: () => void;
+  onEditBoard: () => void;
+  onDeleteBoard: () => void;
 }) {
   return (
     <div className="toolbar">
       <div className="toolbar__logo-wrapper">
-        <LogoIcon className="toolbar__logo " />
+        <LogoIcon className="toolbar__logo" />
       </div>
 
       <label htmlFor="sidebar-toggle" className="toolbar__sidebar-toggle-label">
@@ -28,25 +33,26 @@ function Toolbar({
           <h1 className="toolbar__title">{selectedBoard.title}</h1>
         )}
 
-        <ChevronIcon className="toolbar__chevron" />
+        {selectedBoard && <ChevronIcon className="toolbar__chevron" />}
       </label>
 
-      <Button onClick={onAddNewTask} className="toolbar__add-btn">
-        <span className="desktop--only">+ Add new task</span>
-        <AddIcon className="mobile--only" />
-      </Button>
-
-      <Dropdown
-        toggleIcon={<EllipsisIcon />}
-        className="toolbar__opts-dropdown"
-      >
-        <button type="button" onClick={() => {}}>
-          Edit Board
-        </button>
-        <button type="button" onClick={() => {}}>
-          Delete Board
-        </button>
-      </Dropdown>
+      {selectedBoard && (
+        <>
+          <Button onClick={onAddTask} className="toolbar__add-btn">
+            <span className="desktop--only">+ Add new task</span>
+            <AddIcon className="mobile--only" />
+          </Button>
+          <Dropdown
+            toggleIcon={<EllipsisIcon />}
+            className="toolbar__opts-dropdown"
+          >
+            <DropdownItem onClick={onEditBoard}>Edit Board</DropdownItem>
+            <DropdownItem onClick={onDeleteBoard} className="danger--text">
+              Delete Board
+            </DropdownItem>
+          </Dropdown>
+        </>
+      )}
     </div>
   );
 }
@@ -56,7 +62,7 @@ Toolbar.propTypes = {
     id: string.isRequired,
     title: string.isRequired,
   }),
-  onAddNewTask: func.isRequired,
+  onAddTask: func.isRequired,
 };
 
 Toolbar.defaultProps = {

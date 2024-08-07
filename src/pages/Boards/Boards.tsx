@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Main from "./components/Main/Main";
 import Toolbar from "./components/Toolbar/Toolbar";
+import { isMobile } from "../../utils";
 // import { useParams } from "react-router-dom";
 const mockBoards = [
   {
@@ -27,7 +28,10 @@ function Boards() {
     setSelectedBoard(board);
   }, []);
 
-  const addNewTask = useCallback(() => {}, []);
+  const addTask = useCallback(() => {}, []);
+  const createBoard = useCallback(() => {}, []);
+  const editBoard = useCallback(() => {}, []);
+  const deleteBoard = useCallback(() => {}, []);
 
   useEffect(() => {
     setBoards(mockBoards);
@@ -35,14 +39,19 @@ function Boards() {
 
   return (
     <div className="container">
-      <input type="checkbox" id="sidebar-toggle" defaultChecked />
+      <input type="checkbox" id="sidebar-toggle" defaultChecked={!isMobile()} />
       <Sidebar
         boards={boards}
         selectedBoard={selectedBoard}
         onSelectBoard={selectBoard}
       />
-      <Toolbar selectedBoard={selectedBoard} onAddNewTask={addNewTask} />
-      <Main />
+      <Toolbar
+        selectedBoard={selectedBoard}
+        onAddTask={addTask}
+        onEditBoard={editBoard}
+        onDeleteBoard={deleteBoard}
+      />
+      <Main boards={boards} onCreateBoard={createBoard} />
     </div>
   );
 }

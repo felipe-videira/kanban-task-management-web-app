@@ -1,12 +1,11 @@
 import "./Sidebar.scss";
 import { arrayOf, func, shape, string } from "prop-types";
-import useTheme from "../../../../hooks/useTheme";
+import { useMemo } from "react";
 import BoardIcon from "../../../../icons/icon-board.svg?react";
 import HideIcon from "../../../../icons/icon-hide-sidebar.svg?react";
 import ShowIcon from "../../../../icons/icon-show-sidebar.svg?react";
 import LogoIcon from "../../../../icons/logo-light.svg?react";
-import LightThemeIcon from "../../../../icons/icon-light-theme.svg?react";
-import DarkThemeIcon from "../../../../icons/icon-dark-theme.svg?react";
+import ThemeToggle from "../../../../components/ThemeToggle/ThemeToggle";
 
 function Sidebar({
   boards,
@@ -17,7 +16,7 @@ function Sidebar({
   selectedBoard: Board;
   onSelectBoard: (board: Board) => void;
 }) {
-  const { theme, toggleTheme } = useTheme();
+  const boardsLength = useMemo(() => boards.length, [boards]);
 
   return (
     <div className="sidebar">
@@ -32,7 +31,9 @@ function Sidebar({
         <LogoIcon className="sidebar__logo" />
 
         <div className="sidebar__opts">
-          <h3 className="sidebar__opts-title">{`All boards (${boards.length})`}</h3>
+          <h3 className="sidebar__opts-title">
+            {boardsLength > 0 ? `All boards (${boardsLength})` : "No boards"}
+          </h3>
 
           {boards.map((board) => (
             <button
@@ -64,20 +65,8 @@ function Sidebar({
             <BoardIcon />+ Create new board
           </button>
         </div>
-        <div className="sidebar__theme-toggle-container">
-          <LightThemeIcon />
 
-          <label className="sidebar__theme-toggle">
-            <input
-              type="checkbox"
-              checked={theme === "dark"}
-              onChange={toggleTheme}
-            />
-            <span />
-          </label>
-
-          <DarkThemeIcon />
-        </div>
+        <ThemeToggle className="sidebar__theme-toggle" />
       </div>
     </div>
   );

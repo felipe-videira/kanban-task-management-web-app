@@ -1,5 +1,7 @@
-@import "./styles/mixins";
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import "./styles/mixins";
+@import "./styles/functions";
+@import "./styles/variables";
 
 body {
   margin: 0;
@@ -30,5 +32,11 @@ body {
 .mobile--only {
   @include breakpoint(not-mobile) {
     display: none;
+  }
+}
+
+@include themify($themes) {
+  .danger--text {
+    color: themed("danger") !important;
   }
 }
