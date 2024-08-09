@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import "./Dropdown.scss";
 import { node, string } from "prop-types";
 import { ReactNode } from "react";
@@ -13,11 +14,10 @@ export default function Dropdown({
 }) {
   return (
     <div className={`dropdown ${className}`}>
-      <input id="toggle-dropdown" type="checkbox" />
-      <label htmlFor="toggle-dropdown" className="dropdown__label">
+      <div tabIndex={0} className="dropdown__label">
         {toggleIcon}
-      </label>
-      <div className="dropdown__content">{children}</div>
+        <div className="dropdown__content">{children}</div>
+      </div>
     </div>
   );
 }

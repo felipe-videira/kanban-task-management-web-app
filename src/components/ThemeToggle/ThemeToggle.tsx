@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import "./ThemeToggle.scss";
 import { bool, string } from "prop-types";
 import LightThemeIcon from "../../icons/icon-light-theme.svg?react";

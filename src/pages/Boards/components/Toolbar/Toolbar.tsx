@@ -33,7 +33,7 @@ function Toolbar({
           <h1 className="toolbar__title">{selectedBoard.title}</h1>
         )}
 
-        {selectedBoard && <ChevronIcon className="toolbar__chevron" />}
+        <ChevronIcon className="toolbar__chevron" />
       </label>
 
       {selectedBoard && (
@@ -63,6 +63,8 @@ Toolbar.propTypes = {
     title: string.isRequired,
   }),
   onAddTask: func.isRequired,
+  onEditBoard: func.isRequired,
+  onDeleteBoard: func.isRequired,
 };
 
 Toolbar.defaultProps = {

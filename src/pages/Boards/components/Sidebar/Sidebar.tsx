@@ -11,10 +11,12 @@ function Sidebar({
   boards,
   selectedBoard,
   onSelectBoard,
+  onCreateBoard,
 }: {
   boards: Board[];
   selectedBoard: Board;
   onSelectBoard: (board: Board) => void;
+  onCreateBoard: () => void;
 }) {
   const boardsLength = useMemo(() => boards.length, [boards]);
 
@@ -61,6 +63,7 @@ function Sidebar({
           <button
             type="button"
             className="sidebar__opts-btn sidebar__opts-btn--create"
+            onClick={onCreateBoard}
           >
             <BoardIcon />+ Create new board
           </button>
@@ -84,6 +87,7 @@ Sidebar.propTypes = {
     title: string.isRequired,
   }),
   onSelectBoard: func.isRequired,
+  onCreateBoard: func.isRequired,
 };
 
 Sidebar.defaultProps = {

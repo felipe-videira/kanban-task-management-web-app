@@ -5,23 +5,31 @@ import ThemeToggle from "../../../../components/ThemeToggle/ThemeToggle";
 import "./Main.scss";
 
 function Main({
-  onCreateBoard,
   boards,
+  selectedBoard,
+  onCreateBoard,
 }: {
   boards: Board[];
+  selectedBoard: Board;
   onCreateBoard: () => void;
 }) {
   const boardsLength = useMemo(() => boards.length, [boards]);
 
   return (
     <div className="main">
-      {boardsLength === 0 && (
+      {(boardsLength === 0 || !selectedBoard) && (
         <div className="main__empty-state">
           <div className="main__empty-state-create-new">
-            <h2>Create a new board to get started</h2>
-            <Button onClick={onCreateBoard} primary>
-              + Create new board
-            </Button>
+            <h2>
+              {boardsLength === 0
+                ? "Create a new board to get started"
+                : "Select a board to get started"}
+            </h2>
+            {boardsLength === 0 && (
+              <Button onClick={onCreateBoard} primary>
+                + Create new board
+              </Button>
+            )}
           </div>
           <ThemeToggle noBackground />
         </div>
@@ -37,7 +45,15 @@ Main.propTypes = {
       title: string.isRequired,
     })
   ).isRequired,
+  selectedBoard: shape({
+    id: string.isRequired,
+    title: string.isRequired,
+  }),
   onCreateBoard: func.isRequired,
+};
+
+Main.defaultProps = {
+  selectedBoard: null,
 };
 
 export default Main;
