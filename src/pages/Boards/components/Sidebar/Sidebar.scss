@@ -1,0 +1,215 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+@import "../../../../styles/functions";
+
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column-reverse;
+  z-index: 1;
+
+  @include breakpoint(mobile) {
+    position: fixed;
+    height: 90vh;
+    width: max-content;
+    top: 10vh;
+  }
+
+  &__logo {
+    margin: 2.25rem 1.5rem;
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+  }
+
+  &__toggle-label {
+    cursor: pointer;
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    gap: 0.8rem;
+    line-height: 1rem;
+    position: fixed;
+    bottom: 10vh;
+    left: 0;
+    border-radius: 0 50px 50px 0;
+    padding: 12px;
+
+    #sidebar-toggle:checked ~ .sidebar > & {
+      width: auto;
+      position: relative;
+      bottom: 0;
+      background: none;
+      margin: 1.5rem;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar > & .sidebar__toggle-show-icon {
+      display: none;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar > & .sidebar__toggle-hide-icon,
+    #sidebar-toggle:checked ~ .sidebar > & .sidebar__toggle-text {
+      display: block;
+    }
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+  }
+
+  &__toggle-hide-icon {
+    display: none;
+  }
+
+  &__toggle-text {
+    display: none;
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    width: 0px;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include breakpoint(mobile) {
+      transition: opacity 0.3s ease;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar > & {
+      width: calc(10vw + 10rem);
+      opacity: 1;
+
+      @include breakpoint(mobile) {
+        width: 80vw;
+        height: 80vh;
+        flex: none;
+        margin: 0 10vw;
+        bottom: 5vh;
+        position: relative;
+        border-radius: $border-radius;
+      }
+    }
+  }
+
+  &__opts {
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  &__opts-btn {
+    display: list-item;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    border: none;
+    background: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+
+    &--list-item {
+      width: 90%;
+      border-radius: 0 50px 50px 0;
+    }
+
+    &--create {
+      display: flex;
+      gap: 1rem;
+      line-height: 1rem;
+      padding: 0.8rem 1.5rem;
+    }
+  }
+
+  &__opts-toggle-label {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    line-height: 1rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    pointer-events: none;
+
+    @include breakpoint(mobile) {
+      pointer-events: all;
+    }
+  }
+
+  &__opts-board-icon {
+    width: 16px;
+  }
+
+  &__opts-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    margin: 1.5rem;
+  }
+
+  &__theme-toggle {
+    width: 80% !important;
+  }
+}
+
+@include themify($themes) {
+  .sidebar {
+    background-color: themed("background-contrast");
+    border-right: 1px solid themed("border");
+    color: themed("secondary-text");
+
+    @include breakpoint(mobile) {
+      background-color: themed("overlay");
+    }
+
+    &__logo {
+      path {
+        fill: themed("title-text");
+      }
+    }
+
+    &__content {
+      background: themed("background-contrast");
+    }
+
+    &__toggle-label {
+      background-color: themed("primary");
+    }
+
+    &__opts-btn {
+      &--list-item {
+        color: themed("secondary-text");
+        fill: themed("secondary-text");
+
+        &:hover {
+          background-color: themed("secondary-hover");
+        }
+      }
+
+      &--selected {
+        background-color: themed("primary");
+        color: themed("contrast-text");
+        fill: themed("contrast-text");
+
+        &:hover {
+          background-color: themed("primary");
+        }
+      }
+
+      &--create {
+        color: themed("primary");
+        fill: themed("primary");
+
+        &:hover {
+          color: themed("primary-hover");
+          fill: themed("primary-hover");
+        }
+      }
+    }
+  }
+}

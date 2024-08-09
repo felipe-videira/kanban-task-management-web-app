@@ -1,3 +1,8 @@
+// -------- Measures -----------
+$border-radius: 6px;
+$box-shadow: 0px 5px 20px 0px;
+
+// -------- Colors -----------
 $primary: hsl(242, 48%, 58%);
 $light-purple: hsl(243, 100%, 82%);
 $dark-blue: hsl(237, 100%, 4%);
@@ -15,3 +20,46 @@ $light-red: hsl(0, 100%, 80%);
 $blue: #49c4e5;
 $green: #67e2ae;
 $input-border: hsla(216, 15%, 57%, 25%);
+$overlay: rgba(0, 0, 0, 0.25);
+
+// -------- Themes -----------
+$themes: (
+  light: (
+    primary: $primary,
+    background: $soft-lavender,
+    background-contrast: $lightest-blue,
+    border: $light-gray,
+    title-text: $dark-blue,
+    secondary-text: $gray,
+    contrast-text: $light-lavender,
+    primary-hover: $light-purple,
+    secondary-hover: $light-gray,
+    overlay: $overlay,
+    primary-btn-text: $light-lavender,
+    secondary-btn-bg: $light-gray,
+    secondary-btn-hover: $soft-lavender,
+    danger: $red,
+    danger-text: $light-lavender,
+    danger-hover: $light-red,
+    box-shadow: $shadow,
+  ),
+  dark: (
+    primary: $primary,
+    background: $deep-blue,
+    background-contrast: $navy,
+    border: $slate,
+    title-text: $light-lavender,
+    secondary-text: $gray,
+    contrast-text: $light-lavender,
+    primary-hover: $light-purple,
+    secondary-hover: $slate,
+    overlay: $overlay,
+    primary-btn-text: $light-lavender,
+    secondary-btn-bg: $light-lavender,
+    secondary-btn-hover: $soft-lavender,
+    danger: $red,
+    danger-text: $light-lavender,
+    danger-hover: $light-red,
+    box-shadow: $shadow,
+  ),
+);

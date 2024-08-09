@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import useTheme from "./hooks/useTheme";
 import Boards from "./pages/Boards/Boards";
 
 export default function App() {
+  const { theme } = useTheme();
+
   return (
-    <div className="App">
+    <div className={`${theme}-theme`}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Boards />} />

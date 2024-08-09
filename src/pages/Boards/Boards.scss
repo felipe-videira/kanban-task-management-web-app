@@ -1,3 +1,22 @@
-.board-menu {
-  color: blue;
+@import "../../styles/variables";
+@import "../../styles/mixins";
+@import "../../styles/functions";
+
+#sidebar-toggle {
+  display: none;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    "sidebar toolbar"
+    "sidebar  main";
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: 6rem 1fr;
+  width: 100%;
+  min-height: 100vh;
+
+  @include breakpoint(mobile) {
+    grid-template-rows: max-content 1fr;
+  }
 }

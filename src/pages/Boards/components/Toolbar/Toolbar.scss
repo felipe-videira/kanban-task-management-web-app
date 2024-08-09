@@ -1,0 +1,116 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+@import "../../../../styles/functions";
+
+.toolbar {
+  grid-area: toolbar;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid;
+
+  @include breakpoint(mobile) {
+    height: 10vh;
+  }
+
+  &__sidebar-toggle-label {
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    gap: 1rem;
+    height: 100%;
+    flex: 1;
+
+    @include breakpoint(mobile) {
+      pointer-events: all;
+      cursor: pointer;
+      flex: 0.85;
+    }
+  }
+
+  &__logo-wrapper {
+    height: 100%;
+    border-right: 2px solid;
+    width: 153px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 0 0;
+    margin: 0 1rem;
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+
+    #sidebar-toggle:checked ~ .toolbar > & {
+      width: 0;
+      border: none;
+      margin: 0;
+    }
+  }
+
+  &__logo-mobile {
+    padding: 0 0 0 1.5rem;
+
+    @include breakpoint(not-mobile) {
+      display: none;
+    }
+  }
+
+  &__title {
+    white-space: nowrap;
+    font-size: 1.5rem;
+
+    @include breakpoint(mobile) {
+      font-size: 1rem;
+      margin: 0;
+    }
+  }
+
+  &__chevron {
+    display: none;
+
+    @include breakpoint(mobile) {
+      display: block;
+    }
+
+    #sidebar-toggle:checked ~ .toolbar > .toolbar__sidebar-toggle-label > & {
+      rotate: 180deg;
+    }
+  }
+
+  &__add-btn {
+    margin: 0 1rem;
+
+    @include breakpoint(mobile) {
+      margin: 0;
+    }
+  }
+
+  &__opts-dropdown {
+    margin: 0 1.25rem 0 0;
+
+    @include breakpoint(mobile) {
+      margin: 0;
+    }
+  }
+}
+
+@include themify($themes) {
+  .toolbar {
+    background-color: themed("background-contrast");
+    color: themed("title-text");
+    border-color: themed("border");
+
+    &__logo {
+      path {
+        fill: themed("title-text");
+      }
+    }
+
+    &__logo-wrapper {
+      border-color: themed("border");
+    }
+  }
+}

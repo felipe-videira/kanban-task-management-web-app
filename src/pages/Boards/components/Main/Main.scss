@@ -1,0 +1,43 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+@import "../../../../styles/functions";
+
+.main {
+  grid-area: main;
+
+  &__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+  }
+
+  &__empty-state-create-new {
+    flex: 0.9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      text-align: center;
+    }
+  }
+}
+
+@include themify($themes) {
+  .main {
+    background-color: themed("background");
+
+    &__empty-state {
+      background-color: themed("background-contrast");
+    }
+
+    &__empty-state-create-new {
+      h2 {
+        color: themed("secondary-text");
+      }
+    }
+  }
+}

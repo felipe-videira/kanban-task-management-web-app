@@ -1,8 +1,42 @@
-@import "styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import "./styles/mixins";
+@import "./styles/functions";
+@import "./styles/variables";
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 100%;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.light-theme {
+  & .dark--theme {
+    display: none;
+  }
+}
+
+.dark-theme {
+  & .light--theme {
+    display: none;
+  }
+}
+
+.desktop--only {
+  @include breakpoint(mobile) {
+    display: none;
+  }
+}
+
+.mobile--only {
+  @include breakpoint(not-mobile) {
+    display: none;
+  }
+}
+
+@include themify($themes) {
+  .danger--text {
+    color: themed("danger") !important;
+  }
 }
