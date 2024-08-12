@@ -48,6 +48,23 @@ function Boards() {
     setShowSidebar(evt.target.checked);
   }, []);
 
+  const validateForm = useCallback((evt) => {
+    evt.preventDefault();
+    const fields = document.forms.boardForm;
+    console.log(fields.fname.required);
+    if (!fields.fname.value) {
+      alert("nome");
+    }
+
+    // setShowBoardModal(false);
+  }, []);
+
+  const validateRequiredField = useCallback((evt) => {
+    if (!evt.target.value) {
+      alert("nome 2");
+    }
+  }, []);
+
   useEffect(() => {
     setBoards(mockBoards);
   }, []);
@@ -85,15 +102,25 @@ function Boards() {
         onCreateBoard={createBoard}
       />
 
-      <Modal show={showBoardModal}>
-        <button
-          type="button"
-          onClick={() => {
-            setShowBoardModal(false);
-          }}
-        >
-          close
-        </button>
+      <Modal
+        show={showBoardModal}
+        onClose={() => {
+          setShowBoardModal(false);
+        }}
+      >
+        <form name="boardForm" onSubmit={validateForm}>
+          <h3>Add new board</h3>
+          <input type="hidden" name="id" />
+
+          <label htmlFor="name">Name</label>
+          <input type="text" name="fname" onChange={validateRequiredField} />
+
+          <label htmlFor="name">Columns</label>
+          <input type="text" name="column1" />
+
+          <button type="button">+ Add New Column</button>
+          <button type="submit">Create New Board</button>
+        </form>
       </Modal>
     </div>
   );
