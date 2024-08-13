@@ -24,7 +24,13 @@
   &__content {
     width: 90%;
     max-width: 350px;
+    padding: 2rem;
     border-radius: $border-radius;
+  }
+
+  &__title {
+    margin: 0 0 1rem 0;
+    font-size: 1.17rem;
   }
 }
 
@@ -35,6 +41,10 @@
     &__content {
       background-color: themed("background-contrast");
       box-shadow: $box-shadow themed("box-shadow");
+    }
+
+    &__title {
+      color: themed("title-text");
     }
   }
 }

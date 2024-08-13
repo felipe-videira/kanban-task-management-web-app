@@ -3,7 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Main from "./components/Main/Main";
 import Toolbar from "./components/Toolbar/Toolbar";
-import Modal from "../../components/Modal/Modal";
+import Modal, { ModalTitle } from "../../components/Modal/Modal";
+import Button from "../../components/Button/Button";
+import TextField from "../../components/TextField/TextField";
 // import { useParams } from "react-router-dom";
 
 const mockBoards = [
@@ -108,18 +110,31 @@ function Boards() {
           setShowBoardModal(false);
         }}
       >
+        <ModalTitle>Add new board</ModalTitle>
+
         <form name="boardForm" onSubmit={validateForm}>
-          <h3>Add new board</h3>
           <input type="hidden" name="id" />
 
-          <label htmlFor="name">Name</label>
-          <input type="text" name="fname" onChange={validateRequiredField} />
+          <TextField
+            name="fname"
+            label="Name"
+            onChange={validateRequiredField}
+            error="This field is required"
+          />
 
-          <label htmlFor="name">Columns</label>
-          <input type="text" name="column1" />
+          <TextField
+            name="fcolumn1"
+            label="Columns"
+            onChange={validateRequiredField}
+          />
 
-          <button type="button">+ Add New Column</button>
-          <button type="submit">Create New Board</button>
+          <Button secondary block>
+            + Add New Column
+          </Button>
+
+          <Button type="submit" block>
+            Create New Board
+          </Button>
         </form>
       </Modal>
     </div>

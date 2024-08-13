@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 
 function Button({
   children,
+  type,
   onClick,
   className,
   block,
@@ -12,6 +13,7 @@ function Button({
   danger,
 }: {
   children: ReactNode;
+  type: "button" | "submit" | "reset" | undefined;
   onClick: () => void;
   className: string;
   block: boolean;
@@ -21,7 +23,7 @@ function Button({
 }) {
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
       className={`base-button ${className} ${block ? "base-button--block" : ""}
       ${primary ? "base-button--primary" : ""}
@@ -36,7 +38,8 @@ function Button({
 
 Button.propTypes = {
   children: node.isRequired,
-  onClick: func.isRequired,
+  onClick: func,
+  type: string,
   className: string,
   block: bool,
   primary: bool,
@@ -45,6 +48,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  type: "button",
+  onClick: null,
   className: "",
   block: false,
   primary: true,

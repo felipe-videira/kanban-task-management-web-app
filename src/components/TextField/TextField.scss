@@ -1,0 +1,59 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+@import "../../styles/functions";
+
+.text-field {
+  &__label {
+    font-weight: 700;
+    font-size: 0.25rem;
+    margin: 0 0 0.5rem 0;
+    display: block;
+  }
+
+  &__input {
+    display: block;
+    border-radius: $border-radius;
+    border: 1px solid;
+    padding: 0.6rem 0.75rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+    margin: 0 0 1rem 0;
+    transition: border-color 0.3s ease;
+
+    &--error {
+      margin: 0;
+    }
+  }
+
+  &__error {
+    font-weight: 500;
+    font-size: 0.2rem;
+    margin: 0 0 1rem 0;
+    display: block;
+  }
+}
+
+@include themify($themes) {
+  .text-field {
+    &__label {
+      color: themed("title-text");
+    }
+
+    &__input {
+      color: themed("title-text");
+      border-color: themed("input-border");
+      background-color: themed("background-contrast");
+
+      &--error {
+        border-color: themed("danger");
+      }
+    }
+
+    &__error {
+      color: themed("danger");
+    }
+  }
+}

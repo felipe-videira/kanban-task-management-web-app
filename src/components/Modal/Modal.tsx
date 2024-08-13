@@ -47,4 +47,12 @@ Modal.defaultProps = {
   show: false,
 };
 
+export function ModalTitle({ children }: { children: ReactNode }) {
+  return <h3 className="modal__title">{children}</h3>;
+}
+
+ModalTitle.propTypes = {
+  children: node.isRequired,
+};
+
 export default Modal;
