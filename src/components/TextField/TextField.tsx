@@ -6,12 +6,14 @@ function TextField({
   name,
   className,
   label,
+  defaultValue,
   error,
   onChange,
 }: {
   name: string;
   className: string;
   label: string;
+  defaultValue: string;
   error: string;
   onChange: ChangeEventHandler;
 }) {
@@ -24,6 +26,7 @@ function TextField({
         type="text"
         name={name}
         onChange={onChange}
+        defaultValue={defaultValue}
         className={`text-field__input ${className} ${
           error ? "text-field__input--error" : ""
         }`}
@@ -37,12 +40,14 @@ TextField.propTypes = {
   name: string.isRequired,
   label: string.isRequired,
   className: string,
+  defaultValue: string,
   error: string,
   onChange: func,
 };
 
 TextField.defaultProps = {
   className: "",
+  defaultValue: "",
   error: null,
   onChange: null,
 };

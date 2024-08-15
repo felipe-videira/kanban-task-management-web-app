@@ -6,6 +6,7 @@ import Toolbar from "./components/Toolbar/Toolbar";
 import Modal, { ModalTitle } from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
 import TextField from "../../components/TextField/TextField";
+import ColumnsField from "../../components/ColumnsField/ColumnsField";
 // import { useParams } from "react-router-dom";
 
 const mockBoards = [
@@ -29,6 +30,33 @@ function Boards() {
   const [boards, setBoards] = useState<Board[]>([]);
   const [showBoardModal, setShowBoardModal] = useState<boolean>(false);
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
+
+  const [columns, setColumns] = useState<Column[]>([
+    { id: new Date().getTime().toString(), title: "" },
+  ]);
+
+  const addColumn = useCallback(() => {
+    setColumns([
+      ...columns,
+      {
+        id: new Date().getTime().toString(),
+        title: "",
+      },
+    ]);
+  }, [columns]);
+
+  const validateColumns = useCallback((column: Column, index: number) => {},
+  []);
+  const rearrangeColumns = useCallback(
+    (column: Column, currentIndex: number, targetIndex: number) => {},
+    []
+  );
+  const deleteColumn = useCallback(
+    (index: number) => {
+      setColumns([...columns.slice(0, index), ...columns.slice(index + 1)]);
+    },
+    [columns]
+  );
 
   const selectBoard = useCallback((board: Board) => {
     setSelectedBoard(board);
@@ -122,13 +150,15 @@ function Boards() {
             error="This field is required"
           />
 
-          <TextField
-            name="fcolumn1"
+          <ColumnsField
             label="Columns"
-            onChange={validateRequiredField}
+            data={columns}
+            onChange={validateColumns}
+            onRearrange={rearrangeColumns}
+            onDelete={deleteColumn}
           />
 
-          <Button secondary block>
+          <Button secondary block onClick={addColumn}>
             + Add New Column
           </Button>
 
