@@ -47,9 +47,29 @@ function Boards() {
 
   const validateColumns = useCallback((column: Column, index: number) => {},
   []);
-  const rearrangeColumns = useCallback(
-    (column: Column, currentIndex: number, targetIndex: number) => {},
-    []
+  const reorderColumns = useCallback(
+    (currentIndex: number, targetIndex: number) => {
+      const column = columns[currentIndex];
+      let newColumns = [
+        ...columns.slice(0, currentIndex),
+        ...columns.slice(currentIndex + 1),
+      ];
+
+      if (targetIndex === columns.length) {
+        newColumns.push(column);
+      } else if (targetIndex === 0) {
+        newColumns.unshift(column);
+      } else {
+        newColumns = [
+          ...newColumns.slice(0, targetIndex),
+          column,
+          ...newColumns.slice(targetIndex),
+        ];
+      }
+
+      setColumns(newColumns);
+    },
+    [columns]
   );
   const deleteColumn = useCallback(
     (index: number) => {
@@ -153,8 +173,8 @@ function Boards() {
           <ColumnsField
             label="Columns"
             data={columns}
-            onChange={validateColumns}
-            onRearrange={rearrangeColumns}
+            onFieldChange={validateColumns}
+            onReorder={reorderColumns}
             onDelete={deleteColumn}
           />
 
