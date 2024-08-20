@@ -36,6 +36,7 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
         itemsRef.current[selected.column.id].style.pointerEvents = `all`;
         itemsRef.current[selected.column.id].style.marginTop = "0";
         itemsRef.current[selected.column.id].style.marginBottom = `0`;
+        itemsRef.current[selected.column.id].style.opacity = `1`;
         setSelected(null);
         setTarget(null);
         setIsDragging(false);
@@ -51,6 +52,7 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
         itemsRef.current[selected.column.id].style.zIndex = "99";
         itemsRef.current[selected.column.id].style.width = `${width}px`;
         itemsRef.current[selected.column.id].style.pointerEvents = `none`;
+        itemsRef.current[selected.column.id].style.opacity = `0.75`;
 
         const { y, height } =
           itemsRef.current[selected.column.id].getBoundingClientRect();
@@ -88,7 +90,11 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
 
   const onMouseEnterTarget = (id, i) => {
     if (isDragging) {
-      itemsRef.current[id].style.marginTop = `${selected.height}px`;
+      if (selected?.index > i) {
+        itemsRef.current[id].style.marginTop = `${selected.height}px`;
+      } else {
+        itemsRef.current[id].style.marginBottom = `${selected.height}px`;
+      }
 
       setTarget({ id, index: i });
     }
@@ -101,8 +107,6 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
 
   return (
     <div className="columns-field">
-      selected: {selected?.index}
-      target: {target?.index}
       {data.map((column, index) => (
         <div
           key={column.id}
@@ -132,7 +136,7 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
           </button>
         </div>
       ))}
-      <div
+      {/* <div
         className="columns-field__item"
         style={{ height: "20px" }}
         ref={(el) => {
@@ -140,7 +144,7 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
         }}
         onMouseEnter={() => onMouseEnterTarget(0, data.length)}
         onMouseLeave={() => onMouseLeaveTarget(0, data.length)}
-      />
+      /> */}
     </div>
   );
 }
