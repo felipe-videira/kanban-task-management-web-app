@@ -1,58 +1,69 @@
 import "./ColumnsField.scss";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import TextField from "../TextField/TextField";
 import CrossIcon from "../../icons/icon-cross.svg?react";
+import DragIcon from "../../icons/icon-drag-handle.svg?react";
 
-function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
-  const itemsRef = useRef([]);
+type Selected = {
+  column: Column;
+  index: number;
+  height?: number;
+  currentY?: number;
+} | null;
 
-  const [selected, setSelected] = useState<{
-    column: Column;
-    index: number;
-    currentY: number;
-  } | null>(null);
-
-  const [target, setTarget] = useState<{
-    column: Column;
-    index: number;
-    currentY: number;
-  } | null>(null);
-
+function ColumnsField({
+  data,
+  label,
+  onFieldChange,
+  onReorder,
+  onDelete,
+}: {
+  data: Column[];
+  label: string;
+  onFieldChange: (column: Column, index: number) => void;
+  onReorder: (selectedIndex: number, targetIndex: number) => void;
+  onDelete: (index: number) => void;
+}) {
+  const itemsRef = useRef<{ [key: string]: HTMLDivElement }>({});
+  const [selected, setSelected] = useState<Selected>(null);
+  const [target, setTarget] = useState<Selected>(null);
   const [isDragging, setIsDragging] = useState(false);
 
-  useEffect(() => {
-    const handleDocumentMouseUp = (event) => {
+  const handleDocumentMouseUp = useCallback(
+    (event) => {
       if (selected && event.button === 0) {
         if (target) {
           onReorder(selected.index, target.index);
-          itemsRef.current[target.id].style.marginTop = "0";
-          itemsRef.current[target.id].style.marginBottom = `0`;
+
+          itemsRef.current[target.column.id].style.marginTop = "0";
+          itemsRef.current[target.column.id].style.marginBottom = `0`;
         }
+
+        itemsRef.current[selected.column.id].classList.remove(
+          "columns-field__item--selected"
+        );
         itemsRef.current[
           selected.column.id
         ].style.transform = `translateY(0px)`;
-        itemsRef.current[selected.column.id].style.position = "relative";
-        itemsRef.current[selected.column.id].style.zIndex = "1";
-        itemsRef.current[selected.column.id].style.pointerEvents = `all`;
-        itemsRef.current[selected.column.id].style.marginTop = "0";
-        itemsRef.current[selected.column.id].style.marginBottom = `0`;
-        itemsRef.current[selected.column.id].style.opacity = `1`;
+
         setSelected(null);
         setTarget(null);
         setIsDragging(false);
       }
-    };
+    },
+    [selected, target, itemsRef]
+  );
 
-    const handleDocumentMouseDown = (event) => {
+  const handleDocumentMouseDown = useCallback(
+    (event) => {
       if (selected && event.button === 0) {
         const { width } =
           itemsRef.current[selected.column.id].getBoundingClientRect();
 
-        itemsRef.current[selected.column.id].style.position = "fixed";
-        itemsRef.current[selected.column.id].style.zIndex = "99";
         itemsRef.current[selected.column.id].style.width = `${width}px`;
-        itemsRef.current[selected.column.id].style.pointerEvents = `none`;
-        itemsRef.current[selected.column.id].style.opacity = `0.75`;
+        itemsRef.current[selected.column.id].classList.add(
+          "columns-field__item--selected"
+        );
 
         const { y, height } =
           itemsRef.current[selected.column.id].getBoundingClientRect();
@@ -64,17 +75,78 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
           height,
         });
       }
-    };
+    },
+    [selected, itemsRef]
+  );
 
-    const handleMousePosition = (event) => {
-      if (selected && isDragging) {
-        const offset = selected.height / 2;
+  const handleMousePosition = useCallback(
+    (event) => {
+      if (selected && isDragging && selected.height && selected.currentY) {
         itemsRef.current[selected.column.id].style.transform = `translateY(${
-          event.clientY - selected.currentY - offset
+          event.clientY - selected.currentY - selected.height / 2
         }px)`;
       }
-    };
+    },
+    [selected, isDragging, itemsRef]
+  );
 
+  const onMouseEnterTarget = useCallback(
+    (column, index) => {
+      if (isDragging && selected) {
+        if (selected.index > index) {
+          itemsRef.current[column.id].style.marginTop = `${selected?.height}px`;
+          itemsRef.current[column.id].classList.add(
+            "columns-field__item--target-up"
+          );
+        } else {
+          itemsRef.current[
+            column.id
+          ].style.marginBottom = `${selected?.height}px`;
+          itemsRef.current[column.id].classList.add(
+            "columns-field__item--target-down"
+          );
+        }
+
+        setTarget({ column, index });
+      }
+    },
+    [selected, isDragging, itemsRef]
+  );
+
+  const onMouseLeaveTarget = useCallback(
+    (column) => {
+      itemsRef.current[column.id].style.marginTop = "0";
+      itemsRef.current[column.id].style.marginBottom = `0`;
+      itemsRef.current[column.id].classList.remove(
+        "columns-field__item--target-up"
+      );
+      itemsRef.current[column.id].classList.remove(
+        "columns-field__item--target-down"
+      );
+      setTarget(null);
+    },
+    [itemsRef]
+  );
+
+  const onMouseEnterSelected = useCallback(
+    (column, index) => {
+      if (!isDragging) setSelected({ column, index });
+    },
+    [isDragging]
+  );
+
+  const onMouseLeaveSelected = useCallback(() => {
+    if (!isDragging) setSelected(null);
+  }, [isDragging]);
+
+  const assignRef = useCallback(
+    (el, column) => {
+      if (el) itemsRef.current[column.id] = el;
+    },
+    [itemsRef]
+  );
+
+  useEffect(() => {
     document.addEventListener("mousedown", handleDocumentMouseDown);
     document.addEventListener("mouseup", handleDocumentMouseUp);
 
@@ -88,64 +160,43 @@ function ColumnsField({ data, label, onFieldChange, onReorder, onDelete }) {
     };
   }, [selected, isDragging, itemsRef, target]);
 
-  const onMouseEnterTarget = (id, i) => {
-    if (isDragging) {
-      if (selected?.index > i) {
-        itemsRef.current[id].style.marginTop = `${selected.height}px`;
-      } else {
-        itemsRef.current[id].style.marginBottom = `${selected.height}px`;
-      }
-
-      setTarget({ id, index: i });
-    }
-  };
-
-  const onMouseLeaveTarget = (id, i) => {
-    itemsRef.current[id].style.marginTop = "0";
-    itemsRef.current[id].style.marginBottom = `0`;
-  };
-
   return (
-    <div className="columns-field">
-      {data.map((column, index) => (
-        <div
-          key={column.id}
-          className="columns-field__item"
-          ref={(el) => {
-            itemsRef.current[column.id] = el;
-          }}
-          onMouseEnter={() => onMouseEnterTarget(column.id, index)}
-          onMouseLeave={() => onMouseLeaveTarget(column.id, index)}
-        >
-          <TextField
-            name={`fcolumn${index}`}
-            defaultValue={column.title}
-            onChange={() => onFieldChange(column, index)}
-            error={column.error}
-          />
-          <button
-            type="button"
-            onMouseEnter={() => !isDragging && setSelected({ column, index })}
-            onMouseLeave={() => !isDragging && setSelected(null)}
-            className="columns-field__drag-area"
+    <>
+      <label className="columns-field__label">{label}</label>
+      <div className="columns-field">
+        {data.map((column, index) => (
+          <div
+            key={column.id}
+            className="columns-field__item"
+            ref={(el) => assignRef(el, column)}
+            onMouseEnter={() => onMouseEnterTarget(column, index)}
+            onMouseLeave={() => onMouseLeaveTarget(column)}
           >
-            ::
-          </button>
-          <button type="button" onClick={() => onDelete(index)}>
-            <CrossIcon />
-          </button>
-        </div>
-      ))}
-      {/* <div
-        className="columns-field__item"
-        style={{ height: "20px" }}
-        ref={(el) => {
-          itemsRef.current[0] = el;
-        }}
-        onMouseEnter={() => onMouseEnterTarget(0, data.length)}
-        onMouseLeave={() => onMouseLeaveTarget(0, data.length)}
-      /> */}
-    </div>
+            <TextField
+              name={`fcolumn${index}`}
+              defaultValue={column.title}
+              onChange={() => onFieldChange(column, index)}
+              error={column.error}
+            />
+            <button
+              type="button"
+              onMouseEnter={() => onMouseEnterSelected(column, index)}
+              onMouseLeave={onMouseLeaveSelected}
+              className="columns-field__drag-area"
+            >
+              <DragIcon />
+            </button>
+            <button
+              type="button"
+              onClick={() => onDelete(index)}
+              className="columns-field__del-btn"
+            >
+              <CrossIcon />
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 

@@ -19,9 +19,11 @@ function TextField({
 }) {
   return (
     <>
-      <label htmlFor={name} className="text-field__label">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={name} className="text-field__label">
+          {label}
+        </label>
+      )}
       <input
         type="text"
         name={name}
@@ -38,7 +40,7 @@ function TextField({
 
 TextField.propTypes = {
   name: string.isRequired,
-  label: string.isRequired,
+  label: string,
   className: string,
   defaultValue: string,
   error: string,
@@ -46,6 +48,7 @@ TextField.propTypes = {
 };
 
 TextField.defaultProps = {
+  label: "",
   className: "",
   defaultValue: "",
   error: null,
