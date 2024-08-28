@@ -180,6 +180,7 @@ function ColumnsField({
               defaultValue={column.title}
               onChange={(evt) => onFieldChange(evt, `fcolumn-${column.id}`)}
               error={errors[`fcolumn-${column.id}`]}
+              errorNoMargin
             />
             <button
               type="button"
