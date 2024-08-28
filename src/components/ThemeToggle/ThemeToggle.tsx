@@ -1,19 +1,20 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import "./ThemeToggle.scss";
-import { bool, string } from "prop-types";
+import { bool, func, string } from "prop-types";
 import LightThemeIcon from "../../icons/icon-light-theme.svg?react";
 import DarkThemeIcon from "../../icons/icon-dark-theme.svg?react";
-import useTheme from "../../hooks/useTheme";
 
 function ThemeToggle({
+  theme,
+  onToggleTheme,
   className,
   noBackground,
 }: {
+  theme: string;
+  onToggleTheme: () => void;
   className: string;
   noBackground: boolean;
 }) {
-  const { theme, toggleTheme } = useTheme();
-
   return (
     <div
       className={`theme-toggle ${
@@ -26,7 +27,7 @@ function ThemeToggle({
         <input
           type="checkbox"
           checked={theme === "dark"}
-          onChange={toggleTheme}
+          onChange={onToggleTheme}
         />
         <span />
       </label>
@@ -37,6 +38,8 @@ function ThemeToggle({
 }
 
 ThemeToggle.propTypes = {
+  theme: string.isRequired,
+  onToggleTheme: func.isRequired,
   className: string,
   noBackground: bool,
 };
