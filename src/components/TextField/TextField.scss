@@ -38,6 +38,10 @@
     font-size: 0.2rem;
     margin: 0 0 1rem 0;
     display: block;
+
+    &--no-margin {
+      margin: 0;
+    }
   }
 }
 

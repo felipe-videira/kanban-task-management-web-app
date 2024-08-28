@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react";
 import "./TextField.scss";
-import { func, string } from "prop-types";
+import { bool, func, string } from "prop-types";
 
 function TextField({
   name,
@@ -8,6 +8,7 @@ function TextField({
   label,
   defaultValue,
   error,
+  errorNoMargin,
   onChange,
 }: {
   name: string;
@@ -15,6 +16,7 @@ function TextField({
   label: string;
   defaultValue: string;
   error: string | null | undefined;
+  errorNoMargin: boolean;
   onChange: ChangeEventHandler;
 }) {
   return (
@@ -33,7 +35,15 @@ function TextField({
           error ? "text-field__input--error" : ""
         }`}
       />
-      {error && <div className="text-field__error">{error}</div>}
+      {error && (
+        <div
+          className={`text-field__error ${
+            errorNoMargin ? "text-field__error--no-margin" : ""
+          }`}
+        >
+          {error}
+        </div>
+      )}
     </div>
   );
 }
@@ -44,6 +54,7 @@ TextField.propTypes = {
   className: string,
   defaultValue: string,
   error: string,
+  errorNoMargin: bool,
   onChange: func,
 };
 
@@ -52,6 +63,7 @@ TextField.defaultProps = {
   className: "",
   defaultValue: "",
   error: null,
+  errorNoMargin: false,
   onChange: null,
 };
 

@@ -6,6 +6,7 @@ import HideIcon from "../../../../icons/icon-hide-sidebar.svg?react";
 import ShowIcon from "../../../../icons/icon-show-sidebar.svg?react";
 import LogoIcon from "../../../../icons/logo-light.svg?react";
 import ThemeToggle from "../../../../components/ThemeToggle/ThemeToggle";
+import useTheme from "../../../../hooks/useTheme";
 
 function Sidebar({
   boards,
@@ -18,6 +19,8 @@ function Sidebar({
   onSelectBoard: (board: Board) => void;
   onCreateBoard: () => void;
 }) {
+  const { theme, toggleTheme } = useTheme();
+
   const boardsLength = useMemo(() => boards.length, [boards]);
 
   return (
@@ -69,7 +72,11 @@ function Sidebar({
           </button>
         </div>
 
-        <ThemeToggle className="sidebar__theme-toggle" />
+        <ThemeToggle
+          theme={theme}
+          onToggleTheme={toggleTheme}
+          className="sidebar__theme-toggle"
+        />
       </div>
     </div>
   );
