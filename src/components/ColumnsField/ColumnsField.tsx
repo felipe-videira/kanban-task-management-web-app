@@ -1,5 +1,6 @@
 import "./ColumnsField.scss";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import { arrayOf, func, object, shape, string } from "prop-types";
 import TextField from "../TextField/TextField";
 import CrossIcon from "../../icons/icon-cross.svg?react";
 import DragIcon from "../../icons/icon-drag-handle.svg?react";
@@ -14,13 +15,15 @@ type Selected = {
 function ColumnsField({
   data,
   label,
+  errors,
   onFieldChange,
   onReorder,
   onDelete,
 }: {
   data: Column[];
   label: string;
-  onFieldChange: (column: Column, index: number) => void;
+  errors: { [key: string]: string };
+  onFieldChange: (evt: ChangeEvent<Element>, fieldName: string) => void;
   onReorder: (selectedIndex: number, targetIndex: number) => void;
   onDelete: (index: number) => void;
 }) {
@@ -173,10 +176,10 @@ function ColumnsField({
             onMouseLeave={() => onMouseLeaveTarget(column)}
           >
             <TextField
-              name={`fcolumn${index}`}
+              name={`fcolumn-${column.id}`}
               defaultValue={column.title}
-              onChange={() => onFieldChange(column, index)}
-              error={column.error}
+              onChange={(evt) => onFieldChange(evt, `fcolumn-${column.id}`)}
+              error={errors[`fcolumn-${column.id}`]}
             />
             <button
               type="button"
@@ -186,18 +189,34 @@ function ColumnsField({
             >
               <DragIcon />
             </button>
-            <button
-              type="button"
-              onClick={() => onDelete(index)}
-              className="columns-field__del-btn"
-            >
-              <CrossIcon />
-            </button>
+            {index > 0 && (
+              <button
+                type="button"
+                onClick={() => onDelete(index)}
+                className="columns-field__del-btn"
+              >
+                <CrossIcon />
+              </button>
+            )}
           </div>
         ))}
       </div>
     </>
   );
 }
+
+ColumnsField.propTypes = {
+  data: arrayOf(
+    shape({
+      id: string.isRequired,
+      title: string,
+    })
+  ).isRequired,
+  label: string.isRequired,
+  errors: shape({}).isRequired,
+  onFieldChange: func.isRequired,
+  onReorder: func.isRequired,
+  onDelete: func.isRequired,
+};
 
 export default ColumnsField;

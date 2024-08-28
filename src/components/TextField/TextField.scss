@@ -3,6 +3,11 @@
 @import "../../styles/functions";
 
 .text-field {
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+
   &__label {
     font-weight: 700;
     font-size: 0.25rem;

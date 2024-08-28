@@ -14,11 +14,11 @@ function TextField({
   className: string;
   label: string;
   defaultValue: string;
-  error: string;
+  error: string | null | undefined;
   onChange: ChangeEventHandler;
 }) {
   return (
-    <>
+    <div className="text-field">
       {label && (
         <label htmlFor={name} className="text-field__label">
           {label}
@@ -34,7 +34,7 @@ function TextField({
         }`}
       />
       {error && <div className="text-field__error">{error}</div>}
-    </>
+    </div>
   );
 }
 

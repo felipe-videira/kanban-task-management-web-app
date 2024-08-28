@@ -35,7 +35,8 @@
         "@typescript-eslint/naming-convention": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
         "jsx-a11y/no-noninteractive-tabindex": "off",
-        "react/button-has-type": "off"
+        "react/button-has-type": "off",
+        "@typescript-eslint/dot-notation": "off"
     },
     "settings": {
         "react": {

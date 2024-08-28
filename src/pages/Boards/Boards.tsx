@@ -3,10 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Main from "./components/Main/Main";
 import Toolbar from "./components/Toolbar/Toolbar";
-import Modal, { ModalTitle } from "../../components/Modal/Modal";
-import Button from "../../components/Button/Button";
-import TextField from "../../components/TextField/TextField";
-import ColumnsField from "../../components/ColumnsField/ColumnsField";
+import BoardFormModal from "./components/BoardFormModal";
 // import { useParams } from "react-router-dom";
 
 const mockBoards = [
@@ -26,57 +23,11 @@ const mockBoards = [
 
 function Boards() {
   // const { boardId, taskId } = useParams();
-  const [selectedBoard, setSelectedBoard] = useState<Board>();
   const [boards, setBoards] = useState<Board[]>([]);
-  const [showBoardModal, setShowBoardModal] = useState<boolean>(false);
+  const [selectedBoard, setSelectedBoard] = useState<Board>();
+  const [boardForEdit, setBoardForEdit] = useState<Board>();
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
-
-  const [columns, setColumns] = useState<Column[]>([
-    { id: new Date().getTime().toString(), title: "" },
-  ]);
-
-  const addColumn = useCallback(() => {
-    setColumns([
-      ...columns,
-      {
-        id: new Date().getTime().toString(),
-        title: "",
-      },
-    ]);
-  }, [columns]);
-
-  const validateColumns = useCallback((column: Column, index: number) => {},
-  []);
-  const reorderColumns = useCallback(
-    (currentIndex: number, targetIndex: number) => {
-      const column = columns[currentIndex];
-      let newColumns = [
-        ...columns.slice(0, currentIndex),
-        ...columns.slice(currentIndex + 1),
-      ];
-
-      if (targetIndex === columns.length) {
-        newColumns.push(column);
-      } else if (targetIndex === 0) {
-        newColumns.unshift(column);
-      } else {
-        newColumns = [
-          ...newColumns.slice(0, targetIndex),
-          column,
-          ...newColumns.slice(targetIndex),
-        ];
-      }
-
-      setColumns(newColumns);
-    },
-    [columns]
-  );
-  const deleteColumn = useCallback(
-    (index: number) => {
-      setColumns([...columns.slice(0, index), ...columns.slice(index + 1)]);
-    },
-    [columns]
-  );
+  const [showBoardModal, setShowBoardModal] = useState<boolean>(false);
 
   const selectBoard = useCallback((board: Board) => {
     setSelectedBoard(board);
@@ -87,8 +38,9 @@ function Boards() {
   }, []);
 
   const editBoard = useCallback(() => {
+    setBoardForEdit(selectedBoard);
     setShowBoardModal(true);
-  }, []);
+  }, [selectedBoard]);
 
   const deleteBoard = useCallback(() => {}, []);
 
@@ -98,21 +50,9 @@ function Boards() {
     setShowSidebar(evt.target.checked);
   }, []);
 
-  const validateForm = useCallback((evt) => {
-    evt.preventDefault();
-    const fields = document.forms.boardForm;
-    console.log(fields.fname.required);
-    if (!fields.fname.value) {
-      alert("nome");
-    }
-
-    // setShowBoardModal(false);
-  }, []);
-
-  const validateRequiredField = useCallback((evt) => {
-    if (!evt.target.value) {
-      alert("nome 2");
-    }
+  const onCloseBoardModal = useCallback(() => {
+    setBoardForEdit(undefined);
+    setShowBoardModal(false);
   }, []);
 
   useEffect(() => {
@@ -152,41 +92,11 @@ function Boards() {
         onCreateBoard={createBoard}
       />
 
-      <Modal
+      <BoardFormModal
         show={showBoardModal}
-        onClose={() => {
-          setShowBoardModal(false);
-        }}
-      >
-        <ModalTitle>Add new board</ModalTitle>
-
-        <form name="boardForm" onSubmit={validateForm}>
-          <input type="hidden" name="id" />
-
-          <TextField
-            name="fname"
-            label="Name"
-            onChange={validateRequiredField}
-            error="This field is required"
-          />
-
-          <ColumnsField
-            label="Columns"
-            data={columns}
-            onFieldChange={validateColumns}
-            onReorder={reorderColumns}
-            onDelete={deleteColumn}
-          />
-
-          <Button secondary block onClick={addColumn}>
-            + Add New Column
-          </Button>
-
-          <Button type="submit" block>
-            Create New Board
-          </Button>
-        </form>
-      </Modal>
+        onClose={onCloseBoardModal}
+        board={boardForEdit}
+      />
     </div>
   );
 }
