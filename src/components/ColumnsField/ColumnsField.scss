@@ -1,0 +1,93 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+@import "../../styles/functions";
+
+.columns-field {
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-radius: $border-radius;
+  padding: 0.5rem;
+
+  &__label {
+    font-weight: 700;
+    font-size: 0.25rem;
+    margin: 0 0 0.5rem 0;
+    display: block;
+  }
+
+  &__item {
+    display: flex;
+    align-items: baseline;
+    transition: margin 0.3s ease;
+    position: relative;
+    z-index: 1;
+    pointer-events: all;
+    margin-top: 0;
+    margin-bottom: 0;
+    opacity: 1;
+    transform: translateY(0);
+
+    input {
+      margin: 0;
+    }
+
+    &--selected {
+      z-index: 99;
+      pointer-events: none;
+      opacity: 0.75;
+    }
+
+    &--target-up {
+      position: relative;
+
+      &::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        top: -100%;
+        position: absolute;
+      }
+    }
+
+    &--target-down {
+      position: relative;
+
+      &::after {
+        content: "";
+        height: 100%;
+        width: 100%;
+        top: 100%;
+        position: absolute;
+      }
+    }
+  }
+
+  &__drag-area {
+    border: none;
+    background: none;
+    border-radius: $border-radius;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  &__del-btn {
+    border: none;
+    background: none;
+    border-radius: 50%;
+    margin: 0;
+    cursor: pointer;
+  }
+}
+
+@include themify($themes) {
+  .columns-field {
+    background-color: themed("background");
+
+    &__label {
+      color: themed("title-text");
+    }
+  }
+}

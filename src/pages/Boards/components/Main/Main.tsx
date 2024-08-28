@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { arrayOf, func, shape, string } from "prop-types";
 import Button from "../../../../components/Button/Button";
-import ThemeToggle from "../../../../components/ThemeToggle/ThemeToggle";
 import "./Main.scss";
 
 function Main({
@@ -31,7 +30,6 @@ function Main({
               </Button>
             )}
           </div>
-          <ThemeToggle noBackground />
         </div>
       )}
     </div>

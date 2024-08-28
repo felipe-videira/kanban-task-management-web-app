@@ -42,6 +42,7 @@ $themes: (
     danger-text: $light-lavender,
     danger-hover: $light-red,
     box-shadow: $shadow,
+    input-border: $input-border,
   ),
   dark: (
     primary: $primary,
@@ -61,5 +62,6 @@ $themes: (
     danger-text: $light-lavender,
     danger-hover: $light-red,
     box-shadow: $shadow,
+    input-border: $input-border,
   ),
 );

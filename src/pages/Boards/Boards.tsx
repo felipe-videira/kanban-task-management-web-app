@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Main from "./components/Main/Main";
 import Toolbar from "./components/Toolbar/Toolbar";
-import Modal from "../../components/Modal/Modal";
+import BoardFormModal from "./components/BoardFormModal";
 // import { useParams } from "react-router-dom";
 
 const mockBoards = [
@@ -23,10 +23,11 @@ const mockBoards = [
 
 function Boards() {
   // const { boardId, taskId } = useParams();
-  const [selectedBoard, setSelectedBoard] = useState<Board>();
   const [boards, setBoards] = useState<Board[]>([]);
-  const [showBoardModal, setShowBoardModal] = useState<boolean>(false);
+  const [selectedBoard, setSelectedBoard] = useState<Board>();
+  const [boardForEdit, setBoardForEdit] = useState<Board>();
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
+  const [showBoardModal, setShowBoardModal] = useState<boolean>(false);
 
   const selectBoard = useCallback((board: Board) => {
     setSelectedBoard(board);
@@ -37,8 +38,9 @@ function Boards() {
   }, []);
 
   const editBoard = useCallback(() => {
+    setBoardForEdit(selectedBoard);
     setShowBoardModal(true);
-  }, []);
+  }, [selectedBoard]);
 
   const deleteBoard = useCallback(() => {}, []);
 
@@ -46,6 +48,11 @@ function Boards() {
 
   const onSidebarToggleChange = useCallback((evt) => {
     setShowSidebar(evt.target.checked);
+  }, []);
+
+  const onCloseBoardModal = useCallback(() => {
+    setBoardForEdit(undefined);
+    setShowBoardModal(false);
   }, []);
 
   useEffect(() => {
@@ -85,16 +92,11 @@ function Boards() {
         onCreateBoard={createBoard}
       />
 
-      <Modal show={showBoardModal}>
-        <button
-          type="button"
-          onClick={() => {
-            setShowBoardModal(false);
-          }}
-        >
-          close
-        </button>
-      </Modal>
+      <BoardFormModal
+        show={showBoardModal}
+        onClose={onCloseBoardModal}
+        board={boardForEdit}
+      />
     </div>
   );
 }
