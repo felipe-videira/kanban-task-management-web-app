@@ -5,7 +5,10 @@ import Button from "../../../components/Button/Button";
 import TextField from "../../../components/TextField/TextField";
 import ColumnsField from "../../../components/ColumnsField/ColumnsField";
 
-const defaultColumn = { id: new Date().getTime().toString(), title: "" };
+const getDefaultColumn = () => ({
+  id: new Date().getTime().toString(),
+  title: "",
+});
 
 function BoardFormModal({
   board,
@@ -17,23 +20,11 @@ function BoardFormModal({
   onClose: () => void;
 }) {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [columns, setColumns] = useState<Column[]>([defaultColumn]);
+  const [columns, setColumns] = useState<Column[]>([getDefaultColumn()]);
 
   const addColumn = useCallback(() => {
-    setColumns([...columns, defaultColumn]);
+    setColumns([...columns, getDefaultColumn()]);
   }, [columns]);
-
-  const validateColumns = useCallback(
-    (evt, index) => {
-      if (!evt.target.value) {
-        columns[index].error = "A column must have a name";
-      } else {
-        columns[index].error = null;
-      }
-      setColumns([...columns]);
-    },
-    [columns]
-  );
 
   const reorderColumns = useCallback(
     (currentIndex: number, targetIndex: number) => {
@@ -110,7 +101,7 @@ function BoardFormModal({
       if (!hasErrors) {
         document.forms["boardForm"].reset();
         setErrors({});
-        setColumns([defaultColumn]);
+        setColumns([getDefaultColumn()]);
         onClose();
       }
     },
@@ -120,7 +111,7 @@ function BoardFormModal({
   const onCloseBoardModal = useCallback(() => {
     document.forms["boardForm"].reset();
     setErrors({});
-    setColumns([defaultColumn]);
+    setColumns([getDefaultColumn()]);
     onClose();
   }, [document.forms]);
 
