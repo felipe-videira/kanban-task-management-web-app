@@ -4,6 +4,7 @@ import { arrayOf, func, object, shape, string } from "prop-types";
 import TextField from "../TextField/TextField";
 import CrossIcon from "../../icons/icon-cross.svg?react";
 import DragIcon from "../../icons/icon-drag-handle.svg?react";
+import { getRandomColor } from "../../utils";
 
 type Selected = {
   column: Column;
@@ -175,6 +176,13 @@ function ColumnsField({
             onMouseEnter={() => onMouseEnterTarget(column, index)}
             onMouseLeave={() => onMouseLeaveTarget(column)}
           >
+            <div className="columns-field__color-input-wrapper">
+              <input
+                type="color"
+                name={`fcolor-${column.id}`}
+                defaultValue={getRandomColor()}
+              />
+            </div>
             <TextField
               name={`fcolumn-${column.id}`}
               defaultValue={column.title}
