@@ -6,6 +6,7 @@ import Toolbar from "./components/Toolbar/Toolbar";
 import BoardFormModal from "./components/BoardFormModal";
 import Modal, { ModalTitle } from "../../components/Modal/Modal";
 import useBoard from "./hooks/useBoard";
+import Button from "../../components/Button/Button";
 // import { useParams } from "react-router-dom";
 
 function Boards() {
@@ -32,11 +33,14 @@ function Boards() {
     selectedBoard,
     boardForEdit,
     showBoardModal,
+    showDeleteModal,
     selectBoard,
     onCreateBoard,
     onEditBoard,
     onDeleteBoard,
+    deleteBoard,
     onCloseBoardModal,
+    onCloseDeleteModal,
     onBoardFormSubmit,
   } = useBoard(onError);
 
@@ -79,6 +83,20 @@ function Boards() {
         onClose={onCloseBoardModal}
         onSubmit={onBoardFormSubmit}
       />
+
+      <Modal show={showDeleteModal} onClose={onCloseDeleteModal}>
+        <ModalTitle className="danger--text">Board Delete</ModalTitle>
+        <p>
+          You are sure you want to delete the board:{" "}
+          <strong>{selectedBoard?.title}</strong> ?
+        </p>
+        <Button danger block onClick={deleteBoard}>
+          Yes, delete
+        </Button>
+        <Button secondary block onClick={onCloseDeleteModal}>
+          No, cancel
+        </Button>
+      </Modal>
 
       <Modal show={showErrorModal} onClose={onErrorModalClose}>
         <ModalTitle className="danger--text">Error</ModalTitle>

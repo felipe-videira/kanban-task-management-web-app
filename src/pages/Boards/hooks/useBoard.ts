@@ -1,4 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+import {
+  saveBoard,
+  deleteBoard as boardServiceDeleteBoard,
+  getBoards,
+} from "../../../services/board";
 
 const mockBoards = [
   {
@@ -38,6 +43,7 @@ export default function useBoard(onError: (error: unknown) => void) {
   const [selectedBoard, setSelectedBoard] = useState<Board>();
   const [boardForEdit, setBoardForEdit] = useState<Board>();
   const [showBoardModal, setShowBoardModal] = useState<boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   const selectBoard = useCallback((board: Board) => {
     setSelectedBoard(board);
@@ -52,16 +58,34 @@ export default function useBoard(onError: (error: unknown) => void) {
     setShowBoardModal(true);
   }, [selectedBoard]);
 
-  const onDeleteBoard = useCallback(() => {}, []);
+  const onDeleteBoard = useCallback(() => {
+    setShowDeleteModal(true);
+  }, []);
+
+  const onCloseDeleteModal = useCallback(() => {
+    setShowDeleteModal(false);
+  }, []);
 
   const onCloseBoardModal = useCallback(() => {
     setBoardForEdit(undefined);
     setShowBoardModal(false);
   }, []);
 
-  const onBoardFormSubmit = useCallback((data) => {
+  const deleteBoard = useCallback(async () => {
     try {
-      console.log(data);
+      if (selectedBoard && selectedBoard.id) {
+        await boardServiceDeleteBoard(selectedBoard.id);
+        onCloseDeleteModal();
+      }
+    } catch (err) {
+      onError(err);
+      throw err;
+    }
+  }, []);
+
+  const onBoardFormSubmit = useCallback(async (data) => {
+    try {
+      await saveBoard(data);
       onCloseBoardModal();
     } catch (err) {
       onError(err);
@@ -70,7 +94,9 @@ export default function useBoard(onError: (error: unknown) => void) {
   }, []);
 
   useEffect(() => {
-    setBoards(mockBoards);
+    getBoards().then((data) => {
+      setBoards(data);
+    });
   }, []);
 
   return {
@@ -78,11 +104,14 @@ export default function useBoard(onError: (error: unknown) => void) {
     selectedBoard,
     boardForEdit,
     showBoardModal,
+    showDeleteModal,
     selectBoard,
+    deleteBoard,
     onCreateBoard,
     onEditBoard,
     onDeleteBoard,
     onCloseBoardModal,
+    onCloseDeleteModal,
     onBoardFormSubmit,
   };
 }

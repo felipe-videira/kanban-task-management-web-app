@@ -38,11 +38,11 @@
     }
 
     &--danger {
-      background-color: themed("danger-btn-bg");
-      color: themed("danger-btn-text");
+      background-color: themed("danger");
+      color: themed("danger-text");
 
       &:hover {
-        background-color: themed("danger-btn-hover");
+        background-color: themed("danger-hover");
       }
     }
   }
