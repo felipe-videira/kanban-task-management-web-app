@@ -26,6 +26,7 @@
     max-width: 350px;
     padding: 2rem;
     border-radius: $border-radius;
+    overflow: auto;
   }
 
   &__title {
