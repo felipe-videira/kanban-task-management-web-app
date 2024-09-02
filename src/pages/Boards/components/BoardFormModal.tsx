@@ -14,9 +14,11 @@ function BoardFormModal({
   board,
   show,
   onClose,
+  onSubmit,
 }: {
   board: Board;
   show: boolean;
+  onSubmit: (data: Board) => Promise<void>;
   onClose: () => void;
 }) {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -70,8 +72,40 @@ function BoardFormModal({
     [errors]
   );
 
+  const submit = useCallback(async () => {
+    const data: Board = {
+      id: document.forms["boardForm"].fid.value,
+      title: document.forms["boardForm"].fname.value,
+      columns: [],
+    };
+
+    Object.keys(document.forms["boardForm"].elements).forEach((key) => {
+      if (key.includes("fcolumn-")) {
+        const id = key.substring("fcolumn-".length);
+        const order = columns.findIndex((column) => column.id === id);
+
+        data.columns?.push({
+          id: data.id ? id : undefined,
+          order,
+          title: document.forms["boardForm"].elements[key].value,
+          color: document.forms["boardForm"].elements[`fcolor-${id}`].value,
+        });
+      }
+    });
+
+    try {
+      await onSubmit(data);
+
+      document.forms["boardForm"].reset();
+      setErrors({});
+      setColumns([getDefaultColumn()]);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [document.forms, columns]);
+
   const validateForm = useCallback(
-    (evt) => {
+    async (evt) => {
       evt.preventDefault();
 
       let hasErrors = !(Object.keys(errors).length === 0);
@@ -85,13 +119,8 @@ function BoardFormModal({
       Object.keys(document.forms["boardForm"].elements).forEach((key) => {
         if (key.includes("fcolumn-")) {
           if (!document.forms["boardForm"].elements[key].value) {
-            const id = key.substring("fcolumn-".length);
-            const index = columns.findIndex((column) => column.id === id);
-
-            if (index !== -1) {
-              newErrors = { ...newErrors, [key]: "This field is required" };
-              hasErrors = true;
-            }
+            newErrors = { ...newErrors, [key]: "This field is required" };
+            hasErrors = true;
           }
         }
       });
@@ -99,10 +128,7 @@ function BoardFormModal({
       setErrors(newErrors);
 
       if (!hasErrors) {
-        document.forms["boardForm"].reset();
-        setErrors({});
-        setColumns([getDefaultColumn()]);
-        onClose();
+        submit();
       }
     },
     [document.forms, errors, columns]
@@ -124,7 +150,7 @@ function BoardFormModal({
       <ModalTitle>{board?.id ? "Edit Board" : "Add new board"}</ModalTitle>
 
       <form name="boardForm" onSubmit={validateForm}>
-        <input type="hidden" name="id" defaultValue={board?.id} />
+        <input type="hidden" name="fid" defaultValue={board?.id} />
 
         <TextField
           name="fname"
