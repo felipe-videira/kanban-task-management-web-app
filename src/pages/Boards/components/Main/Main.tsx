@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { arrayOf, func, shape, string } from "prop-types";
 import Button from "../../../../components/Button/Button";
 import "./Main.scss";
@@ -50,6 +50,55 @@ function Main({
   onCreateBoard: () => void;
 }) {
   const boardsLength = useMemo(() => boards.length, [boards]);
+  const [columns, setColumns] = useState<Column[]>([]);
+
+  const onTaskReorder = useCallback(
+    (
+      selectedColumnIndex: number,
+      selectedTaskIndex: number,
+      targetColumnIndex: number,
+      targetTaskIndex: number
+    ) => {
+      const newColumns = JSON.parse(JSON.stringify(columns));
+
+      if (
+        newColumns[selectedColumnIndex]?.tasks &&
+        newColumns[targetColumnIndex]?.tasks
+      ) {
+        const task = newColumns[selectedColumnIndex].tasks[selectedTaskIndex];
+
+        newColumns[selectedColumnIndex].tasks = [
+          ...newColumns[selectedColumnIndex].tasks.slice(0, selectedTaskIndex),
+          ...newColumns[selectedColumnIndex].tasks.slice(selectedTaskIndex + 1),
+        ];
+
+        if (targetTaskIndex === columns[targetColumnIndex].tasks?.length) {
+          newColumns[targetColumnIndex].tasks.push(task);
+        } else if (targetTaskIndex === 0) {
+          newColumns[targetColumnIndex].tasks?.unshift(task);
+        } else {
+          const targetIndex =
+            targetColumnIndex === selectedColumnIndex &&
+            selectedTaskIndex < targetColumnIndex
+              ? targetTaskIndex - 1
+              : targetTaskIndex;
+
+          newColumns[targetColumnIndex].tasks = [
+            ...newColumns[targetColumnIndex].tasks.slice(0, targetIndex),
+            task,
+            ...newColumns[targetColumnIndex].tasks.slice(targetIndex),
+          ];
+        }
+
+        setColumns(newColumns);
+      }
+    },
+    [columns]
+  );
+
+  useEffect(() => {
+    setColumns(mockTasks);
+  }, []);
 
   return (
     <div className="main">
@@ -70,7 +119,7 @@ function Main({
         </div>
       )}
 
-      <BoardView data={mockTasks} onReorder={() => {}} />
+      <BoardView data={columns} onTaskReorder={onTaskReorder} />
     </div>
   );
 }

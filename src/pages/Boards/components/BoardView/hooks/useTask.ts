@@ -1,13 +1,21 @@
-import { useCallback, useState } from "react";
+import { Ref, useCallback, useState } from "react";
 
-export default function useTask(getRef, onTaskReorder) {
+export default function useTask(
+  getRef: (id: string) => HTMLDivElement,
+  onTaskReorder: (
+    selectedColumnIndex: number,
+    selectedTaskIndex: number,
+    targetColumnIndex: number,
+    targetTaskIndex: number
+  ) => void
+) {
   const [selectedTask, setSelectedTask] = useState<Selected>(null);
   const [targetTask, setTargetTask] = useState<Selected>(null);
   const [isDraggingTask, setIsDraggingTask] = useState(false);
 
   const handleTaskMouseUp = useCallback(
     (event) => {
-      if (selectedTask && event.button === 0) {
+      if (selectedTask && selectedTask.task && event.button === 0) {
         if (targetTask) {
           onTaskReorder(
             selectedTask.columnIndex,
@@ -16,14 +24,18 @@ export default function useTask(getRef, onTaskReorder) {
             targetTask.taskIndex
           );
 
-          const targetEl = getRef(targetTask.task.id);
-          targetEl.style.marginTop = "0";
-          targetEl.style.marginBottom = `0`;
+          if (targetTask.task) {
+            const targetEl = getRef(targetTask.task.id);
+            targetEl.style.marginTop = "0";
+            targetEl.style.marginBottom = `0`;
+          }
         }
 
         const selectedEl = getRef(selectedTask.task.id);
         selectedEl.classList.remove("board-view__item--selected");
         selectedEl.style.transform = `translate(0)`;
+        selectedEl.style.top = `0px`;
+        selectedEl.style.left = `0px`;
 
         setSelectedTask(null);
         setTargetTask(null);
@@ -35,11 +47,13 @@ export default function useTask(getRef, onTaskReorder) {
 
   const handleTaskMouseDown = useCallback(
     (event) => {
-      if (selectedTask && event.button === 0) {
+      if (selectedTask && selectedTask.task && event.button === 0) {
         const selectedEl = getRef(selectedTask.task.id);
-        selectedEl.classList.add("board-view__item--selected");
-
         const { y, x, height } = selectedEl.getBoundingClientRect();
+
+        selectedEl.style.top = `${y}px`;
+        selectedEl.style.left = `${x}px`;
+        selectedEl.classList.add("board-view__item--selected");
 
         setIsDraggingTask(true);
         setSelectedTask({
@@ -74,30 +88,34 @@ export default function useTask(getRef, onTaskReorder) {
   );
 
   const onMouseEnterSelectedTask = useCallback(
-    (column, task, columnIndex, taskIndex) => {
+    (column, columnIndex, taskIndex, task = null) => {
       if (!isDraggingTask) {
         setSelectedTask({ column, task, columnIndex, taskIndex });
       } else if (selectedTask) {
-        const el = getRef(task.id);
-        el.style.marginTop = `${selectedTask?.height}px`;
-        el.classList.add("board-view__item--target-up");
+        if (task) {
+          const el = getRef(task.id);
+          el.style.marginTop = `${selectedTask?.height}px`;
+          el.classList.add("board-view__item--target-up");
+        }
 
-        setTargetTask({ column, columnIndex, taskIndex });
+        setTargetTask({ column, task, columnIndex, taskIndex });
       }
     },
     [selectedTask, isDraggingTask, getRef]
   );
 
   const onMouseLeaveSelectedTask = useCallback(
-    (column, task) => {
+    (task = null) => {
       if (!isDraggingTask) {
         setSelectedTask(null);
       } else {
-        const el = getRef(task.id);
-        el.style.marginTop = "0";
-        el.style.marginBottom = `0`;
-        el.classList.remove("board-view__item--target-up");
-        el.classList.remove("board-view__item--target-down");
+        if (task) {
+          const el = getRef(task.id);
+          el.style.marginTop = "0";
+          el.style.marginBottom = `0`;
+          el.classList.remove("board-view__item--target-up");
+          el.classList.remove("board-view__item--target-down");
+        }
 
         setTargetTask(null);
       }

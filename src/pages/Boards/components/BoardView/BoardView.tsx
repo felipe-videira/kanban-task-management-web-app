@@ -1,6 +1,6 @@
 import "./BoardView.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { arrayOf, func, shape, string } from "prop-types";
+import { arrayOf, shape, string } from "prop-types";
 import useTask from "./hooks/useTask";
 
 function TaskList({
@@ -93,13 +93,26 @@ function TaskList({
               className="board-view__item"
               ref={(el) => assignRef(el, task.id)}
               onMouseEnter={() =>
-                onMouseEnterSelectedTask(column, task, columnIndex, taskIndex)
+                onMouseEnterSelectedTask(column, columnIndex, taskIndex, task)
               }
-              onMouseLeave={() => onMouseLeaveSelectedTask(column, task)}
+              onMouseLeave={() => onMouseLeaveSelectedTask(task)}
             >
               {task.title}
             </div>
           ))}
+          <div
+            key="0"
+            className="board-view__item"
+            ref={(el) => assignRef(el, "0")}
+            onMouseEnter={() =>
+              onMouseEnterSelectedTask(
+                column,
+                columnIndex,
+                column.tasks?.length
+              )
+            }
+            onMouseLeave={() => onMouseLeaveSelectedTask()}
+          />
         </div>
       ))}
     </div>
