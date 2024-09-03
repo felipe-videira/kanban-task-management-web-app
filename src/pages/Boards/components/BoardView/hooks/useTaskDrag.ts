@@ -1,6 +1,6 @@
 import { Ref, useCallback, useState } from "react";
 
-export default function useTask(
+export default function useTaskDrag(
   getRef: (id: string) => HTMLDivElement,
   onTaskReorder: (
     selectedColumnIndex: number,
@@ -9,13 +9,12 @@ export default function useTask(
     targetTaskIndex: number
   ) => void
 ) {
-  const [selectedTask, setSelectedTask] = useState<Selected>(null);
-  const [targetTask, setTargetTask] = useState<Selected>(null);
+  const [selectedTask, setSelectedTask] = useState<SelectedTask>(null);
+  const [targetTask, setTargetTask] = useState<SelectedTask>(null);
   const [isDraggingTask, setIsDraggingTask] = useState(false);
 
   const handleTaskMouseUp = useCallback(
     (event) => {
-      console.log(event.button);
       if (selectedTask && selectedTask.task && event.button === 0) {
         if (targetTask) {
           onTaskReorder(
@@ -33,7 +32,7 @@ export default function useTask(
         }
 
         const selectedEl = getRef(selectedTask.task.id);
-        selectedEl.style.transform = `translate(0)`;
+        selectedEl.style.transform = "none";
         selectedEl.classList.remove("board-view__item--selected");
         selectedEl.style.top = `0px`;
         selectedEl.style.left = `0px`;
@@ -49,6 +48,8 @@ export default function useTask(
   const handleTaskMouseDown = useCallback(
     (event, column, task, columnIndex, taskIndex) => {
       if (event.button === 0) {
+        event.stopPropagation();
+
         const selectedEl = getRef(task.id);
         const { y, x, height, width } = selectedEl.getBoundingClientRect();
 

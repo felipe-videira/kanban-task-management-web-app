@@ -39,6 +39,21 @@ const mockTasks = [
       },
     ],
   },
+  {
+    id: "sadsad66",
+    title: "3",
+    color: "",
+    tasks: [
+      {
+        id: "514s5daa",
+        title: "7",
+      },
+      {
+        id: "as4d65sad",
+        title: "58",
+      },
+    ],
+  },
 ];
 function Main({
   boards,
@@ -72,11 +87,13 @@ function Main({
           ...newColumns[selectedColumnIndex].tasks.slice(selectedTaskIndex + 1),
         ];
 
-        const targetIndex =
+        const targetIndex = Math.max(
           targetColumnIndex === selectedColumnIndex &&
-          selectedTaskIndex < targetTaskIndex
+            selectedTaskIndex < targetTaskIndex
             ? targetTaskIndex - 1
-            : targetTaskIndex;
+            : targetTaskIndex,
+          0
+        );
 
         if (targetTaskIndex === columns[targetColumnIndex].tasks?.length) {
           newColumns[targetColumnIndex].tasks.push(task);
@@ -92,6 +109,39 @@ function Main({
 
         setColumns(newColumns);
       }
+    },
+    [columns]
+  );
+
+  const onColumnReorder = useCallback(
+    (selectedIndex, targetIndex) => {
+      let newColumns = JSON.parse(JSON.stringify(columns));
+
+      const column = newColumns[selectedIndex];
+
+      newColumns = [
+        ...newColumns.slice(0, selectedIndex),
+        ...newColumns.slice(selectedIndex + 1),
+      ];
+
+      const target = Math.max(
+        selectedIndex < targetIndex ? targetIndex - 1 : targetIndex,
+        0
+      );
+
+      if (targetIndex === columns.length) {
+        newColumns.push(column);
+      } else if (target === 0) {
+        newColumns.unshift(column);
+      } else {
+        newColumns = [
+          ...newColumns.slice(0, target),
+          column,
+          ...newColumns.slice(target),
+        ];
+      }
+
+      setColumns(newColumns);
     },
     [columns]
   );
@@ -119,7 +169,11 @@ function Main({
         </div>
       )}
 
-      <BoardView data={columns} onTaskReorder={onTaskReorder} />
+      <BoardView
+        data={columns}
+        onTaskReorder={onTaskReorder}
+        onColumnReorder={onColumnReorder}
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-type Selected = {
+type SelectedTask = {
   column: Column;
   task: Task;
   columnIndex: number;

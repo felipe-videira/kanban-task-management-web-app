@@ -1,7 +1,8 @@
 import "./BoardView.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { arrayOf, shape, string } from "prop-types";
-import useTask from "./hooks/useTask";
+import useTaskDrag from "./hooks/useTaskDrag";
+import useColumnDrag from "./hooks/useColumnDrag";
 
 function TaskList({
   data,
@@ -42,17 +43,42 @@ function TaskList({
     handleTaskDrag,
     onMouseEnterTargetTask,
     onMouseLeaveTargetTask,
-  } = useTask(getRef, onTaskReorder);
+  } = useTaskDrag(getRef, onTaskReorder);
+
+  const {
+    selectedColumn,
+    targetColumn,
+    isDraggingColumn,
+    handleColumnMouseUp,
+    handleColumnMouseDown,
+    handleColumnDrag,
+    onMouseEnterTargetColumn,
+    onMouseLeaveTargetColumn,
+  } = useColumnDrag(getRef, onColumnReorder);
 
   useEffect(() => {
     document.addEventListener("mousemove", handleTaskDrag);
     document.addEventListener("mouseup", handleTaskMouseUp);
 
+    document.addEventListener("mousemove", handleColumnDrag);
+    document.addEventListener("mouseup", handleColumnMouseUp);
+
     return () => {
       document.removeEventListener("mousemove", handleTaskDrag);
       document.removeEventListener("mouseup", handleTaskMouseUp);
+
+      document.removeEventListener("mousemove", handleColumnDrag);
+      document.removeEventListener("mouseup", handleColumnMouseUp);
     };
-  }, [selectedTask, isDraggingTask, itemsRef, targetTask]);
+  }, [
+    itemsRef,
+    selectedTask,
+    targetTask,
+    isDraggingTask,
+    selectedColumn,
+    targetColumn,
+    isDraggingColumn,
+  ]);
 
   return (
     <div className="board-view">
@@ -61,6 +87,10 @@ function TaskList({
           key={column.id}
           className="board-view__column"
           ref={(el) => assignRef(el, column.id)}
+          role="listitem"
+          onMouseDown={(evt) => handleColumnMouseDown(evt, column, columnIndex)}
+          onMouseEnter={() => onMouseEnterTargetColumn(columnIndex, column)}
+          onMouseLeave={() => onMouseLeaveTargetColumn(column)}
         >
           <h4>{column.title}</h4>
 
