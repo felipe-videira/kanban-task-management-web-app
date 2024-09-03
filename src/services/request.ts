@@ -10,10 +10,6 @@ export default async function request(
     method,
     url: baseUrl + url,
     data,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "*",
-    },
   });
   return res;
 }

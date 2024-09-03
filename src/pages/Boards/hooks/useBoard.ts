@@ -43,32 +43,35 @@ export default function useBoard(
     setShowBoardModal(false);
   }, []);
 
+  const requestBoards = useCallback(() => {
+    return getBoards().then((data) => {
+      setBoards(data);
+    });
+  }, []);
+
   const deleteBoard = useCallback(async () => {
     try {
       if (selectedBoard && selectedBoard.id) {
         await boardServiceDeleteBoard(selectedBoard.id);
+        setSelectedBoard(undefined);
         onCloseDeleteModal();
+        requestBoards();
       }
     } catch (err) {
       onError(err);
       throw err;
     }
-  }, []);
+  }, [selectedBoard]);
 
   const onBoardFormSubmit = useCallback(async (data) => {
     try {
       await saveBoard(data);
       onCloseBoardModal();
+      requestBoards();
     } catch (err) {
       onError(err);
       throw err;
     }
-  }, []);
-
-  const populateBoards = useCallback(() => {
-    return getBoards().then((data) => {
-      setBoards(data);
-    });
   }, []);
 
   useEffect(() => {
@@ -78,7 +81,7 @@ export default function useBoard(
       });
     }
 
-    populateBoards();
+    requestBoards();
   }, [boardId, taskId]);
 
   return {
