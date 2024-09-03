@@ -40,40 +40,17 @@ function TaskList({
     handleTaskMouseUp,
     handleTaskMouseDown,
     handleTaskDrag,
-    onMouseEnterSelectedTask,
-    onMouseLeaveSelectedTask,
+    onMouseEnterTargetTask,
+    onMouseLeaveTargetTask,
   } = useTask(getRef, onTaskReorder);
 
-  const handleDocumentMouseUp = useCallback(
-    (event) => {
-      handleTaskMouseUp(event);
-    },
-    [selectedTask, targetTask, itemsRef]
-  );
-
-  const handleDocumentMouseDown = useCallback(
-    (event) => {
-      handleTaskMouseDown(event);
-    },
-    [selectedTask, itemsRef]
-  );
-
-  const handleMousePosition = useCallback(
-    (event) => {
-      handleTaskDrag(event);
-    },
-    [selectedTask, isDraggingTask, itemsRef]
-  );
-
   useEffect(() => {
-    document.addEventListener("mousedown", handleDocumentMouseDown);
-    document.addEventListener("mouseup", handleDocumentMouseUp);
-    document.addEventListener("mousemove", handleMousePosition);
+    document.addEventListener("mousemove", handleTaskDrag);
+    document.addEventListener("mouseup", handleTaskMouseUp);
 
     return () => {
-      document.removeEventListener("mousedown", handleDocumentMouseDown);
-      document.removeEventListener("mouseup", handleDocumentMouseUp);
-      document.removeEventListener("mousemove", handleMousePosition);
+      document.removeEventListener("mousemove", handleTaskDrag);
+      document.removeEventListener("mouseup", handleTaskMouseUp);
     };
   }, [selectedTask, isDraggingTask, itemsRef, targetTask]);
 
@@ -92,10 +69,14 @@ function TaskList({
               key={task.id}
               className="board-view__item"
               ref={(el) => assignRef(el, task.id)}
-              onMouseEnter={() =>
-                onMouseEnterSelectedTask(column, columnIndex, taskIndex, task)
+              role="listitem"
+              onMouseDown={(evt) =>
+                handleTaskMouseDown(evt, column, task, columnIndex, taskIndex)
               }
-              onMouseLeave={() => onMouseLeaveSelectedTask(task)}
+              onMouseEnter={() =>
+                onMouseEnterTargetTask(column, columnIndex, taskIndex, task)
+              }
+              onMouseLeave={() => onMouseLeaveTargetTask(task)}
             >
               {task.title}
             </div>
@@ -105,13 +86,9 @@ function TaskList({
             className="board-view__item"
             ref={(el) => assignRef(el, "0")}
             onMouseEnter={() =>
-              onMouseEnterSelectedTask(
-                column,
-                columnIndex,
-                column.tasks?.length
-              )
+              onMouseEnterTargetTask(column, columnIndex, column.tasks?.length)
             }
-            onMouseLeave={() => onMouseLeaveSelectedTask()}
+            onMouseLeave={() => onMouseLeaveTargetTask()}
           />
         </div>
       ))}

@@ -72,17 +72,17 @@ function Main({
           ...newColumns[selectedColumnIndex].tasks.slice(selectedTaskIndex + 1),
         ];
 
+        const targetIndex =
+          targetColumnIndex === selectedColumnIndex &&
+          selectedTaskIndex < targetTaskIndex
+            ? targetTaskIndex - 1
+            : targetTaskIndex;
+
         if (targetTaskIndex === columns[targetColumnIndex].tasks?.length) {
           newColumns[targetColumnIndex].tasks.push(task);
-        } else if (targetTaskIndex === 0) {
+        } else if (targetIndex === 0) {
           newColumns[targetColumnIndex].tasks?.unshift(task);
         } else {
-          const targetIndex =
-            targetColumnIndex === selectedColumnIndex &&
-            selectedTaskIndex < targetColumnIndex
-              ? targetTaskIndex - 1
-              : targetTaskIndex;
-
           newColumns[targetColumnIndex].tasks = [
             ...newColumns[targetColumnIndex].tasks.slice(0, targetIndex),
             task,

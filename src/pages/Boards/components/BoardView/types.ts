@@ -4,6 +4,7 @@ type Selected = {
   columnIndex: number;
   taskIndex: number;
   height?: number;
+  width?: number;
   currentY?: number;
   currentX?: number;
 } | null;

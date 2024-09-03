@@ -15,6 +15,7 @@ export default function useTask(
 
   const handleTaskMouseUp = useCallback(
     (event) => {
+      console.log(event.button);
       if (selectedTask && selectedTask.task && event.button === 0) {
         if (targetTask) {
           onTaskReorder(
@@ -32,8 +33,8 @@ export default function useTask(
         }
 
         const selectedEl = getRef(selectedTask.task.id);
-        selectedEl.classList.remove("board-view__item--selected");
         selectedEl.style.transform = `translate(0)`;
+        selectedEl.classList.remove("board-view__item--selected");
         selectedEl.style.top = `0px`;
         selectedEl.style.left = `0px`;
 
@@ -46,10 +47,10 @@ export default function useTask(
   );
 
   const handleTaskMouseDown = useCallback(
-    (event) => {
-      if (selectedTask && selectedTask.task && event.button === 0) {
-        const selectedEl = getRef(selectedTask.task.id);
-        const { y, x, height } = selectedEl.getBoundingClientRect();
+    (event, column, task, columnIndex, taskIndex) => {
+      if (event.button === 0) {
+        const selectedEl = getRef(task.id);
+        const { y, x, height, width } = selectedEl.getBoundingClientRect();
 
         selectedEl.style.top = `${y}px`;
         selectedEl.style.left = `${x}px`;
@@ -57,10 +58,14 @@ export default function useTask(
 
         setIsDraggingTask(true);
         setSelectedTask({
-          ...selectedTask,
+          column,
+          task,
+          columnIndex,
+          taskIndex,
           currentY: y,
           currentX: x,
           height,
+          width,
         });
       }
     },
@@ -72,14 +77,14 @@ export default function useTask(
       if (
         selectedTask &&
         isDraggingTask &&
-        selectedTask.height &&
+        selectedTask.width &&
         selectedTask.currentY &&
         selectedTask.currentX
       ) {
-        const offset = selectedTask.height / 2;
         const selectedEl = getRef(selectedTask.task.id);
-        const translateX = event.clientX - selectedTask.currentX - offset;
-        const translateY = event.clientY - selectedTask.currentY - offset;
+        const translateX =
+          event.clientX - selectedTask.currentX - selectedTask.width / 2;
+        const translateY = event.clientY - selectedTask.currentY;
 
         selectedEl.style.transform = `translate(${translateX}px, ${translateY}px)`;
       }
@@ -87,11 +92,9 @@ export default function useTask(
     [selectedTask, isDraggingTask, getRef]
   );
 
-  const onMouseEnterSelectedTask = useCallback(
+  const onMouseEnterTargetTask = useCallback(
     (column, columnIndex, taskIndex, task = null) => {
-      if (!isDraggingTask) {
-        setSelectedTask({ column, task, columnIndex, taskIndex });
-      } else if (selectedTask) {
+      if (selectedTask) {
         if (task) {
           const el = getRef(task.id);
           el.style.marginTop = `${selectedTask?.height}px`;
@@ -104,21 +107,17 @@ export default function useTask(
     [selectedTask, isDraggingTask, getRef]
   );
 
-  const onMouseLeaveSelectedTask = useCallback(
+  const onMouseLeaveTargetTask = useCallback(
     (task = null) => {
-      if (!isDraggingTask) {
-        setSelectedTask(null);
-      } else {
-        if (task) {
-          const el = getRef(task.id);
-          el.style.marginTop = "0";
-          el.style.marginBottom = `0`;
-          el.classList.remove("board-view__item--target-up");
-          el.classList.remove("board-view__item--target-down");
-        }
-
-        setTargetTask(null);
+      if (task) {
+        const el = getRef(task.id);
+        el.style.marginTop = "0";
+        el.style.marginBottom = `0`;
+        el.classList.remove("board-view__item--target-up");
+        el.classList.remove("board-view__item--target-down");
       }
+
+      setTargetTask(null);
     },
     [isDraggingTask, getRef]
   );
@@ -130,7 +129,7 @@ export default function useTask(
     handleTaskMouseUp,
     handleTaskMouseDown,
     handleTaskDrag,
-    onMouseEnterSelectedTask,
-    onMouseLeaveSelectedTask,
+    onMouseEnterTargetTask,
+    onMouseLeaveTargetTask,
   };
 }
