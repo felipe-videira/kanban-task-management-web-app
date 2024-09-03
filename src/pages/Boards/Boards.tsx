@@ -1,5 +1,6 @@
 import "./Boards.scss";
 import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Main from "./components/Main/Main";
 import Toolbar from "./components/Toolbar/Toolbar";
@@ -7,10 +8,9 @@ import BoardFormModal from "./components/BoardFormModal";
 import Modal, { ModalTitle } from "../../components/Modal/Modal";
 import useBoard from "./hooks/useBoard";
 import Button from "../../components/Button/Button";
-// import { useParams } from "react-router-dom";
 
 function Boards() {
-  // const { boardId, taskId } = useParams();
+  const { boardId, taskId } = useParams();
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
 
@@ -42,7 +42,7 @@ function Boards() {
     onCloseBoardModal,
     onCloseDeleteModal,
     onBoardFormSubmit,
-  } = useBoard(onError);
+  } = useBoard(boardId, taskId, onError);
 
   useEffect(() => {
     setShowSidebar(boards.length > 0);

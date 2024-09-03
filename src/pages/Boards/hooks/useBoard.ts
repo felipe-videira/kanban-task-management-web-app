@@ -3,42 +3,14 @@ import {
   saveBoard,
   deleteBoard as boardServiceDeleteBoard,
   getBoards,
+  getBoard,
 } from "../../../services/board";
 
-const mockBoards = [
-  {
-    id: "1",
-    title: "Platform Launch",
-    columns: [
-      {
-        id: new Date().getTime().toString(),
-        title: "sdsd",
-      },
-    ],
-  },
-  {
-    id: "2",
-    title: "Platform Kanvan",
-    columns: [
-      {
-        id: new Date().getTime().toString(),
-        title: "sdsd",
-      },
-    ],
-  },
-  {
-    id: "3",
-    title: "Platform Daman",
-    columns: [
-      {
-        id: new Date().getTime().toString(),
-        title: "sdsd",
-      },
-    ],
-  },
-];
-
-export default function useBoard(onError: (error: unknown) => void) {
+export default function useBoard(
+  boardId: string | undefined,
+  taskId: string | undefined,
+  onError: (error: unknown) => void
+) {
   const [boards, setBoards] = useState<Board[]>([]);
   const [selectedBoard, setSelectedBoard] = useState<Board>();
   const [boardForEdit, setBoardForEdit] = useState<Board>();
@@ -93,11 +65,21 @@ export default function useBoard(onError: (error: unknown) => void) {
     }
   }, []);
 
-  useEffect(() => {
-    getBoards().then((data) => {
+  const populateBoards = useCallback(() => {
+    return getBoards().then((data) => {
       setBoards(data);
     });
   }, []);
+
+  useEffect(() => {
+    if (boardId) {
+      getBoard(boardId).then((board) => {
+        setSelectedBoard(board);
+      });
+    }
+
+    populateBoards();
+  }, [boardId, taskId]);
 
   return {
     boards,
