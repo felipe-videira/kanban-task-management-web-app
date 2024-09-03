@@ -1,20 +1,20 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
-@import "../../styles/functions";
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+@import "../../../../styles/functions";
 
-.columns-field {
+.board-view {
   margin: 0 0 1rem 0;
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  gap: 1rem;
   border-radius: $border-radius;
   padding: 0.5rem;
 
-  &__label {
-    font-weight: 700;
-    font-size: 0.25rem;
-    margin: 0 0 0.5rem 0;
-    display: block;
+  &__column {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: $border-radius;
   }
 
   &__color-input-wrapper {
@@ -39,6 +39,13 @@
   }
 
   &__item {
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     display: flex;
     align-items: baseline;
     transition: margin 0.3s ease;
@@ -58,6 +65,7 @@
       z-index: 99;
       pointer-events: none;
       opacity: 0.75;
+      position: absolute;
     }
 
     &--target-up {
@@ -104,11 +112,13 @@
 }
 
 @include themify($themes) {
-  .columns-field {
-    background-color: themed("background");
+  .board-view {
+    &__column {
+      background-color: themed("background-contrast");
+    }
 
-    &__label {
-      color: themed("title-text");
+    &__item {
+      background-color: themed("background");
     }
   }
 }

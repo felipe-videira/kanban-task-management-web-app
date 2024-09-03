@@ -1,10 +1,10 @@
 import "./ColumnsField.scss";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { arrayOf, func, object, shape, string } from "prop-types";
-import TextField from "../TextField/TextField";
-import CrossIcon from "../../icons/icon-cross.svg?react";
-import DragIcon from "../../icons/icon-drag-handle.svg?react";
-import { getRandomColor } from "../../utils";
+import TextField from "../../../../../../components/TextField/TextField";
+import CrossIcon from "../../../../../../icons/icon-cross.svg?react";
+import DragIcon from "../../../../../../icons/icon-drag-handle.svg?react";
+import { getRandomColor } from "../../../../../../utils";
 
 type Selected = {
   column: Column;

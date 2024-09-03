@@ -2,8 +2,44 @@ import { useMemo } from "react";
 import { arrayOf, func, shape, string } from "prop-types";
 import Button from "../../../../components/Button/Button";
 import "./Main.scss";
-import TaskList from "../../../../components/TaskList/TaskList";
+import BoardView from "../BoardView/BoardView";
 
+const mockTasks = [
+  {
+    id: "1sadsdsd",
+    title: "1",
+    color: "",
+    tasks: [
+      {
+        id: "1sadsd",
+        title: "1",
+      },
+      {
+        id: "2sadsddsd",
+        title: "2",
+      },
+      {
+        id: "5ssddsds",
+        title: "3",
+      },
+    ],
+  },
+  {
+    id: "23sdsdsd",
+    title: "2",
+    color: "",
+    tasks: [
+      {
+        id: "3sdsd",
+        title: "4",
+      },
+      {
+        id: "4sadsd",
+        title: "5",
+      },
+    ],
+  },
+];
 function Main({
   boards,
   selectedBoard,
@@ -34,45 +70,7 @@ function Main({
         </div>
       )}
 
-      <TaskList
-        label="Columns"
-        data={[
-          {
-            id: "1",
-            title: "sadsadsad",
-            color: "",
-            tasks: [
-              {
-                id: "1",
-                title: "asdsa",
-              },
-              {
-                id: "2",
-                title: "sadsad",
-              },
-            ],
-          },
-          {
-            id: "2",
-            title: "sda",
-            color: "",
-            tasks: [
-              {
-                id: "3",
-                title: "asdsa",
-              },
-              {
-                id: "4",
-                title: "sadsad",
-              },
-            ],
-          },
-        ]}
-        errors={{}}
-        onFieldChange={() => {}}
-        onReorder={() => {}}
-        onDelete={() => {}}
-      />
+      <BoardView data={mockTasks} onReorder={() => {}} />
     </div>
   );
 }
