@@ -1,7 +1,7 @@
 import { Ref, useCallback, useState } from "react";
 
 export default function useTaskDrag(
-  getRef: (id: string) => HTMLDivElement,
+  getRef: (id: string | undefined) => HTMLDivElement | null,
   onTaskReorder: (
     selectedColumnIndex: number,
     selectedTaskIndex: number,
@@ -26,16 +26,21 @@ export default function useTaskDrag(
 
           if (targetTask.task) {
             const targetEl = getRef(targetTask.task.id);
-            targetEl.style.marginTop = "0";
-            targetEl.style.marginBottom = `0`;
+
+            if (targetEl) {
+              targetEl.style.marginTop = "0";
+              targetEl.style.marginBottom = `0`;
+            }
           }
         }
 
         const selectedEl = getRef(selectedTask.task.id);
-        selectedEl.style.transform = "none";
-        selectedEl.classList.remove("board-view__item--selected");
-        selectedEl.style.top = `0px`;
-        selectedEl.style.left = `0px`;
+        if (selectedEl) {
+          selectedEl.style.transform = "none";
+          selectedEl.classList.remove("board-view__task--selected");
+          selectedEl.style.top = `0px`;
+          selectedEl.style.left = `0px`;
+        }
 
         setSelectedTask(null);
         setTargetTask(null);
@@ -51,23 +56,25 @@ export default function useTaskDrag(
         event.stopPropagation();
 
         const selectedEl = getRef(task.id);
-        const { y, x, height, width } = selectedEl.getBoundingClientRect();
 
-        selectedEl.style.top = `${y}px`;
-        selectedEl.style.left = `${x}px`;
-        selectedEl.classList.add("board-view__item--selected");
+        if (selectedEl) {
+          const { y, x, height, width } = selectedEl.getBoundingClientRect();
+          selectedEl.classList.add("board-view__task--selected");
+          selectedEl.style.top = `${document.documentElement.scrollTop + y}px`;
+          selectedEl.style.left = `${x}px`;
 
-        setIsDraggingTask(true);
-        setSelectedTask({
-          column,
-          task,
-          columnIndex,
-          taskIndex,
-          currentY: y,
-          currentX: x,
-          height,
-          width,
-        });
+          setIsDraggingTask(true);
+          setSelectedTask({
+            column,
+            task,
+            columnIndex,
+            taskIndex,
+            currentY: y,
+            currentX: x,
+            height,
+            width,
+          });
+        }
       }
     },
     [selectedTask, getRef]
@@ -82,12 +89,14 @@ export default function useTaskDrag(
         selectedTask.currentY &&
         selectedTask.currentX
       ) {
-        const selectedEl = getRef(selectedTask.task.id);
         const translateX =
           event.clientX - selectedTask.currentX - selectedTask.width / 2;
         const translateY = event.clientY - selectedTask.currentY;
 
-        selectedEl.style.transform = `translate(${translateX}px, ${translateY}px)`;
+        const selectedEl = getRef(selectedTask.task.id);
+        if (selectedEl) {
+          selectedEl.style.transform = `translate(${translateX}px, ${translateY}px)`;
+        }
       }
     },
     [selectedTask, isDraggingTask, getRef]
@@ -98,8 +107,10 @@ export default function useTaskDrag(
       if (selectedTask) {
         if (task) {
           const el = getRef(task.id);
-          el.style.marginTop = `${selectedTask?.height}px`;
-          el.classList.add("board-view__item--target-up");
+          if (el) {
+            el.style.marginTop = `${selectedTask?.height}px`;
+            el.classList.add("board-view__task--target");
+          }
         }
 
         setTargetTask({ column, task, columnIndex, taskIndex });
@@ -112,10 +123,10 @@ export default function useTaskDrag(
     (task = null) => {
       if (task) {
         const el = getRef(task.id);
-        el.style.marginTop = "0";
-        el.style.marginBottom = `0`;
-        el.classList.remove("board-view__item--target-up");
-        el.classList.remove("board-view__item--target-down");
+        if (el) {
+          el.style.marginTop = "0";
+          el.classList.remove("board-view__task--target");
+        }
       }
 
       setTargetTask(null);

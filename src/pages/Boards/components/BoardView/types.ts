@@ -8,3 +8,11 @@ type SelectedTask = {
   currentY?: number;
   currentX?: number;
 } | null;
+
+type SelectedColumn = {
+  column: Column;
+  index: number;
+  width?: number;
+  currentY?: number;
+  currentX?: number;
+} | null;

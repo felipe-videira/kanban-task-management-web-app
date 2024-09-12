@@ -22,14 +22,17 @@ function TaskList({
 
   const assignRef = useCallback(
     (el, id) => {
-      if (el) itemsRef.current[id] = el;
+      if (el && id) itemsRef.current[id] = el;
     },
     [itemsRef]
   );
 
   const getRef = useCallback(
     (id) => {
-      return itemsRef.current[id];
+      if (id) {
+        return itemsRef.current[id];
+      }
+      return null;
     },
     [itemsRef]
   );
@@ -97,7 +100,7 @@ function TaskList({
           {column.tasks?.map((task, taskIndex) => (
             <div
               key={task.id}
-              className="board-view__item"
+              className="board-view__task"
               ref={(el) => assignRef(el, task.id)}
               role="listitem"
               onMouseDown={(evt) =>
@@ -113,7 +116,7 @@ function TaskList({
           ))}
           <div
             key="0"
-            className="board-view__item"
+            className="board-view__task"
             ref={(el) => assignRef(el, "0")}
             onMouseEnter={() =>
               onMouseEnterTargetTask(column, columnIndex, column.tasks?.length)
@@ -122,6 +125,14 @@ function TaskList({
           />
         </div>
       ))}
+      <div
+        key="-1"
+        className="board-view__column"
+        ref={(el) => assignRef(el, "-1")}
+        role="listitem"
+        onMouseEnter={() => onMouseEnterTargetColumn(data.length)}
+        onMouseLeave={() => onMouseLeaveTargetColumn()}
+      />
     </div>
   );
 }

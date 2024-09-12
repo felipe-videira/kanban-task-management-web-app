@@ -1,11 +1,11 @@
 import { Ref, useCallback, useState } from "react";
 
 export default function useColumnDrag(
-  getRef: (id: string) => HTMLDivElement,
+  getRef: (id: string | undefined) => HTMLDivElement | null,
   onColumnReorder: (selectedIndex: number, targetIndex: number) => void
 ) {
-  const [selectedColumn, setSelectedColumn] = useState(null);
-  const [targetColumn, setTargetColumn] = useState(null);
+  const [selectedColumn, setSelectedColumn] = useState<SelectedColumn>(null);
+  const [targetColumn, setTargetColumn] = useState<SelectedColumn>(null);
   const [isDraggingColumn, setIsDraggingColumn] = useState(false);
 
   const handleColumnMouseUp = useCallback(
@@ -16,15 +16,19 @@ export default function useColumnDrag(
 
           if (targetColumn.column) {
             const targetEl = getRef(targetColumn.column.id);
-            targetEl.style.marginLeft = "0";
+            if (targetEl) {
+              targetEl.style.marginLeft = "0";
+            }
           }
         }
 
         const selectedEl = getRef(selectedColumn.column.id);
-        selectedEl.style.transform = "none";
-        selectedEl.classList.remove("board-view__item--selected");
-        selectedEl.style.top = `0px`;
-        selectedEl.style.left = `0px`;
+        if (selectedEl) {
+          selectedEl.style.transform = "none";
+          selectedEl.classList.remove("board-view__column--selected");
+          selectedEl.style.top = `0px`;
+          selectedEl.style.left = `0px`;
+        }
 
         setSelectedColumn(null);
         setTargetColumn(null);
@@ -38,20 +42,22 @@ export default function useColumnDrag(
     (event, column, index) => {
       if (event.button === 0) {
         const selectedEl = getRef(column.id);
-        const { y, x, width } = selectedEl.getBoundingClientRect();
+        if (selectedEl) {
+          const { y, x, width } = selectedEl.getBoundingClientRect();
 
-        selectedEl.style.top = `${y}px`;
-        selectedEl.style.left = `${x}px`;
-        selectedEl.classList.add("board-view__item--selected");
+          selectedEl.style.top = `${y}px`;
+          selectedEl.style.left = `${x}px`;
+          selectedEl.classList.add("board-view__column--selected");
 
-        setIsDraggingColumn(true);
-        setSelectedColumn({
-          column,
-          index,
-          currentY: y,
-          currentX: x,
-          width,
-        });
+          setIsDraggingColumn(true);
+          setSelectedColumn({
+            column,
+            index,
+            currentY: y,
+            currentX: x,
+            width,
+          });
+        }
       }
     },
     [selectedColumn, getRef]
@@ -66,11 +72,13 @@ export default function useColumnDrag(
         selectedColumn.currentY &&
         selectedColumn.currentX
       ) {
-        const selectedEl = getRef(selectedColumn.column.id);
         const translateX =
           event.clientX - selectedColumn.currentX - selectedColumn.width / 2;
 
-        selectedEl.style.transform = `translateX(${translateX}px)`;
+        const selectedEl = getRef(selectedColumn.column.id);
+        if (selectedEl) {
+          selectedEl.style.transform = `translateX(${translateX}px)`;
+        }
       }
     },
     [selectedColumn, isDraggingColumn, getRef]
@@ -81,8 +89,11 @@ export default function useColumnDrag(
       if (selectedColumn) {
         if (column) {
           const el = getRef(column.id);
-          el.style.marginLeft = `${selectedColumn?.width}px`;
-          // el.classList.add("board-view__item--target-up");
+
+          if (el) {
+            el.style.marginLeft = `${selectedColumn?.width}px`;
+            el.classList.add("board-view__column--target");
+          }
         }
 
         setTargetColumn({ column, index });
@@ -95,9 +106,10 @@ export default function useColumnDrag(
     (column = null) => {
       if (column) {
         const el = getRef(column.id);
-        el.style.marginLeft = "0";
-        // el.classList.remove("board-view__item--target-up");
-        // el.classList.remove("board-view__item--target-down");
+        if (el) {
+          el.style.marginLeft = "0";
+          el.classList.remove("board-view__column--target");
+        }
       }
 
       setTargetColumn(null);
