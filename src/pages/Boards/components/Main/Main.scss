@@ -4,6 +4,7 @@
 
 .main {
   grid-area: main;
+  overflow-x: auto;
 
   &__empty-state {
     display: flex;

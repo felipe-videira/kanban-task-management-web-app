@@ -5,27 +5,37 @@
 .board-view {
   margin: 0 0 1rem 0;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
+  min-height: 80vh;
   gap: 1rem;
   border-radius: $border-radius;
   padding: 0.5rem;
 
   &__column {
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-    padding: 1rem;
     border-radius: $border-radius;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
     transition: margin 0.3s ease;
+    padding: 1rem 0.5rem;
+
+    &::after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      left: -100%;
+      position: absolute;
+    }
 
     &--selected {
       z-index: 99;
       pointer-events: none;
       opacity: 0.75;
       position: absolute;
+
+      & .board-view__task {
+        pointer-events: none;
+      }
     }
 
     &--target {
@@ -41,6 +51,15 @@
     }
   }
 
+  &__column-tasks {
+    overflow-y: auto;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    max-height: 65vh;
+    padding: 0 0.5rem;
+  }
+
   &__task {
     height: 100px;
     width: 100px;
@@ -48,7 +67,6 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
     display: flex;
     align-items: baseline;
     transition: margin 0.3s ease;
@@ -59,6 +77,9 @@
     margin-bottom: 0;
     opacity: 1;
     transform: translateY(0);
+    height: 100px;
+    width: 200px;
+    flex: none;
 
     input {
       margin: 0;

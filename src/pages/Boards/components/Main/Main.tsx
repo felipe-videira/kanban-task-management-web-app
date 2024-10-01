@@ -54,6 +54,51 @@ const mockTasks = [
       },
     ],
   },
+  {
+    id: "sadsad666",
+    title: "3",
+    color: "",
+    tasks: [
+      {
+        id: "514s5dada",
+        title: "7",
+      },
+      {
+        id: "as4d65sadd",
+        title: "58",
+      },
+    ],
+  },
+  {
+    id: "sadsad696",
+    title: "3",
+    color: "",
+    tasks: [
+      {
+        id: "514s5dawa",
+        title: "7",
+      },
+      {
+        id: "as4d65sawd",
+        title: "58",
+      },
+    ],
+  },
+  {
+    id: "sadsad6896",
+    title: "3",
+    color: "",
+    tasks: [
+      {
+        id: "514s5daaa",
+        title: "7",
+      },
+      {
+        id: "as4d65sada",
+        title: "58",
+      },
+    ],
+  },
 ];
 function Main({
   boards,

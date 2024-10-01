@@ -96,33 +96,38 @@ function TaskList({
           onMouseLeave={() => onMouseLeaveTargetColumn(column)}
         >
           <h4>{column.title}</h4>
-
-          {column.tasks?.map((task, taskIndex) => (
+          <div className="board-view__column-tasks">
+            {column.tasks?.map((task, taskIndex) => (
+              <div
+                key={task.id}
+                className="board-view__task"
+                ref={(el) => assignRef(el, task.id)}
+                role="listitem"
+                onMouseDown={(evt) =>
+                  handleTaskMouseDown(evt, column, task, columnIndex, taskIndex)
+                }
+                onMouseEnter={() =>
+                  onMouseEnterTargetTask(column, columnIndex, taskIndex, task)
+                }
+                onMouseLeave={() => onMouseLeaveTargetTask(task)}
+              >
+                {task.title}
+              </div>
+            ))}
             <div
-              key={task.id}
+              key="0"
               className="board-view__task"
-              ref={(el) => assignRef(el, task.id)}
-              role="listitem"
-              onMouseDown={(evt) =>
-                handleTaskMouseDown(evt, column, task, columnIndex, taskIndex)
-              }
+              ref={(el) => assignRef(el, "0")}
               onMouseEnter={() =>
-                onMouseEnterTargetTask(column, columnIndex, taskIndex, task)
+                onMouseEnterTargetTask(
+                  column,
+                  columnIndex,
+                  column.tasks?.length
+                )
               }
-              onMouseLeave={() => onMouseLeaveTargetTask(task)}
-            >
-              {task.title}
-            </div>
-          ))}
-          <div
-            key="0"
-            className="board-view__task"
-            ref={(el) => assignRef(el, "0")}
-            onMouseEnter={() =>
-              onMouseEnterTargetTask(column, columnIndex, column.tasks?.length)
-            }
-            onMouseLeave={() => onMouseLeaveTargetTask()}
-          />
+              onMouseLeave={() => onMouseLeaveTargetTask()}
+            />
+          </div>
         </div>
       ))}
       <div
